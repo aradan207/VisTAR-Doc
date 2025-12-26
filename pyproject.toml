@@ -1,9 +1,9 @@
 [project]
-name = "deep-research-agent"
+name = "agentic-rag"
 version = "0.1.0"
-description = "Add your description here"
+description = "RAG pipeline with multi-step reasoning agent for manufacturing documentation"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.11"
 dependencies = [
     "beautifulsoup4==4.14.2",
     "fastapi==0.115.9",

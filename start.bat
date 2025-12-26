@@ -8,6 +8,7 @@ echo.
 echo Agentic RAG Agent started with RAG capability.
 echo Backend: http://localhost:8000
 echo Frontend: http://localhost:3000
+echo API Docs: http://localhost:8000/docs
 echo.
 echo Press any key to exit this window...
 pause >nul
