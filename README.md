@@ -60,11 +60,28 @@ The interactive web UI provides a comprehensive view of the agent's reasoning pr
 
 ### Prerequisites
 
-- **Python 3.11+** with pip
-- **Node.js 18+** with npm
-- **Ollama** (for offline operation)
+- **Python 3.11+** with pip (Python 3.13 recommended)
+- **Ollama** installed and running (download from [ollama.com](https://ollama.com/download))
+- **Node.js 18+** with npm (will be installed automatically if missing on Windows)
 
-### Setup Steps
+### Quick Setup (Windows)
+
+For a fully automated installation, simply run:
+
+```bash
+git clone https://github.com/Manufacturing-Demonstration-Facility/agentic-rag.git
+cd agentic-rag
+install.bat
+```
+
+This will automatically:
+1. Install uv package manager and Python dependencies
+2. Install Node.js (if needed) and frontend dependencies
+3. Pull all required Ollama models
+4. Build the FAISS index from PDF manuals
+5. Verify the installation
+
+### Manual Setup Steps
 
 #### 1. Clone and Navigate
 
@@ -92,15 +109,27 @@ cd ../../..
 
 #### 4. Ollama Models
 
-If using Ollama (recommended for offline operation), pull the required models:
+Pull the required models for LLM reasoning and RAG embeddings:
 
 ```bash
-# Pull the LLM model for reasoning
+# Pull the default and best LLM model for reasoning (6.1 GB)
+ollama pull hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M
+
+# Pull the alternative lighter LLM model (4.4 GB)
 ollama pull hf.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF:Q4_K_M
 
-# Pull the embedding model for RAG
+# Pull the embedding model for RAG (required, 215 MB)
 ollama pull hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
 ```
+
+**Available LLM Models:**
+
+| Model | Size | Speed | Use Case |
+|-------|------|-------|----------|
+| `Ministral-3-8B-Instruct-2512` | 6.1 GB | Moderate | Best quality reasoning (default) |
+| `Mistral-7B-Instruct-v0.3` | 4.4 GB | Fast | Lighter alternative, lower resource usage |
+
+To switch models, update `OLLAMA_MODEL` in your `.env` file.
 
 Verify models are installed:
 ```bash
@@ -114,9 +143,12 @@ The `.env` file is already configured with sensible defaults for Ollama:
 ```env
 # LLM Configuration
 LLM_PROVIDER=ollama
-OLLAMA_MODEL=hf.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF:Q4_K_M
+OLLAMA_MODEL=hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M
 
-# Embedding Model (for RAG)
+# Alternative: Use the lighter Mistral 7B model (uncomment to use)
+# OLLAMA_MODEL=hf.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF:Q4_K_M
+
+# Embedding Model
 OLLAMA_EMBED_MODEL=hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
 
 # RAG Configuration
@@ -126,7 +158,7 @@ CHUNK_SIZE=800
 CHUNK_OVERLAP=150
 ```
 
-For OpenAI or Mistral, update:
+For OpenAI or Mistral API (cloud), update:
 ```env
 LLM_PROVIDER=openai  # or mistral
 OPENAI_API_KEY=your_key_here
@@ -210,7 +242,7 @@ npm start
 |----------|-------------|---------|----------|
 | **LLM Configuration** |
 | `LLM_PROVIDER` | LLM backend: `ollama`, `openai`, or `mistral` | `ollama` | Yes |
-| `OLLAMA_MODEL` | Ollama model name | `hf.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF:Q4_K_M` | If using Ollama |
+| `OLLAMA_MODEL` | Ollama model name | `Ministral-3-8B-Instruct-2512` (default) or `Mistral-7B-Instruct-v0.3` | If using Ollama |
 | `OLLAMA_HOST` | Ollama server URL | `http://localhost:11434` | No |
 | `OPENAI_API_KEY` | OpenAI API key | – | If using OpenAI |
 | `OPENAI_MODEL` | OpenAI model name | `gpt-4o` | If using OpenAI |
