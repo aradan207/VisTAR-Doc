@@ -1,7 +1,7 @@
 export const providerDefaults = {
   ollama: {
     url: 'http://127.0.0.1:11434',
-    model: 'llama3.2:latest',
+    model: 'hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M',
   },
   openai: {
     url: 'https://api.openai.com/v1',

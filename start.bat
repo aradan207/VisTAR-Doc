@@ -1,7 +1,9 @@
 @echo off
 echo Starting Agentic RAG Agent...
 echo.
-start "Agentic Backend" cmd /k "cd /d %~dp0 && uv run uvicorn app.backend.main:app --reload"
+
+REM Use system Python to avoid SSL certificate issues when downloading Python
+start "Agentic Backend" cmd /k "cd /d %~dp0 && uv run --python python uvicorn app.backend.main:app --reload"
 timeout /t 3 >nul
 start "Agentic Frontend" cmd /k "cd /d %~dp0app\frontend\agent-frontend && npm start"
 echo.
