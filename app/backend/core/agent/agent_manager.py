@@ -78,16 +78,34 @@ class AgentManager:
             return
 
         for step in steps:
-            tool_calls = [ToolCall(tool_name=tc['tool_name'], args=tc['args']) for tc in step.tool_calls]
+            tool_calls = []
+            for tc in step.tool_calls:
+                if 'tool_name' in tc:
+                    tool_calls.append(ToolCall(
+                        tool_name=tc['tool_name'],
+                        args=tc.get('args', {})  # Default to empty dict if args missing
+                    ))
+            
             for call in tool_calls:
                 call.result = self.llm.run_tool(call.tool_name, call.args)
 
             FILL_RESULT_PROMPT = """
-            You are an autonomous reasoning agent.
+            You are an autonomous reasoning agent summarizing tool results.
 
-            The listed tools have already been executed successfully. Using the prior context, the current reasoning step description, and the tool results, produce a concise and coherent outcome for this step.
-
-            Respond with a short, informative paragraph only. Do not include JSON, code fences, or explanations of your process.
+            STRICT RULES FOR IMAGE URLs:
+            1. If image_search results contain URLs, extract them EXACTLY as written
+            2. DO NOT modify, shorten, or make up any URLs
+            3. Only use URLs that appear verbatim in "url": "..." fields
+            4. Format images as: ![Brief description](exact_url_from_results)
+            
+            WRONG: ![Image](http://localhost:8000/api/media/yologen/train/APSX-PIM_page37_img1.png)
+            (if that exact URL wasn't in the results)
+            
+            RIGHT: Copy the EXACT url value from the tool results
+            
+            If no image_search was called or it returned no results, do not include any images.
+            
+            Respond with a brief summary paragraph. If images were found, include them using the exact URLs from results.
             """
             tool_results_text = "\n".join(f"{call.tool_name}: {call.result}" for call in tool_calls)
 
@@ -132,9 +150,32 @@ class AgentManager:
         leaves = self.reasoning_tree.get_reasoning_tree_context()
 
         FINAL_PROMPT = f"""
-        You are a deep research agent responding to the user's original request: {self.user_input}.
-        Use the reasoning tree summary below to craft a professional, well-structured final report.
-        """
+You are answering the user's question: "{self.user_input}"
+
+Based on the reasoning tree context below, write a DIRECT answer to the user.
+
+=== CRITICAL IMAGE RULES ===
+
+1. LOOK FOR "url" FIELDS: Search the context for image_search results containing "url": "http://..."
+
+2. COPY URLs EXACTLY: If you find image URLs, copy them CHARACTER FOR CHARACTER
+   - CORRECT: Use the exact URL from results like "url": "http://localhost:8000/api/media/yologen/train/APSX-PIM_page41_img1.png"
+   - WRONG: Making up or modifying URLs like page37, page20, etc. that weren't in results
+
+3. FORMAT: ![Description based on image_name](exact_url_from_results)
+
+4. NO IMAGES IF NOT FOUND: If image_search returned count: 0 or wasn't called, don't include any image markdown
+
+5. VERIFY BEFORE INCLUDING: Before writing any ![...](...) markdown, confirm that exact URL appeared in the tool results
+
+=== ANSWER FORMAT ===
+
+1. Brief text answer to the user's question
+2. Then include images using EXACT urls from image_search results
+3. Any additional context or notes
+
+DO NOT invent URLs. DO NOT modify URLs. Only use URLs that appear exactly in the image_search results.
+"""
 
         final_answer = self.llm.generate(
             user_input=leaves,

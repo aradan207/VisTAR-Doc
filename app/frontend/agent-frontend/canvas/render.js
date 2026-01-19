@@ -137,8 +137,33 @@ export function render(state) {
         ? state.final
         : state.final.answer ?? pretty(state.final);
 
+    // Configure marked for proper image rendering
+    if (window.marked) {
+      window.marked.setOptions({
+        breaks: true,
+        gfm: true
+      });
+    }
+    
     const html = window.marked ? window.marked.parse(raw) : raw;
     el.finalContent.innerHTML = html;
+    
+    // Add click handlers for images to open in new tab
+    const images = el.finalContent.querySelectorAll('img');
+    images.forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => {
+        window.open(img.src, '_blank');
+      });
+      // Add error handling for broken images
+      img.addEventListener('error', () => {
+        img.alt = `Failed to load: ${img.src}`;
+        img.style.border = '2px dashed #dc2626';
+        img.style.padding = '20px';
+        img.style.background = '#fef2f2';
+        console.error('Failed to load image:', img.src);
+      });
+    });
 
     el.status.textContent = `${summaryText} Final answer ready.`;
   } else {

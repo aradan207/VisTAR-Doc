@@ -8,6 +8,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from app.backend.api.tools.manual_search import manual_search
+from app.backend.api.tools.image_search import image_search
 from app.backend.api.tools.web import fetch_url, web_search
 from app.backend.core.agent.agent_manager import AgentManager
 from app.backend.core.agent.llm import LLM
@@ -81,7 +82,7 @@ def _init_manager(req: AgentRequest) -> AgentManager:
         raise HTTPException(status_code=500, detail=f"Failed to initialize language model: {exc}") from exc
 
     # Register manual_search first for priority in tool list
-    for tool_fn in (manual_search, web_search, fetch_url, add_a_b):
+    for tool_fn in (manual_search, image_search, web_search, fetch_url, add_a_b):
         llm.register_decorated_tool(tool_fn)
 
     return AgentManager(user_input=req.query, llm=llm)
