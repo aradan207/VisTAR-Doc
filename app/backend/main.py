@@ -24,7 +24,7 @@ def create_app() -> FastAPI:
 
     # Mount static files for images
     project_root = Path(__file__).parent.parent.parent.parent
-    yologen_images = project_root / "yolo-gen" / "data" / "processed" / "images"
+    yologen_images = project_root / "vlm-yolo-detector" / "data" / "processed" / "images"
     if yologen_images.exists():
         app.mount("/api/media/yologen", StaticFiles(directory=str(yologen_images)), name="yologen_media")
         print(f"[Main] Mounted yologen images from: {yologen_images}")
