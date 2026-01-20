@@ -33,7 +33,7 @@ _APP_DIR = _BACKEND_DIR.parent
 _AGENTIC_RAG_DIR = _APP_DIR.parent
 _REPOSITORIES_DIR = _AGENTIC_RAG_DIR.parent
 
-YOLOGEN_DIR = _REPOSITORIES_DIR / "yolo-gen"
+YOLOGEN_DIR = _REPOSITORIES_DIR / "vlm-yolo-detector"
 IMAGE_INDEX_PATH = YOLOGEN_DIR / "data" / "processed" / "image_index.json"
 EMBEDDING_NPY_PATH = YOLOGEN_DIR / "data" / "processed" / "image_embeddings.npy"
 EMBEDDING_MAPPING_PATH = YOLOGEN_DIR / "data" / "processed" / "embedding_mapping.json"
@@ -105,13 +105,20 @@ def _load_all_data(force_reload: bool = False):
         except Exception as e:
             print(f"[ImageSearch] Failed to load model: {e}")
     
-    # Only mark as loaded if we have the essential components
+    # Only mark as loaded if we have ALL essential components for semantic search
     if _image_index and _embeddings is not None and _embedding_model is not None:
         _loaded = True
         print(f"[ImageSearch] Successfully initialized with semantic search")
+        print(f"[ImageSearch]   Index: {len(_image_index)} images")
+        print(f"[ImageSearch]   Embeddings: {_embeddings.shape}")
+        print(f"[ImageSearch]   Filenames: {len(_filenames)}")
     else:
-        print(f"[ImageSearch] WARNING: Partial initialization - semantic search may not work")
-        _loaded = True  # Still mark loaded to avoid repeated attempts
+        # DON'T mark loaded on partial failure - allow retry on next request
+        _loaded = False
+        print(f"[ImageSearch] WARNING: Partial initialization - will retry on next request")
+        print(f"[ImageSearch]   Index loaded: {bool(_image_index)}")
+        print(f"[ImageSearch]   Embeddings loaded: {_embeddings is not None}")
+        print(f"[ImageSearch]   Model loaded: {_embedding_model is not None}")
 
 
 def _extract_machine_names(query: str) -> List[str]:
@@ -214,6 +221,8 @@ def _semantic_search(query: str, top_k: int = 50) -> List[tuple]:
     global _embeddings, _filenames, _embedding_model
     
     if _embedding_model is None or _embeddings is None or len(_filenames) == 0:
+        print(f"[ImageSearch] _semantic_search: SKIPPING - embeddings not ready")
+        print(f"[ImageSearch]   model={_embedding_model is not None}, embeddings={_embeddings is not None}, filenames={len(_filenames)}")
         return []
     
     try:
@@ -252,7 +261,21 @@ def _search_images(
     3. Apply content type filtering
     4. Apply page proximity scoring
     """
+    global _embeddings, _embedding_model, _filenames
+    
     _load_all_data()
+    
+    # Validate embedding state - force reload if missing
+    if _embeddings is None or _embedding_model is None or len(_filenames) == 0:
+        print(f"[ImageSearch] Embeddings missing after load, forcing reload...")
+        print(f"[ImageSearch]   _embeddings: {_embeddings is not None}")
+        print(f"[ImageSearch]   _embedding_model: {_embedding_model is not None}")
+        print(f"[ImageSearch]   _filenames: {len(_filenames)}")
+        _load_all_data(force_reload=True)
+        
+        # Check again after force reload
+        if _embeddings is None or _embedding_model is None:
+            print(f"[ImageSearch] ERROR: Embeddings still not loaded after force reload!")
     
     if not _image_index:
         return []
