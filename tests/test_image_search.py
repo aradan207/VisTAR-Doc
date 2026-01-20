@@ -8,8 +8,8 @@ Tests the updated image_search tool with VLM descriptions and embeddings.
 import sys
 from pathlib import Path
 
-# Add agentic-rag to path
-sys.path.insert(0, str(Path(__file__).parent))
+# Add agentic-rag root to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from app.backend.api.tools.image_search import (
     _load_all_data,

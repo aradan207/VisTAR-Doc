@@ -1,6 +1,13 @@
+"""
+Test script for queries that should not return images.
+
+Run with: uv run python tests/test_no_images.py
+"""
+
 import requests
 import json
 import time
+
 
 def test_query(prompt):
     print(f"\nQuery: {prompt}")
@@ -20,12 +27,13 @@ def test_query(prompt):
         
         # Check if image tags are present
         if "![" in data.get("final_answer", ""):
-            print("⚠️ WARNING: Still found images in the final answer!")
+            print("WARNING: Still found images in the final answer!")
         else:
-            print("✅ SUCCESS: No images in the final answer (as expected).")
+            print("SUCCESS: No images in the final answer (as expected).")
     else:
         print(f"Error: {response.status_code}")
         print(response.text)
+
 
 if __name__ == "__main__":
     test_query("what is the boy 35 evv?")
