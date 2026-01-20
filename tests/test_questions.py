@@ -11,6 +11,12 @@ Run the server first: ./start.bat
 Then test these questions in the UI at http://localhost:3000
 """
 
+import sys
+from pathlib import Path
+
+# Add agentic-rag root to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 # =============================================================================
 # TEST QUESTIONS - Copy these into the UI
 # =============================================================================
@@ -71,9 +77,6 @@ TEST_QUESTIONS = [
 
 def verify_image_search():
     """Verify image search returns expected results."""
-    import sys
-    sys.path.insert(0, '.')
-    
     from app.backend.api.tools.image_search import image_search, ImageSearchArgs, _load_all_data
     
     # Force reload data
@@ -107,12 +110,12 @@ def verify_image_search():
         if result.get('results'):
             print("\nResults:")
             for r in result['results']:
-                match = "✓" if test['expected_image'] in r['image_name'] else " "
+                match = "[MATCH]" if test['expected_image'] in r['image_name'] else ""
                 print(f"  {match} {r['image_name']}")
                 print(f"    Page: {r['page_number']}, Semantic: {r['semantic_match']}")
                 print(f"    URL: {r['url']}")
         else:
-            print(f"\n  ✗ No results found!")
+            print(f"\n  [FAIL] No results found!")
             print(f"    Message: {result.get('message', 'Unknown error')}")
     
     print("\n" + "=" * 70)

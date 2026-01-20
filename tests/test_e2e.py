@@ -9,11 +9,10 @@ Tests:
 """
 
 import sys
-import json
 from pathlib import Path
 
-# Add agentic-rag to path
-sys.path.insert(0, str(Path(__file__).parent))
+# Add agentic-rag root to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 
 def test_manual_search():
@@ -179,10 +178,10 @@ if __name__ == "__main__":
         test_different_machines()
         
         print("\n" + "=" * 70)
-        print("  ALL TESTS PASSED ✓")
+        print("  ALL TESTS PASSED")
         print("=" * 70)
         
     except Exception as e:
-        print(f"\n❌ TEST FAILED: {e}")
+        print(f"\nTEST FAILED: {e}")
         import traceback
         traceback.print_exc()
