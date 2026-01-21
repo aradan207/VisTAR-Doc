@@ -50,11 +50,25 @@ echo.
 
 :: Install Python dependencies
 echo [4/8] Installing Python dependencies...
-uv sync
+:: Use system Python to avoid downloading standalone Python (SSL certificate issues)
+echo Using system Python installation...
+uv sync --python-preference only-system
 if errorlevel 1 (
-    echo ERROR: Failed to install Python dependencies.
-    pause
-    exit /b 1
+    echo First attempt failed. Trying with native TLS...
+    uv sync --python-preference only-system --native-tls
+    if errorlevel 1 (
+        echo.
+        echo ERROR: Failed to install Python dependencies.
+        echo.
+        echo Troubleshooting tips:
+        echo   1. Check your internet connection
+        echo   2. Try running: uv sync --python-preference only-system --native-tls
+        echo   3. If behind a corporate proxy, configure proxy settings
+        echo   4. Try: pip install -r requirements.txt (if available)
+        echo.
+        pause
+        exit /b 1
+    )
 )
 echo Python dependencies installed successfully.
 echo.
@@ -65,35 +79,11 @@ where npm >nul 2>&1
 if errorlevel 1 (
     echo Node.js/npm not found. Attempting to install Node.js...
     echo.
-    
-    :: Try winget first
-    winget install OpenJS.NodeJS.LTS --accept-package-agreements --accept-source-agreements >nul 2>&1
+    call :install_nodejs
     if errorlevel 1 (
-        echo Winget installation failed. Downloading Node.js installer...
-        
-        :: Download Node.js installer
-        powershell -Command "Invoke-WebRequest -Uri 'https://nodejs.org/dist/v22.16.0/node-v22.16.0-x64.msi' -OutFile '%TEMP%\nodejs.msi' -UseBasicParsing"
-        if errorlevel 1 (
-            echo ERROR: Failed to download Node.js installer.
-            echo Please install Node.js manually from https://nodejs.org/
-            pause
-            exit /b 1
-        )
-        
-        echo Installing Node.js (this may require administrator privileges)...
-        start /wait msiexec /i "%TEMP%\nodejs.msi" /qn /norestart
-        if errorlevel 1 (
-            echo Silent install failed. Launching interactive installer...
-            start /wait "" "%TEMP%\nodejs.msi"
-        )
-        
-        :: Clean up
-        del "%TEMP%\nodejs.msi" >nul 2>&1
+        pause
+        exit /b 1
     )
-    
-    :: Refresh PATH
-    echo Refreshing PATH environment...
-    for /f "tokens=*" %%a in ('powershell -Command "[System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')"') do set "PATH=%%a"
 )
 
 :: Verify npm is available
@@ -220,3 +210,39 @@ echo   For image search to work, ensure vlm-yolo-detector is set up in the paren
 echo   If not already done, run install.bat in that repository.
 echo.
 pause
+goto :eof
+
+:: ============================================================
+:: Subroutine: Install Node.js
+:: ============================================================
+:install_nodejs
+:: Try winget first
+winget install OpenJS.NodeJS.LTS --accept-package-agreements --accept-source-agreements >nul 2>&1
+if not errorlevel 1 goto :refresh_path
+
+echo Winget installation failed. Downloading Node.js installer...
+
+:: Download Node.js installer using PowerShell
+set "NODE_MSI=%TEMP%\nodejs.msi"
+powershell -Command "Invoke-WebRequest -Uri 'https://nodejs.org/dist/v22.16.0/node-v22.16.0-x64.msi' -OutFile '%NODE_MSI%' -UseBasicParsing"
+if errorlevel 1 (
+    echo ERROR: Failed to download Node.js installer.
+    echo Please install Node.js manually from https://nodejs.org/
+    exit /b 1
+)
+
+echo Installing Node.js (this may require administrator privileges)...
+start /wait msiexec /i "%NODE_MSI%" /qn /norestart
+if errorlevel 1 (
+    echo Silent install failed. Launching interactive installer...
+    start /wait "" "%NODE_MSI%"
+)
+
+:: Clean up
+del "%NODE_MSI%" >nul 2>&1
+
+:refresh_path
+:: Refresh PATH environment
+echo Refreshing PATH environment...
+for /f "usebackq tokens=*" %%a in (`powershell -Command "[System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')"`) do set "PATH=%%a"
+exit /b 0
