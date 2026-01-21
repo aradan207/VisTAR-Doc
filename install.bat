@@ -10,7 +10,7 @@ echo.
 cd /d "%~dp0"
 
 :: Check for Python
-echo [1/7] Checking Python installation...
+echo [1/8] Checking Python installation...
 python --version >nul 2>&1
 if errorlevel 1 (
     echo ERROR: Python is not installed or not in PATH.
@@ -24,7 +24,7 @@ echo Found Python %PYTHON_VERSION%
 echo.
 
 :: Check for Ollama
-echo [2/7] Checking Ollama installation...
+echo [2/8] Checking Ollama installation...
 ollama --version >nul 2>&1
 if errorlevel 1 (
     echo ERROR: Ollama is not installed or not in PATH.
@@ -38,7 +38,7 @@ echo Found Ollama %OLLAMA_VERSION%
 echo.
 
 :: Install uv package manager
-echo [3/7] Installing uv package manager...
+echo [3/8] Installing uv package manager...
 pip install uv --quiet
 if errorlevel 1 (
     echo ERROR: Failed to install uv package manager.
@@ -49,7 +49,7 @@ echo uv installed successfully.
 echo.
 
 :: Install Python dependencies
-echo [4/7] Installing Python dependencies...
+echo [4/8] Installing Python dependencies...
 uv sync
 if errorlevel 1 (
     echo ERROR: Failed to install Python dependencies.
@@ -60,7 +60,7 @@ echo Python dependencies installed successfully.
 echo.
 
 :: Check for Node.js and install frontend dependencies
-echo [5/7] Setting up frontend dependencies...
+echo [5/8] Setting up frontend dependencies...
 where npm >nul 2>&1
 if errorlevel 1 (
     echo Node.js/npm not found. Attempting to install Node.js...
@@ -121,7 +121,7 @@ echo Frontend dependencies installed successfully.
 echo.
 
 :: Pull Ollama models
-echo [6/7] Pulling Ollama models (this may take several minutes)...
+echo [6/8] Pulling Ollama models (this may take several minutes)...
 echo.
 
 echo Pulling Mistral 7B Instruct (4.4 GB)...
@@ -150,8 +150,34 @@ echo.
 echo All Ollama models pulled successfully.
 echo.
 
+:: Clone vlm-yolo-detector if not present (for image search functionality)
+echo [7/8] Setting up vlm-yolo-detector for image search...
+set "PARENT_DIR=%~dp0.."
+if exist "%PARENT_DIR%\vlm-yolo-detector" (
+    echo Found existing vlm-yolo-detector repository.
+    echo Checking for required data files...
+    if exist "%PARENT_DIR%\vlm-yolo-detector\data\processed\image_embeddings.npy" (
+        echo Image embeddings found. Image search is ready.
+    ) else (
+        echo WARNING: Image embeddings not found.
+        echo Run install.bat in vlm-yolo-detector to generate them.
+    )
+) else (
+    echo Cloning vlm-yolo-detector repository...
+    cd "%PARENT_DIR%"
+    git clone https://github.com/morkev/vlm-yolo-detector.git
+    if errorlevel 1 (
+        echo WARNING: Failed to clone vlm-yolo-detector.
+        echo Image search will not work. Clone manually to %PARENT_DIR%\vlm-yolo-detector
+    ) else (
+        echo Repository cloned. Run install.bat in vlm-yolo-detector to set up image data.
+    )
+    cd "%~dp0"
+)
+echo.
+
 :: Build FAISS index
-echo [7/7] Building FAISS index from PDF manuals...
+echo [8/8] Building FAISS index from PDF manuals...
 .\.venv\Scripts\python.exe -m app.backend.core.rag.indexer
 if errorlevel 1 (
     echo WARNING: Failed to build FAISS index.
@@ -170,7 +196,7 @@ ollama list
 echo.
 
 echo Testing RAG functionality...
-.\.venv\Scripts\python.exe test_rag.py
+.\.venv\Scripts\python.exe tests\test_rag.py
 echo.
 
 echo ============================================================
@@ -180,7 +206,7 @@ echo.
 echo To start the application, run: start.bat
 echo.
 echo Or start manually:
-echo   Backend:  uv run uvicorn app.backend.main:app --reload
+echo   Backend:  uv run uvicorn app.backend.main:app --host 0.0.0.0 --port 8000
 echo   Frontend: cd app\frontend\agent-frontend ^&^& npm start
 echo.
 echo Available LLM models:
@@ -188,5 +214,9 @@ echo   - hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M (def
 echo   - hf.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF:Q4_K_M (lighter alternative)
 echo.
 echo To switch models, edit the OLLAMA_MODEL value in .env
+echo.
+echo Image search dependency:
+echo   For image search to work, ensure vlm-yolo-detector is set up in the parent directory.
+echo   If not already done, run install.bat in that repository.
 echo.
 pause
