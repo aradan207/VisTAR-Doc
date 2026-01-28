@@ -90,23 +90,34 @@ class AgentManager:
                 call.result = self.llm.run_tool(call.tool_name, call.args)
 
             FILL_RESULT_PROMPT = """
-            You are an autonomous reasoning agent summarizing tool results.
+You are an autonomous reasoning agent summarizing tool results.
 
-            STRICT RULES FOR IMAGE URLs:
-            1. If image_search results contain URLs, extract them EXACTLY as written
-            2. DO NOT modify, shorten, or make up any URLs
-            3. Only use URLs that appear verbatim in "url": "..." fields
-            4. Format images as: ![Brief description](exact_url_from_results)
-            
-            WRONG: ![Image](http://localhost:8000/api/media/yologen/train/APSX-PIM_page37_img1.png)
-            (if that exact URL wasn't in the results)
-            
-            RIGHT: Copy the EXACT url value from the tool results
-            
-            If no image_search was called or it returned no results, do not include any images.
-            
-            Respond with a brief summary paragraph. If images were found, include them using the exact URLs from results.
-            """
+=== STEP 1: CHECK WHICH TOOLS WERE CALLED ===
+
+Look at TOOL RESULTS below. Check if "image_search" appears.
+- If ONLY "manual_search" was called: Your response must have ZERO images, ZERO URLs, ZERO image suggestions
+- If "image_search" was called: Check if it returned results with "url" fields
+
+=== STEP 2: IMAGES ONLY FROM image_search ===
+
+INCLUDE images ONLY if ALL of these are true:
+1. The tool "image_search" was actually called (appears in TOOL RESULTS)
+2. The results contain "count" > 0
+3. The results contain actual "url": "http://..." values
+
+If including images:
+- Copy the URL EXACTLY character-for-character from the "url" field
+- Format: ![description](exact_url)
+
+=== FORBIDDEN ===
+
+- Do NOT invent URLs based on page numbers from manual_search
+- Do NOT guess URL patterns like "machine_page123_img1.png"
+- Do NOT suggest "see image at..." unless image_search returned that URL
+- Do NOT include any image markdown if image_search wasn't called
+
+Respond with a brief text summary. Only include image markdown if image_search returned actual URLs.
+"""
             tool_results_text = "\n".join(f"{call.tool_name}: {call.result}" for call in tool_calls)
 
             user_input = f"""
@@ -154,27 +165,39 @@ You are answering the user's question: "{self.user_input}"
 
 Based on the reasoning tree context below, write a DIRECT answer to the user.
 
-=== CRITICAL IMAGE RULES ===
+=== STEP 1: VERIFY IMAGE_SEARCH WAS CALLED ===
 
-1. LOOK FOR "url" FIELDS: Search the context for image_search results containing "url": "http://..."
+Before writing anything, search the context for "image_search" tool calls.
 
-2. COPY URLs EXACTLY: If you find image URLs, copy them CHARACTER FOR CHARACTER
-   - CORRECT: Use the exact URL from results like "url": "http://localhost:8000/api/media/yologen/train/APSX-PIM_page41_img1.png"
-   - WRONG: Making up or modifying URLs like page37, page20, etc. that weren't in results
+IF image_search WAS NOT CALLED:
+- Your answer must contain ZERO image URLs
+- Your answer must contain ZERO ![...](...) markdown
+- Your answer must NOT suggest viewing any images
+- Just provide a text-only answer based on manual_search results
 
-3. FORMAT: ![Description based on image_name](exact_url_from_results)
+IF image_search WAS CALLED but returned "count": 0:
+- Say "No relevant images were found" in your answer
+- Do NOT include any image markdown
 
-4. NO IMAGES IF NOT FOUND: If image_search returned count: 0 or wasn't called, don't include any image markdown
+=== STEP 2: IF image_search RETURNED RESULTS ===
 
-5. VERIFY BEFORE INCLUDING: Before writing any ![...](...) markdown, confirm that exact URL appeared in the tool results
+ONLY if you find actual "url": "http://..." values in image_search results:
+1. Copy the URL EXACTLY - character for character
+2. Format: ![Brief description](exact_url)
+3. Verify the image is from the correct machine (e.g., BOY-35 images for BOY-35 questions)
+
+=== FORBIDDEN - NEVER DO THESE ===
+
+- Do NOT invent URLs like "http://localhost:8000/api/media/yologen/train/MACHINE_page123_img1.png"
+- Do NOT construct URLs from page numbers found in manual_search
+- Do NOT include image markdown unless image_search returned actual URLs
+- Do NOT use "Failed to load:" with made-up URLs
 
 === ANSWER FORMAT ===
 
-1. Brief text answer to the user's question
-2. Then include images using EXACT urls from image_search results
-3. Any additional context or notes
-
-DO NOT invent URLs. DO NOT modify URLs. Only use URLs that appear exactly in the image_search results.
+1. Text answer to the user's question
+2. IF AND ONLY IF image_search returned URLs: include them with exact URLs
+3. Additional context if needed
 """
 
         final_answer = self.llm.generate(

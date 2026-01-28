@@ -27,7 +27,7 @@
   --radius-lg: 16px;
   --sidebar-w: 280px;
   --right-w: 360px;
-  --toolbar-h: 52px;
+  --toolbar-h: 60px;
   --node-w: 220px;
   --node-h: 64px;
   --col-gap: 120px;
@@ -71,11 +71,10 @@ body {
 /* TOP BAR */
 .topbar {
   grid-area: top;
-  display: grid;
-  grid-template-columns: 1fr auto auto;
+  display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
+  gap: 16px;
+  padding: 10px 16px;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.98),
@@ -92,6 +91,15 @@ body {
   display: flex;
   gap: 8px;
   align-items: center;
+  flex: 1;
+}
+.query-textarea {
+  min-height: 40px;
+  max-height: 44px;
+  resize: none;
+  flex: 1;
+  font-family: inherit;
+  line-height: 1.4;
 }
 .input,
 select,

@@ -11,38 +11,13 @@
       <!-- TOPBAR -->
       <header class="topbar">
         <div class="searchrow">
-          <input
+          <textarea
             id="query"
-            class="input"
+            class="input query-textarea"
             placeholder="Ask anything… (⇧⏎ to run)"
-          />
+            rows="2"
+          ></textarea>
           <button id="runBtn" class="btn primary">Run</button>
-        </div>
-
-        <div class="top-controls">
-          <button id="fitBtn" class="btn" title="Fit to content">Fit</button>
-          <button id="zoomInBtn" class="btn" title="Zoom in">＋</button>
-          <button id="zoomOutBtn" class="btn" title="Zoom out">－</button>
-          <button
-            id="exportTreeBtn"
-            class="btn"
-            title="Download the current reasoning tree as JSON"
-          >
-            Export
-          </button>
-          <button
-            id="importTreeBtn"
-            class="btn"
-            title="Upload a previously saved reasoning tree"
-          >
-            Import
-          </button>
-          <input
-            type="file"
-            id="importTreeInput"
-            accept="application/json"
-            hidden
-          />
         </div>
 
         <div class="status" id="status">Ready.</div>
@@ -69,17 +44,8 @@
         <div class="side-content" id="tab-settings" style="display: block">
           <div class="list">
             <div class="list-item" style="flex-direction: column; gap: 8px">
-              <div style="font-weight: 700">LLM Provider</div>
-              <div class="meta">Choose your LLM service provider</div>
-              <select id="llmProvider" class="input" style="width: 100%">
-                <option value="ollama">Ollama</option>
-                <option value="openai">OpenAI</option>
-                <option value="mistral">Mistral AI</option>
-              </select>
-            </div>
-            <div class="list-item" style="flex-direction: column; gap: 8px">
               <div style="font-weight: 700">Model Name</div>
-              <div class="meta">Name of the model to use</div>
+              <div class="meta">Name of the Ollama model to use</div>
               <input
                 id="modelName"
                 class="input"
@@ -88,26 +54,12 @@
               />
             </div>
             <div class="list-item" style="flex-direction: column; gap: 8px">
-              <div style="font-weight: 700">Provider URL</div>
-              <div class="meta">API endpoint for your chosen provider</div>
+              <div style="font-weight: 700">Ollama URL</div>
+              <div class="meta">URL of your local Ollama server</div>
               <input
                 id="providerUrl"
                 class="input"
                 value="http://127.0.0.1:11434"
-                style="width: 100%"
-              />
-            </div>
-            <div class="list-item" style="flex-direction: column; gap: 8px">
-              <div style="font-weight: 700">API Key</div>
-              <div class="meta">
-                Authentication key for the provider (if required)
-              </div>
-              <input
-                id="apiKey"
-                class="input"
-                type="password"
-                placeholder="Enter your API key"
-                value=""
                 style="width: 100%"
               />
             </div>
@@ -135,19 +87,19 @@
           <div class="live-header">
             <span class="live-pulse" aria-hidden="true"></span>
             <div class="live-copy">
-              <div id="liveTitle" class="live-title">Live reasoning</div>
+              <div id="liveTitle" class="live-title">Thinking</div>
               <div id="liveSubtitle" class="live-subtitle">
                 Waiting for the agent to begin…
               </div>
             </div>
-            <div class="live-controls" role="group" aria-label="Live reasoning controls">
+            <div class="live-controls" role="group" aria-label="Thinking controls">
               <button
                 id="collapseLive"
                 class="live-btn"
                 type="button"
                 aria-pressed="false"
                 aria-controls="liveStream"
-                title="Collapse live reasoning"
+                title="Collapse thinking"
               >
                 Collapse
               </button>
@@ -156,7 +108,7 @@
                 class="live-btn"
                 type="button"
                 aria-controls="liveStream"
-                title="Hide live reasoning"
+                title="Hide thinking"
               >
                 Hide
               </button>
@@ -171,7 +123,7 @@
           aria-controls="liveStream"
           aria-expanded="false"
         >
-          Show live reasoning
+          Show Thinking
         </button>
         <div id="viewport" class="viewport">
           <div class="layers">

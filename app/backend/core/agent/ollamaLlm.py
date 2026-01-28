@@ -9,8 +9,8 @@ from app.backend.core.models.prompt import SYSTEM_PROMPT
 
 
 class OllamaLLM(LLM):
-    def __init__(self, model_name: str, provider_url: Optional[str] = None, api_key: Optional[str] = None):
-        super().__init__(model_name, provider_url=provider_url, api_key=api_key)
+    def __init__(self, model_name: str, provider_url: Optional[str] = None):
+        super().__init__(model_name, provider_url=provider_url)
 
     def init_client(self):
         """

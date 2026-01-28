@@ -67,8 +67,8 @@ const btnMaxFinal = document.getElementById('btnMaxFinal');
 
 const TREE_EXPORT_VERSION = 1;
 const MAX_LIVE_EVENTS = 80;
-const LIVE_TOGGLE_DEFAULT_LABEL = 'Show live reasoning';
-const LIVE_TOGGLE_UPDATES_LABEL = 'Show live reasoning (updates)';
+const LIVE_TOGGLE_DEFAULT_LABEL = 'Show Thinking';
+const LIVE_TOGGLE_UPDATES_LABEL = 'Show Thinking (updates)';
 let lastTreePayload = null;
 let activeRun = null;
 let hasInitialFit = false;
@@ -201,7 +201,7 @@ function applyLiveCollapsed(collapsed, { persist = false } = {}) {
     el.collapseLiveBtn.setAttribute('aria-pressed', String(collapsed));
     el.collapseLiveBtn.setAttribute(
       'title',
-      collapsed ? 'Expand live reasoning' : 'Collapse live reasoning'
+      collapsed ? 'Expand thinking' : 'Collapse thinking'
     );
   }
 
@@ -238,7 +238,7 @@ function resetLiveStream(query) {
   if (!el.liveStream) return;
   el.liveStream.classList.remove('is-complete', 'is-error', 'is-cancelled');
   if (el.liveEvents) el.liveEvents.innerHTML = '';
-  if (el.liveTitle) el.liveTitle.textContent = 'Live reasoning';
+  if (el.liveTitle) el.liveTitle.textContent = 'Thinking';
   const label = query ? `“${shortText(query, 80)}”` : 'Streaming agent thoughts…';
   setLiveSubtitle(label);
 
@@ -380,9 +380,6 @@ setOnTransform(drawMinimapFrame);
 
 initProviderDefaults(el);
 
-el.fitBtn?.addEventListener('click', fitToContent);
-el.zoomInBtn?.addEventListener('click', zoomIn);
-el.zoomOutBtn?.addEventListener('click', zoomOut);
 el.hudFit?.addEventListener('click', fitToContent);
 el.hudZoomIn?.addEventListener('click', zoomIn);
 el.hudZoomOut?.addEventListener('click', zoomOut);
@@ -394,12 +391,6 @@ el.query?.addEventListener('keydown', (e) => {
     runAgent();
   }
 });
-
-el.exportTreeBtn?.addEventListener('click', exportCurrentTree);
-el.importTreeBtn?.addEventListener('click', () =>
-  el.importTreeInput?.click()
-);
-el.importTreeInput?.addEventListener('change', handleImportTreeFile);
 
 window.addEventListener('keydown', (e) => {
   if ((e.metaKey || e.ctrlKey) && e.key === '+') {
