@@ -1,9 +1,47 @@
 #!/usr/bin/env python3
 """
-Test the semantic image search functionality.
+Test Image Search - Semantic Image Search Functionality
 
-Tests the updated image_search tool with VLM descriptions and embeddings.
-"""
+=============================================================================
+WHAT THIS FILE TESTS:
+=============================================================================
+
+This file tests the internal functions of the image_search tool:
+1. Data loading (_load_all_data)
+2. Semantic search (_semantic_search)
+3. Machine name extraction (_extract_machine_names)
+4. Content type detection (_detect_required_content_type)
+5. Full search pipeline (_search_images)
+
+=============================================================================
+HOW WE GET THE DATA:
+=============================================================================
+
+- Images are indexed by vlm-yolo-detector in data/processed/
+- image_index.json: metadata for each image (filename, PDF source, page)
+- image_embeddings.npy: 384-dimensional vectors from VLM descriptions
+- The search embeds the query and finds similar image descriptions
+
+=============================================================================
+EXPECTED RESULTS:
+=============================================================================
+
+- Queries with machine names should return images from that machine's manual
+- Content type keywords (diagram, schematic) should influence results
+- PDF filter should restrict results to specific manuals
+- Results include image name, PDF source, page number, and relevance score
+
+=============================================================================
+HOW TO RUN:
+=============================================================================
+
+Run directly:
+    uv run python tests/test_image_search.py
+
+Run with pytest:
+    uv run pytest tests/test_image_search.py -v
+
+============================================================================="""
 
 import sys
 from pathlib import Path

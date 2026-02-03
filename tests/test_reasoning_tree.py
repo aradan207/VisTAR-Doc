@@ -1,8 +1,51 @@
+#!/usr/bin/env python3
 """
-Test script for the ReasoningTree structure.
+Test Reasoning Tree - Data Structure and Operations
 
-Run with: uv run python tests/test_reasoning_tree.py
-"""
+=============================================================================
+WHAT THIS FILE TESTS:
+=============================================================================
+
+This file tests the ReasoningTree data structure that the agent uses
+to track its thinking process. Each "leaf" in the tree represents
+one reasoning step with tool calls and results.
+
+We test:
+1. Creating a tree with a root query
+2. Adding child leaves with descriptions and tool calls
+3. Parent-child relationships work correctly
+4. Context accumulation (getting ancestor chain)
+5. Tree serialization to dictionary
+
+=============================================================================
+HOW WE GET THE DATA:
+=============================================================================
+
+- We create a ReasoningTree in memory
+- We add leaves manually with fake tool calls
+- No external data needed - this is a unit test
+
+=============================================================================
+EXPECTED RESULTS:
+=============================================================================
+
+- Tree starts with leaf_0 as root (the user query)
+- Each add_leaf returns a new leaf ID (leaf_1, leaf_2, etc.)
+- Leaves track their parent and children
+- get_leaf_context returns the full ancestor chain
+- to_dict exports the tree for JSON serialization
+
+=============================================================================
+HOW TO RUN:
+=============================================================================
+
+Run directly:
+    uv run python tests/test_reasoning_tree.py
+
+Run with pytest:
+    uv run pytest tests/test_reasoning_tree.py -v
+
+============================================================================="""
 
 import sys
 from pathlib import Path

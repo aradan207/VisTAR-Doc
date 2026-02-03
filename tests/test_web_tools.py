@@ -1,8 +1,45 @@
+#!/usr/bin/env python3
 """
-Manual smoke-tests for the HTTP tools.
+Test Web Tools - External Web Search and URL Fetch
 
-Run with: uv run python tests/test_web_tools.py
-"""
+=============================================================================
+WHAT THIS FILE TESTS:
+=============================================================================
+
+This file tests the web-related tools that the agent can use
+when local knowledge is insufficient.
+
+We test:
+1. web_search: Searches DuckDuckGo for external information
+2. fetch_url: Downloads and cleans content from web pages
+
+=============================================================================
+HOW WE GET THE DATA:
+=============================================================================
+
+- web_search sends requests to DuckDuckGo Lite
+- fetch_url downloads HTML from the given URL and extracts text
+- Both tools require internet access
+
+=============================================================================
+EXPECTED RESULTS:
+=============================================================================
+
+- web_search returns a list of search results with titles and URLs
+- fetch_url returns cleaned text content from the page
+- Both should handle errors gracefully (timeouts, bad URLs, etc.)
+
+=============================================================================
+HOW TO RUN:
+=============================================================================
+
+Run directly:
+    uv run python tests/test_web_tools.py
+
+Run with pytest:
+    uv run pytest tests/test_web_tools.py -v
+
+============================================================================="""
 
 import sys
 from pathlib import Path
