@@ -1,12 +1,49 @@
 #!/usr/bin/env python3
 """
-End-to-end test of the agentic-rag with semantic image search.
+End-to-End Test - Full Search Pipeline
 
-Tests:
-1. Manual search finds relevant content
-2. Image search finds semantically matching images
-3. Results include both text and images
-"""
+=============================================================================
+WHAT THIS FILE TESTS:
+=============================================================================
+
+This file tests the complete search pipeline from query to results:
+1. Manual search finds relevant text content
+2. Image search finds matching images using page hints
+3. Both searches return data from the correct manual
+4. Combined results can be used to answer visual questions
+
+=============================================================================
+HOW WE GET THE DATA:
+=============================================================================
+
+Text data:
+- manual_search reads from FAISS index in data/faiss_index/
+- Returns text chunks with source, page, and relevance score
+
+Image data:
+- image_search reads from vlm-yolo-detector/data/processed/
+- Returns image metadata with URLs for display
+
+=============================================================================
+EXPECTED RESULTS:
+=============================================================================
+
+- Manual search returns text from the queried machine's manual
+- Image search returns images from the same manual
+- Page hints from text improve image relevance
+- Both tools can be used together without errors
+
+=============================================================================
+HOW TO RUN:
+=============================================================================
+
+Run directly:
+    uv run python tests/test_e2e.py
+
+Run with pytest:
+    uv run pytest tests/test_e2e.py -v
+
+============================================================================="""
 
 import sys
 from pathlib import Path

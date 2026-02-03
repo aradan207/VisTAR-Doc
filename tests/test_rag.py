@@ -1,7 +1,48 @@
+#!/usr/bin/env python3
 """
-Quick test script for the RAG system.
+Test RAG System - Basic Manual Search Functionality
 
-Run with: uv run python tests/test_rag.py
+=============================================================================
+WHAT THIS FILE TESTS:
+=============================================================================
+
+This is a simple smoke test for the manual_search tool. It runs a few
+queries and prints the results to the console for manual inspection.
+
+We test:
+1. Can the tool connect to the FAISS vector store?
+2. Does it return results for common equipment queries?
+3. Are the results formatted correctly (source, page, content, score)?
+
+=============================================================================
+HOW WE GET THE DATA:
+=============================================================================
+
+- The manual_search tool uses a FAISS index stored in data/faiss_index/
+- The index contains text chunks from PDF manuals
+- Each chunk is embedded using sentence transformers
+- Queries are also embedded and compared using cosine similarity
+
+=============================================================================
+EXPECTED RESULTS:
+=============================================================================
+
+- Each query should return 1-3 results
+- Results should include source PDF name and page number
+- Content should be relevant to the query
+- Higher relevance scores mean better matches
+
+=============================================================================
+HOW TO RUN:
+=============================================================================
+
+Run directly:
+    uv run python tests/test_rag.py
+
+Run with pytest:
+    uv run pytest tests/test_rag.py -v
+
+=============================================================================
 """
 
 import os

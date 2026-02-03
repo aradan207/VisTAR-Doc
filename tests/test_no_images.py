@@ -1,8 +1,51 @@
+#!/usr/bin/env python3
 """
-Test script for queries that should not return images.
+Test No Images - Text-Only Query Validation
 
-Run with: uv run python tests/test_no_images.py
-"""
+=============================================================================
+WHAT THIS FILE TESTS:
+=============================================================================
+
+This file tests that text-only queries do NOT return images.
+This is a critical test for the URL hallucination fix.
+
+We test:
+1. Questions like "What is X?" should get text-only answers
+2. The LLM should NOT invent image URLs
+3. The final answer should have ZERO image markdown (no ![...](...) tags)
+
+=============================================================================
+HOW WE GET THE DATA:
+=============================================================================
+
+- This test calls the live API at http://localhost:8000
+- It sends a query via POST /api/agent/chat
+- The agent decides which tools to use based on the query
+- For "what is" questions, only manual_search should be called
+
+=============================================================================
+EXPECTED RESULTS:
+=============================================================================
+
+- The final answer should be text only
+- No image URLs in the response (no ![...](http://...) markdown)
+- The agent should NOT hallucinate URLs based on page numbers
+
+=============================================================================
+REQUIREMENTS:
+=============================================================================
+
+The backend server must be running:
+    ./start.bat
+
+=============================================================================
+HOW TO RUN:
+=============================================================================
+
+Start server first, then:
+    uv run python tests/test_no_images.py
+
+============================================================================="""
 
 import requests
 import json

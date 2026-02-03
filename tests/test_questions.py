@@ -1,15 +1,50 @@
 #!/usr/bin/env python3
 """
-Test Questions for Image Search Validation
+Test Questions - Manual UI Testing Reference
 
-These questions are designed to test if the system correctly:
-1. Finds the right images based on semantic search
-2. Returns images from the correct pages
-3. Properly displays images in the frontend
+=============================================================================
+WHAT THIS FILE TESTS:
+=============================================================================
 
-Run the server first: ./start.bat
-Then test these questions in the UI at http://localhost:3000
-"""
+This file provides sample questions for MANUAL testing in the UI.
+It also includes a script to verify image_search results directly.
+
+We test:
+1. Do visual queries return the expected images?
+2. Are images from the correct page in the manual?
+3. Does the pdf_filter correctly restrict to one manual?
+
+=============================================================================
+HOW WE GET THE DATA:
+=============================================================================
+
+- The verify_image_search() function calls image_search directly
+- Expected results are based on manual inspection of the VLM index
+- The questions are designed for the APSX-PIM and BOY-35 manuals
+
+=============================================================================
+EXPECTED RESULTS:
+=============================================================================
+
+Each test question defines:
+- question: What to ask in the UI
+- expected_image: The image filename we expect
+- expected_page: The page number in the PDF
+- reason: Why this image should match
+
+=============================================================================
+HOW TO RUN:
+=============================================================================
+
+Run the verification script:
+    uv run python tests/test_questions.py
+
+Or test manually:
+    1. Start server: ./start.bat
+    2. Open http://localhost:3000
+    3. Ask the questions and check results
+
+============================================================================="""
 
 import sys
 from pathlib import Path
