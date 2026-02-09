@@ -87,7 +87,16 @@ class AgentManager:
                     ))
             
             for call in tool_calls:
-                call.result = self.llm.run_tool(call.tool_name, call.args)
+                try:
+                    call.result = self.llm.run_tool(call.tool_name, call.args)
+                except Exception as tool_err:
+                    # Store the error as the tool result so the agent can
+                    # self-correct or continue with remaining reasoning steps
+                    # instead of aborting the entire question.
+                    call.result = {
+                        "error": f"Tool '{call.tool_name}' failed: {tool_err}",
+                        "results": [],
+                    }
 
             FILL_RESULT_PROMPT = """
 You are an autonomous reasoning agent summarizing tool results.

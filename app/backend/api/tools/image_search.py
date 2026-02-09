@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import Optional, Dict, Any, List
 
 import numpy as np
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from app.backend.core.agent.tool import tool
 
@@ -441,6 +441,15 @@ class ImageSearchArgs(BaseModel):
         default=3,
         description="Number of images to return",
     )
+
+    @field_validator("class_filter", mode="before")
+    @classmethod
+    def coerce_class_filter(cls, v):
+        """Accept a list and join into a comma-separated string so the LLM
+        sending ``['diagram', 'schematic']`` doesn't cause a validation error."""
+        if isinstance(v, list):
+            return ", ".join(str(x) for x in v) if v else None
+        return v
 
 
 @tool(
