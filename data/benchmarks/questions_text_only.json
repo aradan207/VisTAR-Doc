@@ -1,0 +1,152 @@
+[
+    {
+        "id": "text-01",
+        "question": "What are the processing characteristics of plastic that must be considered before injection molding?",
+        "expected_source": "APSX-PIM",
+        "ground_truth": "The processing characteristics of plastic that must be considered include melting or softening temperature, energy content (specific heat and latent heat), melt viscosity, and stability and behavior during processing. Each chemical type of plastic has its specific processing characteristics that must be understood before being successfully molded."
+    },
+    {
+        "id": "text-02",
+        "question": "What is the definition of clamp in the context of an injection molding machine?",
+        "expected_source": "APSX-PIM",
+        "ground_truth": "The clamp is the part of an injection molding machine incorporating the platens that provides the force necessary to hold the mold closed during the injection cycle. It prevents the mold from opening under injection pressure."
+    },
+    {
+        "id": "text-03",
+        "question": "What procedure does the FTIR manual describe for measuring a polystyrene film sample?",
+        "expected_source": "FTIR",
+        "ground_truth": "The FTIR manual describes opening the sample compartment lid and setting the polystyrene film in the sample holder. Then from the pull-down menu for the tool button, select Monitor sample. After confirming the sample spectrum profile, click the OK button and the measurement will be started. When the measurement is completed, the measured spectrum is displayed."
+    },
+    {
+        "id": "text-04",
+        "question": "What is injection molding pressure according to the APSX-PIM manual?",
+        "expected_source": "APSX-PIM",
+        "ground_truth": "Injection molding pressure is defined as the pressure applied to the cross-sectional area of the molding cylinder. Injection molding is the method of forming objects from granular or powdered plastics by forcing the material from a hopper through a heated cylinder into a cooled mold."
+    },
+    {
+        "id": "text-05",
+        "question": "What is a gate in injection molding terminology?",
+        "expected_source": "APSX-PIM",
+        "ground_truth": "A gate is the channel through which the molten resin flows from the runner into the cavity of the mold during the injection molding process."
+    },
+    {
+        "id": "text-06",
+        "question": "What electrical requirements must be met when connecting the BOY 35 EVV machine?",
+        "expected_source": "BOY-35",
+        "ground_truth": "The BOY 35 EVV machine must only be connected to an electrical circuit which corresponds to the current type, voltage, and frequency as specified on the rating plate. The local regulations for grounding, phasing, and protection circuits must be observed when connecting. Correct function of the machine is ensured within a range of plus or minus 5 percent of the rated operating voltage and plus or minus 2 percent of the rated frequency."
+    },
+    {
+        "id": "text-07",
+        "question": "What safety standards does the BOY 35 injection moulding machine comply with?",
+        "expected_source": "BOY-35",
+        "ground_truth": "The safety technology incorporated in the design and engineering of the BOY injection moulding machine complies with the criteria specified in European Standard EN 201. If the machine is resold and relocated outside of Europe, the safety codes applicable in the destination country must be verified and met."
+    },
+    {
+        "id": "text-08",
+        "question": "What are the main sections in the BOY 35 EVV technical data description?",
+        "expected_source": "BOY-35",
+        "ground_truth": "The BOY 35 EVV technical data description includes sections covering space requirements, mould clamp and ejector measures, ejector rod dimensions, nozzle dimensions, material feed unit connection dimensions, clamping force diagram, injection pressure diagram, back pressure diagram, mechanical interface, nozzle and screw arrangements, and barrel and nozzle heating."
+    },
+    {
+        "id": "text-09",
+        "question": "What is the BOY 35 EVV ejector system configuration?",
+        "expected_source": "BOY-35",
+        "ground_truth": "The BOY 35 EVV ejector system includes a directional valve Y61 for ejector retract and Y60 for ejector advance, with limit position sensors B61 for ejector rear limit and B60 for advance ejector nominal position. The system also includes movement buttons for both retract and advance operations."
+    },
+    {
+        "id": "text-10",
+        "question": "What safety warnings does the MILACRON manual provide regarding guard removal?",
+        "expected_source": "MILACRON",
+        "ground_truth": "The MILACRON manual warns that if one or more guards must be removed or altered to facilitate part removal, mold size, or for any other reason, the user must provide additional guarding of sufficient size to prevent access to moving machine members when the machine is operated. This warning applies to any gate or guard alteration or use."
+    },
+    {
+        "id": "text-11",
+        "question": "What electrical safety guidelines does the MILACRON manual specify?",
+        "expected_source": "MILACRON",
+        "ground_truth": "The MILACRON manual states to keep all electrical equipment in safe and proper working condition. Defective equipment should be put in good order or be permanently disconnected. Operators must thoroughly inspect electrical equipment before using it to ensure that it is in good operating condition."
+    },
+    {
+        "id": "text-12",
+        "question": "What does the MILACRON manual say about interrupted cycle situations?",
+        "expected_source": "MILACRON",
+        "ground_truth": "The MILACRON manual advises to approach an interrupted cycle situation with caution. An interrupted cycle can be caused by solidified plastic in the nozzle. If the nozzle appears to be clogged, never under any circumstances attempt to remove the solidified material without first backing off the screw to its fully retracted position."
+    },
+    {
+        "id": "text-13",
+        "question": "What pre-shipment items should be completed before a MILACRON machine arrives?",
+        "expected_source": "MILACRON",
+        "ground_truth": "Before the MILACRON machine arrives, users should verify the plant floor is strong enough to support the machine and order all the lubricants and filter elements needed. This checklist should be reviewed any time the machine is relocated to minimize the amount of down time involved."
+    },
+    {
+        "id": "text-14",
+        "question": "What are the main sections of the MAAC Thermoformer operator manual?",
+        "expected_source": "MAAC",
+        "ground_truth": "The MAAC Thermoformer manual contains sections covering reference documentation including safety warnings, machine specifications, and operating conditions; forming sequences with multiple sequence options; software screens and descriptions including setup screens, timers, and diagnostics; and forming sequence editing with C Flex programming and definitions."
+    },
+    {
+        "id": "text-15",
+        "question": "What troubleshooting guidance does the MAAC manual provide for blisters or bubbles in thermoformed parts?",
+        "expected_source": "MAAC",
+        "ground_truth": "For blisters or bubbles, the probable causes include heating too rapidly, excess moisture, uneven heating, and wrong sheet type. Suggested actions include lowering heat temperature, using slower heating, increasing distance between heaters and sheet, pre-drying the material, preheating, heating from both sides, and not removing material from moisture-proof wrapping prematurely."
+    },
+    {
+        "id": "text-16",
+        "question": "What temperature control features does the RSA-G2 forced convection oven provide?",
+        "expected_source": "RSA-G2",
+        "ground_truth": "The RSA-G2 Forced Convection Oven is designed to optimize temperature response time, uniformity and stability. Gas is passed over two resistive gun heaters and into a specially-shaped oven cavity which optimizes gas mixing and uniformity. Up to five thermocouples within the oven make continuous measurements of temperature and are used to determine power adjustments."
+    },
+    {
+        "id": "text-17",
+        "question": "What types of analysis does the RSA-G2 support?",
+        "expected_source": "RSA-G2",
+        "ground_truth": "The RSA-G2 is a fourth generation dual-head mechanical analyzer that supports solid analysis techniques. It is positioned to address the widest range of applications from the R&D bench to the quality control lab, featuring a forced convection oven for precise temperature control and an extensive array of clamping systems to accommodate different sample types."
+    },
+    {
+        "id": "text-18",
+        "question": "What is the Fusion Cell technology in the Discovery DSC?",
+        "expected_source": "DSC",
+        "ground_truth": "The Fusion Cell is a patented technology in the Discovery DSC that provides unrivaled performance in baseline flatness, sensitivity, resolution, and reproducibility. Its technology enables detection of the weakest thermal transitions and the most accurate enthalpy and specific heat capacity measurements."
+    },
+    {
+        "id": "text-19",
+        "question": "What is the T4P Tzero heat flow technology in the Discovery DSC?",
+        "expected_source": "DSC",
+        "ground_truth": "The Advanced T4P Tzero heat flow technology is an exclusive feature of the Discovery DSC that provides ultimate DSC performance. It has the unique capability to conduct advanced heat flow measurements for the most accurate and precise thermal analysis results."
+    },
+    {
+        "id": "text-20",
+        "question": "How does Differential Scanning Calorimetry (DSC) work?",
+        "expected_source": "DSC",
+        "ground_truth": "Differential Scanning Calorimetry (DSC) measures endothermic and exothermic processes. Understanding a material's structure-property relationship is necessary when designing, processing, and using a product. DSC is the most prevalent thermal analysis technique that measures the physical properties of a material with respect to temperature, time, and atmosphere."
+    },
+    {
+        "id": "text-21",
+        "question": "What safety precautions does the MILACRON manual describe for adding raw material?",
+        "expected_source": "MILACRON",
+        "ground_truth": "When adding raw material to the machine, the MILACRON manual states to do so in a safe and stable manner. Operators should not climb or stand on the machine to add material."
+    },
+    {
+        "id": "text-22",
+        "question": "What is a cavity in the context of plastic injection molding?",
+        "expected_source": "APSX-PIM",
+        "ground_truth": "A cavity is a depression, or a set of matching recesses, in a plastics-forming mold that forms the outer surfaces of the molded articles."
+    },
+    {
+        "id": "text-23",
+        "question": "What is flash in the context of injection molding?",
+        "expected_source": "APSX-PIM",
+        "ground_truth": "Flash is excess material that is formed and attached to the component along a seam or mold parting line during the injection molding process."
+    },
+    {
+        "id": "text-24",
+        "question": "What does the MAAC Thermoformer sequence selection section cover?",
+        "expected_source": "MAAC",
+        "ground_truth": "The MAAC Thermoformer sequence selection section covers multiple forming sequences. It includes Sequence 1 through multiple options, along with vacuum forming and pressure forming configurations. The software screens describe setup, automatic platen jog, timers, and diagnostics."
+    },
+    {
+        "id": "text-25",
+        "question": "What are the seven fundamentals of thermoforming mentioned in the MAAC manual?",
+        "expected_source": "MAAC",
+        "ground_truth": "The MAAC manual references the seven fundamentals of thermoforming in the reference documentation section of the operator's manual. This topic is introduced alongside the machine specifications, operating conditions, safety warnings, and the company introduction for MAAC Machinery Company."
+    }
+]

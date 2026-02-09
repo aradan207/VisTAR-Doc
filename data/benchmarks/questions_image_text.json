@@ -1,0 +1,177 @@
+[
+    {
+        "id": "imgtext-01",
+        "question": "Show me the APSX-PIM wiring diagram with the J1, J2, J3 connectors and explain the connections",
+        "expected_source": "APSX-PIM",
+        "expected_image_pattern": "APSX-PIM_page41",
+        "ground_truth": "The APSX-PIM wiring diagram shows the electrical connections for the machine including labeled connectors: J1 for the Spring Motor, J2 for Sensors, J3 for the Clamp Motor, and J9 for Switches. The diagram also shows the connection for the Hopper Motor labeled as connector 6."
+    },
+    {
+        "id": "imgtext-02",
+        "question": "What does the APSX-PIM dashboard look like during the injection cycle?",
+        "expected_source": "APSX-PIM",
+        "expected_image_pattern": "APSX-PIM_page31",
+        "ground_truth": "The APSX-PIM dashboard displays the injection cycle stages including CLAMPING, INJECTING, HOLDING, and COOLING phases. The interface shows real-time status of the current cycle stage and allows the operator to monitor progress through each phase."
+    },
+    {
+        "id": "imgtext-03",
+        "question": "Show me the APSX-PIM machine internal components and hopper assembly",
+        "expected_source": "APSX-PIM",
+        "expected_image_pattern": "APSX-PIM_page",
+        "ground_truth": "The APSX-PIM internal components include the hopper for material feed, the barrel assembly for melting plastic, the injection screw mechanism, and the mold clamping unit. The hopper is positioned at the top of the machine for gravity-fed material loading into the barrel."
+    },
+    {
+        "id": "imgtext-04",
+        "question": "Show the BOY 35 user administration screen with USB options",
+        "expected_source": "BOY-35",
+        "expected_image_pattern": "BOY-35",
+        "ground_truth": "The BOY 35 user administration screen provides an interface for managing user access and machine configuration. It includes options for USB data transfer, user permission levels, and system administration settings."
+    },
+    {
+        "id": "imgtext-05",
+        "question": "What safety warning signs are shown for BOY 35 maintenance procedures?",
+        "expected_source": "BOY-35",
+        "expected_image_pattern": "BOY-35",
+        "ground_truth": "The BOY 35 maintenance section displays safety warning signs that indicate hazardous areas during maintenance. These warnings address the risks of moving machine parts, high temperatures, and electrical hazards that maintenance personnel must be aware of before servicing the machine."
+    },
+    {
+        "id": "imgtext-06",
+        "question": "Show the BOY 35 process configurator sequence screen",
+        "expected_source": "BOY-35",
+        "expected_image_pattern": "BOY-35",
+        "ground_truth": "The BOY 35 process configurator screen shows the sequence of operations for the injection molding cycle. It displays the configurable steps including mold closing, injection, holding pressure, cooling, mold opening, and ejection in a visual sequence layout."
+    },
+    {
+        "id": "imgtext-07",
+        "question": "Show me the MILACRON ejector system setup menu and explain the settings",
+        "expected_source": "MILACRON",
+        "expected_image_pattern": "MILACRON_page263",
+        "ground_truth": "The MILACRON ejector system setup menu displays configuration options for the ejector mechanism including Forward Speed settings, Dwell time configuration, and retract parameters. The menu allows operators to set the ejector stroke, speed profiles, and timing for part removal from the mold."
+    },
+    {
+        "id": "imgtext-08",
+        "question": "Show the MILACRON lubricant specifications table",
+        "expected_source": "MILACRON",
+        "expected_image_pattern": "MILACRON_page82",
+        "ground_truth": "The MILACRON lubricant specifications table lists the approved lubricants for the machine including types, viscosity grades, and application points. It specifies which lubricants should be used for hydraulic systems, toggle mechanisms, and sliding surfaces."
+    },
+    {
+        "id": "imgtext-09",
+        "question": "Show the MAAC thermoformer forming timer diagram with flow control",
+        "expected_source": "MAAC",
+        "expected_image_pattern": "MAAC",
+        "ground_truth": "The MAAC thermoformer forming timer diagram shows the timing sequence for the forming cycle including the flow control valve settings. It displays the relationship between heating time, forming time, and cooling time with adjustable timer parameters for each stage."
+    },
+    {
+        "id": "imgtext-10",
+        "question": "Show the MAAC thermoformer input diagnostics screen",
+        "expected_source": "MAAC",
+        "expected_image_pattern": "MAAC",
+        "ground_truth": "The MAAC thermoformer input diagnostics screen displays the status of all machine input signals. It shows which inputs are active or inactive, allowing operators to troubleshoot sensor and switch problems by monitoring real-time input states."
+    },
+    {
+        "id": "imgtext-11",
+        "question": "Show me the RSA-G2 clamping systems for tension and three-point bending tests",
+        "expected_source": "RSA-G2",
+        "expected_image_pattern": "RSA-G2_page7",
+        "ground_truth": "The RSA-G2 features an extensive array of clamping systems to accommodate different test types. The tension clamps hold flat or cylindrical samples vertically for tensile testing. The three-point bending fixture supports the sample at two points while applying force at the center for flexural measurements."
+    },
+    {
+        "id": "imgtext-12",
+        "question": "Show the MILACRON alarm SPC chart for trend monitoring",
+        "expected_source": "MILACRON",
+        "expected_image_pattern": "MILACRON_page",
+        "ground_truth": "The MILACRON alarm SPC (Statistical Process Control) chart displays trend monitoring data for key process parameters. It shows historical data points plotted over time with upper and lower control limits to help operators identify process drift and maintain quality standards."
+    },
+    {
+        "id": "imgtext-13",
+        "question": "Show me the APSX-PIM electrical schematic showing the hopper motor and sensors wiring",
+        "expected_source": "APSX-PIM",
+        "expected_image_pattern": "APSX-PIM_page41",
+        "ground_truth": "The APSX-PIM electrical schematic shows the wiring for the hopper motor connected through connector 6, and the sensors connected through J2. The diagram provides the complete electrical routing for motor control and sensor feedback signals used during the injection molding process."
+    },
+    {
+        "id": "imgtext-14",
+        "question": "Show the BOY 35 injection pressure diagram from the technical data section",
+        "expected_source": "BOY-35",
+        "expected_image_pattern": "BOY-35",
+        "ground_truth": "The BOY 35 injection pressure diagram is part of the technical data section and shows the relationship between injection pressure and screw diameter. It provides the maximum injection pressure values achievable at different screw positions for the 35 EVV model."
+    },
+    {
+        "id": "imgtext-15",
+        "question": "Show the FTIR spectra comparison interface for data comparison analysis",
+        "expected_source": "FTIR",
+        "expected_image_pattern": "FTIR_page100",
+        "ground_truth": "The FTIR data comparison interface displays a graphical user interface with plots for comparing a measured spectrum against a reference spectrum. The software allows setting wavenumber regions for comparison and selecting reference spectra files for analysis."
+    },
+    {
+        "id": "imgtext-16",
+        "question": "Show the MILACRON machine layout and space requirements diagram",
+        "expected_source": "MILACRON",
+        "expected_image_pattern": "MILACRON_page",
+        "ground_truth": "The MILACRON machine layout diagram shows the overall dimensions and space requirements for installation. It includes the footprint dimensions, clearance areas needed for maintenance access, and the positions of major components such as the clamp unit, injection unit, and hydraulic system."
+    },
+    {
+        "id": "imgtext-17",
+        "question": "Show the MAAC thermoformer heater zone layout diagram",
+        "expected_source": "MAAC",
+        "expected_image_pattern": "MAAC",
+        "ground_truth": "The MAAC thermoformer heater zone layout shows the arrangement of heating elements across the forming area. Individual heater zones can be controlled independently to achieve uniform sheet temperature distribution before forming."
+    },
+    {
+        "id": "imgtext-18",
+        "question": "Show the RSA-G2 instrument overview and main components",
+        "expected_source": "RSA-G2",
+        "expected_image_pattern": "RSA-G2_page",
+        "ground_truth": "The RSA-G2 instrument overview shows the main components of the dual-head mechanical analyzer including the forced convection oven, the upper and lower measurement heads, the sample mounting area, and the control electronics enclosure."
+    },
+    {
+        "id": "imgtext-19",
+        "question": "Show the Discovery DSC instrument and Fusion Cell design",
+        "expected_source": "DSC",
+        "expected_image_pattern": "Discovery",
+        "ground_truth": "The Discovery DSC instrument features the patented Fusion Cell technology. The cell design includes the sample and reference platforms with Tzero thermocouples, the silver heating block for uniform temperature distribution, and the lid assembly for controlled atmosphere operation."
+    },
+    {
+        "id": "imgtext-20",
+        "question": "Show the MILACRON toggle clamp mechanism diagram",
+        "expected_source": "MILACRON",
+        "expected_image_pattern": "MILACRON_page",
+        "ground_truth": "The MILACRON toggle clamp mechanism diagram illustrates the mechanical linkage system used to apply clamping force to the mold. The toggle mechanism converts hydraulic cylinder force into a mechanical advantage that locks the platens together during injection."
+    },
+    {
+        "id": "imgtext-21",
+        "question": "Show the BOY 35 nozzle and screw arrangement diagram",
+        "expected_source": "BOY-35",
+        "expected_image_pattern": "BOY-35",
+        "ground_truth": "The BOY 35 nozzle and screw arrangement diagram shows the configuration of the injection nozzle, barrel, and plasticizing screw. It includes the nozzle dimensions, screw geometry, and the barrel and nozzle heating zone layout for the 35 EVV model."
+    },
+    {
+        "id": "imgtext-22",
+        "question": "Show the FTIR simple quantitation analysis settings dialog",
+        "expected_source": "FTIR",
+        "expected_image_pattern": "FTIR_page104",
+        "ground_truth": "The FTIR simple quantitation analysis settings dialog box shows the interface for configuring quantitative analysis parameters. It includes options for selecting calibration methods, setting concentration ranges, and specifying the wavenumber regions used for quantitative measurements."
+    },
+    {
+        "id": "imgtext-23",
+        "question": "Show the APSX-PIM mold clamping assembly diagram",
+        "expected_source": "APSX-PIM",
+        "expected_image_pattern": "APSX-PIM_page",
+        "ground_truth": "The APSX-PIM mold clamping assembly diagram shows the clamping mechanism that holds the mold closed during injection. It includes the platens, toggle or hydraulic cylinder, tie bars, and the mold mounting surfaces."
+    },
+    {
+        "id": "imgtext-24",
+        "question": "Show the MILACRON barrel and screw assembly cross-section",
+        "expected_source": "MILACRON",
+        "expected_image_pattern": "MILACRON_page",
+        "ground_truth": "The MILACRON barrel and screw assembly cross-section shows the injection unit internals including the feed zone, compression zone, and metering zone of the screw. The barrel heating bands and thermocouple positions are marked along the length of the barrel."
+    },
+    {
+        "id": "imgtext-25",
+        "question": "Show the BOY 35 hydraulic system schematic diagram",
+        "expected_source": "BOY-35",
+        "expected_image_pattern": "BOY-35",
+        "ground_truth": "The BOY 35 hydraulic system schematic shows the hydraulic circuit including the pump, directional control valves, pressure relief valves, and actuating cylinders. It illustrates the oil flow paths for clamping, injection, and ejection functions."
+    }
+]
