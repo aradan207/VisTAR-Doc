@@ -1,121 +1,184 @@
 id,category,question,expected_source,ground_truth,generated_answer,retrieved_sources,duration_seconds,token_f1,bleu,rouge1_f1,rouge2_f1,rougeL_f1,bertscore_f1,retrieval_accuracy,image_present,image_url_correct_source
-imgtext-01,image_text,"Show me the APSX-PIM wiring diagram with the J1, J2, J3 connectors and explain the connections",APSX-PIM,"The APSX-PIM wiring diagram shows the electrical connections for the machine including labeled connectors: J1 for the Spring Motor, J2 for Sensors, J3 for the Clamp Motor, and J9 for Switches. The diagram also shows the connection for the Hopper Motor labeled as connector 6.","Here is the information you requested:
+imgtext-01,image_text,"Show me the APSX-PIM wiring diagram with the J1, J2, J3 connectors and explain the connections",APSX-PIM,"The APSX-PIM wiring diagram shows the electrical connections for the machine including labeled connectors: J1 for the Spring Motor, J2 for Sensors, J3 for the Clamp Motor, and J9 for Switches. The diagram also shows the connection for the Hopper Motor labeled as connector 6.","The **APSX-PIM wiring diagram** for connectors **J1, J2, and J3** is on **Page 37** of the *APSX-PIM.pdf* manual.
 
-The APSX-PIM wiring diagram with J1, J2, and J3 connectors can be found in three images. These images were discovered through an image search tool. Here are the URLs for each image:
+### **Connector Functions:**
+- **J1:** Distributes power (+115VAC) and ground to the system.
+- **J2:** Provides communication links (likely CAN bus or diagnostic signals).
+- **J3:** Handles sensor/motor control signals (e.g., solenoid triggers, feedback).
 
-1. ![APSX-PIM schematic diagram from page 41](http://localhost:8000/api/media/yologen/train/APSX-PIM_page41_img1.png)
-2. ![APSX-PIM diagram from page 30](http://localhost:8000/api/media/yologen/train/APSX-PIM_page30_img1.jpeg)
-3. ![APSX-PIM schematic or illustration from page ","APSX-PIM.pdf, APSX-PIM, Manual_BOY-35-E-VV_unlocked.pdf",17.54,0.2055,0.031,0.2404,0.068,0.1538,0.5168,1.0,True,True
-imgtext-02,image_text,What does the APSX-PIM dashboard look like during the injection cycle?,APSX-PIM,"The APSX-PIM dashboard displays the injection cycle stages including CLAMPING, INJECTING, HOLDING, and COOLING phases. The interface shows real-time status of the current cycle stage and allows the operator to monitor progress through each phase.","Based on the information provided, here is a summary of what was found about the APSX-PIM dashboard during the injection cycle:
+For precise pin assignments, refer to the schematic in **Page 41** for detailed wiring paths. No explicit pin details were provi","APSX-PIM.pdf, Manual_BOY-35-E-VV_unlocked.pdf, APSX-PIM",21.8,0.2804,0.0484,0.3594,0.0794,0.2812,0.5694,1.0,True,True
+imgtext-02,image_text,What does the APSX-PIM dashboard look like during the injection cycle?,APSX-PIM,"The APSX-PIM dashboard displays the injection cycle stages including CLAMPING, INJECTING, HOLDING, and COOLING phases. The interface shows real-time status of the current cycle stage and allows the operator to monitor progress through each phase.","During the injection cycle, the **APSX-PIM dashboard** shows text-based status updates including:
 
-- The APSX-PIM dashboard includes a status message display that shows the current injection cycle step and notifies the user when necessary. Possible steps include STAND BY, CLAMPING, INJECTING, HOLDING, and COOLING. (Leaf 1)
-- During the manual controls section, it was mentioned that there are three sections on the user interface: The main dashboard, the manual contro","APSX-PIM.pdf, APSX-PIM",12.71,0.2192,0.0532,0.2222,0.1028,0.1852,0.5435,1.0,True,True
-imgtext-03,image_text,Show me the APSX-PIM machine internal components and hopper assembly,APSX-PIM,"The APSX-PIM internal components include the hopper for material feed, the barrel assembly for melting plastic, the injection screw mechanism, and the mold clamping unit. The hopper is positioned at the top of the machine for gravity-fed material loading into the barrel.","Based on the manual search results, I found detailed instructions for the APSX-PIM machine internal components and hopper assembly. However, no images were found as image_search did not return any URLs. Here is a summary of the information:
+- **""STAND BY""** (ready state)
+- **""CLAMPING""** (clamp blocks approaching mold)
+- **""INJECTING""** (nozzle opens and injects plastic)
+- **""HOLDING""** (holding pressure applied for full fill)
+- **""COOLING""** (machine pauses for part cooling)
 
-1. The APSX-PIM machine requires various wrenches (7/16”, ½”, ¾”) and hex keys (3/16”, ¼” and M4) for adjustments and maintenance.
-2. The hopper motor mounts use a 7/16” wrench, mold clamps use a 1/2” wrench, and Blocks 1 and 7 that hold the 1” steel shafts ","APSX-PIM.pdf, APSX-PIM",7.49,0.1951,0.0185,0.2741,0.0821,0.1827,0.5532,1.0,False,
-imgtext-04,image_text,Show the BOY 35 user administration screen with USB options,BOY-35,"The BOY 35 user administration screen provides an interface for managing user access and machine configuration. It includes options for USB data transfer, user permission levels, and system administration settings.","The output you provided appears to be a tree structure representing the results of a search for images related to the BOY-35 injection molding machine's user administration screen with USB options. Here is a simplified version:
+The central display shows the cycle’s current phase, accompanied by manual controls and settings adjustments. Automation follows a sequence of plasticizing → cl","APSX-PIM.pdf, Manual_BOY-35-E-VV_unlocked.pdf, APSX-PIM",19.25,0.3516,0.0597,0.434,0.1346,0.2642,0.5833,1.0,False,
+imgtext-03,image_text,Show me the APSX-PIM machine internal components and hopper assembly,APSX-PIM,"The APSX-PIM internal components include the hopper for material feed, the barrel assembly for melting plastic, the injection screw mechanism, and the mold clamping unit. The hopper is positioned at the top of the machine for gravity-fed material loading into the barrel.","Here is a concise yet detailed visual guide to the **APSX-PIM internal components and hopper assembly**, based on your refined search:
 
-```markdown
-Leaf(id=leaf_0) | desc=Show the BOY 35 user administration screen with USB options
-| children=['leaf_1', 'leaf_6']
+---
 
-Leaf(id=leaf_1) | desc=Not defined
+### **1. Hopper & Feeder Pipe Layout**
+**Image:** [Page 18 Schematic](http://localhost:8000/api/media/yologen/train/APSX-PIM_page18_img1.png)
+- **Focus:** Shows the material flow from hopper to injection nozzle.
+- **Key Points:**
+  - Feeder pipe connections (ensure no blockages).
+  - Hopper motor mounting bolts (7/16"" wrench required).
 
-Leaf(id=leaf_6) | desc=Search for images of BOY 35 user administration screens with USB options
-| tools=[im","Manual_MAAC-Thermoformer.pdf, Manual_BOY-35-E-VV_unlocked.pdf, MILACRON.pdf, Manual_BOY-35-E-VV_unlocked",22.77,0.1045,0.0215,0.101,0.0254,0.0707,0.4094,1.0,False,
-imgtext-05,image_text,What safety warning signs are shown for BOY 35 maintenance procedures?,BOY-35,"The BOY 35 maintenance section displays safety warning signs that indicate hazardous areas during maintenance. These warnings address the risks of moving machine parts, high temperatures, and electrical hazards that maintenance personnel must be aware of before servicing the machine.","The safety warning signs for BOY 35 maintenance procedures are shown in the technical documentation such as Manual_BOY-35-E-VV_unlocked.pdf, MILACRON.pdf, and Manual_MAAC-Thermoformer.pdf. Some of the safety measures include regular inspection of all machine safety devices, replacement of non-functioning components, maintaining safety guards, doors, shields, limit switches, and proper electrical connections.
+---
 
-The following images related to safety warning signs for BOY 35 maintenance procedures ","Manual_BOY-35-E-VV_unlocked.pdf, MILACRON.pdf, Manual_MAAC-Thermoformer.pdf, Manual_BOY-35-E-VV_unlocked",11.17,0.1622,0.0338,0.1545,0.0367,0.1273,0.4276,1.0,False,
-imgtext-06,image_text,Show the BOY 35 process configurator sequence screen,BOY-35,"The BOY 35 process configurator screen shows the sequence of operations for the injection molding cycle. It displays the configurable steps including mold closing, injection, holding pressure, cooling, mold opening, and ejection in a visual sequence layout.","It appears that you have provided a transcript of a conversation between two AI models discussing the results of searching for images related to the BOY 35 process configurator sequence screen from a technical manual for an industrial plastic injection molding system.
+### **2. Motor ","APSX-PIM.pdf, APSX-PIM",38.03,0.1333,0.0175,0.1631,0.0346,0.1288,0.4346,1.0,False,
+imgtext-04,image_text,Show the BOY 35 user administration screen with USB options,BOY-35,"The BOY 35 user administration screen provides an interface for managing user access and machine configuration. It includes options for USB data transfer, user permission levels, and system administration settings.","The **BOY 35 User Administration screen** does not contain direct USB-related options. Instead, USB functionality is managed in the **""Machine Data, Configuration""** section:
 
-In summary, the search returned three images:
-1. A screenshot from a technical manual showing a use of the BOY 35 E VV injection molding machine with a vertical clamping unit (<http://localhost:8000/api/media/yologen/train/Manual_","Manual_BOY-35-E-VV_unlocked.pdf, MILACRON.pdf, Manual_BOY-35-E-VV_unlocked",19.0,0.1974,0.0392,0.2115,0.0444,0.1498,0.4542,1.0,False,
-imgtext-07,image_text,Show me the MILACRON ejector system setup menu and explain the settings,MILACRON,"The MILACRON ejector system setup menu displays configuration options for the ejector mechanism including Forward Speed settings, Dwell time configuration, and retract parameters. The menu allows operators to set the ejector stroke, speed profiles, and timing for part removal from the mold.","Based on the provided context and tool results, I was unable to find any images of the Milacron ejector system setup menu as only the manual_search tool was called, and there's no mention of image_search being used. Therefore, the response should not include any image markdown. The final answer would be: ""No images of the Milacron ejector system setup menu could be found.""
+- Use the **""Save yfiles on USB""** (item **22**) to export configurations from this screen.
+- Located in Section **12.30**, page 234 of the BOY-35-E-VV manual.
 
-Additionally, I was unable to analyze the settings in the images since none were found during the search process. The summa","MILACRON.pdf, Manual_BOY-35-E-VV_unlocked.pdf, Manual_MAAC-Thermoformer.pdf",22.23,0.2016,0.0588,0.2685,0.068,0.2013,0.5614,1.0,False,
-imgtext-08,image_text,Show the MILACRON lubricant specifications table,MILACRON,"The MILACRON lubricant specifications table lists the approved lubricants for the machine including types, viscosity grades, and application points. It specifies which lubricants should be used for hydraulic systems, toggle mechanisms, and sliding surfaces.","The MILACRON lubricant specifications were found in the provided PDF document during manual search. No images were suggested or found using the image_search tool.
+For visual reference, check **page 234** in your manual for the exact interface with the **""Save yfiles on USB""** option.","Manual_BOY-35-E-VV_unlocked.pdf, Manual_BOY-35-E-VV_unlocked, Manual_MAAC-Thermoformer.pdf, FTIR.pdf",35.05,0.2921,0.089,0.2941,0.1,0.2157,0.5153,1.0,False,
+imgtext-05,image_text,What safety warning signs are shown for BOY 35 maintenance procedures?,BOY-35,"The BOY 35 maintenance section displays safety warning signs that indicate hazardous areas during maintenance. These warnings address the risks of moving machine parts, high temperatures, and electrical hazards that maintenance personnel must be aware of before servicing the machine.","For BOY 35 maintenance procedures, key safety warning signs include:
 
-The search results include various details about different lubricants and their specifications, such as P70 5237680 08/2018 Supplier Product Name Shell Global Solutions (US) Inc., Sinopec Lubricant Co., Ltd., Tide Water Oil Co. (India) Ltd., Tongyi Petroleum Chemical Co., Ltd., Total Lubrifiants, W.S. Dodge Oil Co., Inc., and Chevron ","MILACRON.pdf, MILACRON",8.09,0.104,0.0278,0.1376,0.037,0.1009,0.5037,1.0,False,
-imgtext-09,image_text,Show the MAAC thermoformer forming timer diagram with flow control,MAAC,"The MAAC thermoformer forming timer diagram shows the timing sequence for the forming cycle including the flow control valve settings. It displays the relationship between heating time, forming time, and cooling time with adjustable timer parameters for each stage.","Based on the results provided, the objective was to find a forming timer diagram of a MAAC Thermoforming machine. The process involved searching through manuals using both manual search and image search tools.
+- **Prohibitive symbols**: No entry while powered/guards bypassed; mandatory power disconnection via Lockout/Tagout (LOTO).
+- **Hazard categories**: High-risk (e.g., crushing, electric shock), moderate-risk (pinch points/electrical), and low-risk (minor injuries).
+- **Specific visual warnings**:
+  - Hot surfaces (""Do not touch"").
+  - Electrical hazards inside enclosures.
+  - Pinch-point/crushing zones; require gloves for prote","MILACRON.pdf, Manual_BOY-35-E-VV_unlocked.pdf, Manual_MAAC-Thermoformer.pdf, Manual_BOY-35-E-VV_unlocked",25.72,0.1681,0.046,0.1955,0.0763,0.1654,0.5054,1.0,False,
+imgtext-06,image_text,Show the BOY 35 process configurator sequence screen,BOY-35,"The BOY 35 process configurator screen shows the sequence of operations for the injection molding cycle. It displays the configurable steps including mold closing, injection, holding pressure, cooling, mold opening, and ejection in a visual sequence layout.","The **BOY 35 process configurator sequence screen** includes the following technical specifications and configurations:
 
-The manual search tool found several pages containing relevant information about the MAAC Thermoforming machine, its functions, and its manufacturer. However, it did not return any images of the forming timer diagram.
+### Key Functional Elements:
+1. **Fixed Sequence Components**:
+   - **""Start of a sequence run""** (non-editable).
+   - **""End of a process sequence""** (non-editable).
 
-The image search tool failed to execute due to an error related to pag",Manual_MAAC-Thermoformer.pdf,16.7,0.1227,0.0222,0.172,0.0543,0.1398,0.5354,1.0,False,
-imgtext-10,image_text,Show the MAAC thermoformer input diagnostics screen,MAAC,"The MAAC thermoformer input diagnostics screen displays the status of all machine input signals. It shows which inputs are active or inactive, allowing operators to troubleshoot sensor and switch problems by monitoring real-time input states.","No relevant images were found for the MAAC thermoformer input diagnostics screen. Based on the manual search results, we have found five documents that may contain information about the diagnostics screen for your machine. Here are the summaries of the most relevant documents:
+2. **Delay Times (`y–`)**:
+   - Adjustable delays from 1 to 16 units.
+   - Configurable delay periods before execution.
 
-1. Page 109 of the 'Manual_MAAC-Thermoformer.pdf' document mentions ""Section 6 Thermoforming Process Troubleshooting Section VI © 2020 MAAC Machinery."" This section might contain useful information regarding the diagnosti",Manual_MAAC-Thermoformer.pdf,7.36,0.1453,0.037,0.1569,0.0495,0.1275,0.546,1.0,False,
-imgtext-11,image_text,Show me the RSA-G2 clamping systems for tension and three-point bending tests,RSA-G2,The RSA-G2 features an extensive array of clamping systems to accommodate different test types. The tension clamps hold flat or cylindrical samples vertically for tensile testing. The three-point bending fixture supports the sample at two points while applying force at the center for flexural measur,"It appears that the initial query was about finding information on the RSA-G2 clamping systems suitable for tension and three-point bending tests, but only a manual search was performed, and no image search was conducted. The results of the manual search include details about the clamps suitable for these tests, sample sizes, material compatibility, modes of deformation, and temperature range.
+3. **User Outputs**:
+   - Toggle activation/deactivation via ""Switch user output.""
+   - Se","Manual_BOY-35-E-VV_unlocked.pdf, Manual_BOY-35-E-VV_unlocked, MILACRON.pdf",23.74,0.1304,0.0277,0.1739,0.0488,0.1353,0.4792,1.0,False,
+imgtext-07,image_text,Show me the MILACRON ejector system setup menu and explain the settings,MILACRON,"The MILACRON ejector system setup menu displays configuration options for the ejector mechanism including Forward Speed settings, Dwell time configuration, and retract parameters. The menu allows operators to set the ejector stroke, speed profiles, and timing for part removal from the mold.","The **MILACRON ejector system** typically follows a **parameterized configuration process** within CNC machine controls (e.g., Fanuc, Siemens, or Heidenhain). Below are key setup parameters relevant to ejectors via **manual control screens**:
 
-Here's a summary of the key points:
+### **Ejector Menu Hierarchy:**
+1. **Main Screen** → **""Setup""**
+   Navigate to **System Setup** → **Ejector/Unloader Configuration**
 
-1. The RSA-G2 is an advanced platform for mechanical analysis of ","RSA-G2.pdf, BROCH-EF-DMA3200.pdf, APSX-PIM.pdf, RSA-G2",52.69,0.1702,0.0155,0.2156,0.0449,0.1338,0.5714,1.0,False,
-imgtext-12,image_text,Show the MILACRON alarm SPC chart for trend monitoring,MILACRON,The MILACRON alarm SPC (Statistical Process Control) chart displays trend monitoring data for key process parameters. It shows historical data points plotted over time with upper and lower control limits to help operators identify process drift and maintain quality standards.,"The search for Milacron alarm SPC chart returned a total of 5 relevant documents from the indexed manuals, but no images were found in the results of the image_search tool. Here are the text-based descriptions of the relevant documents:
+2. **Core Settings (Standard for MILACRON Ejector Modules):**
+   - **Eject Cycle Mode**: Select between **Manual**, **Sem",MILACRON,4.05,0.1875,0.0207,0.1825,0.04,0.127,0.4843,1.0,False,
+imgtext-08,image_text,Show the MILACRON lubricant specifications table,MILACRON,"The MILACRON lubricant specifications table lists the approved lubricants for the machine including types, viscosity grades, and application points. It specifies which lubricants should be used for hydraulic systems, toggle mechanisms, and sliding surfaces.","Here are **MILACRON’s key lubricant specifications**:
 
-1. 'Effective Alarmlist' from Manual_BOY-35-E-VV_unlocked.pdf on page 332, with a relevance score of 0.7464.
-2. A passage about XBar Trend Alarm SPC Chart from MILACRON.pdf on page 358, with a relevance score of 0.7333.
-3. A description about the control generat","Manual_BOY-35-E-VV_unlocked.pdf, MILACRON.pdf, MILACRON",6.74,0.1,0.0225,0.0874,0.0196,0.0777,0.4392,1.0,False,
-imgtext-13,image_text,Show me the APSX-PIM electrical schematic showing the hopper motor and sensors wiring,APSX-PIM,"The APSX-PIM electrical schematic shows the wiring for the hopper motor connected through connector 6, and the sensors connected through J2. The diagram provides the complete electrical routing for motor control and sensor feedback signals used during the injection molding process.","The search for the APSX-PIM electrical schematic with the hopper motor and sensor wiring returned results from both manual_search and image_search tools. The manual search yielded several relevant documents, while the image_search tool provided three images that seem to be schematic diagrams related to the APSX-PIM plastic injection molding machine.
+1. **General Lubrication Grease**: **Mobilith SHC PM** (e.g., Mobilith SHC-460) or equivalents like Exxon Unirex SHP 460, Klueber Centoplex GLP 402/BE 41-542.
+2. **P-70 Hydraulic Oil** (Medium Anti-Wear):
+   - Viscosity: 41.4–50.6 cSt @40°C (ASTM D2422/D445).
+   - Flash/Fire Point: ≥385°F/≥425°F (ASTM D92), Acid Number: No mineral acids.
+   - Complies with **ISO HM-46** standards.
 
-Here is a brief summary of the findings:
+3. **P-59 Gear Lubricant**: Heavy EP gear lubricant, per spe","MILACRON.pdf, MILACRON, Manual_MAAC-Thermoformer.pdf",21.82,0.099,0.0268,0.1639,0.0167,0.1148,0.4772,1.0,True,True
+imgtext-09,image_text,Show the MAAC thermoformer forming timer diagram with flow control,MAAC,"The MAAC thermoformer forming timer diagram shows the timing sequence for the forming cycle including the flow control valve settings. It displays the relationship between heating time, forming time, and cooling time with adjustable timer parameters for each stage.","No detailed **MAAC thermoformer forming timer diagram with integrated flow control** is provided in the manual or search results.
 
-1. Manual Search Results:
-   - Relevant documents were found with titles such as ""APSX-PIM User Manual,"" ","APSX-PIM.pdf, Manual_BOY-35-E-VV_unlocked.pdf, APSX-PIM",6.7,0.1613,0.0246,0.2105,0.0682,0.1654,0.5149,1.0,True,True
-imgtext-14,image_text,Show the BOY 35 injection pressure diagram from the technical data section,BOY-35,The BOY 35 injection pressure diagram is part of the technical data section and shows the relationship between injection pressure and screw diameter. It provides the maximum injection pressure values achievable at different screw positions for the 35 EVV model.,"Based on the information you've provided, it seems that the system is trying to find an image of the BOY 35 injection pressure diagram from a technical data source. However, both the initial search and subsequent attempts using manual search or class filter 'diagram' did not yield any results due to an issue with the ""image_search"" tool.
+The system uses a **13-timer architecture** for sequential processes (heating, platen delays, eject timing, cooling fan control), but no explicit circuit schematic or flow diagram was found. Key controls include:
+- **Platen delay** (top/bottom)
+- **Eject air release timing**
+- **Fan delay (MCOOL function)**
+- Security codes and Ethernet IP integration for diagnostics","Manual_MAAC-Thermoformer.pdf, Manual_MAAC-Thermoformer, Manual_BOY-35-E-VV_unlocked.pdf",18.55,0.25,0.074,0.3333,0.0968,0.2063,0.5479,1.0,False,
+imgtext-10,image_text,Show the MAAC thermoformer input diagnostics screen,MAAC,"The MAAC thermoformer input diagnostics screen displays the status of all machine input signals. It shows which inputs are active or inactive, allowing operators to troubleshoot sensor and switch problems by monitoring real-time input states.","The **MAAC thermoformer input diagnostics screen** is shown on **Page 73**:
+![Input Diagnostics screen](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page73_img2)
+It displays a table of inputs with their statuses. Additional diagnostic-related screens are available via the **Setup > MAINT button**, including **output diagnostics (Page 74)** and **maintenance settings (Page 77)**.","Manual_MAAC-Thermoformer.pdf, Manual_MAAC-Thermoformer",20.95,0.3143,0.142,0.3377,0.1333,0.2857,0.5841,1.0,True,True
+imgtext-11,image_text,Show me the RSA-G2 clamping systems for tension and three-point bending tests,RSA-G2,The RSA-G2 features an extensive array of clamping systems to accommodate different test types. The tension clamps hold flat or cylindrical samples vertically for tensile testing. The three-point bending fixture supports the sample at two points while applying force at the center for flexural measur,"The **RSA-G2 tension clamp** secures samples at both ends for testing thin films (up to **35 mm × 12.5 mm × 1.5 mm**), fibers, strips, or bars—compatible with composites, ceramics, polymers, and metals. The **three-point bending system** uses interchangeable spans (**10 mm**, **25 mm**, **40 mm**) for pure deformation of stiff materials (e.g., composites, metals), with a max sample width/thickness of **12.8 × 5 mm**. All clamps are standard on RSA-G2 units and support temperatures up to **500°C*","RSA-G2.pdf, BROCH-EF-DMA3200.pdf, RSA-G2, BROCH-ARES-G2-2017-EN.pdf",19.4,0.2393,0.0302,0.3022,0.1022,0.1871,0.5215,1.0,True,True
+imgtext-12,image_text,Show the MILACRON alarm SPC chart for trend monitoring,MILACRON,The MILACRON alarm SPC (Statistical Process Control) chart displays trend monitoring data for key process parameters. It shows historical data points plotted over time with upper and lower control limits to help operators identify process drift and maintain quality standards.,"The MILACRON SPC alarm trend-monitoring charts show:
 
-The three potential matches mentioned in the last step were found when the page hint for manual search could not be parsed. These potential matches include:
+1. **Data Collection**:
+   - Tracks up to **8 parameters** via **X-Bar (average)** and **R (range)** values.
+   - Collects 2–10 successive readings in each sample at preset intervals.
 
-1","MILACRON.pdf, Manual_BOY-35-E-VV_unlocked.pdf, Manual_BOY-35-E-VV_unlocked",220.11,0.1768,0.0407,0.2085,0.067,0.1422,0.513,1.0,False,
-imgtext-15,image_text,Show the FTIR spectra comparison interface for data comparison analysis,FTIR,The FTIR data comparison interface displays a graphical user interface with plots for comparing a measured spectrum against a reference spectrum. The software allows setting wavenumber regions for comparison and selecting reference spectra files for analysis.,"It seems that the provided text is a conversation log between an assistant and a user, where the assistant is helping the user to find relevant images related to a BOY-35 plastic injection molding machine from local manuals. The assistant uses the `image_search` tool to locate three schematic diagrams related to the machine's operation and components. Here are the images:
+2. **Trend-Based Alarms**:
+   - Activates when X-Bar or R values show consistent upward/downward trends over configurable samples (**2–20 consecutive samples**), set via **Menu 67**.
+   - Example: **""R Trend Alarm""** triggers if R-values deviate persistently be","MILACRON.pdf, MILACRON, Manual_BOY-35-E-VV_unlocked.pdf",18.47,0.183,0.0206,0.2367,0.0479,0.1657,0.4785,1.0,False,
+imgtext-13,image_text,Show me the APSX-PIM electrical schematic showing the hopper motor and sensors wiring,APSX-PIM,"The APSX-PIM electrical schematic shows the wiring for the hopper motor connected through connector 6, and the sensors connected through J2. The diagram provides the complete electrical routing for motor control and sensor feedback signals used during the injection molding process.","The APSX-PIM hopper motor and sensors wiring is shown in the following schematics:
 
-1. ![Image 1](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page444_rendered.png)
-2. ![Image 2](","MILACRON.pdf, Manual_MAAC-Thermoformer.pdf, Manual_BOY-35-E-VV_unlocked.pdf, Manual_BOY-35-E-VV_unlocked",15.49,0.0351,0.016,0.0757,0.0,0.0757,0.4015,0.0,True,False
-imgtext-16,image_text,Show the MILACRON machine layout and space requirements diagram,MILACRON,"The MILACRON machine layout diagram shows the overall dimensions and space requirements for installation. It includes the footprint dimensions, clearance areas needed for maintenance access, and the positions of major components such as the clamp unit, injection unit, and hydraulic system.","Based on the output you provided, it appears that your system is designed to perform a few tasks related to finding information about a MILACRON plastic injection molding machine:
+- **[Wiring Diagram (Page 36)](http://localhost:8000/api/media/yologen/train/APSX-PIM_page36_rendered.png)** – Includes hopper motor connections.
+- **General electrical schematic (Page 41)** includes related wiring:
+  ![Machine Electrical Schematic](http://localhost:8000/api/media/yologen/train/APSX-PIM_page41_img1.png)
 
-1. Search for images of the MILACRON machine layout diagrams in various manuals. This is done using an image search tool with the 'MILACRON machine layout diagram' query and filtering the results to only include documents from MILACRON. Three images were found, each with a URL, page number, content type (schematic), a","Manual_MAAC-Thermoformer.pdf, MILACRON.pdf, MILACRON",12.51,0.1545,0.0276,0.1859,0.0524,0.119,0.5166,1.0,False,
-imgtext-17,image_text,Show the MAAC thermoformer heater zone layout diagram,MAAC,The MAAC thermoformer heater zone layout shows the arrangement of heating elements across the forming area. Individual heater zones can be controlled independently to achieve uniform sheet temperature distribution before forming.,"I'm sorry for any inconvenience, but it seems that no relevant images were found during the search in this specific context. Therefore, I'll provide you with a text-based explanation of the MAAC thermoformer heater zone layout:
+Key details for sensors and safety:
+- Hopper nipple sensor: Requires ~24V DC at **K103:X3.10 ","APSX-PIM.pdf, APSX-PIM, MILACRON.pdf, Manual_BOY-35-E-VV_unlocked.pdf",19.42,0.2796,0.0468,0.3178,0.1143,0.243,0.5639,1.0,True,True
+imgtext-14,image_text,Show the BOY 35 injection pressure diagram from the technical data section,BOY-35,The BOY 35 injection pressure diagram is part of the technical data section and shows the relationship between injection pressure and screw diameter. It provides the maximum injection pressure values achievable at different screw positions for the 35 EVV model.,"The **BOY 35 injection pressure diagram** is not explicitly shown as a standalone chart on page 280—only textual references to transfer and actual injection pressures exist. The manual provides:
 
-The MAAC thermoformer heater zone layout typically consists of multiple zones (e.g., preheat, form, hold) that are strategically placed along the mold assembly line to ensure even and controlled heating of the material during the thermoforming process.
+1. A **pressure setpoint schematic** (page 28):
+   ![Pressure Setpoint Schematic](http://localhost:8000/api/media/yologen/train/MILACRON_page280_rendered.png)
 
-Here's a simplifi",MAAC,2.56,0.1414,0.0323,0.1579,0.0531,0.1316,0.6011,1.0,False,
-imgtext-18,image_text,Show the RSA-G2 instrument overview and main components,RSA-G2,"The RSA-G2 instrument overview shows the main components of the dual-head mechanical analyzer including the forced convection oven, the upper and lower measurement heads, the sample mounting area, and the control electronics enclosure.","It appears that you have provided a detailed summary of the results obtained from searching for images and information about the TA Instruments RSA-G2 rheometer in local manuals. The search yielded three relevant images:
+2. A **holding pressure phase diagram** (page 115):
+   ![Injection Holding Pressure Phase](http://localhost:8000/api/media/yologen/train/Manual_","MILACRON.pdf, Manual_BOY-35-E-VV_unlocked, MILACRON, Manual_BOY-35-E-VV_unlocked.pdf",22.0,0.2857,0.099,0.3115,0.1333,0.2295,0.5342,1.0,True,True
+imgtext-15,image_text,Show the FTIR spectra comparison interface for data comparison analysis,FTIR,The FTIR data comparison interface displays a graphical user interface with plots for comparing a measured spectrum against a reference spectrum. The software allows setting wavenumber regions for comparison and selecting reference spectra files for analysis.,"The **FTIR spectra comparison interface** includes dedicated tools like **Spectra Analysis** for qualitative/quantitative comparisons, with adjustable y-axis units (Absorbance, %T, %R) and spectrum reduction features (e.g., CO₂/H₂O removal). Overlays, thumbnail bars, and menu-driven controls enable side-by-side spectral analysis. Two modes exist: **Manual Mode** (customizable parameters) and **Navigation Mode** (automated workflows). Visual schematics for overlay tools appear on referenced manua","FTIR.pdf, TA-Instruments-DiscoveryTGA-HP750-Brochure-EN.pdf, FTIR",22.49,0.2151,0.0352,0.2222,0.0377,0.1481,0.5451,1.0,False,
+imgtext-16,image_text,Show the MILACRON machine layout and space requirements diagram,MILACRON,"The MILACRON machine layout diagram shows the overall dimensions and space requirements for installation. It includes the footprint dimensions, clearance areas needed for maintenance access, and the positions of major components such as the clamp unit, injection unit, and hydraulic system.","Here is the primary **MILACRON machine layout and space requirements diagram**:
+**![Installation Location Requirements](http://localhost:8000/api/media/yologen/train/MILACRON_page42_rendered.png)**
 
-1. A schematic diagram focusing on clamping systems used for three-point bending and tension testing.
-2. A geographical distribution map showing the locations worldwide where TA Instruments' RSA-G2 rheometers are distributed.
-3. A detailed component view of a section of the RSA","RSA-G2.pdf, RSA-G2",16.43,0.0617,0.0116,0.1667,0.0421,0.1562,0.531,1.0,False,
-imgtext-19,image_text,Show the Discovery DSC instrument and Fusion Cell design,DSC,"The Discovery DSC instrument features the patented Fusion Cell technology. The cell design includes the sample and reference platforms with Tzero thermocouples, the silver heating block for uniform temperature distribution, and the lid assembly for controlled atmosphere operation.","It seems like the code you've provided is a tree structure representing the steps taken in a program, specifically related to image search. The issue at hand is that the `pdf_filter` argument in the `image_search` function call is being passed as a list instead of a string, which is causing a validation error.
+Key highlights:
+- Shows required floor space, clearance (minimum 3 ft around machine), and access paths.
+- Includes electrical cabinet door opening considerations.
+- Foundational requirements for structural support.","MILACRON.pdf, Manual_BOY-35-E-VV_unlocked.pdf, MILACRON, Manual_MAAC-Thermoformer.pdf",21.07,0.3611,0.1123,0.359,0.1316,0.2308,0.6069,1.0,True,True
+imgtext-17,image_text,Show the MAAC thermoformer heater zone layout diagram,MAAC,The MAAC thermoformer heater zone layout shows the arrangement of heating elements across the forming area. Individual heater zones can be controlled independently to achieve uniform sheet temperature distribution before forming.,"Here are the MAAC thermoformer heater zone layout diagrams from the manual:
 
-To resolve this issue, you should ensure that the `pdf_filter` argument is always provided as a string. You might want to modify your code to convert the list to a string before passing i","ta_rubber_testing.pdf, TA-Instruments-Discovery-DSCX3-Brochure-EN.pdf, TA-Instruments-Discovery-DSC-Brochure-EN.pdf",45.28,0.0856,0.0189,0.1167,0.0252,0.075,0.4173,1.0,False,
-imgtext-20,image_text,Show the MILACRON toggle clamp mechanism diagram,MILACRON,The MILACRON toggle clamp mechanism diagram illustrates the mechanical linkage system used to apply clamping force to the mold. The toggle mechanism converts hydraulic cylinder force into a mechanical advantage that locks the platens together during injection.,"Your text provides a detailed analysis of the search for Milacron toggle clamp mechanism diagrams in relevant manuals. It explains that an image search was conducted, and three relevant results were found:
+- **Barrel/Nozzle Heater Zones & Wiring:**
+![MAAC thermoformer barrel nozzle heater zones](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page31_img9)
 
-1. A diagram from the Milacron manual on page 139 (MILACRON_page139_rendered)
-2. A diagram from the Milacron manual on page 33 (MILACRON_page33_rendered)
-3. A procedure illustration from the Milacron manual on page 460 (MILACRON_page460_rendered).
+- **Bottom Plate Connectors Layout:**
+![MAAC thermoformer bottom plate connectors](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page31_img28)
 
-These images were extracted and are ready fo","MILACRON.pdf, Manual_BOY-35-E-VV_unlocked.pdf, MILACRON",18.96,0.1304,0.037,0.2222,0.0625,0.1605,0.5099,1.0,False,
-imgtext-21,image_text,Show the BOY 35 nozzle and screw arrangement diagram,BOY-35,"The BOY 35 nozzle and screw arrangement diagram shows the configuration of the injection nozzle, barrel, and plasticizing screw. It includes the nozzle dimensions, screw geometry, and the barrel and nozzle heating zone layout for the 35 EVV model.","It appears you have provided a structured tree of information about the search results for ""BOY 35 nozzle and screw arrangement diagram"". Here is a summary:
+The diagram shows **5 nozzle heater zones (Zones 1–5)** with wiring and connec","Manual_MAAC-Thermoformer.pdf, Manual_BOY-35-E-VV_unlocked.pdf, Manual_MAAC-Thermoformer",18.45,0.2368,0.1091,0.3095,0.1463,0.2619,0.5971,1.0,True,True
+imgtext-18,image_text,Show the RSA-G2 instrument overview and main components,RSA-G2,"The RSA-G2 instrument overview shows the main components of the dual-head mechanical analyzer including the forced convection oven, the upper and lower measurement heads, the sample mounting area, and the control electronics enclosure.","**RSA-G2 Overview & Main Components:**
 
-Leaf 0 (Show the BOY 35 nozzle and screw arrangement diagram):
-- Description: Displays the BOY 35 nozzle and screw arrangement diagram
-- Children: Leaf 1, Leaf 2
+The **RSA-G2** is a dual-head mechanical analyzer enabling dynamic mechanical analysis (DMA), creep/recovery, stress relaxation, fatigue, and dielectric thermal analysis (DTA). Key features include forced convection temperature control, large deformation testing, and specialized clamping systems for tension/three-point bending. Its high-speed electronics deliver precision at up to 87,000 Hz sampling and advanced signal processing for non-linear responses.
+","RSA-G2.pdf, RSA-G2",6.76,0.2569,0.0424,0.2901,0.1085,0.2443,0.5726,1.0,False,
+imgtext-19,image_text,Show the Discovery DSC instrument and Fusion Cell design,DSC,"The Discovery DSC instrument features the patented Fusion Cell technology. The cell design includes the sample and reference platforms with Tzero thermocouples, the silver heating block for uniform temperature distribution, and the lid assembly for controlled atmosphere operation.","The **Discovery DSC** instrument is a high-performance **Differential Scanning Calorimeter (DSC)** featuring:
+- **Temperature range**: -90°C to 700°C
+- **Sensitivity**: ±4 µW precision with auto-zeroing functionality
+- **Sample sizes**: Up to 100 mg for standard pans; smaller samples (<250 µg) via optional Micro-DSC head
+- **Atmospheres**: Inert (N₂, Ar), oxidizing (air), or vacuum environments
 
-Leaf 1 (Show the BOY 35 nozzle and screw arrangement text):
-- Description: Contains textual information about the BOY 35 nozzle and screw arrangement
-- Result: Information about t","MILACRON.pdf, Manual_BOY-35-E-VV_unlocked.pdf, Manual_BOY-35-E-VV_unlocked",16.22,0.1434,0.0348,0.1507,0.0583,0.1391,0.4628,1.0,True,True
-imgtext-22,image_text,Show the FTIR simple quantitation analysis settings dialog,FTIR,"The FTIR simple quantitation analysis settings dialog box shows the interface for configuring quantitative analysis parameters. It includes options for selecting calibration methods, setting concentration ranges, and specifying the wavenumber regions used for quantitative measurements.","The answer for the user's question is:
+The **Fusion Cell** design includes:
+- **Highly sensitive sensors** for sub-microgram detection with ",DSC,3.11,0.2137,0.0428,0.25,0.0933,0.1842,0.5182,1.0,False,
+imgtext-20,image_text,Show the MILACRON toggle clamp mechanism diagram,MILACRON,The MILACRON toggle clamp mechanism diagram illustrates the mechanical linkage system used to apply clamping force to the mold. The toggle mechanism converts hydraulic cylinder force into a mechanical advantage that locks the platens together during injection.,"The **MILACRON toggle clamp mechanism** uses a servo motor-driven rack-and-crosshead system to control platen movement:
 
-Based on our search results, we found useful textual information about FTIR simple quantitation analysis settings, but no relevant images could be discovered using the given context and tools. We obtained five documents with content regarding the measurement process, sample measuring procedure, and water vapor reduction in the infrared spectrum. However, no images or URLs were found during this search. Here's a summary of the textual results:
+- **Closing**: The motor rotates, engaging the toggle linkage and pulling the crosshead forward—locking the moving platen against the stationary platen.
+- **Opening**: Reverse rotation retracts the crosshead, opening the mold via the crosshead’s return.
 
-1. The trans","FTIR.pdf, TA-Instruments-DiscoveryTGA-HP750-Brochure-EN.pdf",5.74,0.1116,0.0251,0.1356,0.041,0.0949,0.5284,1.0,False,
-imgtext-23,image_text,Show the APSX-PIM mold clamping assembly diagram,APSX-PIM,"The APSX-PIM mold clamping assembly diagram shows the clamping mechanism that holds the mold closed during injection. It includes the platens, toggle or hydraulic cylinder, tie bars, and the mold mounting surfaces.","Based on your request, I have searched the APSX-PIM manual and found some relevant information regarding the mold clamping assembly. Here is a summary of the findings:
+A schematic of this mechanism is shown in:
+![MILACRON toggle clamp schematic](http://localhost:8000/api/media/yologen/train/","MILACRON.pdf, Manual_BOY-35-E-VV_unlocked.pdf, MILACRON",15.57,0.2632,0.0906,0.3878,0.1458,0.2653,0.602,1.0,True,True
+imgtext-21,image_text,Show the BOY 35 nozzle and screw arrangement diagram,BOY-35,"The BOY 35 nozzle and screw arrangement diagram shows the configuration of the injection nozzle, barrel, and plasticizing screw. It includes the nozzle dimensions, screw geometry, and the barrel and nozzle heating zone layout for the 35 EVV model.","![Front/back views of BOY 35 nozzle assembly](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page31_rendered.png)
 
-1. Installing the Mold with Clamp (APSX-PIM.pdf, Page 23):
-   - Clamp the mold by pressing the Engage Clamp Fast button. When it gets 1/8 inch close to the mold, press the Engage Clamp Slow button.
-   - Installing molds with ejector pins: Slide the clamp switch to the left. Press the home the clamp fast button (manual buttons). A","APSX-PIM.pdf, APSX-PIM",10.63,0.0732,0.0138,0.1053,0.0414,0.0915,0.5376,1.0,False,
-imgtext-24,image_text,Show the MILACRON barrel and screw assembly cross-section,MILACRON,"The MILACRON barrel and screw assembly cross-section shows the injection unit internals including the feed zone, compression zone, and metering zone of the screw. The barrel heating bands and thermocouple positions are marked along the length of the barrel.","It appears that you have provided a tree structure of leaves (or nodes) in a knowledge graph, each representing a different task or result related to finding images of the MILACRON barrel and screw assembly cross-section from its manual.
+The **BOY 35** typically features a **35 mm radius open/nozzle**, with optional **R ½"" (50.8 mm)** variants. Shut-off nozzles include extended lengths (**+21 mm**) for screws **≥24 mm**. Screw diameters range from **14–32 mm** (e.g., 18, 20, 24, 32), with elastomer applications using a **22 mm screw**.
 
-* Leaf 0: Show the MILACRON barrel and screw assembly cross-section
-	+ Child leaf 1: Display an image of the MILACRON barrel and screw assembly (not specified if it's from the manual)
-	+ Child leaf 3: Search for relevant images of the MILACRON barrel and screw ","MILACRON.pdf, MILACRON",15.21,0.1152,0.0309,0.1595,0.0736,0.1462,0.4948,1.0,False,
-imgtext-25,image_text,Show the BOY 35 hydraulic system schematic diagram,BOY-35,"The BOY 35 hydraulic system schematic shows the hydraulic circuit including the pump, directional control valves, pressure relief valves, and actuating cylinders. It illustrates the oil flow paths for clamping, injection, and ejection functions.","Based on the information found, the BOY 35 hydraulic system schematic diagram can be found in the PDF Manual_BOY-35-E-VV_unlocked on page 459. Additionally, three relevant images were obtained from the same manual: one on page 444, another on page 315, and a third on page 387. These images are schematic diagrams related to the BOY 35 E VV injection molding machine. No URLs or image suggestions were found for the manual_search tool since it wasn't used for finding the images. The summary should n","Manual_BOY-35-E-VV_unlocked.pdf, MILACRON.pdf, Manual_BOY-35-E-VV_unlocked",6.83,0.1392,0.0406,0.1277,0.0515,0.1021,0.4286,1.0,False,
-AVERAGE,image_text,Aggregate over 25 questions,,,,,23.89,0.1383,0.0294,0.1706,0.0508,0.13,0.5008,0.96,5/25,4/25
+For detailed arrangement specifics, refer to the sche","Manual_BOY-35-E-VV_unlocked.pdf, Manual_BOY-35-E-VV_unlocked, MILACRON.pdf",23.89,0.1647,0.0388,0.2626,0.0412,0.1818,0.4978,1.0,True,True
+imgtext-22,image_text,Show the FTIR simple quantitation analysis settings dialog,FTIR,"The FTIR simple quantitation analysis settings dialog box shows the interface for configuring quantitative analysis parameters. It includes options for selecting calibration methods, setting concentration ranges, and specifying the wavenumber regions used for quantitative measurements.","The **FTIR Simple Quantitation Analysis Settings** dialog typically includes:
+
+1. **Sample Type**: Select between single beam, double beam, or internal reference.
+2. **Quantitation Method**:
+   - Absorbance ratio (e.g., peak ratios like *Area A/Area B*).
+   - Peak height ratio (similar to above but using peak heights).
+   - External calibration curve selection (with options for linear/logarithmic scaling).
+3. **Range Settings**: Define integration ranges (start/end wavenumbers) for:
+   - Analyte",FTIR,2.8,0.2013,0.0591,0.2651,0.0854,0.1687,0.5286,1.0,False,
+imgtext-23,image_text,Show the APSX-PIM mold clamping assembly diagram,APSX-PIM,"The APSX-PIM mold clamping assembly diagram shows the clamping mechanism that holds the mold closed during injection. It includes the platens, toggle or hydraulic cylinder, tie bars, and the mold mounting surfaces.","See the **APSX-PIM mold clamping assembly diagrams**:
+
+- **[Schematic of clamp force system, electric motors, and components]** ![Clamp force schematic](http://localhost:8000/api/media/yologen/train/APSX-PIM_page14_img2.png)
+- **[Detailed internal assembly with sensors and mechanics]** ![Internal mechanics diagram](http://localhost:8000/api/media/yologen/train/APSX-PIM_page18_img1.png)","APSX-PIM.pdf, APSX-PIM",15.25,0.2041,0.1285,0.3509,0.2182,0.3158,0.5877,1.0,True,True
+imgtext-24,image_text,Show the MILACRON barrel and screw assembly cross-section,MILACRON,"The MILACRON barrel and screw assembly cross-section shows the injection unit internals including the feed zone, compression zone, and metering zone of the screw. The barrel heating bands and thermocouple positions are marked along the length of the barrel.","Here’s the concise cross-section breakdown of a **MILACRON barrel and screw assembly**:
+
+The assembly includes:
+- **Barrel nut**, set screws, and feedthroat block (external).
+- Internally: thermocouples for temperature control, splash zones, and melt channel geometry.
+- Screw spline adapter interfaces with the drive system.
+
+**Critical schematics**:
+1. ![Cross-section](http://localhost:8000/api/media/yologen/train/MILACRON_page200_rendered.png) – Shows barrel layers, thermocouples, and internal ","MILACRON.pdf, MILACRON",19.16,0.2955,0.097,0.4118,0.12,0.2941,0.6322,1.0,True,True
+imgtext-25,image_text,Show the BOY 35 hydraulic system schematic diagram,BOY-35,"The BOY 35 hydraulic system schematic shows the hydraulic circuit including the pump, directional control valves, pressure relief valves, and actuating cylinders. It illustrates the oil flow paths for clamping, injection, and ejection functions.","Here is the **BOY 35 hydraulic system schematic diagram**:
+
+![General BOY 35 Hydraulic Schematic](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page315_rendered.png)
+
+**Key Features:**
+- Shows the full **BOY 35 E VV** injection molding machine hydraulic circuit.
+- Includes operational instructions for reference.
+- Covers components, flow paths, and control logic.","Manual_BOY-35-E-VV_unlocked.pdf, MILACRON.pdf, Manual_BOY-35-E-VV_unlocked",19.24,0.4444,0.1834,0.4928,0.2687,0.4058,0.6231,1.0,True,True
+AVERAGE,image_text,Aggregate over 25 questions,,,,,19.04,0.242,0.0675,0.2963,0.1022,0.218,0.5436,1.0,13/25,13/25
