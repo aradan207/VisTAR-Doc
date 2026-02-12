@@ -188,6 +188,25 @@ def run_agent_for_question(query: str) -> Dict:
 
 
 # ---------------------------------------------------------------------------
+# Pre-scoring cleanup
+# ---------------------------------------------------------------------------
+
+def _clean_for_scoring(text: str) -> str:
+    """Strip image markdown and raw URLs so they don't corrupt NLG metrics.
+
+    The raw answer is still saved in the CSV for manual inspection; this
+    cleaned version is only used when computing token-overlap scores.
+    """
+    # Remove image markdown: ![alt](url)
+    text = re.sub(r'!\[.*?\]\(.*?\)', '', text)
+    # Remove raw URLs
+    text = re.sub(r'https?://\S+', '', text)
+    # Collapse extra whitespace left behind
+    text = re.sub(r'\s{2,}', ' ', text).strip()
+    return text
+
+
+# ---------------------------------------------------------------------------
 # Evaluation loops
 # ---------------------------------------------------------------------------
 
@@ -208,10 +227,11 @@ def evaluate_text_only(questions: List[Dict]) -> List[BenchmarkResult]:
         retrieved = agent_output["retrieved_sources"]
         duration = agent_output["duration"]
 
-        # Score
+        # Score (clean text so image markdown / URLs don't skew metrics)
+        cleaned = _clean_for_scoring(generated)
         metrics = compute_all_metrics(
             ground_truth=ground_truth,
-            generated=generated,
+            generated=cleaned,
             expected_source=expected_source,
             retrieved_sources=retrieved,
         )
@@ -262,10 +282,11 @@ def evaluate_image_text(questions: List[Dict]) -> List[BenchmarkResult]:
         retrieved = agent_output["retrieved_sources"]
         duration = agent_output["duration"]
 
-        # Score text quality
+        # Score text quality (clean text so image markdown / URLs don't skew metrics)
+        cleaned = _clean_for_scoring(generated)
         metrics = compute_all_metrics(
             ground_truth=ground_truth,
-            generated=generated,
+            generated=cleaned,
             expected_source=expected_source,
             retrieved_sources=retrieved,
         )

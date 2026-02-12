@@ -25,7 +25,10 @@ from typing import Dict, List, Tuple
 # ---------------------------------------------------------------------------
 
 def normalize_text(text: str) -> str:
-    """Lowercase, strip articles, remove punctuation, collapse whitespace."""
+    """Lowercase, strip URLs, strip articles, remove punctuation, collapse whitespace."""
+    # Strip URLs before punctuation removal so path components don't become junk tokens
+    text = re.sub(r"https?://\S+", "", text)
+    text = re.sub(r"localhost\S+", "", text)
     text = text.lower()
     text = re.sub(r"\b(a|an|the)\b", " ", text)
     text = re.sub(r"[^\w\s]", "", text)

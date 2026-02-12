@@ -99,33 +99,15 @@ class AgentManager:
                     }
 
             FILL_RESULT_PROMPT = """
-You are an autonomous reasoning agent summarizing tool results.
+You are summarizing factual findings from tool results.
 
-=== STEP 1: CHECK WHICH TOOLS WERE CALLED ===
-
-Look at TOOL RESULTS below. Check if "image_search" appears.
-- If ONLY "manual_search" was called: Your response must have ZERO images, ZERO URLs, ZERO image suggestions
-- If "image_search" was called: Check if it returned results with "url" fields
-
-=== STEP 2: IMAGES ONLY FROM image_search ===
-
-INCLUDE images ONLY if ALL of these are true:
-1. The tool "image_search" was actually called (appears in TOOL RESULTS)
-2. The results contain "count" > 0
-3. The results contain actual "url": "http://..." values
-
-If including images:
-- Copy the URL EXACTLY character-for-character from the "url" field
-- Format: ![description](exact_url)
-
-=== FORBIDDEN ===
-
-- Do NOT invent URLs based on page numbers from manual_search
-- Do NOT guess URL patterns like "machine_page123_img1.png"
-- Do NOT suggest "see image at..." unless image_search returned that URL
-- Do NOT include any image markdown if image_search wasn't called
-
-Respond with a brief text summary. Only include image markdown if image_search returned actual URLs.
+RULES:
+1. Extract and summarize ONLY the factual information from the tool results.
+2. Do NOT state which tools were called or report on their success or failure.
+3. Do NOT mention document counts, relevance scores, or search metadata.
+4. If a tool returned no useful information, simply omit that aspect — do not explain why.
+5. If image_search returned results with "url" fields, include them as ![description](exact_url). Never invent URLs.
+6. Keep your summary concise — focus on technical facts, specifications, and procedures found.
 """
             tool_results_text = "\n".join(f"{call.tool_name}: {call.result}" for call in tool_calls)
 
@@ -172,41 +154,22 @@ Respond with a brief text summary. Only include image markdown if image_search r
         FINAL_PROMPT = f"""
 You are answering the user's question: "{self.user_input}"
 
-Based on the reasoning tree context below, write a DIRECT answer to the user.
+Using the context below, write a DIRECT, CONCISE answer.
 
-=== STEP 1: VERIFY IMAGE_SEARCH WAS CALLED ===
+=== MANDATORY RULES ===
 
-Before writing anything, search the context for "image_search" tool calls.
+1. Answer the question immediately. Do NOT open with phrases like "Based on your request", "Here is a summary", "It seems like", or "The search results indicate".
+2. Do NOT mention tools, searches, documents, leaf IDs, tree structures, step descriptions, or how information was found.
+3. Do NOT describe the retrieval process, document counts, relevance scores, or which tools were called.
+4. Extract ONLY the factual technical content from the context and present it as your answer.
+5. Keep your answer concise and focused — typically 2 to 5 sentences covering the key facts.
+6. Do NOT elaborate beyond what the question asks.
 
-IF image_search WAS NOT CALLED:
-- Your answer must contain ZERO image URLs
-- Your answer must contain ZERO ![...](...) markdown
-- Your answer must NOT suggest viewing any images
-- Just provide a text-only answer based on manual_search results
+=== IMAGES ===
 
-IF image_search WAS CALLED but returned "count": 0:
-- Say "No relevant images were found" in your answer
-- Do NOT include any image markdown
-
-=== STEP 2: IF image_search RETURNED RESULTS ===
-
-ONLY if you find actual "url": "http://..." values in image_search results:
-1. Copy the URL EXACTLY - character for character
-2. Format: ![Brief description](exact_url)
-3. Verify the image is from the correct machine (e.g., BOY-35 images for BOY-35 questions)
-
-=== FORBIDDEN - NEVER DO THESE ===
-
-- Do NOT invent URLs like "http://localhost:8000/api/media/yologen/train/MACHINE_page123_img1.png"
-- Do NOT construct URLs from page numbers found in manual_search
-- Do NOT include image markdown unless image_search returned actual URLs
-- Do NOT use "Failed to load:" with made-up URLs
-
-=== ANSWER FORMAT ===
-
-1. Text answer to the user's question
-2. IF AND ONLY IF image_search returned URLs: include them with exact URLs
-3. Additional context if needed
+- If the context contains image URLs (http://...) from image_search results, include them as ![description](exact_url).
+- If no image URLs appear in the context, do NOT include any image markdown or suggest images.
+- Never invent or construct image URLs.
 """
 
         final_answer = self.llm.generate(
