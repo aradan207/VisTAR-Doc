@@ -107,7 +107,8 @@ RULES:
 3. Do NOT mention document counts, relevance scores, or search metadata.
 4. If a tool returned no useful information, simply omit that aspect — do not explain why.
 5. If image_search returned results with "url" fields, include them as ![description](exact_url). Never invent URLs.
-6. Keep your summary concise — focus on technical facts, specifications, and procedures found.
+6. CRITICAL: Copy image URLs EXACTLY as they appear, character-for-character, including the file extension (e.g. .png). Do NOT shorten, truncate, or modify URLs in any way.
+7. Keep your summary concise — focus on technical facts, specifications, and procedures found.
 """
             tool_results_text = "\n".join(f"{call.tool_name}: {call.result}" for call in tool_calls)
 
@@ -168,6 +169,7 @@ Using the context below, write a DIRECT, CONCISE answer.
 === IMAGES ===
 
 - If the context contains image URLs (http://...) from image_search results, include them as ![description](exact_url).
+- Copy image URLs EXACTLY character-for-character, including the file extension (.png). Do NOT shorten or modify URLs.
 - If no image URLs appear in the context, do NOT include any image markdown or suggest images.
 - Never invent or construct image URLs.
 """
