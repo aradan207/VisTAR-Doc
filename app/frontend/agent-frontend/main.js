@@ -1,8 +1,8 @@
 import { el } from './ui/dom.js';
-import { initTabs } from './ui/tabs.js';
 import { toast } from './ui/toast.js';
 import { bindPalette, openPalette, closePalette } from './ui/palette.js';
 import { bindInspector, closeInspector } from './ui/inspector.js';
+import { classifyNode } from './core/nodeStatus.js';
 
 import {
   bindPanZoom,
@@ -18,7 +18,6 @@ import {
 import { drawMinimapFrame, getMinimapState } from './canvas/minimap.js';
 import { render } from './canvas/render.js';
 import { streamAgent } from './data/backend.js';
-import { initProviderDefaults } from './ui/defaults.js';
 import { NODE_W, NODE_H } from './core/constants.js';
 import { escHTML, shortText } from './core/utils.js';
 
@@ -372,13 +371,10 @@ function handleStreamEvent(event) {
   }
 }
 
-initTabs();
 bindInspector();
 bindPalette(runAction);
 bindPanZoom();
 setOnTransform(drawMinimapFrame);
-
-initProviderDefaults(el);
 
 el.hudFit?.addEventListener('click', fitToContent);
 el.hudZoomIn?.addEventListener('click', zoomIn);
@@ -513,14 +509,21 @@ function buildRenderStateFromPayload(payload) {
 
     nodes[leafId] = {
       id: leaf.id || leafId,
-      name: String(title).slice(0, 60),
+      name: String(title),
       description: result,
       depends_on: leaf.parent_leaf ? [leaf.parent_leaf] : [],
-      status: leaf.status || 'done',
+      status: 'done', // placeholder, classified below
       tool_calls: Array.isArray(leaf.tool_calls) ? leaf.tool_calls : [],
       parent: leaf.parent_leaf ?? null,
       children: Array.isArray(leaf.child_leaves) ? leaf.child_leaves : [],
     };
+  }
+
+  // Classify each node now that the full map is built
+  for (const [nodeId, node] of Object.entries(nodes)) {
+    const isFinalLeaf =
+      !Array.isArray(node.children) || node.children.length === 0;
+    node.status = classifyNode(node, false, isFinalLeaf);
   }
 
   return {
@@ -668,16 +671,6 @@ function runAction(a) {
     zoomIn,
     zoomOut,
     clear: clearCanvas,
-    settings: () => {
-      document
-        .querySelectorAll('.tab')
-        .forEach((t) => t.classList.remove('active'));
-      document.querySelectorAll('.tab').forEach((t) => {
-        if (t.dataset.tab === 'settings') t.classList.add('active');
-      });
-      document.getElementById('tab-nodes').style.display = 'none';
-      document.getElementById('tab-settings').style.display = 'block';
-    },
   };
   (map[a] || (() => {}))();
 }
@@ -690,8 +683,6 @@ function clearCanvas() {
   el.status.textContent = 'Canvas cleared.';
   toast('Canvas cleared');
 }
-document.getElementById('clearBtn')?.addEventListener('click', clearCanvas);
-
 function fitToContent() {
   const { nodes } = getMinimapState();
   if (!nodes.length) return;

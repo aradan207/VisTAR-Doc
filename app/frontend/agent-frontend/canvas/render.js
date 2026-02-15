@@ -1,5 +1,6 @@
 import { el } from '../ui/dom.js';
 import { escHTML, pretty, safeToolText } from '../core/utils.js';
+import { NODE_H } from '../core/constants.js';
 import { buildLayout, withRootRecursive, edgePath } from './layout.js';
 import { drawMinimap } from './minimap.js';
 
@@ -15,9 +16,67 @@ export function render(state) {
 
   const label = (el.query?.value || 'User Request').trim();
   const view = withRootRecursive(state, label);
-  const { positions, width, height } = buildLayout(view);
 
-  // Edges
+  // ── Pass 1: create DOM nodes, measure natural heights ──────────
+  el.nodesLayer.innerHTML = '';
+  const divMap = {};
+
+  for (const [id, n] of Object.entries(view.nodes)) {
+    const div = document.createElement('div');
+    div.className = `node ${n.status}${id === view.__root__ ? ' root' : ''}`;
+    // place off-screen at 0,0 so it can be measured
+    div.style.left = '0px';
+    div.style.top = '0px';
+    div.style.visibility = 'hidden';
+
+    const badge = `${n.children?.length || 0}·${n.tool_calls?.length || 0}`;
+    const toolsHTML = (n.tool_calls || [])
+      .map(
+        (t) => `
+      <div class="tool">
+        <div class="tool-name">🧩 ${escHTML(t.tool_name)}</div>
+        <div class="tool-result">${safeToolText(
+          t.result ?? '(no result)',
+          220
+        )}</div>
+      </div>`
+      )
+      .join('');
+
+    div.innerHTML = `
+      <div class="row">
+        <span class="dot"></span>
+        <div class="title" title="${escHTML(n.name || 'Untitled')}">${escHTML(
+      n.name || 'Untitled'
+    )}</div>
+        <span class="badge" title="children·tools">${badge}</span>
+      </div>
+      <div class="desc">${escHTML(n.description || '(no result)')}</div>
+      ${toolsHTML ? `<div class="tools">${toolsHTML}</div>` : ''}
+    `;
+
+    el.nodesLayer.appendChild(div);
+    divMap[id] = { div, node: n };
+  }
+
+  // Force layout so offsetHeight is accurate
+  const nodeHeights = {};
+  for (const [id, { div }] of Object.entries(divMap)) {
+    nodeHeights[id] = Math.max(div.offsetHeight, NODE_H);
+  }
+
+  // ── Pass 2: compute layout with measured heights, position nodes ──
+  const { positions, width, height } = buildLayout(view, nodeHeights);
+
+  // Position each node div
+  for (const [id, { div }] of Object.entries(divMap)) {
+    const pos = positions[id] || { x: 0, y: 0 };
+    div.style.left = `${pos.x}px`;
+    div.style.top = `${pos.y}px`;
+    div.style.visibility = '';
+  }
+
+  // ── Edges ──────────────────────────────────────────────────────
   el.edgesSvg.innerHTML = '';
   el.edgesSvg.setAttribute('viewBox', `0 0 ${width} ${height}`);
   el.edgesSvg.setAttribute('width', width);
@@ -47,8 +106,10 @@ export function render(state) {
       const from = positions[dep],
         to = positions[node.id];
       if (!from || !to) continue;
+      const fromH = nodeHeights[dep] || NODE_H;
+      const toH = nodeHeights[node.id] || NODE_H;
       const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      p.setAttribute('d', edgePath(from, to));
+      p.setAttribute('d', edgePath(from, to, fromH, toH));
       p.setAttribute('marker-end', 'url(#arrow)');
       p.setAttribute('fill', 'none');
       p.setAttribute('stroke', '#94a3b8');
@@ -60,43 +121,8 @@ export function render(state) {
     }
   }
 
-  // Nodes
-  el.nodesLayer.innerHTML = '';
-  el.nodeList.innerHTML = '';
-
-  for (const [id, n] of Object.entries(view.nodes)) {
-    const pos = positions[id] || { x: 0, y: 0 };
-    const div = document.createElement('div');
-    div.className = `node ${n.status}${id === view.__root__ ? ' root' : ''}`;
-    div.style.left = `${pos.x}px`;
-    div.style.top = `${pos.y}px`;
-
-    const badge = `${n.children?.length || 0}·${n.tool_calls?.length || 0}`;
-    const toolsHTML = (n.tool_calls || [])
-      .map(
-        (t) => `
-      <div class="tool">
-        <div class="tool-name">🧩 ${escHTML(t.tool_name)}</div>
-        <div class="tool-result">${safeToolText(
-          t.result ?? '(no result)',
-          220
-        )}</div>
-      </div>`
-      )
-      .join('');
-
-    div.innerHTML = `
-      <div class="row">
-        <span class="dot"></span>
-        <div class="title" title="${escHTML(n.name || 'Untitled')}">${escHTML(
-      n.name || 'Untitled'
-    )}</div>
-        <span class="badge" title="children·tools">${badge}</span>
-      </div>
-      <div class="desc">${escHTML(n.description || '(no result)')}</div>
-      ${toolsHTML ? `<div class="tools">${toolsHTML}</div>` : ''}
-    `;
-
+  // ── Event listeners ────────────────────────────────────────────
+  for (const [id, { div, node: n }] of Object.entries(divMap)) {
     div.addEventListener('mouseenter', () => {
       for (const d of n.depends_on || [])
         edgeIndex.get(`${id}<-${d}`)?.classList.add('active');
@@ -108,19 +134,6 @@ export function render(state) {
     div.addEventListener('click', () => {
       import('../ui/inspector.js').then((m) => m.openInspectorRich(n));
     });
-
-    el.nodesLayer.appendChild(div);
-
-    // side list
-    const li = document.createElement('div');
-    li.className = 'list-item';
-    li.innerHTML = `<span>${escHTML(n.name || id)}</span><span class="meta">${
-      n.status || ''
-    }</span>`;
-    li.addEventListener('click', () =>
-      import('../ui/inspector.js').then((m) => m.openInspector(n))
-    );
-    el.nodeList.appendChild(li);
   }
 
   // final
