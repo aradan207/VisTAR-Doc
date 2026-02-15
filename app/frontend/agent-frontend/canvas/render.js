@@ -168,8 +168,15 @@ export function render(state) {
       img.addEventListener('click', () => {
         window.open(img.src, '_blank');
       });
-      // Add error handling for broken images
+      // Auto-repair broken image URLs: try adding .png if extension is missing
       img.addEventListener('error', () => {
+        const src = img.src;
+        const hasExt = /\.(png|jpe?g|gif|webp|svg|bmp)$/i.test(src);
+        if (!hasExt && !img.dataset.retried) {
+          img.dataset.retried = '1';
+          img.src = src + '.png';
+          return; // give the .png URL a chance to load
+        }
         img.alt = `Failed to load: ${img.src}`;
         img.style.border = '2px dashed #dc2626';
         img.style.padding = '20px';
