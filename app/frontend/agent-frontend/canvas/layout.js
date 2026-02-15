@@ -24,7 +24,7 @@ function longestPathRanks(nodes) {
   return out;
 }
 
-export function buildLayout(state) {
+export function buildLayout(state, nodeHeights = {}) {
   if (!state?.nodes) return { positions: {}, width: 0, height: 0 };
   const ranks = longestPathRanks(state.nodes);
   const layers = {};
@@ -38,18 +38,21 @@ export function buildLayout(state) {
     cols = Object.keys(layers)
       .map(Number)
       .sort((a, b) => a - b);
-  let maxRows = 0;
+  let maxColHeight = 0;
   for (const r of cols) {
     const ids = layers[r];
-    maxRows = Math.max(maxRows, ids.length);
-    ids.forEach((id, i) => {
-      positions[id] = { x: r * (NODE_W + COL_GAP), y: i * (NODE_H + ROW_GAP) };
-    });
+    let runningY = 0;
+    for (const id of ids) {
+      positions[id] = { x: r * (NODE_W + COL_GAP), y: runningY };
+      const h = nodeHeights[id] || NODE_H;
+      runningY += h + ROW_GAP;
+    }
+    maxColHeight = Math.max(maxColHeight, runningY);
   }
   return {
     positions,
     width: cols.length * (NODE_W + COL_GAP) + 400,
-    height: maxRows * (NODE_H + ROW_GAP) + 400,
+    height: maxColHeight + 400,
   };
 }
 
@@ -65,7 +68,7 @@ export function withRootRecursive(state, label) {
           name: label || 'User Request',
           args: {},
           depends_on: [],
-          status: 'done',
+          status: 'root',
         },
       },
       final: null,
@@ -88,16 +91,16 @@ export function withRootRecursive(state, label) {
     name: label || 'User Request',
     args: {},
     depends_on: [],
-    status: 'done',
+    status: 'root',
   };
   return { ...state, nodes, __root__: ROOT };
 }
 
-export function edgePath(from, to) {
+export function edgePath(from, to, fromH = NODE_H, toH = NODE_H) {
   const x1 = from.x + NODE_W,
-    y1 = from.y + NODE_H / 2;
+    y1 = from.y + fromH / 2;
   const x2 = to.x,
-    y2 = to.y + NODE_H / 2;
+    y2 = to.y + toH / 2;
   const dx = Math.max(44, (x2 - x1) * 0.45);
   return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
 }

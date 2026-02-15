@@ -23,53 +23,6 @@
         <div class="status" id="status">Ready.</div>
       </header>
 
-      <!-- SIDEBAR -->
-      <aside class="sidebar">
-        <div class="side-header">
-          <div class="tabs">
-            <button class="tab active" data-tab="settings">Settings</button>
-            <button class="tab" data-tab="nodes">Nodes</button>
-          </div>
-          <button
-            id="openPalette"
-            class="btn"
-            title="Command palette (Ctrl/Cmd + K)"
-          >
-            ⌘K
-          </button>
-        </div>
-        <div class="side-content" id="tab-nodes" style="display: none">
-          <div class="list" id="nodeList"></div>
-        </div>
-        <div class="side-content" id="tab-settings" style="display: block">
-          <div class="list">
-            <div class="list-item" style="flex-direction: column; gap: 8px">
-              <div style="font-weight: 700">Model Name</div>
-              <div class="meta">Name of the Ollama model to use</div>
-              <input
-                id="modelName"
-                class="input"
-                value="hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M"
-                style="width: 100%"
-              />
-            </div>
-            <div class="list-item" style="flex-direction: column; gap: 8px">
-              <div style="font-weight: 700">Ollama URL</div>
-              <div class="meta">URL of your local Ollama server</div>
-              <input
-                id="providerUrl"
-                class="input"
-                value="http://127.0.0.1:11434"
-                style="width: 100%"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="side-footer">
-          <button id="clearBtn" class="btn">Clear</button>
-        </div>
-      </aside>
-
       <!-- MAIN / CANVAS -->
       <main class="main">
         <div class="canvas-toolbar">
@@ -195,9 +148,6 @@
           </div>
           <div class="cmd" data-action="clear">
             <span>Clear canvas</span><span class="kbd">⌫</span>
-          </div>
-          <div class="cmd" data-action="settings">
-            <span>Open settings</span><span class="kbd">,</span>
           </div>
         </div>
       </div>

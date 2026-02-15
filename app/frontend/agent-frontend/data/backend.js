@@ -5,8 +5,6 @@ const BASE_URL = 'http://localhost:8000';
 function collectPayload() {
   return {
     query: (el.query?.value || '').trim(),
-    providerUrl: el.providerUrl.value,
-    modelName: el.modelName.value,
   };
 }
 
