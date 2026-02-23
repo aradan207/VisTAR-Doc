@@ -22,7 +22,7 @@ class ManualSearchArgs(BaseModel):
         description="Search query to find relevant information in manufacturing/machine manuals",
     )
     top_k: int = Field(
-        default=5,
+        default=8,
         ge=1,
         le=20,
         description="Number of relevant document chunks to return",

@@ -33,16 +33,12 @@ technical information for various machines and equipment.
    - Use `pdf_filter="APSX-PIM"` and `page_hint=36` in image_search
    - This ensures images come from the SAME manual, not random unrelated machines
 
-4. **DO NOT include images** in the final answer if:
-   - You did NOT call image_search (text-only questions need text-only answers)
-   - The retrieved images are from a DIFFERENT machine than the one being asked about
-   - The image relevance_score is very low
-   - The user did not ask for visual content
+4. **IMAGE SEARCH SCOPE**: Only call `image_search` when the user asks to see, show, display, or view something visual. For text definitions, procedures, and specifications — use `manual_search` only.
 
-5. **IMAGE URLS**: 
-   - Images can ONLY come from image_search tool results
-   - ONLY use the exact `url` field returned by image_search results
-   - NEVER generate, invent, or construct image URLs yourself
+5. **SOURCE-SPECIFIC QUERIES**: When the user names a specific manual or machine (e.g., "according to the APSX-PIM manual", "in the BOY 35", "the MILACRON setting"), you MUST include that exact name in your `manual_search` query.
+   - WRONG: `{"query": "injection molding pressure", "top_k": 8}`
+   - CORRECT: `{"query": "APSX-PIM injection molding pressure", "top_k": 8}`
+   - Always use `top_k: 8` for the first search on any question.
 
 ### Example: Visual request with proper filtering
 
@@ -56,7 +52,7 @@ CORRECT approach:
       {
         "result": "",
         "tool_name": "manual_search",
-        "args": {"query": "APSX-PIM J7 connector wiring diagram pinout", "top_k": 5}
+        "args": {"query": "APSX-PIM J7 connector wiring diagram pinout", "top_k": 8}
       },
       {
         "result": "",
@@ -84,7 +80,7 @@ CORRECT approach - ONLY manual_search:
       {
         "result": "",
         "tool_name": "manual_search",
-        "args": {"query": "BOY 35 EVV specifications overview machine", "top_k": 5}
+        "args": {"query": "BOY 35 EVV specifications overview machine", "top_k": 8}
       }
     ]
   }
