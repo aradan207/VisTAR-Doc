@@ -69,6 +69,7 @@ def get_ragas_llm():
         base_url=_OLLAMA_HOST,
         temperature=0,          # deterministic judging
         num_predict=4096,       # 8B model can handle large NLI payloads without truncation
+        format="json",          # grammar-constrained JSON — eliminates RagasOutputParserException
     )
     _llm_instance = LangchainLLMWrapper(chat_model)
     return _llm_instance
