@@ -449,14 +449,17 @@ def main():
     )
     args = parser.parse_args()
 
-    model_name = os.getenv(
+    from tests.ragas_config import get_ragas_judge_model_name
+    model_name = get_ragas_judge_model_name()
+    agent_model = os.getenv(
         "OLLAMA_MODEL",
         "hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M",
     )
 
     print("=" * 72)
     print("  AGENTIC-RAG RAGAS EVALUATION")
-    print(f"  Judge Model : {model_name}")
+    print(f"  Agent Model : {agent_model}")
+    print(f"  Judge Model : {model_name}  (RAGAS_JUDGE_MODEL env to override)")
     print(f"  Date        : {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
     print("=" * 72)
 
