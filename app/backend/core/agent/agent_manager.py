@@ -161,9 +161,10 @@ Write a DIRECT, FACTUAL answer using ONLY the information in the context below.
 1. Start your answer immediately — no preambles like "Based on your request", "Here is a summary", "It seems like", "The context mentions", or "According to the manual".
 2. Do NOT mention tools, searches, documents, leaf IDs, tree structures, step descriptions, retrieval metadata, or document counts.
 3. Do NOT narrate what was or was not found — just state the facts directly.
-4. Do NOT add information the question did not ask for. Match the scope and length of the question.
-5. Keep your answer concise: 1–3 sentences for definitions and facts, up to 5 sentences for procedures.
+4. List ONLY the specific names, values, and facts from the context that directly answer the question. Do not include any sentence whose content is not explicitly present in the context.
+5. Keep your answer concise: 1–3 sentences maximum. For step-by-step procedures, list only the steps explicitly described in the context.
 6. CRITICAL: Answer ONLY using facts that appear explicitly in the context. Do NOT add domain knowledge, elaborations, adjacent concepts, or inferences from your training data. If a fact is not stated in the context, do not include it.
+7. If the question refers to specific component names, connector IDs, part numbers, or parameters (e.g. J1, J2, hopper, spring motor), you MUST use those exact names from the context — do not paraphrase or substitute them.
 
 === IMAGES ===
 
@@ -175,33 +176,6 @@ Write a DIRECT, FACTUAL answer using ONLY the information in the context below.
         final_answer = self.llm.generate(
             user_input=leaves,
             system_prompt=FINAL_PROMPT.strip()
-        )
-
-        # Self-critique pass: strip claims not supported by the retrieved context.
-        # This removes domain-knowledge elaborations the model adds beyond the context.
-        CRITIQUE_PROMPT = """
-You are a strict fact-checker. Your only job is to remove unsupported claims from an answer.
-
-RULES:
-1. Keep every claim that is directly stated or closely paraphrased from the CONTEXT.
-2. Remove every claim that adds domain knowledge, elaboration, or inference NOT present in the CONTEXT.
-3. Keep all image markdown (![description](url)) unchanged.
-4. Do NOT add new content. Do NOT rewrite existing claims. Only remove unsupported ones.
-5. Output ONLY the refined answer. No commentary, no preamble, no explanation.
-"""
-        critique_input = f"""QUESTION: {self.user_input}
-
-CONTEXT (source of truth):
-{leaves}
-
-ANSWER TO REVIEW:
-{final_answer}
-
-Return only the refined answer with unsupported claims removed."""
-
-        final_answer = self.llm.generate(
-            user_input=critique_input.strip(),
-            system_prompt=CRITIQUE_PROMPT.strip()
         )
 
         # Post-processing: guarantee image URLs from image_search are in the answer.
