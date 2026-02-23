@@ -210,3 +210,6 @@ __marimo__/
 media/paper.md
 media/test_logic.md
 media/findings.md
+
+# RAGAS evaluation results (timestamped CSVs — tracked via .gitkeep)
+data/benchmarks/ragas_results/*.csv

@@ -99,16 +99,15 @@ class AgentManager:
                     }
 
             FILL_RESULT_PROMPT = """
-You are summarizing factual findings from tool results.
+You are extracting factual findings from tool results.
 
 RULES:
-1. Extract and summarize ONLY the factual information from the tool results.
-2. Do NOT state which tools were called or report on their success or failure.
-3. Do NOT mention document counts, relevance scores, or search metadata.
-4. If a tool returned no useful information, simply omit that aspect — do not explain why.
-5. If image_search returned results with "url" fields, include them as ![description](exact_url). Never invent URLs.
-6. CRITICAL: Copy image URLs EXACTLY as they appear, character-for-character, including the file extension (e.g. .png). Do NOT shorten, truncate, or modify URLs in any way.
-7. Keep your summary concise — focus on technical facts, specifications, and procedures found.
+1. Extract ONLY concrete technical facts, specifications, and procedures found in the tool results.
+2. Do NOT state which tools were called, whether searches succeeded or failed, or mention document counts.
+3. Do NOT use phrases like "the search returned", "no results were found", "based on the tool results", "I was unable to find", or any meta-commentary about the retrieval process.
+4. If a tool returned no useful information for an aspect, simply omit that aspect — write nothing about it.
+5. If image_search returned results with "url" fields, copy them EXACTLY as ![description](url). Never invent URLs.
+6. Keep your response concise — 2–4 sentences of factual content only.
 """
             tool_results_text = "\n".join(f"{call.tool_name}: {call.result}" for call in tool_calls)
 
@@ -155,29 +154,59 @@ RULES:
         FINAL_PROMPT = f"""
 You are answering the user's question: "{self.user_input}"
 
-Using the context below, write a DIRECT, CONCISE answer.
+Write a DIRECT, FACTUAL answer using ONLY the information in the context below.
 
-=== MANDATORY RULES ===
+=== ANSWER RULES ===
 
-1. Answer the question immediately. Do NOT open with phrases like "Based on your request", "Here is a summary", "It seems like", or "The search results indicate".
-2. Do NOT mention tools, searches, documents, leaf IDs, tree structures, step descriptions, or how information was found.
-3. Do NOT describe the retrieval process, document counts, relevance scores, or which tools were called.
-4. Extract ONLY the factual technical content from the context and present it as your answer.
-5. Keep your answer concise and focused — typically 2 to 5 sentences covering the key facts.
-6. Do NOT elaborate beyond what the question asks.
+1. Start your answer immediately — no preambles like "Based on your request", "Here is a summary", "It seems like", "The context mentions", or "According to the manual".
+2. Do NOT mention tools, searches, documents, leaf IDs, tree structures, step descriptions, retrieval metadata, or document counts.
+3. Do NOT narrate what was or was not found — just state the facts directly.
+4. Do NOT add information the question did not ask for. Match the scope and length of the question.
+5. Keep your answer concise: 1–3 sentences for definitions and facts, up to 5 sentences for procedures.
+6. CRITICAL: Answer ONLY using facts that appear explicitly in the context. Do NOT add domain knowledge, elaborations, adjacent concepts, or inferences from your training data. If a fact is not stated in the context, do not include it.
 
 === IMAGES ===
 
-- If the context contains image URLs (http://...) from image_search results, include them as ![description](exact_url).
-- Copy image URLs EXACTLY character-for-character, including the file extension (.png). Do NOT shorten or modify URLs.
-- If no image URLs appear in the context, do NOT include any image markdown or suggest images.
-- Never invent or construct image URLs.
+- If the context contains image URLs (http://...) from image_search results, you MUST include them as ![description](exact_url).
+- Copy image URLs EXACTLY character-for-character including the file extension (.png). Do NOT shorten or modify URLs.
+- ONLY include images that appear in the context. Never invent or construct URLs.
 """
 
         final_answer = self.llm.generate(
             user_input=leaves,
             system_prompt=FINAL_PROMPT.strip()
         )
+
+        # Self-critique pass: strip claims not supported by the retrieved context.
+        # This removes domain-knowledge elaborations the model adds beyond the context.
+        CRITIQUE_PROMPT = """
+You are a strict fact-checker. Your only job is to remove unsupported claims from an answer.
+
+RULES:
+1. Keep every claim that is directly stated or closely paraphrased from the CONTEXT.
+2. Remove every claim that adds domain knowledge, elaboration, or inference NOT present in the CONTEXT.
+3. Keep all image markdown (![description](url)) unchanged.
+4. Do NOT add new content. Do NOT rewrite existing claims. Only remove unsupported ones.
+5. Output ONLY the refined answer. No commentary, no preamble, no explanation.
+"""
+        critique_input = f"""QUESTION: {self.user_input}
+
+CONTEXT (source of truth):
+{leaves}
+
+ANSWER TO REVIEW:
+{final_answer}
+
+Return only the refined answer with unsupported claims removed."""
+
+        final_answer = self.llm.generate(
+            user_input=critique_input.strip(),
+            system_prompt=CRITIQUE_PROMPT.strip()
+        )
+
+        # Post-processing: guarantee image URLs from image_search are in the answer.
+        # The 3B model sometimes drops valid images despite the prompt instruction.
+        final_answer = self._inject_missing_images(final_answer)
 
         final_leaf_id = self.reasoning_tree.add_leaf(
             description="Final answer",
@@ -188,3 +217,55 @@ Using the context below, write a DIRECT, CONCISE answer.
         self.final_answer = final_answer
         self._emit_update(on_update, latest_leaf_id=final_leaf_id)
         return final_answer
+
+    def _inject_missing_images(self, answer: str) -> str:
+        """
+        Walk the reasoning tree and collect every image URL returned by
+        image_search tool calls.  Any URL not already present in the answer
+        text is appended as Markdown so visual questions always include their
+        retrieved images, regardless of whether the LLM chose to keep them.
+
+        At most 3 images are appended to avoid cluttering short answers.
+        """
+        import re
+
+        collected: list = []  # [(url, description), ...]
+        seen_urls: set = set()
+
+        for leaf in self.reasoning_tree.leaves.values():
+            for tc in leaf.tool_calls:
+                if tc.tool_name != "image_search":
+                    continue
+                result = tc.result or {}
+                if not isinstance(result, dict):
+                    continue
+                for item in result.get("results", []):
+                    url = item.get("url", "").strip()
+                    if not url or url in seen_urls:
+                        continue
+                    seen_urls.add(url)
+                    kwords = item.get("keywords")
+                    desc = (
+                        item.get("description")
+                        or item.get("vlm_description")
+                        or (kwords[0] if isinstance(kwords, list) and kwords else "image")
+                    )
+                    collected.append((url, str(desc)[:80]))
+
+        if not collected:
+            return answer
+
+        # Identify URLs already in the answer
+        existing_urls = set(re.findall(r"https?://\S+", answer))
+
+        missing = [
+            (url, desc)
+            for url, desc in collected
+            if url not in existing_urls
+        ][:3]  # cap at 3 new images
+
+        if not missing:
+            return answer
+
+        image_block = "\n".join(f"![{desc}]({url})" for url, desc in missing)
+        return f"{answer.rstrip()}\n\n{image_block}"
