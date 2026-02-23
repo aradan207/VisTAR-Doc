@@ -32,6 +32,19 @@ class ManualSearchArgs(BaseModel):
 # Lazy-loaded singleton instances for performance
 _embedder = None
 _vector_store = None
+_reranker = None
+
+CANDIDATE_MULTIPLIER = 3   # First-stage FAISS over-fetches by this factor
+MAX_CANDIDATES = 24        # Hard cap to keep cross-encoder latency bounded
+
+
+def _get_reranker():
+    """Lazy-load cross-encoder reranker (downloaded once, ~50 MB)."""
+    global _reranker
+    if _reranker is None:
+        from app.backend.core.rag.reranker import CrossEncoderReranker
+        _reranker = CrossEncoderReranker()
+    return _reranker
 
 
 def _get_rag_components():
@@ -93,10 +106,22 @@ def manual_search(args: ManualSearchArgs) -> dict:
         
         # Generate query embedding
         query_embedding = embedder.embed(args.query)
-        
-        # Search vector store
-        results = vector_store.search(query_embedding, top_k=args.top_k)
-        
+
+        # --- Two-stage retrieval ---
+        # Stage 1: FAISS retrieves a wider candidate pool (fast cosine similarity)
+        n_candidates = min(args.top_k * CANDIDATE_MULTIPLIER, MAX_CANDIDATES)
+        candidates = vector_store.search(query_embedding, top_k=n_candidates)
+
+        # Stage 2: Cross-encoder reranker re-scores (query, chunk) pairs with a
+        # fine-tuned NLI model and returns only the top_k most relevant chunks.
+        # Falls back to FAISS order gracefully if the reranker fails to load.
+        try:
+            reranker = _get_reranker()
+            results = reranker.rerank(args.query, candidates, top_k=args.top_k)
+        except Exception:
+            # Graceful fallback: use FAISS results directly
+            results = candidates[:args.top_k]
+
         # Format results
         formatted_results = []
         for chunk, score in results:
