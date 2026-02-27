@@ -27,14 +27,14 @@ from dotenv import load_dotenv
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(_PROJECT_ROOT / ".env")
 
-# Agent model (Ministral-3B stays as the agent; configurable via OLLAMA_MODEL in .env)
+# Agent model (Ministral-8B Q4_K_M stays as the agent; configurable via OLLAMA_MODEL in .env)
 _DEFAULT_MODEL = "hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M"
 _OLLAMA_MODEL  = os.getenv("OLLAMA_MODEL", _DEFAULT_MODEL)
 _OLLAMA_HOST   = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 
 # Judge model: a dedicated, more capable model for RAGAS NLI evaluation.
 # Uses a SEPARATE env var so it never interferes with the agent model.
-# llama3.1:8b is ~4.7 GB; runs comfortably on RTX 5090 alongside the 3B agent.
+# llama3.1:8b is ~4.7 GB; runs comfortably on RTX 5090 alongside the 8B agent.
 _DEFAULT_JUDGE = "llama3.1:8b"
 _JUDGE_MODEL   = os.getenv("RAGAS_JUDGE_MODEL", _DEFAULT_JUDGE)
 
@@ -70,6 +70,7 @@ def get_ragas_llm():
         temperature=0,          # deterministic judging
         num_predict=4096,       # 8B model can handle large NLI payloads without truncation
         format="json",          # grammar-constrained JSON — eliminates RagasOutputParserException
+        timeout=300,            # 5 min — Ollama needs headroom when swapping 3B/8B models
     )
     _llm_instance = LangchainLLMWrapper(chat_model)
     return _llm_instance

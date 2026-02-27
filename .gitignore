@@ -207,10 +207,9 @@ marimo/_lsp/
 __marimo__/
 
 # Paper documentation (private)
-media/paper.md
-media/test_logic.md
-media/findings.md
-media/ragas.md
+media/*.md
+media/diagrams/
+media/build_slides.bat
 
 # RAGAS evaluation results (timestamped CSVs — tracked via .gitkeep)
 data/benchmarks/ragas_results/*.csv

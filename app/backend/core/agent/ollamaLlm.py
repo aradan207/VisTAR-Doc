@@ -45,6 +45,10 @@ class OllamaLLM(LLM):
             response: ChatResponse = chat(
                 model=self.model_name,
                 messages=messages,
+                options={
+                    "num_predict": 4096,   # prevent truncation of planning JSON & answers
+                    "temperature": 0.2,    # low creativity — stay close to context
+                },
             )
             return response["message"]["content"].strip()
         except Exception as e:

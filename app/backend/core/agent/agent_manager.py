@@ -99,15 +99,15 @@ class AgentManager:
                     }
 
             FILL_RESULT_PROMPT = """
-You are extracting factual findings from tool results.
+You are extracting factual findings from tool results for a field technician.
 
 RULES:
-1. Extract ONLY concrete technical facts, specifications, and procedures found in the tool results.
+1. Extract ALL concrete technical facts, specifications, values, procedures, and component names found in the tool results. Be thorough — a technician needs every relevant detail.
 2. Do NOT state which tools were called, whether searches succeeded or failed, or mention document counts.
 3. Do NOT use phrases like "the search returned", "no results were found", "based on the tool results", "I was unable to find", or any meta-commentary about the retrieval process.
 4. If a tool returned no useful information for an aspect, simply omit that aspect — write nothing about it.
 5. If image_search returned results with "url" fields, copy them EXACTLY as ![description](url). Never invent URLs.
-6. Keep your response concise — 2–4 sentences of factual content only.
+6. Do NOT add any fact, value, or specification from your own knowledge that is not present in the tool results.
 """
             tool_results_text = "\n".join(f"{call.tool_name}: {call.result}" for call in tool_calls)
 
@@ -152,25 +152,15 @@ RULES:
         leaves = self.reasoning_tree.get_reasoning_tree_context()
 
         FINAL_PROMPT = f"""
-You are answering the user's question: "{self.user_input}"
+Question: "{self.user_input}"
 
-Write a DIRECT, FACTUAL answer using ONLY the information in the context below.
+You are answering a field technician who needs precise, actionable technical information.
 
-=== ANSWER RULES ===
-
-1. Start your answer immediately — no preambles like "Based on your request", "Here is a summary", "It seems like", "The context mentions", or "According to the manual".
-2. Do NOT mention tools, searches, documents, leaf IDs, tree structures, step descriptions, retrieval metadata, or document counts.
-3. Do NOT narrate what was or was not found — just state the facts directly.
-4. List ONLY the specific names, values, and facts from the context that directly answer the question. Do not include any sentence whose content is not explicitly present in the context.
-5. Keep your answer concise: 1–3 sentences maximum. For step-by-step procedures, list only the steps explicitly described in the context.
-6. CRITICAL: Answer ONLY using facts that appear explicitly in the context. Do NOT add domain knowledge, elaborations, adjacent concepts, or inferences from your training data. If a fact is not stated in the context, do not include it.
-7. If the question refers to specific component names, connector IDs, part numbers, or parameters (e.g. J1, J2, hopper, spring motor), you MUST use those exact names from the context — do not paraphrase or substitute them.
-
-=== IMAGES ===
-
-- If the context contains image URLs (http://...) from image_search results, you MUST include them as ![description](exact_url).
-- Copy image URLs EXACTLY character-for-character including the file extension (.png). Do NOT shorten or modify URLs.
-- ONLY include images that appear in the context. Never invent or construct URLs.
+Rules:
+1. Answer using ONLY facts, specifications, values, and procedures that appear explicitly in the context below. Include ALL relevant technical details — component names, voltage/pressure/temperature values, connector labels, part numbers, procedure steps — that the context provides.
+2. Do NOT add any fact, specification, number, material name, or technical detail from your own training data. If a detail is not explicitly written in the context, do not include it. When uncertain, leave it out.
+3. You may use markdown formatting: **bold** key values, bullet lists for specifications, headings for sections. Make the answer easy for a technician to scan.
+4. If image URLs from localhost:8000 appear in the context, include them as ![description](url) at the end of your answer. Copy URLs exactly — do not modify or invent URLs.
 """
 
         final_answer = self.llm.generate(
@@ -178,9 +168,44 @@ Write a DIRECT, FACTUAL answer using ONLY the information in the context below.
             system_prompt=FINAL_PROMPT.strip()
         )
 
+        # Self-critique: second LLM call strips claims not supported by context.
+        # Catches hallucinated specs (e.g. invented voltages, connector details)
+        # that the model adds from training data despite the prompt constraint.
+        CRITIQUE_PROMPT = f"""
+You are a strict fact-checker for manufacturing documentation. Your job is critical — incorrect specifications can endanger technicians.
+
+Compare the ANSWER below against the CONTEXT. Remove or correct any claim, number, specification, temperature, pressure, voltage, connector description, or technical detail in the answer that is NOT explicitly stated in the context.
+
+Keep:
+- All facts that ARE supported by the context
+- All image URLs (![...](...)) unchanged
+- Markdown formatting
+
+Remove:
+- Any specific value (voltage, temperature, pressure, dimensions) not in the context
+- Any component description or function not in the context
+- Any material name, standard, or procedure not in the context
+
+Output ONLY the cleaned answer. No commentary, no explanation of what you changed.
+"""
+
+        critique_input = f"""ANSWER:
+{final_answer}
+
+CONTEXT:
+{leaves}"""
+
+        final_answer = self.llm.generate(
+            user_input=critique_input,
+            system_prompt=CRITIQUE_PROMPT.strip()
+        )
+
         # Post-processing: guarantee image URLs from image_search are in the answer.
-        # The 3B model sometimes drops valid images despite the prompt instruction.
+        # The model sometimes drops valid images during critique.
         final_answer = self._inject_missing_images(final_answer)
+
+        # Strip any hallucinated URLs that don't match our real API endpoint.
+        final_answer = self._strip_hallucinated_urls(final_answer)
 
         final_leaf_id = self.reasoning_tree.add_leaf(
             description="Final answer",
@@ -191,6 +216,32 @@ Write a DIRECT, FACTUAL answer using ONLY the information in the context below.
         self.final_answer = final_answer
         self._emit_update(on_update, latest_leaf_id=final_leaf_id)
         return final_answer
+
+    def _strip_hallucinated_urls(self, answer: str) -> str:
+        """
+        Remove any image markdown where the URL does not match our real API.
+
+        The model sometimes invents URLs like http://example.com/image1 or
+        http://localhost:8000/findings-link that don't correspond to any
+        real served image.  Only URLs matching the yologen media endpoint
+        are kept.
+        """
+        import re
+        import os
+
+        base_url = os.getenv("API_BASE_URL", "http://localhost:8000")
+        real_prefix = f"{base_url}/api/media/yologen/"
+
+        def _check_image_md(m: re.Match) -> str:
+            url = m.group(2)
+            if url.startswith(real_prefix):
+                return m.group(0)  # keep — real image
+            return ""  # strip — hallucinated
+
+        answer = re.sub(r"!\[([^\]]*)\]\(([^\)]+)\)", _check_image_md, answer)
+        # Clean up leftover blank lines from stripped images
+        answer = re.sub(r"\n{3,}", "\n\n", answer).strip()
+        return answer
 
     def _inject_missing_images(self, answer: str) -> str:
         """
