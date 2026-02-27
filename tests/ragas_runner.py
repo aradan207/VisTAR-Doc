@@ -85,6 +85,13 @@ RAGAS_METRICS = [
     "answer_relevancy",
 ]
 
+# Keep RAGAS judge payloads compact and deterministic.
+# With verbose technician-grade answers, the model uses more context than
+# a terse 2-sentence reply.  16 chunks × 800 chars gives the judge enough
+# visibility into what the agent actually saw without blowing up timeouts.
+MAX_RAGAS_CONTEXT_CHUNKS = 16
+MAX_RAGAS_CONTEXT_CHARS = 800
+
 # ---------------------------------------------------------------------------
 # Score interpretation thresholds
 # ---------------------------------------------------------------------------
@@ -171,6 +178,60 @@ def _extract_contexts(snapshot: Dict) -> List[str]:
     return contexts
 
 
+def _prepare_contexts_for_ragas(contexts: List[str]) -> List[str]:
+    """
+    Normalize and cap contexts before passing to RAGAS.
+
+    Why:
+      - Very large context payloads can cause judge timeouts.
+      - Normalized whitespace improves token efficiency with no semantic loss.
+    """
+    prepared: List[str] = []
+    for text in contexts:
+        cleaned = re.sub(r"\s+", " ", (text or "")).strip()
+        if not cleaned:
+            continue
+        if len(cleaned) > MAX_RAGAS_CONTEXT_CHARS:
+            cleaned = cleaned[: MAX_RAGAS_CONTEXT_CHARS - 1].rstrip() + "…"
+        prepared.append(cleaned)
+        if len(prepared) >= MAX_RAGAS_CONTEXT_CHUNKS:
+            break
+    return prepared
+
+
+def _clean_answer_for_ragas(answer: str) -> str:
+    """
+    Convert markdown-rich answers into plain prose for fair semantic scoring.
+
+    This removes formatting artifacts (image links, markdown bullets, headings,
+    emphasis marks) that can depress factual correctness despite correct facts.
+    """
+    text = (answer or "").strip()
+
+    # Remove markdown image syntax entirely.
+    text = re.sub(r"!\[[^\]]*\]\([^\)]+\)", " ", text)
+
+    # Convert markdown hyperlinks to visible anchor text only.
+    text = re.sub(r"\[([^\]]+)\]\((https?://[^\)]+)\)", r"\1", text)
+
+    # Remove markdown structure tokens.
+    text = re.sub(r"^\s{0,3}#{1,6}\s+", "", text, flags=re.MULTILINE)
+    text = re.sub(r"^\s*[-*•]\s+", "", text, flags=re.MULTILINE)
+    text = re.sub(r"^\s*\d+\.\s+", "", text, flags=re.MULTILINE)
+
+    # Remove bold/italic/code wrappers while keeping text.
+    text = re.sub(r"\*\*(.*?)\*\*", r"\1", text)
+    text = re.sub(r"__(.*?)__", r"\1", text)
+    text = re.sub(r"`([^`]*)`", r"\1", text)
+    text = re.sub(r"(?<!\w)\*(.*?)\*(?!\w)", r"\1", text)
+    text = re.sub(r"(?<!\w)_(.*?)_(?!\w)", r"\1", text)
+
+    # Collapse lines/spacing to plain paragraph text.
+    text = re.sub(r"\s*\n\s*", " ", text)
+    text = re.sub(r"\s{2,}", " ", text).strip()
+    return text
+
+
 def run_agent_for_question(query: str) -> Dict:
     """
     Run the full agent pipeline for one question.
@@ -226,20 +287,30 @@ def collect_samples(questions: List[Dict], category: str) -> List[Dict]:
 
         output = run_agent_for_question(query)
 
+        # Brief pause between questions so Ollama can stabilise between
+        # inference calls and avoid model-swap contention.
+        if i < total:
+            time.sleep(2)
+
+        raw_answer = output["final_answer"]
+        cleaned_answer = _clean_answer_for_ragas(raw_answer)
+        prepared_contexts = _prepare_contexts_for_ragas(output["contexts"])
+
         sample = {
             # bookkeeping (stripped out before RAGAS sees the dataset)
             "_id":              qid,
             "_category":        category,
             "_duration":        round(output["duration"], 2),
+            "_raw_response":    raw_answer,
             # RAGAS fields
             "user_input":           query,
-            "retrieved_contexts":   output["contexts"],
-            "response":             output["final_answer"],
+            "retrieved_contexts":   prepared_contexts,
+            "response":             cleaned_answer,
             "reference":            gt,
         }
         samples.append(sample)
         print(f"    Done in {output['duration']:.1f}s  "
-              f"({len(output['contexts'])} context chunks)")
+              f"({len(prepared_contexts)} context chunks)")
 
     return samples
 
@@ -253,7 +324,7 @@ def run_ragas(samples: List[Dict]) -> List[Dict]:
     Evaluate collected samples with RAGAS and return enriched dicts
     where each sample has the four metric scores appended.
     """
-    from ragas import EvaluationDataset, evaluate
+    from ragas import EvaluationDataset, RunConfig, evaluate
     from ragas.metrics import (
         _FactualCorrectness,
         _Faithfulness,
@@ -262,7 +333,12 @@ def run_ragas(samples: List[Dict]) -> List[Dict]:
     )
     from tests.ragas_config import get_ragas_embeddings, get_ragas_llm
 
-    print("\n  Loading RAGAS judge LLM and embeddings...")
+    # Pause to let Ollama unload the agent model before the judge (llama3.1:8b)
+    # starts receiving requests.  Avoids GPU memory contention on single-GPU rigs.
+    print("\n  Pausing 10 s for Ollama model swap (agent → judge)...")
+    time.sleep(10)
+
+    print("  Loading RAGAS judge LLM and embeddings...")
     llm        = get_ragas_llm()
     embeddings = get_ragas_embeddings()
 
@@ -272,6 +348,15 @@ def run_ragas(samples: List[Dict]) -> List[Dict]:
         for s in samples
     ]
     dataset = EvaluationDataset.from_list(ragas_only)
+
+    # Limit parallelism: Ollama serves one model at a time on the local GPU.
+    # 16 workers (default) pile up → TimeoutError.  4 keeps flow moving.
+    ragas_run_cfg = RunConfig(
+        timeout=300,        # 5 min per judge call
+        max_workers=4,      # avoid Ollama queue pile-up
+        max_retries=15,     # retry on transient Ollama 503 / slow swap
+        max_wait=120,       # back-off ceiling between retries
+    )
 
     print(f"  Running RAGAS on {len(samples)} samples (this may take a few minutes)...")
     result = evaluate(
@@ -283,6 +368,7 @@ def run_ragas(samples: List[Dict]) -> List[Dict]:
             _ResponseRelevancy(llm=llm, embeddings=embeddings),
         ],
         raise_exceptions=False,  # return NaN on timeout/parse errors instead of crashing
+        run_config=ragas_run_cfg,
     )
 
     # result.to_pandas() returns a DataFrame with one row per sample
@@ -327,6 +413,7 @@ def write_csv(enriched: List[Dict], path: Path) -> None:
     fieldnames = [
         "id", "category", "question",
         "duration_seconds",
+        "response", "raw_response",
         "context_recall", "faithfulness", "factual_correctness", "answer_relevancy",
         "context_recall_band", "faithfulness_band",
         "factual_correctness_band", "answer_relevancy_band",
@@ -346,6 +433,8 @@ def write_csv(enriched: List[Dict], path: Path) -> None:
                 "category": s["_category"],
                 "question": s["user_input"][:120],
                 "duration_seconds": s["_duration"],
+                "response": s.get("response", ""),
+                "raw_response": s.get("_raw_response", ""),
                 "context_recall":      _fmt(cr),
                 "faithfulness":        _fmt(fa),
                 "factual_correctness": _fmt(fc),
