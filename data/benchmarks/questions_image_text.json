@@ -8,10 +8,10 @@
     },
     {
         "id": "imgtext-02",
-        "question": "What does the APSX-PIM dashboard look like during the injection cycle?",
+        "question": "Show the APSX-PIM dashboard status screen (STAND BY through COOLING) and describe what the operator sees during each stage.",
         "expected_source": "APSX-PIM",
         "expected_image_pattern": "APSX-PIM_page31",
-        "ground_truth": "The APSX-PIM dashboard displays the injection cycle stages including CLAMPING, INJECTING, HOLDING, and COOLING phases. The interface shows real-time status of the current cycle stage and allows the operator to monitor progress through each phase."
+        "ground_truth": "The APSX-PIM dashboard presents stage-by-stage status text including STAND BY, CLAMPING, INJECTING, HOLDING, and COOLING, while indicating the currently active injection-cycle phase so the operator can monitor real-time progression and machine state."
     },
     {
         "id": "imgtext-03",
