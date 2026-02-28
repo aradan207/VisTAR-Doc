@@ -1,0 +1,142 @@
+# Agentic-RAG: From Query to Answer - An End-to-End Journey
+
+Imagine you're asking a complex question like "Show me the wiring diagram for the J7 connector in the APSX-PIM manual and explain how it connects to the motor controller." Traditional AI systems might give you a basic answer or get confused by the multiple parts of your request. But what if there was a system that could break down your question, gather information from manuals, find the right diagrams, and put it all together into a coherent explanation?
+
+That's exactly what Agentic-RAG does. Let's take a journey from the moment you ask a question to when you get your complete answer, exploring every step along the way.
+
+## The Starting Point: Your Question Arrives
+
+It all begins when you submit your query through the web interface. The system receives this through a FastAPI backend running on a web server. This isn't just any API - it's designed to handle complex requests asynchronously, meaning it can process multiple questions at once without getting bogged down.
+
+The API layer acts like a receptionist, taking your question and preparing it for the real work. It sets up the environment, loads any necessary data, and passes your question to the core reasoning engine.
+
+## Building the Foundation: The Reasoning Tree
+
+At the heart of everything is something called the Reasoning Tree. Think of it like a family tree, but instead of people, it tracks the steps of reasoning. When your question arrives, the system creates a root node - the starting point that contains your original query.
+
+This tree structure is crucial because complex questions aren't answered in one step. Your J7 connector question needs multiple pieces: finding the right manual section, locating the diagram, understanding the connections, and explaining it clearly. The tree allows the system to break this down into manageable pieces.
+
+## The Brain: Large Language Model Integration
+
+Now we need intelligence to figure out how to answer your question. The system uses a Large Language Model (LLM) - think of it as the "brain" that can understand language and plan actions. But here's the clever part: instead of just generating an answer directly, this LLM acts as a planner.
+
+The system feeds the LLM your question along with information about what tools are available. These tools include:
+- A manual search tool that can dig through technical documentation
+- An image search tool that can find diagrams and pictures
+- A web search tool for broader information gathering
+
+The LLM analyzes your question and creates a plan: "First, search the APSX-PIM manual for J7 connector information. Then, look for wiring diagrams. Finally, search for motor controller connection details."
+
+## Planning the Attack: Breaking Down the Problem
+
+The planning phase is where the magic starts. The LLM doesn't just think of one thing to do - it creates a structured plan in JSON format that outlines multiple steps. Each step includes:
+
+1. A description of what this step will accomplish
+2. Which tools to use
+3. What arguments to pass to those tools
+
+For your J7 connector question, the plan might look like:
+- Step 1: Search APSX-PIM manual for "J7 connector wiring"
+- Step 2: Find images with "J7 wiring diagram" from APSX-PIM sources
+- Step 3: Look up motor controller specifications
+
+This planning happens recursively - after each step is completed, the system can plan additional steps based on what it learned.
+
+## Executing the Plan: Tools in Action
+
+Once the plan is created, it's time to execute. The system goes through each planned step and calls the appropriate tools. This is where the real work happens.
+
+The manual search tool dives into the vector database, using mathematical similarity to find relevant sections in technical manuals. It's not just keyword matching - it understands context and meaning.
+
+The image search tool looks through document collections, filtering by source (like "APSX-PIM") and content type (like "schematic" or "wiring diagram"). It can even use page hints if earlier searches found relevant page numbers.
+
+If needed, the web search tool queries external sources to fill in any gaps.
+
+Each tool returns structured results that get stored in the reasoning tree. If a tool fails, the system doesn't crash - it stores the error and continues with other steps.
+
+## Synthesizing Knowledge: Making Sense of Results
+
+Raw tool results aren't very useful by themselves. The system needs to make sense of all the information it gathered. This is the synthesis phase.
+
+For each completed step, the LLM takes the tool results and creates a concise summary. It extracts only the factual, relevant information and filters out any noise or irrelevant details. This synthesis ensures that the final answer is based on solid evidence, not speculation.
+
+The system is careful here - it doesn't add external knowledge or make assumptions. It only uses what's in the retrieved results.
+
+## Building the Tree: Tracking the Reasoning Process
+
+As each step completes, new branches are added to the reasoning tree. Each branch represents a completed reasoning step with its description, tool calls, and synthesized results.
+
+The tree structure allows the system to:
+- Keep track of what it's already done
+- Provide context for future planning decisions
+- Maintain a complete audit trail of the reasoning process
+- Support complex, branching logic where different paths might be explored
+
+## The Final Assembly: Creating Your Answer
+
+Once all the planned steps are complete and there are no more branches to explore, it's time to put everything together. The system takes all the terminal leaves of the reasoning tree - all the completed reasoning paths - and feeds them to the LLM one final time.
+
+The LLM now has the complete picture: your original question, all the steps taken, all the information gathered, and all the syntheses created along the way. It crafts a final, coherent answer that addresses your original question completely.
+
+For your J7 connector question, this final answer would include:
+- The location and specifications of the J7 connector
+- The wiring diagram (embedded as an image)
+- How it connects to the motor controller
+- Any relevant safety or installation notes
+
+## Quality Assurance: Evaluating the Results
+
+But the system doesn't stop there. It includes comprehensive evaluation to ensure the answer is good. Multiple metrics are calculated:
+
+- **Lexical metrics** check if the words in the answer match the expected answer
+- **Semantic metrics** verify that the meaning is correct, even if different words are used
+- **Retrieval metrics** confirm that the right sources were found
+- **LLM-as-judge evaluation** uses another AI model to assess answer quality
+
+This evaluation helps developers understand how well the system is performing and identify areas for improvement.
+
+## Real-Time Experience: Streaming Updates
+
+While all this is happening, you're not left in the dark. The system provides real-time updates through streaming. As each step completes, you can see:
+
+- What the system is currently planning
+- Which tools are being executed
+- What results are being found
+- How the reasoning tree is growing
+
+This transparency builds trust and helps users understand the system's thought process.
+
+## Scaling Up: Handling Multiple Users
+
+The system is designed to handle multiple users simultaneously. The asynchronous architecture means that while one user is waiting for their J7 connector answer, another user can ask about injection molding parameters, and a third can inquire about safety procedures.
+
+Each user gets their own reasoning tree and agent manager, keeping everything organized and preventing interference between different queries.
+
+## The Complete Picture: From Start to Finish
+
+Let's trace a complete journey:
+
+1. **You ask**: "Show me the J7 connector wiring diagram from the APSX-PIM manual"
+2. **API receives** the request and initializes the agent
+3. **Reasoning tree** is created with your question as the root
+4. **LLM plans** the approach: search manuals, find images, synthesize information
+5. **Tools execute** in parallel: manual search finds specifications, image search locates diagrams
+6. **Results are synthesized** into clear, factual summaries
+7. **Tree grows** with each completed step
+8. **Final answer** combines everything into a comprehensive response
+9. **Evaluation** confirms the answer quality
+10. **You receive** a complete, accurate answer with diagrams and explanations
+
+## Why This Matters: The Power of Structured Reasoning
+
+What makes Agentic-RAG special isn't just that it can answer complex questions - it's that it does so in a structured, auditable way. Every step is tracked, every decision is logged, and every piece of information is verified.
+
+This approach is particularly valuable for technical domains like manufacturing, engineering, and research where accuracy is critical and users need to understand not just the answer, but how it was derived.
+
+## Looking Forward: Continuous Improvement
+
+The system learns and improves over time. Evaluation results help identify weak spots, successful reasoning patterns inform future planning, and the modular architecture allows new tools and capabilities to be added easily.
+
+As AI systems tackle increasingly complex problems, frameworks like Agentic-RAG show how structured reasoning combined with powerful tools can create systems that are not just smart, but trustworthy and transparent.
+
+The journey from a simple question to a comprehensive answer demonstrates how modern AI can break down complexity, gather relevant information, and synthesize knowledge in ways that were previously impossible. It's not just about getting answers - it's about getting the right answers through a process you can understand and trust.
