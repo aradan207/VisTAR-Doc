@@ -106,8 +106,8 @@ body {
   margin: 0 auto;
 }
 .query-textarea {
-  min-height: 45px;
-  max-height: 50px;
+  min-height: 56px;
+  max-height: 68px;
   resize: none;
   flex: 1;
   font-family: inherit;
@@ -121,7 +121,7 @@ select,
   color: var(--text);
   padding: 8px 10px;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 13px;
   outline: none;
   appearance: none;
 }
@@ -739,7 +739,7 @@ svg.edges {
   padding: 10px;
   overflow: auto;
   background: #f8fafc;
-  font-size: 20px;
+  font-size: 12.5px;
   color: var(--text);
   line-height: 1.45;
 }
@@ -751,7 +751,7 @@ svg.edges {
   background: var(--panel-2);
   border-top: 1px solid var(--border);
   color: var(--text);
-  font-size: 20px;
+  font-size: 12.75px;
   line-height: 1.45;
 }
 #finalContent h1,
@@ -771,7 +771,7 @@ svg.edges {
   padding: 2px 5px;
   border-radius: 4px;
   font-family: ui-monospace, monospace;
-  font-size: 18px;
+  font-size: 12px;
 }
 #finalContent ul,
 #finalContent ol {
