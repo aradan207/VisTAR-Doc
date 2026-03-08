@@ -25,4 +25,6 @@ export const el = {
   palette: document.getElementById('palette'),
   paletteSearch: document.getElementById('paletteSearch'),
   paletteList: document.getElementById('paletteList'),
+  legend: document.getElementById('legend'),
+  legendToggle: document.getElementById('legendToggle'),
 };

@@ -31,6 +31,29 @@
           <button id="hudZoomOut" class="icon-btn" title="Zoom out">－</button>
         </div>
         <div class="minimap"><svg id="minimap" viewBox="0 0 100 60"></svg></div>
+        <div class="top-right-stack">
+          <div id="legend" class="legend">
+            <button id="legendToggle" class="legend-toggle" type="button" title="Toggle legend">Legend</button>
+            <div class="legend-items">
+              <div class="legend-item"><span class="legend-dot" style="background:var(--status-root)"></span>User Query</div>
+              <div class="legend-item"><span class="legend-dot" style="background:var(--status-search)"></span>Document Search</div>
+              <div class="legend-item"><span class="legend-dot" style="background:var(--status-image)"></span>Image Retrieval</div>
+              <div class="legend-item"><span class="legend-dot" style="background:var(--status-web)"></span>Web Search</div>
+              <div class="legend-item"><span class="legend-dot" style="background:var(--status-thinking)"></span>Planning</div>
+              <div class="legend-item"><span class="legend-dot" style="background:var(--status-final)"></span>Final Answer</div>
+              <div class="legend-item"><span class="legend-dot" style="background:var(--status-done)"></span>Completed</div>
+            </div>
+          </div>
+          <button
+            id="liveToggle"
+            class="live-toggle is-hidden"
+            type="button"
+            aria-controls="liveStream"
+            aria-expanded="false"
+          >
+            Show Thinking
+          </button>
+        </div>
         <div
           id="liveStream"
           class="live-stream is-hidden"
@@ -69,15 +92,6 @@
           </div>
           <div id="liveEvents" class="live-events"></div>
         </div>
-        <button
-          id="liveToggle"
-          class="live-toggle is-hidden"
-          type="button"
-          aria-controls="liveStream"
-          aria-expanded="false"
-        >
-          Show Thinking
-        </button>
         <div id="viewport" class="viewport">
           <div class="layers">
             <svg

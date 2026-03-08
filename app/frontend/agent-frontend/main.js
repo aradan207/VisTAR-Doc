@@ -129,6 +129,28 @@ btnMaxFinal?.addEventListener('click', () => {
   applyFinalMode(m === 'max' ? 'normal' : 'max');
 });
 
+/* ── Legend toggle ── */
+{
+  const LEGEND_PREF_KEY = 'ags:legend';
+  const legend = document.getElementById('legend');
+  const legendToggle = document.getElementById('legendToggle');
+  if (legend && legendToggle) {
+    try {
+      const saved = localStorage.getItem(LEGEND_PREF_KEY);
+      if (saved === 'collapsed') legend.classList.add('collapsed');
+    } catch {}
+    legendToggle.addEventListener('click', () => {
+      legend.classList.toggle('collapsed');
+      try {
+        localStorage.setItem(
+          LEGEND_PREF_KEY,
+          legend.classList.contains('collapsed') ? 'collapsed' : 'expanded',
+        );
+      } catch {}
+    });
+  }
+}
+
 copyFinalBtn?.addEventListener('click', async () => {
   const html = el.finalContent?.innerHTML ?? '';
   const tmp = document.createElement('div');

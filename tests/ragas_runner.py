@@ -351,7 +351,7 @@ def run_ragas(samples: List[Dict]) -> List[Dict]:
     llm        = get_ragas_llm()
     embeddings = get_ragas_embeddings()
 
-    # Build dataset — strip our private bookkeeping keys first
+    # Build dataset, clean and strip out bookkeeping fields (keys starting with "_") that RAGAS doesn't need.
     ragas_only = [
         {k: v for k, v in s.items() if not k.startswith("_")}
         for s in samples
@@ -383,7 +383,7 @@ def run_ragas(samples: List[Dict]) -> List[Dict]:
     # result.to_pandas() returns a DataFrame with one row per sample
     scores_df = result.to_pandas()
 
-    # factual_correctness is reported as "factual_correctness(mode=f1)" in ragas 0.4
+    # factual_correctness is reported as "factual_correctness(mode=f1)"
     def _get_col(row, *names):
         for name in names:
             if name in row.index:
