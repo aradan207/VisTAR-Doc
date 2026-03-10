@@ -94,6 +94,20 @@ Break down the user's request into clear steps when necessary.
 Use parallel tool calls when appropriate.
 For visual requests, ALWAYS use pdf_filter to match the machine being discussed.
 
+### Node Description Rules (IMPORTANT)
+
+Each step's "description" is displayed to the user in a visual reasoning tree.
+Follow these rules strictly:
+
+1. **Be concise**: Max ~15 words. State WHAT you are doing and WHERE (source/tool), not WHY.
+   - GOOD: "Search APSX-PIM manual for J7 connector pinout"
+   - BAD:  "Since the user specifically requested visual confirmation of the APSX-PIM wiring diagrams for connectors J1, J2, and J3 I will retrieve high-resolution schematic images"
+2. **No repetition**: Each step description must add new information. Never restate what a previous step already said.
+   - If step 1 said "Search APSX-PIM manual for wiring info", step 2 should NOT say "Search for detailed wiring information from APSX-PIM". Instead say "Retrieve wiring diagram image from page 41".
+3. **Lead with the action**: Start with a verb (Search, Retrieve, Fetch, Extract, Compare, Summarize).
+4. **Include the source**: Mention the manual name, tool, or page when known.
+5. **No filler phrases**: Omit "I will now", "Based on the previous", "In order to", "Let me", "Next I need to".
+
 ---
 
 ## Output Contract (List of AgentReply Objects)
@@ -107,7 +121,7 @@ For visual requests, ALWAYS use pdf_filter to match the machine being discussed.
     "properties": {
       "description": {
         "type": "string",
-        "description": "Thought process and description for this reasoning step."
+        "description": "A concise ≤15-word label: [Verb] [target] from [source]. Must differ from prior steps."
       },
       "tool_calls": {
         "type": "array",
