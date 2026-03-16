@@ -353,6 +353,34 @@ function handleStreamEvent(event) {
     return;
   }
 
+  if (
+    event.type === 'benchmark_started' ||
+    event.type === 'benchmark_progress' ||
+    event.type === 'benchmark_done'
+  ) {
+    const payload = event.payload && typeof event.payload === 'object' ? event.payload : {};
+    if (!lastTreePayload?.reasoning_tree) {
+      return;
+    }
+
+    if (event.type === 'benchmark_done') {
+      lastTreePayload.benchmark_scores = payload.benchmark_scores ?? null;
+      if (!payload.benchmark_scores?.error) {
+        lastTreePayload.benchmark_status = null;
+      }
+      setLiveSubtitle('Benchmark complete.');
+      if (el.status) el.status.textContent = 'Benchmark complete.';
+    } else {
+      lastTreePayload.benchmark_status =
+        payload.benchmark_status || 'Running RAGAS evaluation...';
+      setLiveSubtitle(lastTreePayload.benchmark_status);
+      if (el.status) el.status.textContent = lastTreePayload.benchmark_status;
+    }
+
+    render(buildRenderStateFromPayload(lastTreePayload));
+    return;
+  }
+
   if (event.type !== 'update' && event.type !== 'final') {
     return;
   }
@@ -505,6 +533,8 @@ function normalizeTreePayload(raw, queryOverride) {
     final_answer: deriveFinalAnswer(tree, raw.final_answer ?? null),
     trace: Array.isArray(raw.trace) ? [...raw.trace] : [],
     metadata: metadataBase,
+    benchmark_scores: raw.benchmark_scores ?? null,
+    benchmark_status: raw.benchmark_status ?? null,
   };
 }
 
@@ -552,6 +582,8 @@ function buildRenderStateFromPayload(payload) {
     nodes,
     final: payload?.final_answer ?? deriveFinalAnswer(leaves, null),
     trace: Array.isArray(payload?.trace) ? payload.trace : [],
+    benchmarkScores: payload?.benchmark_scores ?? null,
+    benchmarkStatus: payload?.benchmark_status ?? null,
     root: 'leaf_0',
   };
 }
@@ -566,11 +598,20 @@ function summariseRenderState(state) {
 }
 
 function applyTreePayload(payload, { updateQuery = true, fitViewport = true } = {}) {
+  const previousPayload = lastTreePayload || {};
   lastTreePayload = {
     reasoning_tree: payload.reasoning_tree,
     final_answer: payload.final_answer ?? null,
     trace: Array.isArray(payload.trace) ? payload.trace : [],
     metadata: { ...(payload.metadata || {}) },
+    benchmark_scores:
+      payload.benchmark_scores !== undefined
+        ? payload.benchmark_scores
+        : previousPayload.benchmark_scores ?? null,
+    benchmark_status:
+      payload.benchmark_status !== undefined
+        ? payload.benchmark_status
+        : previousPayload.benchmark_status ?? null,
   };
 
   const renderState = buildRenderStateFromPayload(lastTreePayload);
@@ -701,6 +742,8 @@ function clearCanvas() {
   el.nodesLayer.innerHTML = '';
   el.edgesSvg.innerHTML = '';
   el.finalContent.textContent = 'No answer yet.';
+  el.benchmarkScores.innerHTML = '';
+  el.benchmarkScores.classList.add('hidden');
   lastTreePayload = null;
   el.status.textContent = 'Canvas cleared.';
   toast('Canvas cleared');
@@ -759,6 +802,10 @@ async function runAgent() {
   hasInitialFit = false;
   runCancelled = false;
   finalToastShown = false;
+  if (el.benchmarkScores) {
+    el.benchmarkScores.innerHTML = '';
+    el.benchmarkScores.classList.add('hidden');
+  }
   resetLiveStream(query);
   setRunningUI(true);
   if (el.status) el.status.textContent = 'Starting agent…';

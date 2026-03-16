@@ -191,5 +191,26 @@ export function render(state) {
     el.status.textContent = `${summaryText} Awaiting final answer.`;
   }
 
+  if (state.benchmarkScores) {
+    if (state.benchmarkScores.error) {
+      el.benchmarkScores.innerHTML = `<span style="color:#ef4444;font-size:13px;padding:4px 8px;font-weight:500;">Benchmark Error: ${state.benchmarkScores.error}</span>`;
+    } else {
+      const scores = state.benchmarkScores;
+      el.benchmarkScores.innerHTML = `
+        <div class="benchmark-score-chip"><span class="benchmark-score-label">Context Recall:</span> ${scores.context_recall}</div>
+        <div class="benchmark-score-chip"><span class="benchmark-score-label">Faithfulness:</span> ${scores.faithfulness}</div>
+        <div class="benchmark-score-chip"><span class="benchmark-score-label">Fact. Correctness:</span> ${scores.factual_correctness}</div>
+        <div class="benchmark-score-chip"><span class="benchmark-score-label">Answer Relevancy:</span> ${scores.answer_relevancy}</div>
+      `;
+    }
+    el.benchmarkScores.classList.remove('hidden');
+  } else if (state.benchmarkStatus) {
+    el.benchmarkScores.innerHTML = `<span style="color:var(--text-muted);font-size:13px;padding:4px 8px;">${state.benchmarkStatus}</span>`;
+    el.benchmarkScores.classList.remove('hidden');
+  } else {
+    el.benchmarkScores.innerHTML = '';
+    el.benchmarkScores.classList.add('hidden');
+  }
+
   drawMinimap(Object.values(positions), { width, height });
 }
