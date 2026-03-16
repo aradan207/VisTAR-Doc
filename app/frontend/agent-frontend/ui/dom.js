@@ -7,6 +7,7 @@ export const el = {
   status: document.getElementById('status'),
   query: document.getElementById('query'),
   finalContent: document.getElementById('finalContent'),
+  benchmarkScores: document.getElementById('benchmarkScores'),
   finalDrawer: document.getElementById('finalDrawer'),
   liveStream: document.getElementById('liveStream'),
   liveEvents: document.getElementById('liveEvents'),

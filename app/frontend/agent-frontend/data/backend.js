@@ -3,8 +3,10 @@ import { el } from '../ui/dom.js';
 const BASE_URL = 'http://localhost:8000';
 
 function collectPayload() {
+  const checkbox = document.getElementById('runBenchmark');
   return {
     query: (el.query?.value || '').trim(),
+    runBenchmark: checkbox ? checkbox.checked : false,
   };
 }
 

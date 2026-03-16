@@ -43,6 +43,24 @@ _JUDGE_MODEL   = os.getenv("RAGAS_JUDGE_MODEL", _DEFAULT_JUDGE)
 _EMBED_MODEL = "all-MiniLM-L6-v2"
 
 
+def _resolve_embed_device() -> str:
+    """Select embedding device with optional env override."""
+    override = os.getenv("RAGAS_EMBED_DEVICE", "").strip().lower()
+    if override in {"cpu", "cuda"}:
+        return override
+
+    try:
+        import torch
+
+        if torch.cuda.is_available():
+            return "cuda"
+    except Exception:
+        # Fall back to CPU if torch is unavailable or CUDA probe fails.
+        pass
+
+    return "cpu"
+
+
 # ---------------------------------------------------------------------------
 # Lazy-cached singletons (avoids re-loading on every import)
 # ---------------------------------------------------------------------------
@@ -95,6 +113,10 @@ def get_ragas_embeddings():
     from langchain_huggingface import HuggingFaceEmbeddings
     from ragas.embeddings import LangchainEmbeddingsWrapper
 
-    hf = HuggingFaceEmbeddings(model_name=_EMBED_MODEL)
+    embed_device = _resolve_embed_device()
+    hf = HuggingFaceEmbeddings(
+        model_name=_EMBED_MODEL,
+        model_kwargs={"device": embed_device},
+    )
     _embeddings_instance = LangchainEmbeddingsWrapper(hf)
     return _embeddings_instance

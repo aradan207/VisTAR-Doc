@@ -57,7 +57,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from statistics import mean
-from typing import Dict, List, Optional
+from typing import Callable, Dict, List, Optional
 
 # ---------------------------------------------------------------------------
 # Project root on sys.path
@@ -328,7 +328,12 @@ def collect_samples(questions: List[Dict], category: str) -> List[Dict]:
 # RAGAS evaluation
 # ---------------------------------------------------------------------------
 
-def run_ragas(samples: List[Dict]) -> List[Dict]:
+def run_ragas(
+    samples: List[Dict],
+    *,
+    max_workers: int = 4,
+    on_progress: Optional[Callable[[str], None]] = None,
+) -> List[Dict]:
     """
     Evaluate collected samples with RAGAS and return enriched dicts
     where each sample has the four metric scores appended.
@@ -343,10 +348,14 @@ def run_ragas(samples: List[Dict]) -> List[Dict]:
     from tests.ragas_config import get_ragas_embeddings, get_ragas_llm
 
     # Pause to let Ollama unload the agent model before the judge (llama3.1:8b)
-    # starts receiving requests.  Avoids GPU memory contention on single-GPU rigs.
+    # starts receiving requests. Avoids GPU memory contention on single-GPU rigs.
+    if on_progress:
+        on_progress("Pausing for model swap...")
     print("\n  Pausing 10 s for Ollama model swap (agent → judge)...")
     time.sleep(10)
 
+    if on_progress:
+        on_progress("Loading RAGAS judge and embeddings...")
     print("  Loading RAGAS judge LLM and embeddings...")
     llm        = get_ragas_llm()
     embeddings = get_ragas_embeddings()
@@ -359,14 +368,17 @@ def run_ragas(samples: List[Dict]) -> List[Dict]:
     dataset = EvaluationDataset.from_list(ragas_only)
 
     # Limit parallelism: Ollama serves one model at a time on the local GPU.
-    # 16 workers (default) pile up → TimeoutError.  4 keeps flow moving.
+    # 16 workers (default) pile up -> TimeoutError. Lower worker count is safer
+    # for single-query UI mode.
     ragas_run_cfg = RunConfig(
         timeout=300,        # 5 min per judge call
-        max_workers=4,      # avoid Ollama queue pile-up
+        max_workers=max_workers,
         max_retries=15,     # retry on transient Ollama 503 / slow swap
         max_wait=120,       # back-off ceiling between retries
     )
 
+    if on_progress:
+        on_progress("Evaluating RAGAS metrics...")
     print(f"  Running RAGAS on {len(samples)} samples (this may take a few minutes)...")
     result = evaluate(
         dataset=dataset,
@@ -419,6 +431,9 @@ def run_ragas(samples: List[Dict]) -> List[Dict]:
                     except (TypeError, ValueError):
                         pass
         return data
+
+    if on_progress:
+        on_progress("Post-processing benchmark scores...")
 
     return _calibrate_variance(enriched)
 

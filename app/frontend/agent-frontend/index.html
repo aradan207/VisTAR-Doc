@@ -18,6 +18,9 @@
             rows="2"
           ></textarea>
           <button id="runBtn" class="btn primary">Run</button>
+          <label class="benchmark-toggle" title="Run RAGAS Benchmark after answering">
+            <input type="checkbox" id="runBenchmark" /> ± Bench
+          </label>
         </div>
 
         <div class="status" id="status">Ready.</div>
@@ -126,6 +129,7 @@
               <button id="btnMaxFinal" class="btn">Max</button>
             </div>
           </div>
+          <div id="benchmarkScores" class="benchmark-scores hidden"></div>
           <div id="finalContent" class="bottom-body">No answer yet.</div>
         </section>
       </main>
