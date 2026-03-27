@@ -1,5 +1,6 @@
 import json
 import re
+import os
 from datetime import datetime, timezone
 from typing import Any, Callable, Dict, List, Optional
 
@@ -17,6 +18,16 @@ class PlannedStep(BaseModel):
     tool_calls: List[Dict[str, Any]] = Field(default_factory=list)
 
 
+class PlanFinal(BaseModel):
+    answer: str
+
+
+class PlanResponse(BaseModel):
+    description: Optional[str] = None
+    tool_calls: List[Dict[str, Any]] = Field(default_factory=list)
+    final: Optional[PlanFinal] = None
+
+
 class AgentManager:
 
     def __init__(self, user_input: str, llm: LLM):
@@ -24,6 +35,17 @@ class AgentManager:
         self.reasoning_tree = ReasoningTree(user_input)
         self.llm = llm
         self.final_answer: Optional[str] = None
+        self.max_total_nodes = max(2, int(os.getenv("MAX_TOTAL_NODES", "80")))
+        self.max_children_per_leaf = max(1, int(os.getenv("MAX_CHILDREN_PER_LEAF", "2")))
+        self.max_depth = max(1, int(os.getenv("MAX_DEPTH", "5")))
+
+        self.generated_steps_total = 0
+        self.duplicate_steps_skipped = 0
+        self.max_depth_reached = 0
+        self.terminated_by_budget = False
+        self.terminated_by_convergence = False
+        self.termination_reason: Optional[str] = None
+        self._seen_signatures_by_parent: Dict[str, set[str]] = {}
 
     def _edge_count(self) -> int:
         return sum(len(leaf.child_leaves) for leaf in self.reasoning_tree.leaves.values())
@@ -37,6 +59,15 @@ class AgentManager:
                 "updated_at": datetime.now(timezone.utc).isoformat(),
                 "node_count": len(self.reasoning_tree.leaves),
                 "edge_count": self._edge_count(),
+                "generated_steps_total": self.generated_steps_total,
+                "duplicate_steps_skipped": self.duplicate_steps_skipped,
+                "max_depth_reached": self.max_depth_reached,
+                "terminated_by_budget": self.terminated_by_budget,
+                "terminated_by_convergence": self.terminated_by_convergence,
+                "termination_reason": self.termination_reason,
+                "max_total_nodes": self.max_total_nodes,
+                "max_children_per_leaf": self.max_children_per_leaf,
+                "max_depth": self.max_depth,
             },
         }
 
@@ -56,28 +87,117 @@ class AgentManager:
 
     def run(self, on_update: Optional[Callable[[Dict[str, Any]], None]] = None) -> Dict[str, Any]:
         context = self.reasoning_tree.get_reasoning_tree_context()
-        self.plan(context, parent_leaf_id="leaf_0", on_update=on_update)
-        self.finalize(on_update=on_update)
+
+        try:
+            self.plan(context, parent_leaf_id="leaf_0", on_update=on_update)
+        except Exception as exc:
+            self.termination_reason = self.termination_reason or f"planning_error: {exc}"
+
+        try:
+            self.finalize(on_update=on_update)
+        except Exception as exc:
+            fallback = f"Unable to produce a complete final answer: {exc}"
+            self.final_answer = fallback
+            final_leaf_id = self.reasoning_tree.add_leaf(
+                description="Final answer",
+                parent_leaf="leaf_0",
+                tool_calls=[],
+                result=fallback,
+            )
+            self._emit_update(on_update, latest_leaf_id=final_leaf_id)
+
         return self._snapshot()
+
+    def _can_expand(self) -> bool:
+        return len(self.reasoning_tree.leaves) < self.max_total_nodes
+
+    def _reserve_budget_or_terminate(self, reason: str) -> bool:
+        if self._can_expand():
+            return True
+        self.terminated_by_budget = True
+        if not self.termination_reason:
+            self.termination_reason = reason
+        return False
+
+    def _step_signature(self, step: PlanResponse) -> str:
+        call_signatures = []
+        for tc in step.tool_calls:
+            call_signatures.append({
+                "tool_name": str(tc.get("tool_name", "")).strip().lower(),
+                "args": tc.get("args", {}),
+            })
+
+        canonical = {
+            "description": (step.description or "").strip().lower(),
+            "tool_calls": call_signatures,
+        }
+        return json.dumps(canonical, sort_keys=True, ensure_ascii=True)
+
+    def _is_duplicate_step(self, parent_leaf_id: str, step: PlanResponse) -> bool:
+        sig = self._step_signature(step)
+        seen = self._seen_signatures_by_parent.setdefault(parent_leaf_id, set())
+        if sig in seen:
+            return True
+        seen.add(sig)
+        return False
 
     def plan(
         self,
         context: str,
         parent_leaf_id: str,
-        max_branch_len: int = 5,
+        max_branch_len: Optional[int] = None,
         on_update: Optional[Callable[[Dict[str, Any]], None]] = None,
     ) -> None:
+        if max_branch_len is None:
+            max_branch_len = self.max_depth
+
+        if not self._reserve_budget_or_terminate("node_budget_reached_before_plan"):
+            return
+
+        current_depth = self.reasoning_tree.get_branch_depth(parent_leaf_id)
+        self.max_depth_reached = max(self.max_depth_reached, current_depth)
+        if current_depth >= max_branch_len:
+            self.terminated_by_convergence = True
+            if not self.termination_reason:
+                self.termination_reason = "max_depth_reached"
+            return
+
         response = self.llm.generate(context)
         cleaned = strip_json_markdown(response)
         try:
             data = json.loads(cleaned)
-            steps = TypeAdapter(List[PlannedStep]).validate_python(data)
-        except Exception:
-            return
-        if not steps:
+            raw_steps = TypeAdapter(List[PlanResponse]).validate_python(data)
+        except Exception as exc:
+            if not self.termination_reason:
+                self.termination_reason = f"invalid_plan_json: {exc}"
             return
 
+        if not raw_steps:
+            self.terminated_by_convergence = True
+            if not self.termination_reason:
+                self.termination_reason = "planner_returned_empty"
+            return
+
+        finals = [step.final for step in raw_steps if step.final and step.final.answer.strip()]
+        if finals:
+            self.terminated_by_convergence = True
+            if not self.termination_reason:
+                self.termination_reason = "planner_signaled_final"
+            return
+
+        steps = raw_steps[: self.max_children_per_leaf]
+
         for step in steps:
+            if not self._reserve_budget_or_terminate("node_budget_reached_mid_plan"):
+                return
+
+            if self._is_duplicate_step(parent_leaf_id, step):
+                self.duplicate_steps_skipped += 1
+                continue
+
+            self.generated_steps_total += 1
+            step_description = (step.description or "Execute retrieval step").strip()
+
             tool_calls = []
             for tc in step.tool_calls:
                 if 'tool_name' in tc:
@@ -116,7 +236,7 @@ RULES:
             {context}
 
             STEP DESCRIPTION:
-            {step.description}
+            {step_description}
 
             TOOL RESULTS:
             {tool_results_text}
@@ -127,7 +247,7 @@ RULES:
             result = self.llm.generate(user_input=user_input.strip(), system_prompt=FILL_RESULT_PROMPT.strip())
 
             new_leaf_id = self.reasoning_tree.add_leaf(
-                description=step.description,
+                description=step_description,
                 parent_leaf=parent_leaf_id,
                 tool_calls=tool_calls,
                 result=result
@@ -136,7 +256,11 @@ RULES:
             self._emit_update(on_update, latest_leaf_id=new_leaf_id)
 
             branch_depth = self.reasoning_tree.get_branch_depth(new_leaf_id)
+            self.max_depth_reached = max(self.max_depth_reached, branch_depth)
             if branch_depth >= max_branch_len:
+                continue
+
+            if len(self.reasoning_tree.leaves.get(parent_leaf_id, self.reasoning_tree.leaves["leaf_0"]).child_leaves) >= self.max_children_per_leaf:
                 continue
 
             enriched_context = self.reasoning_tree.get_leaf_context(new_leaf_id)
@@ -214,6 +338,8 @@ CONTEXT:
             result=final_answer
         )
         self.final_answer = final_answer
+        if not self.termination_reason:
+            self.termination_reason = "finalized"
         self._emit_update(on_update, latest_leaf_id=final_leaf_id)
         return final_answer
 

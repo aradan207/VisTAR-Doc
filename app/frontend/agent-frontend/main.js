@@ -74,6 +74,7 @@ let hasInitialFit = false;
 let runCancelled = false;
 let finalToastShown = false;
 let liveSequence = 0;
+let streamSawFinal = false;
 
 function applyFinalMode(mode) {
   if (!finalDrawer) return;
@@ -256,6 +257,7 @@ function setRunningUI(running) {
 
 function resetLiveStream(query) {
   liveSequence = 0;
+  streamSawFinal = false;
   if (!el.liveStream) return;
   el.liveStream.classList.remove('is-complete', 'is-error', 'is-cancelled');
   if (el.liveEvents) el.liveEvents.innerHTML = '';
@@ -329,6 +331,32 @@ function appendLiveEvent(leaf, { isFinal = false, isError = false } = {}) {
 
 function handleStreamEvent(event) {
   if (!event || typeof event !== 'object') return;
+
+  if (event.type === 'done') {
+    if (runCancelled || streamSawFinal) {
+      return;
+    }
+
+    const finalText =
+      lastTreePayload?.final_answer ??
+      deriveFinalAnswer(lastTreePayload?.reasoning_tree || {}, null);
+
+    if (finalText && lastTreePayload) {
+      applyTreePayload(lastTreePayload, {
+        updateQuery: false,
+        fitViewport: false,
+      });
+      markLiveComplete('Completed from final tree snapshot.');
+      if (el.status) {
+        el.status.textContent = 'Run complete (fallback finalization).';
+      }
+      if (!finalToastShown) {
+        toast('Final answer recovered from stream snapshot.');
+        finalToastShown = true;
+      }
+    }
+    return;
+  }
 
   if (event.type === 'start') {
     setLiveSubtitle('Agent planning…');
@@ -407,6 +435,7 @@ function handleStreamEvent(event) {
   const edges = summary.edgeCount ?? summary.edge_count ?? 0;
   const stepCount = Math.max(0, nodes - 1);
   if (event.type === 'final') {
+    streamSawFinal = true;
     markLiveComplete(`Completed with ${stepCount} steps.`);
     const statusText = `Run complete — ${nodes} nodes and ${edges} connections.`;
     if (el.status) el.status.textContent = statusText;

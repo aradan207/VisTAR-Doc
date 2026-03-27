@@ -58,6 +58,33 @@ The image search feature requires the vlm-yolo-detector repository:
 
 ## Getting Started
 
+For offline or air-gapped deployment, follow [media/offline.md](media/offline.md).
+
+### Want To Use It Offline Later? Do This Once While You Are Online
+
+If you are connected right now and want smooth offline use later, run these once:
+
+```bash
+uv run python tests/prepare_offline_semantic_cache.py
+uv run python tests/offline_readiness_check.py
+```
+
+If readiness is green, you can create a transfer bundle:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/export_offline_bundle.ps1
+```
+
+On the offline machine, import and validate:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/import_offline_bundle.ps1
+uv run python tests/offline_readiness_check.py
+```
+
+Expected result:
+- `[Readiness] READY: strict offline prerequisites satisfied`
+
 ### Prerequisites
 
 - **Python 3.11+** with pip (Python 3.13 recommended)
@@ -74,6 +101,15 @@ git clone https://github.com/Manufacturing-Demonstration-Facility/agentic-rag.gi
 cd agentic-rag
 install.bat
 ```
+
+`install.bat` supports two modes:
+
+- `0`: Online prepare/install mode
+- `1`: Offline install/validation mode
+
+At the end of install, the script can optionally run:
+- Online mode: `powershell -ExecutionPolicy Bypass -File scripts/export_offline_bundle.ps1`
+- Offline mode: `powershell -ExecutionPolicy Bypass -File scripts/import_offline_bundle.ps1`
 
 This will automatically:
 1. Install uv package manager and Python dependencies
@@ -133,6 +169,12 @@ ollama pull hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
 
 To switch models, update `OLLAMA_MODEL` in your `.env` file.
 
+If needed, create your local environment file from the template:
+
+```bash
+copy .env.example .env
+```
+
 #### 5. Configuration
 
 The `.env` file is already configured with defaults for Ollama:
@@ -144,6 +186,16 @@ OLLAMA_MODEL=hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M
 
 # Embedding Model
 OLLAMA_EMBED_MODEL=hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
+
+# Strict offline controls
+OFFLINE_MODE=true
+REQUIRE_IMAGE_RETRIEVAL=true
+REQUIRE_SEMANTIC_MODEL_CACHE=true
+
+# Planner safety controls
+MAX_TOTAL_NODES=80
+MAX_CHILDREN_PER_LEAF=2
+MAX_DEPTH=5
 
 # RAG Configuration
 MANUALS_PATH=data/manuals
@@ -354,11 +406,6 @@ agentic-rag/
 
 ## Related Repositories
 
-- **vlm-yolo-detector**: Companion repository for VLM-powered image extraction and semantic search. Required for image search functionality.
+- **vlm-yolo-detector**: Companion repository for image extraction and semantic search. Required for image search functionality.
   - Repository: https://github.com/morkev/vlm-yolo-detector
   - Contains: Image extraction scripts, VLM description generation, semantic embeddings
-
-## License
-
-MIT License
-

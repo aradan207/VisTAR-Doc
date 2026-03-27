@@ -20,6 +20,16 @@ from app.backend.core.agent.tool import tool
 router = APIRouter(tags=["Agent"])
 
 
+def _offline_mode_enabled() -> bool:
+    """Return True when strict offline mode is enabled.
+
+    OFFLINE_MODE defaults to true so deployments remain local-by-default.
+    Set OFFLINE_MODE=false to re-enable web tools in connected environments.
+    """
+    value = os.getenv("OFFLINE_MODE", "true").strip().lower()
+    return value not in {"0", "false", "no", "off"}
+
+
 class AddArgs(BaseModel):
     a: int
     b: int
@@ -62,6 +72,17 @@ def _run_benchmark_for_snapshot(
         _prepare_contexts_for_ragas,
         run_ragas,
     )
+    from tests.ragas_config import validate_ragas_prerequisites
+
+    prereq = validate_ragas_prerequisites()
+    if not prereq.get("ok", False):
+        missing = prereq.get("missing", [])
+        detail = "; ".join(str(item) for item in missing) if missing else "Unknown prerequisite failure"
+        raise RuntimeError(
+            "Benchmark prerequisites not satisfied. "
+            f"OFFLINE_MODE={'enabled' if prereq.get('offline_mode') else 'disabled'}. "
+            f"Missing: {detail}"
+        )
 
     contexts = _extract_contexts(result)
     prepared_contexts = _prepare_contexts_for_ragas(contexts)
@@ -112,8 +133,15 @@ def _init_manager(req: AgentRequest) -> AgentManager:
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Failed to initialize language model: {exc}") from exc
 
-    # Register manual_search first for priority in tool list
-    for tool_fn in (manual_search, image_search, web_search, fetch_url, add_a_b):
+    # Register manual_search first for priority in tool list.
+    # In strict offline mode, web tools stay disabled to prevent non-local calls.
+    tool_fns = [manual_search, image_search, add_a_b]
+    if not _offline_mode_enabled():
+        tool_fns.extend([web_search, fetch_url])
+    else:
+        print("[Agent] OFFLINE_MODE is enabled: web_search and fetch_url are disabled")
+
+    for tool_fn in tool_fns:
         llm.register_decorated_tool(tool_fn)
 
     return AgentManager(user_input=req.query, llm=llm)
@@ -156,6 +184,15 @@ async def run_agent_stream(req: AgentRequest):
         def _run() -> None:
             try:
                 result = manager.run(on_update=emit_update)
+
+                metadata = result.get("metadata", {}) if isinstance(result, dict) else {}
+                print(
+                    "[Agent] Run completed "
+                    f"nodes={metadata.get('node_count')} "
+                    f"edges={metadata.get('edge_count')} "
+                    f"depth={metadata.get('max_depth_reached')} "
+                    f"reason={metadata.get('termination_reason')}"
+                )
 
                 # Always send final answer as soon as agent reasoning completes.
                 loop.call_soon_threadsafe(queue.put_nowait, {"type": "final", "payload": result})

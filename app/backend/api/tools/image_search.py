@@ -23,6 +23,14 @@ import numpy as np
 from pydantic import BaseModel, Field, field_validator
 
 from app.backend.core.agent.tool import tool
+from app.backend.core.runtime_paths import (
+    offline_mode_enabled,
+    require_image_retrieval,
+    require_semantic_model_cache,
+    resolve_yologen_processed_dir,
+    sentence_transformers_cache_available,
+    sentence_transformers_cache_roots,
+)
 
 
 # Paths - resolve relative to this file's location
@@ -31,13 +39,21 @@ _API_DIR = _TOOLS_DIR.parent
 _BACKEND_DIR = _API_DIR.parent
 _APP_DIR = _BACKEND_DIR.parent
 _AGENTIC_RAG_DIR = _APP_DIR.parent
-_REPOSITORIES_DIR = _AGENTIC_RAG_DIR.parent
 
-YOLOGEN_DIR = _REPOSITORIES_DIR / "vlm-yolo-detector"
-IMAGE_INDEX_PATH = YOLOGEN_DIR / "data" / "processed" / "image_index.json"
-EMBEDDING_NPY_PATH = YOLOGEN_DIR / "data" / "processed" / "image_embeddings.npy"
-EMBEDDING_MAPPING_PATH = YOLOGEN_DIR / "data" / "processed" / "embedding_mapping.json"
-IMAGES_BASE_DIR = YOLOGEN_DIR / "data" / "processed" / "images"
+_SEMANTIC_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+
+
+def _resolve_image_paths() -> tuple[Path, Path, Path, Path]:
+    processed = resolve_yologen_processed_dir(_AGENTIC_RAG_DIR)
+    if processed is None:
+        # Keep a deterministic default path for diagnostics even when missing.
+        processed = _AGENTIC_RAG_DIR.parent / "vlm-yolo-detector" / "data" / "processed"
+    return (
+        processed / "image_index.json",
+        processed / "image_embeddings.npy",
+        processed / "embedding_mapping.json",
+        processed / "images",
+    )
 
 # Cached data
 _image_index: Dict[str, Any] = {}
@@ -61,22 +77,24 @@ def _load_all_data(force_reload: bool = False):
         _filenames = []
         _embedding_model = None
     
+    image_index_path, embedding_npy_path, embedding_mapping_path, _images_base_dir = _resolve_image_paths()
+
     # Load image index
-    if IMAGE_INDEX_PATH.exists():
+    if image_index_path.exists():
         try:
-            with open(IMAGE_INDEX_PATH, 'r', encoding='utf-8') as f:
+            with open(image_index_path, 'r', encoding='utf-8') as f:
                 _image_index = json.load(f)
             print(f"[ImageSearch] Loaded {len(_image_index)} images from index")
         except Exception as e:
             print(f"[ImageSearch] Failed to load index: {e}")
     else:
-        print(f"[ImageSearch] Index not found: {IMAGE_INDEX_PATH}")
+        print(f"[ImageSearch] Index not found: {image_index_path}")
     
     # Load embeddings
-    if EMBEDDING_NPY_PATH.exists() and EMBEDDING_MAPPING_PATH.exists():
+    if embedding_npy_path.exists() and embedding_mapping_path.exists():
         try:
-            _embeddings = np.load(EMBEDDING_NPY_PATH)
-            with open(EMBEDDING_MAPPING_PATH, 'r', encoding='utf-8') as f:
+            _embeddings = np.load(embedding_npy_path)
+            with open(embedding_mapping_path, 'r', encoding='utf-8') as f:
                 mapping = json.load(f)
             _filenames = mapping.get("filenames", [])
             print(f"[ImageSearch] Loaded {len(_filenames)} embeddings ({_embeddings.shape})")
@@ -91,14 +109,25 @@ def _load_all_data(force_reload: bool = False):
             traceback.print_exc()
     else:
         print(f"[ImageSearch] Embeddings not found - semantic search disabled")
-        print(f"[ImageSearch]   NPY path: {EMBEDDING_NPY_PATH} exists={EMBEDDING_NPY_PATH.exists()}")
-        print(f"[ImageSearch]   Mapping path: {EMBEDDING_MAPPING_PATH} exists={EMBEDDING_MAPPING_PATH.exists()}")
+        print(f"[ImageSearch]   NPY path: {embedding_npy_path} exists={embedding_npy_path.exists()}")
+        print(f"[ImageSearch]   Mapping path: {embedding_mapping_path} exists={embedding_mapping_path.exists()}")
     
     # Load embedding model (lazy)
     if _embedding_model is None:
+        if offline_mode_enabled() and not sentence_transformers_cache_available(_SEMANTIC_MODEL):
+            message = (
+                f"[ImageSearch] Local cache missing for {_SEMANTIC_MODEL}. "
+                "Skipping model load to avoid network calls in offline mode."
+            )
+            if require_image_retrieval() and require_semantic_model_cache():
+                raise RuntimeError(message)
+            print(message)
+            for root in sentence_transformers_cache_roots():
+                print(f"[ImageSearch]   cache root: {root}")
+            return
         try:
             from sentence_transformers import SentenceTransformer
-            _embedding_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+            _embedding_model = SentenceTransformer(_SEMANTIC_MODEL)
             print("[ImageSearch] Embedding model loaded")
         except ImportError:
             print("[ImageSearch] sentence-transformers not installed - semantic search disabled")

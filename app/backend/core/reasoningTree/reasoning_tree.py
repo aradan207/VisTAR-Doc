@@ -45,7 +45,7 @@ class ReasoningTree:
             cur = self.leaves.get(cur.parent_leaf)
         return depth
 
-    def add_leaf(self, description: str, parent_leaf: str, tool_calls: List[ToolCall], result: str) -> str:
+    def add_leaf(self, description: str, parent_leaf: str, tool_calls: List[ToolCall], result: str = "") -> str:
         leaf_number = len(self.leaves)
         new_id = f"leaf_{leaf_number}"
         while new_id in self.leaves:

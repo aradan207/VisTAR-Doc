@@ -12,6 +12,11 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 from app.backend.core.agent.tool import tool
+from app.backend.core.runtime_paths import (
+    offline_mode_enabled,
+    require_semantic_model_cache,
+    sentence_transformers_cache_available,
+)
 
 
 class ManualSearchArgs(BaseModel):
@@ -36,12 +41,18 @@ _reranker = None
 
 CANDIDATE_MULTIPLIER = 3   # First-stage FAISS over-fetches by this factor
 MAX_CANDIDATES = 24        # Hard cap to keep cross-encoder latency bounded
+RERANKER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 
 
 def _get_reranker():
     """Lazy-load cross-encoder reranker (downloaded once, ~50 MB)."""
     global _reranker
     if _reranker is None:
+        if offline_mode_enabled() and require_semantic_model_cache() and not sentence_transformers_cache_available(RERANKER_MODEL):
+            raise RuntimeError(
+                f"Offline cache missing for reranker model '{RERANKER_MODEL}'. "
+                "Warm the cache on a connected machine first."
+            )
         from app.backend.core.rag.reranker import CrossEncoderReranker
         _reranker = CrossEncoderReranker()
     return _reranker
