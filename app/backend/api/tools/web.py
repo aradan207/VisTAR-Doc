@@ -1,10 +1,17 @@
 import json
+import os
 from pydantic import BaseModel, Field
 import requests
 from bs4 import BeautifulSoup
 import urllib.parse
 
 from app.backend.core.agent.tool import tool
+
+
+def _offline_mode_enabled() -> bool:
+    """Return True when strict offline mode is enabled."""
+    value = os.getenv("OFFLINE_MODE", "true").strip().lower()
+    return value not in {"0", "false", "no", "off"}
 
 
 class WebSearchArgs(BaseModel):
@@ -14,6 +21,12 @@ class WebSearchArgs(BaseModel):
 
 @tool("web_search", WebSearchArgs, "Performs a web search using DuckDuckGo Lite and returns basic results")
 def web_search(args: WebSearchArgs) -> dict:
+    if _offline_mode_enabled():
+        return {
+            "error": "web_search disabled in OFFLINE_MODE",
+            "results": [],
+        }
+
     query = urllib.parse.quote(args.query)
     url = f"https://lite.duckduckgo.com/lite/?q={query}"
 
@@ -88,6 +101,12 @@ class FetchURLArgs(BaseModel):
 
 @tool("fetch_url", FetchURLArgs, "Fetch and clean the content of a public webpage.")
 def fetch_url(args: FetchURLArgs) -> dict:
+    if _offline_mode_enabled():
+        return {
+            "error": "fetch_url disabled in OFFLINE_MODE",
+            "text": "",
+        }
+
     try:
         response = requests.get(args.url, timeout=10)
         response.raise_for_status()

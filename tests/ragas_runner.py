@@ -627,17 +627,35 @@ def main():
     )
     args = parser.parse_args()
 
-    from tests.ragas_config import get_ragas_judge_model_name
+    from tests.ragas_config import (
+        get_ragas_embed_model_name,
+        get_ragas_judge_model_name,
+        validate_ragas_prerequisites,
+    )
     model_name = get_ragas_judge_model_name()
+    embed_model = get_ragas_embed_model_name()
     agent_model = os.getenv(
         "OLLAMA_MODEL",
         "hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M",
     )
 
+    prereq = validate_ragas_prerequisites()
+    if prereq.get("warnings"):
+        print("[RAGAS] Prerequisite warnings:")
+        for warning in prereq["warnings"]:
+            print(f"  - {warning}")
+    if not prereq.get("ok", False):
+        print("[RAGAS] Missing prerequisites:")
+        for missing in prereq.get("missing", []):
+            print(f"  - {missing}")
+        print("[RAGAS] Aborting evaluation until prerequisites are available.")
+        sys.exit(2)
+
     print("=" * 72)
     print("  AGENTIC-RAG RAGAS EVALUATION")
     print(f"  Agent Model : {agent_model}")
     print(f"  Judge Model : {model_name}  (RAGAS_JUDGE_MODEL env to override)")
+    print(f"  Embed Model : {embed_model}  (cached locally for offline runs)")
     print(f"  Date        : {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
     print("=" * 72)
 

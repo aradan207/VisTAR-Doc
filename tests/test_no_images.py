@@ -19,7 +19,7 @@ HOW WE GET THE DATA:
 =============================================================================
 
 - This test calls the live API at http://localhost:8000
-- It sends a query via POST /api/agent/chat
+- It sends a query via POST /api/agent/run
 - The agent decides which tools to use based on the query
 - For "what is" questions, only manual_search should be called
 
@@ -48,17 +48,20 @@ Start server first, then:
 ============================================================================="""
 
 import requests
-import json
 import time
+import pytest
 
 
-def test_query(prompt):
+def test_query(prompt: str = "what is the boy 35 evv?"):
     print(f"\nQuery: {prompt}")
-    url = "http://localhost:8000/api/agent/chat"
-    payload = {"message": prompt}
+    url = "http://localhost:8000/api/agent/run"
+    payload = {"query": prompt}
     
     start_time = time.time()
-    response = requests.post(url, json=payload)
+    try:
+        response = requests.post(url, json=payload, timeout=30)
+    except requests.RequestException as exc:
+        pytest.skip(f"Backend not available at {url}: {exc}")
     end_time = time.time()
     
     if response.status_code == 200:
@@ -73,9 +76,10 @@ def test_query(prompt):
             print("WARNING: Still found images in the final answer!")
         else:
             print("SUCCESS: No images in the final answer (as expected).")
+
+        assert "![" not in data.get("final_answer", "")
     else:
-        print(f"Error: {response.status_code}")
-        print(response.text)
+        pytest.fail(f"API request failed with status {response.status_code}: {response.text}")
 
 
 if __name__ == "__main__":

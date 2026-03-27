@@ -13,6 +13,9 @@
   ],
   "author": "Roman Bessouat",
   "license": "MIT",
+  "dependencies": {
+    "marked": "^15.0.7"
+  },
   "devDependencies": {
     "serve": "^14.2.1"
   }

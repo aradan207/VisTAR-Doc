@@ -16,9 +16,12 @@ embeddings = get_ragas_embeddings()
 """
 
 import os
+import subprocess
 from pathlib import Path
+from typing import Dict, List
 
 from dotenv import load_dotenv
+from app.backend.core.runtime_paths import sentence_transformers_cache_available
 
 # ---------------------------------------------------------------------------
 # Env
@@ -97,6 +100,86 @@ def get_ragas_llm():
 def get_ragas_judge_model_name() -> str:
     """Return the judge model name (for display in the runner header)."""
     return _JUDGE_MODEL
+
+
+def get_ragas_embed_model_name() -> str:
+    """Return the sentence-transformers embedding model name used by RAGAS."""
+    return _EMBED_MODEL
+
+
+def _offline_mode_enabled() -> bool:
+    value = os.getenv("OFFLINE_MODE", "true").strip().lower()
+    return value not in {"0", "false", "no", "off"}
+
+
+def _ollama_list_text() -> str:
+    try:
+        proc = subprocess.run(
+            ["ollama", "list"],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=20,
+        )
+    except FileNotFoundError:
+        return ""
+    except Exception:
+        return ""
+    if proc.returncode != 0:
+        return ""
+    return proc.stdout or ""
+
+
+def _ollama_model_present(model_name: str, listing: str) -> bool:
+    if not model_name or not listing:
+        return False
+    return model_name.lower() in listing.lower()
+
+
+def _embedding_cache_available(model_name: str) -> bool:
+    return sentence_transformers_cache_available(model_name)
+
+
+def validate_ragas_prerequisites() -> Dict[str, object]:
+    """Validate local prerequisites for RAGAS benchmark runs.
+
+    In OFFLINE_MODE, missing dependencies are treated as hard blockers.
+    In online mode, missing embedding cache is advisory because it can be fetched.
+    """
+    offline_mode = _offline_mode_enabled()
+    missing: List[str] = []
+    warnings: List[str] = []
+
+    ollama_listing = _ollama_list_text()
+    if not ollama_listing:
+        missing.append("Ollama is not available or 'ollama list' failed")
+    else:
+        if not _ollama_model_present(_JUDGE_MODEL, ollama_listing):
+            missing.append(f"Missing RAGAS judge model in Ollama: {_JUDGE_MODEL}")
+        if not _ollama_model_present(_OLLAMA_MODEL, ollama_listing):
+            warnings.append(f"Agent model not found in Ollama list: {_OLLAMA_MODEL}")
+
+    has_embed_cache = _embedding_cache_available(_EMBED_MODEL)
+    if not has_embed_cache:
+        message = (
+            "Missing local sentence-transformers cache for "
+            f"'{_EMBED_MODEL}' (first uncached run requires internet)"
+        )
+        if offline_mode:
+            missing.append(message)
+        else:
+            warnings.append(message)
+
+    ok = len(missing) == 0
+    return {
+        "ok": ok,
+        "offline_mode": offline_mode,
+        "missing": missing,
+        "warnings": warnings,
+        "judge_model": _JUDGE_MODEL,
+        "agent_model": _OLLAMA_MODEL,
+        "embed_model": _EMBED_MODEL,
+    }
 
 
 def get_ragas_embeddings():
