@@ -3,8 +3,7 @@
 RAGAS Evaluation Runner - Agentic-RAG
 
 Evaluates the agent using RAGAS metrics (LLM-as-judge) instead of
-pure lexical/embedding scores.  Runs the same questions that
-benchmark_runner.py uses but produces richer, semantics-aware scores:
+pure lexical/embedding scores across the benchmark question sets:
 
     - context_recall       : did the retrieved chunks cover the ground truth?
     - faithfulness         : does the answer stay within what the contexts say?
@@ -122,7 +121,7 @@ def _band(score: float) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Agent helpers  (same pattern as benchmark_runner.py)
+# Agent helpers
 # ---------------------------------------------------------------------------
 
 def _build_agent(query: str):

@@ -39,7 +39,7 @@ class LLM(ABC):
 
     @abstractmethod
     def init_client(self):
-        """Initialize the provider client (e.g., Mistral, OpenAI, etc.)."""
+        """Initialize the provider client implementation."""
         raise NotImplementedError
 
     @abstractmethod
@@ -93,7 +93,7 @@ class LLM(ABC):
     def has_native_tool_calling(self) -> bool:
         """
         Override this in subclasses if the provider supports native
-        tool/function calling (e.g., OpenAI function calling, Mistral tools API).
+        tool/function calling.
         """
         return False
 
