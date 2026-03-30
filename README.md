@@ -13,7 +13,7 @@ RAG (Retrieval-Augmented Generation) pipeline with a multi-step reasoning agent.
 - **Interactive Reasoning Tree UI**: Real-time visualization showing the agent's thought process, tool calls, dependencies, and results.
 - **Web Research Fallback**: DuckDuckGo Lite search and HTML content extraction for information not in local manuals.
 - **Final Report Generation**: After traversing the reasoning tree, the agent synthesizes a professional answer with citations from local documents.
-- **Swappable LLM Providers**: Supports Ollama backends that run entirely offline for both LLM inference and embeddings.
+- **Ollama-Only Runtime**: Uses local Ollama models for both generation and embeddings.
 
 ## System Overview
 
@@ -181,7 +181,6 @@ The `.env` file is already configured with defaults for Ollama:
 
 ```env
 # LLM Configuration
-LLM_PROVIDER=ollama
 OLLAMA_MODEL=hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M
 
 # Embedding Model
@@ -281,7 +280,6 @@ npm start
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| LLM_PROVIDER | LLM backend: ollama, openai, or mistral | ollama |
 | OLLAMA_MODEL | Ollama model name | Ministral-3-8B-Instruct-2512 |
 | OLLAMA_HOST | Ollama server URL | http://localhost:11434 |
 | OLLAMA_EMBED_MODEL | Ollama embedding model for RAG | mxbai-embed-large-v1-gguf:Q4_K_M |
