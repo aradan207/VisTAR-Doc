@@ -13,7 +13,7 @@ RAG (Retrieval-Augmented Generation) pipeline with a multi-step reasoning agent.
 - **Interactive Reasoning Tree UI**: Real-time visualization showing the agent's thought process, tool calls, dependencies, and results.
 - **Web Research Fallback**: DuckDuckGo Lite search and HTML content extraction for information not in local manuals.
 - **Final Report Generation**: After traversing the reasoning tree, the agent synthesizes a professional answer with citations from local documents.
-- **Ollama-Only Runtime**: Uses local Ollama models for both generation and embeddings.
+- **Local-First Runtime**: Uses Ollama for generation and primary RAG embeddings, with local sentence-transformer and cross-encoder caches for strict offline agentic semantic workflows.
 
 ## System Overview
 
@@ -58,43 +58,24 @@ The image search feature requires the vlm-yolo-detector repository:
 
 ## Getting Started
 
-For offline or air-gapped deployment, follow [media/offline.md](media/offline.md).
+This README section explains exactly what the offline scripts do when new users run them, and what changes when your manuals or image artifacts change.
 
-### Want To Use It Offline Later? Do This Once While You Are Online
+### New User Path
 
-If you are connected right now and want smooth offline use later, run these once:
-
-```bash
-uv run python tests/prepare_offline_semantic_cache.py
-uv run python tests/offline_readiness_check.py
-```
-
-If readiness is green, you can create a transfer bundle:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/export_offline_bundle.ps1
-```
-
-On the offline machine, import and validate:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/import_offline_bundle.ps1
-uv run python tests/offline_readiness_check.py
-```
-
-Expected result:
-- `[Readiness] READY: strict offline prerequisites satisfied`
+1. **Online local usage only**: run `install.bat` in mode `0`, then run `start.bat`.
+2. **Preparing for offline transfer**: run `install.bat` in mode `0`, confirm readiness, then export bundle with `scripts/export_offline_bundle.ps1`.
+3. **Receiving on offline machine**: run `install.bat` in mode `1`, import bundle with `scripts/import_offline_bundle.ps1`, run readiness check, then start.
 
 ### Prerequisites
 
-- **Python 3.11+** with pip (Python 3.13 recommended)
+- **Python 3.11+** with pip (Python 3.13.5 recommended, any 3.15 version is ideal)
 - **Ollama** installed and running (download from ollama.com/download)
-- **Node.js 18+** with npm (will be installed automatically if missing on Windows)
+- **Node.js 18+** with npm (auto-installed only in online mode)
 - **vlm-yolo-detector** repository (optional, for image search)
 
 ### Quick Setup (Windows)
 
-For a fully automated installation:
+For an automated installation:
 
 ```bash
 git clone https://github.com/Manufacturing-Demonstration-Facility/agentic-rag.git
@@ -107,17 +88,67 @@ install.bat
 - `0`: Online prepare/install mode
 - `1`: Offline install/validation mode
 
-At the end of install, the script can optionally run:
-- Online mode: `powershell -ExecutionPolicy Bypass -File scripts/export_offline_bundle.ps1`
-- Offline mode: `powershell -ExecutionPolicy Bypass -File scripts/import_offline_bundle.ps1`
+What `install.bat` does in **mode 0**:
+1. Installs/updates `uv` and Python dependencies.
+2. Installs frontend dependencies (and Node.js if needed).
+3. Pulls Ollama models.
+4. Attempts semantic cache warmup.
+5. Builds FAISS index from `data/manuals`.
+6. Runs offline readiness check.
+7. Optionally prompts to export an offline bundle.
 
-This will automatically:
-1. Install uv package manager and Python dependencies
-2. Install Node.js (if needed) and frontend dependencies
-3. Pull all required Ollama models
-4. Clone vlm-yolo-detector repository (for image search)
-5. Build the FAISS index from PDF manuals
-6. Verify the installation
+What `install.bat` does in **mode 1**:
+1. Validates pre-existing dependencies and models.
+2. Validates required local artifacts for offline execution.
+3. Runs readiness checks.
+4. Optionally prompts to import an offline bundle.
+
+Mode `1` does not download missing online resources.
+
+### Offline Scripts and Readiness Tools (Why They Exist)
+
+| File | Why it exists | When to run | Must create per user? |
+|------|---------------|-------------|-------------------------|
+| `scripts/export_offline_bundle.ps1` | Packages offline transfer artifacts (`.cache`, `data/faiss_index`, and sibling `vlm-yolo-detector/data/processed`) | On a connected machine before transferring to air-gapped machine | No, reuse as-is |
+| `scripts/import_offline_bundle.ps1` | Unpacks transfer bundle into workspace | On the target offline machine | No, reuse as-is |
+| `tests/prepare_offline_semantic_cache.py` | Pre-downloads sentence-transformer and cross-encoder cache needed for strict offline mode | On a connected machine before transfer | No, reuse as-is |
+| `tests/offline_readiness_check.py` | Verifies strict prerequisites: FAISS files, Ollama models, image artifacts, semantic cache | After setup, after import, and before startup troubleshooting | No, reuse as-is |
+
+These files are part of the repository and are not generated per user.
+
+Online prep commands:
+
+```bash
+uv run python tests/prepare_offline_semantic_cache.py
+uv run python tests/offline_readiness_check.py
+powershell -ExecutionPolicy Bypass -File scripts/export_offline_bundle.ps1
+```
+
+Offline target commands:
+
+```bash
+powershell -ExecutionPolicy Bypass -File scripts/import_offline_bundle.ps1
+uv run python tests/offline_readiness_check.py
+```
+
+Expected readiness success:
+- `[Readiness] READY: strict offline prerequisites satisfied`
+
+### Cache Roots for Deterministic Offline Deployments
+
+If you want deterministic local cache locations (recommended for transfer workflows), set these in `.env` **before** running cache warmup and install:
+
+```env
+# Repo-local semantic cache roots for deterministic offline deployment.
+HF_HOME=C:/Users/mdfar/Repositories/agentic-rag/.cache/huggingface
+SENTENCE_TRANSFORMERS_HOME=C:/Users/mdfar/Repositories/agentic-rag/.cache/torch/sentence_transformers
+```
+
+When to set these values:
+1. **Online prep machine**: set before `tests/prepare_offline_semantic_cache.py` so caches are created in known paths.
+2. **Offline target machine**: keep the same values if you imported the same repo-local `.cache` structure.
+
+If you do not set them, default cache discovery still works, but transfer paths are less predictable.
 
 ### Manual Setup Steps
 
@@ -135,7 +166,13 @@ pip install uv
 uv sync
 ```
 
-This installs FastAPI, Ollama SDK, FAISS (vector database), pypdf, and other dependencies.
+If `uv sync` fails in constrained environments, retry with:
+
+```bash
+uv sync --python-preference only-system --native-tls
+```
+
+This installs FastAPI, Ollama SDK, FAISS, pypdf, and related dependencies.
 
 #### 3. Frontend Dependencies
 
@@ -191,6 +228,10 @@ OFFLINE_MODE=true
 REQUIRE_IMAGE_RETRIEVAL=true
 REQUIRE_SEMANTIC_MODEL_CACHE=true
 
+# Optional offline cache roots
+HF_HOME=C:/Users/mdfar/Repositories/agentic-rag/.cache/huggingface
+SENTENCE_TRANSFORMERS_HOME=C:/Users/mdfar/Repositories/agentic-rag/.cache/torch/sentence_transformers
+
 # Planner safety controls
 MAX_TOTAL_NODES=80
 MAX_CHILDREN_PER_LEAF=2
@@ -202,6 +243,11 @@ INDEX_PATH=data/faiss_index
 CHUNK_SIZE=800
 CHUNK_OVERLAP=150
 ```
+
+Notes:
+1. Keep `OFFLINE_MODE=true` for strict local operation (web tools disabled).
+2. Keep `REQUIRE_IMAGE_RETRIEVAL=true` if image retrieval is a hard requirement.
+3. Keep `REQUIRE_SEMANTIC_MODEL_CACHE=true` to block accidental network fetches in offline mode.
 
 #### 6. Add Your PDF Manuals
 
@@ -245,6 +291,35 @@ install.bat
 
 The image search tool will automatically find embeddings at `../vlm-yolo-detector/data/processed/`.
 
+Required image artifacts in that folder:
+1. `image_index.json`
+2. `image_embeddings.npy`
+3. `embedding_mapping.json`
+4. `images/`
+
+### When Manuals or Image Data Change
+
+If you keep the current data, you do not need to regenerate offline scripts. The scripts are reusable utilities.
+
+If you add or replace PDF manuals:
+1. Update files in `data/manuals/`.
+2. Rebuild index: `uv run python -m app.backend.core.rag.indexer --force`.
+3. Run readiness check again.
+4. If you deploy offline, export a fresh bundle and re-import on target machines.
+
+If you regenerate image artifacts in the companion repository:
+1. Rebuild artifacts in `../vlm-yolo-detector/data/processed/`.
+2. Confirm required image files listed above exist.
+3. Re-export offline bundle and re-import on offline targets.
+
+What does **not** change when data changes:
+1. `scripts/export_offline_bundle.ps1`
+2. `scripts/import_offline_bundle.ps1`
+3. `tests/offline_readiness_check.py`
+4. `tests/prepare_offline_semantic_cache.py`
+
+You rerun them, you do not regenerate them.
+
 ### Running the Application
 
 #### Option A: Use the Startup Script (Windows)
@@ -259,7 +334,7 @@ This launches both backend and frontend in separate terminal windows.
 
 **Terminal 1 - Backend**:
 ```bash
-uv run uvicorn app.backend.main:app --host 0.0.0.0 --port 8000
+uv run --python python uvicorn app.backend.main:app --host 0.0.0.0 --port 8000
 ```
 
 **Terminal 2 - Frontend**:
@@ -283,10 +358,20 @@ npm start
 | OLLAMA_MODEL | Ollama model name | Ministral-3-8B-Instruct-2512 |
 | OLLAMA_HOST | Ollama server URL | http://localhost:11434 |
 | OLLAMA_EMBED_MODEL | Ollama embedding model for RAG | mxbai-embed-large-v1-gguf:Q4_K_M |
+| OFFLINE_MODE | Disables web tools for strict local mode | true |
+| REQUIRE_IMAGE_RETRIEVAL | Block startup if image artifacts are missing | true |
+| REQUIRE_SEMANTIC_MODEL_CACHE | Block startup if semantic cache is missing | true |
+| HF_HOME | HuggingFace cache root override | repo `.cache/huggingface` when set |
+| SENTENCE_TRANSFORMERS_HOME | Sentence-transformers cache root override | repo `.cache/torch/sentence_transformers` when set |
+| YOLOGEN_ROOT | Optional override to companion repo root | unset |
+| YOLOGEN_DATA_ROOT | Optional override to processed image data root | unset |
 | MANUALS_PATH | Path to PDF documents directory | data/manuals |
 | INDEX_PATH | Path to FAISS index storage | data/faiss_index |
 | CHUNK_SIZE | Characters per document chunk | 800 |
 | CHUNK_OVERLAP | Overlap between chunks | 150 |
+| MAX_TOTAL_NODES | Planner hard cap per run | 80 |
+| MAX_CHILDREN_PER_LEAF | Planner branch fan-out cap | 2 |
+| MAX_DEPTH | Planner depth cap | 5 |
 
 ### Manual Search Priority
 
@@ -303,21 +388,56 @@ The agent is configured to prioritize local documents over web search:
 Tools are Python functions decorated with `@tool`:
 
 ```python
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from app.backend.core.agent.tool import tool
 
-class WeatherArgs(BaseModel):
-    location: str
+class ConnectorPinoutArgs(BaseModel):
+    machine_model: str = Field(..., description="Machine model, for example APSX-PIM")
+    connector_id: str = Field(..., description="Connector label, for example J1, J2, or J3")
 
-@tool("get_weather", WeatherArgs, "Retrieve the current weather for a city")
-def get_weather(args: WeatherArgs) -> dict:
-    return {"conditions": "sunny", "location": args.location}
+@tool(
+    "lookup_connector_pinout",
+    ConnectorPinoutArgs,
+    "Lookup local connector pinout details for manufacturing troubleshooting and wiring support",
+)
+def lookup_connector_pinout(args: ConnectorPinoutArgs) -> dict:
+    pinout_db = {
+        "APSX-PIM": {
+            "J1": {"role": "power and communication", "manual_page": 41},
+            "J2": {"role": "motor drives and limits", "manual_page": 41},
+            "J3": {"role": "temperature and heater outputs", "manual_page": 41},
+        }
+    }
+
+    model_key = args.machine_model.upper()
+    connector_key = args.connector_id.upper()
+    connectors = pinout_db.get(model_key, {})
+    info = connectors.get(connector_key)
+
+    if info is None:
+        return {
+            "error": f"No pinout found for {args.machine_model} {args.connector_id}",
+            "available_connectors": sorted(connectors.keys()),
+            "results": [],
+        }
+
+    return {
+        "machine_model": model_key,
+        "connector_id": connector_key,
+        "results": [
+            {
+                "role": info["role"],
+                "manual_page": info["manual_page"],
+                "source": "local_pinout_catalog",
+            }
+        ],
+    }
 ```
 
 Register the tool on the LLM wrapper before running the agent:
 
 ```python
-llm.register_decorated_tool(get_weather)
+llm.register_decorated_tool(lookup_connector_pinout)
 ```
 
 ## Testing
@@ -373,36 +493,7 @@ uv run python -m app.backend.core.rag.indexer
 2. Check that `../vlm-yolo-detector/data/processed/image_embeddings.npy` exists
 3. Run `install.bat` in the vlm-yolo-detector directory if embeddings are missing
 
-## Project Structure
-
-```
-agentic-rag/
-├── app/
-│   ├── backend/
-│   │   ├── main.py                 # FastAPI application entry point
-│   │   ├── api/
-│   │   │   ├── agent.py            # Agent endpoint and tool registration
-│   │   │   └── tools/              # Tool implementations
-│   │   │       ├── image_search.py # Semantic image search
-│   │   │       ├── manual_search.py# RAG document search
-│   │   │       └── web.py          # Web search fallback
-│   │   └── core/
-│   │       ├── agent/              # Agent logic and LLM wrappers
-│   │       ├── models/             # Pydantic models
-│   │       ├── rag/                # RAG pipeline components
-│   │       └── reasoningTree/      # Reasoning tree implementation
-│   └── frontend/
-│       └── agent-frontend/         # Web UI
-├── data/
-│   ├── faiss_index/                # Built FAISS index
-│   └── manuals/                    # PDF documents
-├── tests/                          # Test suite
-├── install.bat                     # Automated installation script
-├── start.bat                       # Application startup script
-└── pyproject.toml                  # Python dependencies
-```
-
-## Related Repositories
+## Second Required Repository
 
 - **vlm-yolo-detector**: Companion repository for image extraction and semantic search. Required for image search functionality.
   - Repository: https://github.com/morkev/vlm-yolo-detector
