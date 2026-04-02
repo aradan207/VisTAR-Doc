@@ -1,0 +1,2294 @@
+id,category,question,duration_seconds,response,raw_response,context_recall,faithfulness,factual_correctness,answer_relevancy,context_recall_band,faithfulness_band,factual_correctness_band,answer_relevancy_band,context_recall_target,faithfulness_target,factual_correctness_target,answer_relevancy_target,context_recall_target_met,faithfulness_target_met,factual_correctness_target_met,answer_relevancy_target_met,context_recall_target_gap,faithfulness_target_gap,factual_correctness_target_gap,answer_relevancy_target_gap
+text-01,text_only,What are the processing characteristics of plastic that must be considered before injection molding?,40.47,"Here are the processing characteristics of plastic that must be considered before injection molding: --- 1. Key Material Properties & Considerations Melting/softening temperature Specific heat (energy content) Latent heat Melt viscosity Stability and behavior at melt temperatures Freezing rate, crystallization rate, and cycle time Shrinkage --- 2. Material-Specific Properties Polypropylene (PP) Specific gravity Mass flow rate Tensile strength Izod impact resistance Deflection temperature under load General Plastics Melt Flow Rate (MFR): Preferred range: >15 g/10 min (ASTM D1238, 230°C / 2.16 kg) Moisture Sensitivity: Requires drying before processing to prevent defects. --- 3. Processing Temperature Ranges | Material Type | Recommended Barrel Temp Range | |-----------------------------|------------------------------------| | Standard thermoplastics | Typically processed within 99% of materials below 310°C | --- 4. Machine & Environmental Requirements Machine Compatibility Engineered to process standard thermoplastics, PVC, elastomers, thermosets, and liquid silicones. Environmental Conditions Room temperature: 10–45°C Air humidity: ≤70% --- 5. Preprocessing Steps Drying: Mandatory for moisture-sensitive materials. Material Handling: Requires operator training in plastics processing and machine operation. --- 6. Injection Molding Process Overview Heating solid pellets to melt → injecting into mold under pressure → holding until solidification. Insert molding: Plastic molded around preformed metal inserts. --- 7. Machine-Specific Parameters Shot Capacity: Maximum volume of thermoplastic resin injectable per stroke (varies by machine). Safety Notes: Operator must be trained and authorized. Adequate lighting, ventilation, and safety precautions required.","Here are the **processing characteristics** of plastic that must be considered before injection molding:
+
+---
+
+### **1. Key Material Properties & Considerations**
+- Melting/softening temperature
+- Specific heat (energy content)
+- Latent heat
+- Melt viscosity
+- Stability and behavior at melt temperatures
+- Freezing rate, crystallization rate, and cycle time
+- Shrinkage
+
+---
+
+### **2. Material-Specific Properties**
+#### **Polypropylene (PP)**
+- Specific gravity
+- Mass flow rate
+- Tensile strength
+- Izod impact resistance
+- Deflection temperature under load
+
+#### **General Plastics**
+- Melt Flow Rate (MFR): Preferred range: >15 g/10 min (ASTM D1238, 230°C / 2.16 kg)
+- Moisture Sensitivity: Requires drying before processing to prevent defects.
+
+---
+
+### **3. Processing Temperature Ranges**
+| Material Type               | Recommended Barrel Temp Range       |
+|-----------------------------|------------------------------------|
+| Standard thermoplastics      | Typically processed within **99% of materials below 310°C**          |
+
+---
+
+### **4. Machine & Environmental Requirements**
+#### **Machine Compatibility**
+- Engineered to process standard thermoplastics, PVC, elastomers, thermosets, and liquid silicones.
+
+#### **Environmental Conditions**
+- Room temperature: **10–45°C**
+- Air humidity: ≤70%
+
+---
+
+### **5. Preprocessing Steps**
+- Drying: Mandatory for moisture-sensitive materials.
+- Material Handling: Requires operator training in plastics processing and machine operation.
+
+---
+### **6. Injection Molding Process Overview**
+- Heating solid pellets to melt → injecting into mold under pressure → holding until solidification.
+- Insert molding: Plastic molded around preformed metal inserts.
+
+---
+### **7. Machine-Specific Parameters**
+- Shot Capacity: Maximum volume of thermoplastic resin injectable per stroke (varies by machine).
+- Safety Notes:
+  - Operator must be trained and authorized.
+  - Adequate lighting, ventilation, and safety precautions required.",1.0000,1.0000,0.6660,0.9861,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.0160,0.1361
+text-02,text_only,What is the definition of clamp in the context of an injection molding machine?,8.62,"Definition: Clamp Unit The clamp (or clamping unit) is the mechanism that: Opens/closes the mold by moving a moving platen relative to a stationary platen. Generates and maintains force to counteract molten resin pressure during injection, ensuring the mold remains securely closed. --- Key Components The clamp system includes: Stationary Platen: Fixed base for mold mounting. Moving Platen: Moves via a rack-and-pinion gearbox to open/close the mold. Toggle Mechanism: Transfers force from the drive system to hold the mold closed under pressure. Die Height Adjust Mechanism: Allows precise positioning of the moving platen. Pull-in Cylinders: Assist in closing the clamp by aiding the toggle mechanism. --- Operation Workflow Closing the Mold: A servo drive unit rotates a motor, which moves the rack-and-pinion gearbox. The gearbox drives the moving platen toward the stationary platen. Force is transferred through the toggle mechanism, locking the mold closed. Maintaining Pressure Resistance: Once locked, the clamp holds the mold closed against resin pressure during injection. --- Key Technical Terms Clamping Force: The force applied to keep the mold closed, measured in opposition to the fluid pressure of molten resin. Clamping Area: The largest rated molding area a machine can accommodate under full clamping pressure.","### **Definition: Clamp Unit**
+The **clamp** (or **clamping unit**) is the mechanism that:
+- **Opens/closes the mold** by moving a **moving platen** relative to a **stationary platen**.
+- Generates and maintains force to counteract molten resin pressure during injection, ensuring the mold remains securely closed.
+
+---
+
+### **Key Components**
+The clamp system includes:
+- **Stationary Platen**: Fixed base for mold mounting.
+- **Moving Platen**: Moves via a **rack-and-pinion gearbox** to open/close the mold.
+- **Toggle Mechanism**: Transfers force from the drive system to hold the mold closed under pressure.
+- **Die Height Adjust Mechanism**: Allows precise positioning of the moving platen.
+- **Pull-in Cylinders**: Assist in closing the clamp by aiding the toggle mechanism.
+
+---
+### **Operation Workflow**
+1. **Closing the Mold**:
+   - A **servo drive unit** rotates a motor, which moves the **rack-and-pinion gearbox**.
+   - The gearbox drives the moving platen toward the stationary platen.
+   - Force is transferred through the **toggle mechanism**, locking the mold closed.
+
+2. **Maintaining Pressure Resistance**:
+   - Once locked, the clamp holds the mold closed against resin pressure during injection.
+
+---
+### **Key Technical Terms**
+- **Clamping Force**: The force applied to keep the mold closed, measured in opposition to the fluid pressure of molten resin.
+- **Clamping Area**: The largest rated molding area a machine can accommodate under full clamping pressure.",1.0000,0.9167,0.7300,0.9945,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0167,0.0800,0.1445
+text-03,text_only,What procedure does the FTIR manual describe for measuring a polystyrene film sample?,7.04,FTIR Procedure for Polystyrene Film Measurement 1. Hardware Setup Open the sample compartment lid of the FTIR spectrometer. 2. Sample Handling Place the polystyrene film into the designated sample holder. 3. Software Workflow Navigate to the pull-down menu and select the tool button to open: [Monitor Sample] window 4. Measurement Steps Verify the sample spectrum profile in the [Monitor Sample] window. Click <OK> to initiate measurement. 5. Background Correction (Critical) Requires: Single-beam spectrum of background Single-beam spectrum of the sample 6. Post-Measurement The measured spectrum is displayed on-screen upon completion.,"### **FTIR Procedure for Polystyrene Film Measurement**
+
+#### **1. Hardware Setup**
+- Open the sample compartment lid of the FTIR spectrometer.
+
+#### **2. Sample Handling**
+- Place the polystyrene film into the designated sample holder.
+
+#### **3. Software Workflow**
+- Navigate to the pull-down menu and select the tool button to open:
+  - **[Monitor Sample]** window
+
+#### **4. Measurement Steps**
+1. Verify the sample spectrum profile in the **[Monitor Sample]** window.
+2. Click **<OK>** to initiate measurement.
+
+#### **5. Background Correction (Critical)**
+- Requires:
+  - Single-beam spectrum of background
+  - Single-beam spectrum of the sample
+
+#### **6. Post-Measurement**
+- The measured spectrum is displayed on-screen upon completion.",1.0000,1.0000,0.8800,0.9472,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.2300,0.0972
+text-04,text_only,What is injection molding pressure according to the APSX-PIM manual?,13.58,"Injection Molding Pressure Overview Pressure Units: All values set in BAR. Activation Requirement: Injection pressure cannot be activated until barrel temperature reaches its set value. --- Pressure Phases & Settings 1. Injecting Phase Plastic is injected into the mold cavity at a set injection pressure. No explicit default values provided; adjust per material and mold requirements via the user interface under ""Injection Molding Process Settings"". 2. Holding Pressure Phase After injection, pressure drops to a holding pressure level. Purpose: Ensures 100% fill rate of the mold cavity. --- Pressure Stages & Valve Controls First Stage Injection Volume Set at 40% of total part volume. Valve Positions (Nozzle Control) Valve First Position: Opens nozzle valve when clamping and injection pressure are achieved. Nozzle pin angle adjustable up to 200 max value (90° fully open). Valve Second Position: Activates after the first stage volume is reached. --- Machine Capabilities & Limits Maximum Clamp Force: 5 tons. Injection Capacity: Up to 30 cu-cm per cycle.","### **Injection Molding Pressure Overview**
+- **Pressure Units**: All values set in **BAR**.
+- **Activation Requirement**:
+  - Injection pressure cannot be activated until barrel temperature reaches its set value.
+
+---
+
+### **Pressure Phases & Settings**
+#### **1. Injecting Phase**
+- Plastic is injected into the mold cavity at a set injection pressure.
+- No explicit default values provided; adjust per material and mold requirements via the user interface under **""Injection Molding Process Settings""**.
+
+#### **2. Holding Pressure Phase**
+- After injection, pressure drops to a holding pressure level.
+  - Purpose: Ensures **100% fill rate** of the mold cavity.
+
+---
+
+### **Pressure Stages & Valve Controls**
+#### **First Stage Injection Volume**
+- Set at **40% of total part volume**.
+
+- **Valve Positions (Nozzle Control)**
+  - **Valve First Position**:
+    - Opens nozzle valve when clamping and injection pressure are achieved.
+    - Nozzle pin angle adjustable up to **200 max value (90° fully open)**.
+
+  - **Valve Second Position**:
+    - Activates after the first stage volume is reached.
+
+---
+
+### **Machine Capabilities & Limits**
+- **Maximum Clamp Force**: **5 tons**.
+- **Injection Capacity**: Up to **30 cu-cm per cycle**.",0.9291,1.0000,0.7020,0.9238,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1291,0.1000,0.0520,0.0738
+text-05,text_only,What is a gate in injection molding terminology?,9.29,"Gate Definition (Injection Molding) The gate is the channel through which molten resin flows from the runner into the mold cavity. Key Technical Specifications & Procedures Function: Controls material flow by opening/closing a passage between the injection unit and cavity. Must remain open during injection; closes after an adjustable delay (e.g., ""Mold Gate Off Delay After Injection""). Location & Structure: Located along the mold’s parting line or seam, often attached directly to the component. Operation Mechanics: Controlled via mechanical, pneumatic, or electrical systems. Automated gates open before injection; close post-injection with configurable delay timing. Design Features: Integrated into mold tooling as fixed or movable components. Includes: Gate On/Off Toggle: Adjustable passage control. Delay Timing: Configurable delay to ensure cavity fills fully before sealing. Safety: Often paired with guards in automated systems for operator safety.","### **Gate Definition (Injection Molding)**
+
+The **gate** is the channel through which molten resin flows from the runner into the mold cavity.
+
+#### **Key Technical Specifications & Procedures**
+- **Function**:
+  - Controls material flow by opening/closing a passage between the injection unit and cavity.
+  - Must remain open during injection; closes after an adjustable delay (e.g., **""Mold Gate Off Delay After Injection""**).
+
+- **Location & Structure**:
+  - Located along the mold’s parting line or seam, often attached directly to the component.
+
+- **Operation Mechanics**:
+  - Controlled via mechanical, pneumatic, or electrical systems.
+  - Automated gates open before injection; close post-injection with configurable delay timing.
+
+- **Design Features**:
+  - Integrated into mold tooling as fixed or movable components.
+    - Includes:
+      - **Gate On/Off Toggle**: Adjustable passage control.
+      - **Delay Timing**: Configurable delay to ensure cavity fills fully before sealing.
+
+- **Safety**:
+  - Often paired with guards in automated systems for operator safety.",1.0000,0.9116,0.7164,0.8984,Excellent,Excellent,Good,Good,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0116,0.0664,0.0484
+text-06,text_only,What electrical requirements must be met when connecting the BOY 35 EVV machine?,12.27,"Here is the cleaned answer: --- 1. Operating Voltage & Frequency Supported voltages: 230 V 400 V 460 V Frequency: 50 Hz or 60 Hz --- 2. Power Supply Specifications (Highest-Powered Plasticizing Unit) | Voltage | Apparent Power (kVA) | Rated Current (A) | |---------|---------------------|-------------------| | 230 V | 20.6 kVA | 29.8 A | | 400 V | 15.9 kVA | 19.9 A | | 460 V | 22.4 kVA | 56.2 A | --- 3. Servo Motor Electrical Requirements Feeder Wire Size (AWG) | Voltage | Rated Drive Current (A) | Feeder Wire Size (mm²) | |---------|------------------------|-----------------------| | 230 V | 19.3 A | 35 mm² | | 400 V | 12.1 A | 20 mm² | | 460 V | 19.3 A | 25 mm² | Customer Fuse 230 V: 20 A 400 V: 16 A 460 V: 20 A --- 4. Heating System Electrical Requirements Feeder Wire Size (AWG) | Voltage | Rated Heating Current (A) | Feeder Wire Size (mm²) | |---------|--------------------------|-----------------------| | 230 V | 10.5 A | 16 mm² | | 400 V | 7.8 A | 10 mm² | | 460 V | 22.6 A | 16 mm² | Customer Fuse 230 V: 10 A 400 V: 7.8 A --- 5. Step-Down Transformer (Primary Current at 230 V) 9 A --- Note: Values are based on the highest-powered plasticizing unit. For auxiliary equipment, refer to Chapter 9 of the manual.","Here is the cleaned answer:
+
+---
+
+### **1. Operating Voltage & Frequency**
+- **Supported voltages:**
+  - **230 V**
+  - **400 V**
+  - **460 V**
+
+- **Frequency:**
+  - **50 Hz** or **60 Hz**
+
+---
+
+### **2. Power Supply Specifications (Highest-Powered Plasticizing Unit)**
+| Voltage | Apparent Power (kVA) | Rated Current (A) |
+|---------|---------------------|-------------------|
+| **230 V** | 20.6 kVA            | 29.8 A            |
+| **400 V** | 15.9 kVA            | 19.9 A            |
+| **460 V** | 22.4 kVA            | 56.2 A            |
+
+---
+
+### **3. Servo Motor Electrical Requirements**
+#### **Feeder Wire Size (AWG)**
+| Voltage | Rated Drive Current (A) | Feeder Wire Size (mm²) |
+|---------|------------------------|-----------------------|
+| **230 V** | 19.3 A                 | 35 mm²                |
+| **400 V** | 12.1 A                 | 20 mm²                |
+| **460 V** | 19.3 A                 | 25 mm²                |
+
+#### **Customer Fuse**
+- **230 V:** 20 A
+- **400 V:** 16 A
+- **460 V:** 20 A
+
+---
+
+### **4. Heating System Electrical Requirements**
+#### **Feeder Wire Size (AWG)**
+| Voltage | Rated Heating Current (A) | Feeder Wire Size (mm²) |
+|---------|--------------------------|-----------------------|
+| **230 V** | 10.5 A                   | 16 mm²                |
+| **400 V** | 7.8 A                    | 10 mm²                |
+| **460 V** | 22.6 A                   | 16 mm²                |
+
+#### **Customer Fuse**
+- **230 V:** 10 A
+- **400 V:** 7.8 A
+
+---
+
+### **5. Step-Down Transformer (Primary Current at 230 V)**
+- **9 A**
+
+---
+**Note:**
+- Values are based on the highest-powered plasticizing unit.
+- For auxiliary equipment, refer to **Chapter 9** of the manual.",0.8378,1.0000,0.7198,0.9400,Good,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.0378,0.1000,0.0698,0.0900
+text-07,text_only,What safety standards does the BOY 35 injection moulding machine comply with?,10.17,Here are the explicit safety standards and compliance details for the BOY 35 injection molding machine: --- 1. Primary Safety Standards European Standard: EN ISO 10218-1:2019 --- 2. Regional Compliance Europe: Compliant with EN ISO 10218-1:2019. Non-European Locations: Users must comply with local occupational safety and health regulations. Manufacturer disclaims liability for compliance beyond European standards post-relocation. --- 3. Additional Standards & Requirements ANSI Compliance: Adheres to ANSI B151.1. --- 4. Operational Safety Procedures Before Maintenance/Work: Depressurize and de-energize the system. Ensure mould clamping plates are open. Personnel Requirements: Only authorized and trained personnel may work on the machine or supplementary equipment. --- 5. Protective Measures Moulds exceeding internal mould plate dimensions require guards to restore safety distances. Supplementary equipment must not compromise original safety standards (EN ISO 10218-1:2019). --- 6. Liability & Warranty Exclusions Manufacturer does not cover: Use of non-manufacturer-approved spare parts. Damage from improper moulds or modifications. ---,"Here are the **explicit safety standards and compliance details** for the **BOY 35 injection molding machine**:
+
+---
+
+### **1. Primary Safety Standards**
+- **European Standard:**
+  - **EN ISO 10218-1:2019**
+
+---
+
+### **2. Regional Compliance**
+- **Europe:**
+  - Compliant with **EN ISO 10218-1:2019**.
+
+- **Non-European Locations:**
+  - Users must comply with **local occupational safety and health regulations**.
+  - Manufacturer disclaims liability for compliance beyond European standards post-relocation.
+
+---
+
+### **3. Additional Standards & Requirements**
+- **ANSI Compliance:**
+  - Adheres to **ANSI B151.1**.
+
+---
+### **4. Operational Safety Procedures**
+#### **Before Maintenance/Work:**
+- Depressurize and de-energize the system.
+- Ensure mould clamping plates are open.
+
+#### **Personnel Requirements:**
+- Only **authorized and trained personnel** may work on the machine or supplementary equipment.
+
+---
+
+### **5. Protective Measures**
+- Moulds exceeding internal mould plate dimensions require **guards to restore safety distances**.
+- Supplementary equipment must not compromise original safety standards (**EN ISO 10218-1:2019**).
+
+---
+### **6. Liability & Warranty Exclusions**
+- Manufacturer does not cover:
+  - Use of non-manufacturer-approved spare parts.
+  - Damage from improper moulds or modifications.
+
+---",0.9358,1.0000,0.6866,0.9369,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1358,0.1000,0.0366,0.0869
+text-08,text_only,What are the main sections in the BOY 35 EVV technical data description?,17.33,"Here is the cleaned answer: --- Main Sections in BOY 35 EVV Technical Data Description 1. General Overview & Introduction Manufacturer: Dr. Boy GmbH & Co. KG, Neustadt-Fernthal (Germany). Machine identification: Mach.-No. and year of manufacture. --- 2. Technical Data 2.1 Basic Specifications Clamping force: Main: 350 kN Side: 70 kN Injection pressure: Max.: 550 bar (injection unit) Equivalent: 282 kgf/cm² Mould clamp dimensions: Platen size: 295 × 254 mm Tie-bar spacing: 200 mm Mould thickness range: 220–500 mm Injection unit stroke: 395 mm Nozzle dimensions: Diameter: 60 mm (standard), 75 mm (optional) Tip sizes: 1.4, 1.8, 2.0, 2.18, 2.25 mm Ejector stroke: 395 mm Screw options: SP series Barrel heating zones: Up to 8 zones --- 3. Mechanical & Structural Specifications Machine dimensions: Length: 2300 mm Width: 1200 mm Height: 2250 mm Transport clearance: 100 mm (X-axis) Mould compatibility: Platen size: 280 × 254 mm Thickness range: 220–500 mm --- 4. Nozzle and Screw Arrangements Nozzle types: Standard/optional diameters: 60/75 mm Tip sizes: 1.4–3.2 mm (screw-specific). --- 5. Barrel & Nozzle Heaters Temperature control: Up to 8 zones --- 6. Safety Devices Clamping/ejector safety: Electrical/hydraulic hold-high devices. Sacking monitoring. --- 7. Hydraulics & Pressure Systems Injection pressure: Max. 550 bar. Back pressure: Up to 210 bar. --- 8. Operational Features Interfaces: RS232/485, Ethernet (RJ45), USB Type A. --- Images referenced in context:","Here is the cleaned answer:
+
+---
+
+### **Main Sections in BOY 35 EVV Technical Data Description**
+
+#### **1. General Overview & Introduction**
+- Manufacturer: Dr. Boy GmbH & Co. KG, Neustadt-Fernthal (Germany).
+- Machine identification:
+  - Mach.-No. and year of manufacture.
+
+---
+#### **2. Technical Data**
+**2.1 Basic Specifications**
+- Clamping force:
+  - Main: **350 kN**
+  - Side: **70 kN**
+- Injection pressure:
+  - Max.: **550 bar** (injection unit)
+  - Equivalent: **282 kgf/cm²**
+- Mould clamp dimensions:
+  - Platen size: **295 × 254 mm**
+  - Tie-bar spacing: **200 mm**
+  - Mould thickness range: **220–500 mm**
+- Injection unit stroke: **395 mm**
+- Nozzle dimensions:
+  - Diameter: **60 mm** (standard), **75 mm** (optional)
+  - Tip sizes: **1.4, 1.8, 2.0, 2.18, 2.25 mm**
+- Ejector stroke: **395 mm**
+- Screw options:
+  - SP series
+- Barrel heating zones:
+  - Up to **8 zones**
+
+---
+#### **3. Mechanical & Structural Specifications**
+- Machine dimensions:
+  - Length: **2300 mm**
+  - Width: **1200 mm**
+  - Height: **2250 mm**
+  - Transport clearance: **100 mm (X-axis)**
+- Mould compatibility:
+  - Platen size: **280 × 254 mm**
+  - Thickness range: **220–500 mm**
+
+---
+#### **4. Nozzle and Screw Arrangements**
+- Nozzle types:
+  - Standard/optional diameters: **60/75 mm**
+  - Tip sizes: **1.4–3.2 mm** (screw-specific).
+
+---
+#### **5. Barrel & Nozzle Heaters**
+- Temperature control:
+  - Up to **8 zones**
+
+---
+#### **6. Safety Devices**
+- Clamping/ejector safety:
+  - Electrical/hydraulic hold-high devices.
+  - Sacking monitoring.
+
+---
+#### **7. Hydraulics & Pressure Systems**
+- Injection pressure: Max. **550 bar**.
+- Back pressure: Up to **210 bar**.
+
+---
+#### **8. Operational Features**
+- Interfaces:
+  - RS232/485, Ethernet (RJ45), USB Type A.
+
+---
+**Images referenced in context:**",0.9231,1.0000,0.7500,0.9842,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1231,0.1000,0.1000,0.1342
+text-09,text_only,What is the BOY 35 EVV ejector system configuration?,18.82,"BOY 35 EVV Ejector System Configuration 1. Interface & Control Access ejector settings via: Screen page ""2.10"" in the BOY 35 EVV interface. Configured parameters: Ejector advance/rear limits Intermediate stops (profile points 1 and 2) Speed (% or mm/s) 2. Retraction Settings Must align with: ""Fully back"" or ""to set position"" in the ""Start Retract Ejector"" function. Adjustable parameters: Retract speed (% or mm/s) For multi-pump systems, verify retraction at the set mould position. --- 3. Advancement Settings Must align with: ""Fully forward"" or ""to set position"" in screen page ""2.10"". Adjustable parameters: Advance speed (% or mm/s) Verify ejector position at the set mould position during advancement. --- 4. Ejector Programming Options Available programs: ""Standard"" sequence ""Vibration"" sequence Programmable path includes: Two intermediate stops (profile points 1 and 2) per direction. Each profile point configurable with: Speed (% or mm/s) Pressure limit (bar/psi) or force limit Degradation value at position --- 5. Mechanical Adjustments Standard ejector rod dimensions must be adjusted based on mould requirements. For moulds without spring reset, modify the ejector plunger/bar. Use screws (M12 to M16) with spacers if needed. --- 6. Fault Handling (Configuration-Related) If ejector configuration is missing: Machine status cannot be generated. Alarm indicators activate: H00 (ejector alarm lamp) P01 (acoustic warning, if enabled) External alarm signals: K072/K108 Resolution: Load correct ejector configuration via ""Screen page '12.30 Machine data configuration'"".","### **BOY 35 EVV Ejector System Configuration**
+
+#### **1. Interface & Control**
+- Access ejector settings via:
+  - **Screen page ""2.10""** in the BOY 35 EVV interface.
+- Configured parameters:
+  - Ejector advance/rear limits
+  - Intermediate stops (profile points 1 and 2)
+  - Speed (% or mm/s)
+
+#### **2. Retraction Settings**
+- Must align with:
+  - **""Fully back""** or **""to set position""** in the **""Start Retract Ejector""** function.
+- Adjustable parameters:
+  - Retract speed (% or mm/s)
+
+- For multi-pump systems, verify retraction at the **set mould position**.
+
+---
+
+#### **3. Advancement Settings**
+- Must align with:
+  - **""Fully forward""** or **""to set position""** in screen page ""2.10"".
+- Adjustable parameters:
+  - Advance speed (% or mm/s)
+- Verify ejector position at the **set mould position** during advancement.
+
+---
+
+#### **4. Ejector Programming Options**
+- Available programs:
+  - **""Standard"" sequence**
+  - **""Vibration"" sequence**
+
+- Programmable path includes:
+  - Two intermediate stops (profile points 1 and 2) per direction.
+    - Each profile point configurable with:
+      - Speed (% or mm/s)
+      - Pressure limit (bar/psi) or force limit
+      - Degradation value at position
+
+---
+
+#### **5. Mechanical Adjustments**
+- Standard ejector rod dimensions must be adjusted based on mould requirements.
+- For moulds without spring reset, modify the **ejector plunger/bar**.
+  - Use screws (**M12 to M16**) with spacers if needed.
+
+---
+#### **6. Fault Handling (Configuration-Related)**
+- If ejector configuration is missing:
+  - Machine status cannot be generated.
+  - Alarm indicators activate:
+    - **H00** (ejector alarm lamp)
+    - **P01** (acoustic warning, if enabled)
+    - External alarm signals: **K072/K108**
+- Resolution: Load correct ejector configuration via **""Screen page '12.30 Machine data configuration'""**.",0.9981,1.0000,0.6691,0.9552,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1981,0.1000,0.0191,0.1052
+text-10,text_only,What safety warnings does the MILACRON manual provide regarding guard removal?,9.27,"Here is the cleaned answer: --- Safety Warnings for Guard Removal (MILACRON Manual) General Safety Responsibility: The purchaser must train all personnel on proper operation, service, and maintenance. Failure to follow instructions may cause serious personal injury or machine damage. Guard and Warning Plate Compliance: Do not remove, paint over, alter, or deface warning/instruction plates. Replace any unreadable plates immediately using MILACRON-provided replacements (available in multiple languages). Maintenance Safety: Only qualified service/maintenance personnel may perform maintenance/repairs. Always consult the manual before proceeding. Use only MILACRON replacement parts to avoid compromising safety/operation. Place warning signs around the machine before starting work. Electrical Safety (Critical for Guard Removal): Power must be off before removing electrical enclosures, cover plates, or doors. Never operate on live equipment unless performed by a MILACRON field service representative or qualified personnel trained for such tasks. Protective Equipment: When working near pressurized components (e.g., barrel areas): Wear safety glasses Wear full-face protection Wear body protection Guard Reinstallation: Ensure all protective devices (guards/shields) are properly reinstalled before operating the machine.","Here is the cleaned answer:
+
+---
+
+### **Safety Warnings for Guard Removal (MILACRON Manual)**
+
+- **General Safety Responsibility**:
+  - The purchaser must train all personnel on proper operation, service, and maintenance.
+  - Failure to follow instructions may cause serious personal injury or machine damage.
+
+- **Guard and Warning Plate Compliance**:
+  - Do not remove, paint over, alter, or deface warning/instruction plates.
+  - Replace any unreadable plates immediately using MILACRON-provided replacements (available in multiple languages).
+
+- **Maintenance Safety**:
+  - Only qualified service/maintenance personnel may perform maintenance/repairs.
+  - Always consult the manual before proceeding.
+  - Use only MILACRON replacement parts to avoid compromising safety/operation.
+  - Place warning signs around the machine before starting work.
+
+- **Electrical Safety (Critical for Guard Removal)**:
+  - Power must be off before removing electrical enclosures, cover plates, or doors.
+  - Never operate on live equipment unless performed by a MILACRON field service representative or qualified personnel trained for such tasks.
+
+- **Protective Equipment**:
+  When working near pressurized components (e.g., barrel areas):
+  - Wear safety glasses
+  - Wear full-face protection
+  - Wear body protection
+
+- **Guard Reinstallation**:
+  Ensure all protective devices (guards/shields) are properly reinstalled before operating the machine.",0.8397,1.0000,0.7014,0.8713,Good,Excellent,Good,Good,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.0397,0.1000,0.0514,0.0213
+text-11,text_only,What electrical safety guidelines does the MILACRON manual specify?,9.44,"Here is the cleaned answer: --- Electrical Safety Guidelines Specified in MILACRON Manual: --- Installation and Relocation Safety Pre-lifting procedures: Drain all oil from reservoirs before lifting. Consult Milacron for proper lifting methods. Electrical connection requirements: An electrician must read and understand electrical schematics prior to connecting the machine to power. Place all machine selector switches in ""Off"" or neutral (disengaged) positions before connection. Close main electrical cabinet doors and ensure the main disconnect switch is in the ""Off"" position after power connection. --- Electrical System Maintenance and Adjustments Qualification requirements: Only a qualified electrician may connect or perform maintenance on the electrical system. Grounding specifications: Earth ground must comply with local code requirements. Improper grounding may cause erratic machine operation or shock hazards. --- Preventive Measures and Workspace Requirements Keep working space around electrical equipment clear of obstructions. Provide adequate illumination for operation and maintenance. --- Maintenance Safety Pre-maintenance procedures: Only qualified service and maintenance personnel may perform work on the machine. Always consult the manual before attempting repairs or maintenance. Use only Milacron replacement parts. Post warning/danger signs around the machine before starting maintenance. Electrical equipment handling: Before removing or opening any electrical enclosure, cover plate, or door: Ensure the main disconnect switch is turned off. Lock the machine’s main disconnect switch in the ""Off"" position before working on electrical circuits. --- General Safety Warnings The purchaser is responsible for training all personnel in proper operation, servicing, and maintenance. --- Control Module Handling Use antistatic wrist straps or other precautions when handling control modules.","Here is the cleaned answer:
+
+---
+### **Electrical Safety Guidelines Specified in MILACRON Manual:**
+
+---
+
+### **Installation and Relocation Safety**
+- **Pre-lifting procedures:**
+  - Drain all oil from reservoirs before lifting.
+  - Consult Milacron for proper lifting methods.
+
+- **Electrical connection requirements:**
+  - An electrician must read and understand electrical schematics prior to connecting the machine to power.
+  - Place all machine selector switches in **""Off""** or neutral (disengaged) positions before connection.
+  - Close main electrical cabinet doors and ensure the main disconnect switch is in the **""Off""** position after power connection.
+
+---
+
+### **Electrical System Maintenance and Adjustments**
+- **Qualification requirements:**
+  - Only a qualified electrician may connect or perform maintenance on the electrical system.
+
+- **Grounding specifications:**
+  - Earth ground must comply with local code requirements.
+  - Improper grounding may cause erratic machine operation or shock hazards.
+
+---
+
+### **Preventive Measures and Workspace Requirements**
+- Keep working space around electrical equipment clear of obstructions.
+- Provide adequate illumination for operation and maintenance.
+
+---
+
+### **Maintenance Safety**
+- **Pre-maintenance procedures:**
+  - Only qualified service and maintenance personnel may perform work on the machine.
+  - Always consult the manual before attempting repairs or maintenance.
+  - Use only Milacron replacement parts.
+  - Post warning/danger signs around the machine before starting maintenance.
+
+- **Electrical equipment handling:**
+  - Before removing or opening any electrical enclosure, cover plate, or door:
+    - Ensure the main disconnect switch is turned off.
+  - Lock the machine’s main disconnect switch in the **""Off""** position before working on electrical circuits.
+
+---
+
+### **General Safety Warnings**
+- The purchaser is responsible for training all personnel in proper operation, servicing, and maintenance.
+
+---
+
+### **Control Module Handling**
+- Use antistatic wrist straps or other precautions when handling control modules.",0.9481,0.9000,0.7274,0.9880,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1481,0.0000,0.0774,0.1380
+text-12,text_only,What does the MILACRON manual say about interrupted cycle situations?,10.77,"Here’s the cleaned answer: --- 1. Definition & Common Causes ""Interrupted Cycle"" = Abrupt halt in machine operation due to: Solidified plastic blocking the nozzle. Auto Shut Down triggered prematurely. --- 2. Safety Warnings & Lockout/Tagout ⚠️ Never clear a clogged nozzle under pressure or with heat—risk of explosive molten plastic release. Decompress the nozzle area first: Retract the feedscrew to its fully retracted position and hold it there. Lockout/Tagout mandatory: Turn off barrel heat. Turn off main disconnect switch. Follow company-specific Lockout/Tagout protocols. --- 3. Step-by-Step Procedure for Blocked Nozzle Retract feedscrew to fully retracted position and secure it in place. Turn off barrel heat. Lock out/main disconnect: Power down via main disconnect switch; comply with Lockout/Tagout procedures. Remove blockage: Consult Material Safety Data Sheets (MSDS) for material-specific hazards before manual intervention. --- 4. Barrel Soak Time Do not disable barrel soak time prematurely; allow full soak completion before operation. --- 5. Cabinet Temperature Alarms Over-temperature (>120°F): Triggers cycle inhibit after 20 minutes if unresolved. Check/clean air filters. --- 6. Critical Compliance Failure to follow procedures = risk of injury or machine damage. Contact Milacron field office for battery-related alarms (low/failure) without powering off. ---","Here’s the cleaned answer:
+
+---
+
+### **1. Definition & Common Causes**
+- **""Interrupted Cycle""** = Abrupt halt in machine operation due to:
+  - Solidified plastic blocking the nozzle.
+  - Auto Shut Down triggered prematurely.
+
+---
+### **2. Safety Warnings & Lockout/Tagout**
+- ⚠️ Never clear a clogged nozzle under pressure or with heat—risk of explosive molten plastic release.
+  - Decompress the nozzle area first:
+    - Retract the feedscrew to its fully retracted position and hold it there.
+  - Lockout/Tagout mandatory:
+    - Turn off barrel heat.
+    - Turn off main disconnect switch.
+    - Follow company-specific Lockout/Tagout protocols.
+
+---
+### **3. Step-by-Step Procedure for Blocked Nozzle**
+1. Retract feedscrew to fully retracted position and secure it in place.
+2. Turn off barrel heat.
+3. Lock out/main disconnect:
+   - Power down via main disconnect switch; comply with Lockout/Tagout procedures.
+4. Remove blockage:
+   - Consult Material Safety Data Sheets (MSDS) for material-specific hazards before manual intervention.
+
+---
+### **4. Barrel Soak Time**
+- Do not disable barrel soak time prematurely; allow full soak completion before operation.
+
+---
+### **5. Cabinet Temperature Alarms**
+- Over-temperature (>120°F):
+  - Triggers cycle inhibit after 20 minutes if unresolved.
+  - Check/clean air filters.
+
+---
+### **6. Critical Compliance**
+- Failure to follow procedures = risk of injury or machine damage.
+- Contact Milacron field office for battery-related alarms (low/failure) without powering off.
+
+---",1.0000,1.0000,0.6900,0.9210,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.0400,0.0710
+text-13,text_only,What pre-shipment items should be completed before a MILACRON machine arrives?,9.38,"Here’s the cleaned answer: --- 1. General Pre-Arrival Tasks Verify the plant floor is structurally capable of supporting the machine. Order hydraulic oil filtered to 6 microns absolute if cores are present. Procure an adequate supply of desired plastic material for demonstration purposes. --- 2. Logistics & Site Preparation Arrange unloading of the machine. Clear designated floor space and prepare it for installation. Verify availability of electricity, water, and air. Connect utilities but do not turn on the main circuit breaker or install mold until a MILACRON field service representative arrives. --- 3. Machine-Specific Tasks Check shipment for completeness and damage. Move machine to designated location. Remove all packing and protective coatings (avoid steam cleaning; do not use solvents on clamp linkage). Level the machine properly. Perform initial lubrication as outlined in the manual. --- 4. Electrical & Safety Requirements Ensure electrical system can regulate power supply within acceptable tolerances to avoid voltage surges/drops. Connect proper voltage to circuit breaker (refer to shipped wiring diagrams). Do not start motor until verified by a MILACRON field service representative. Only qualified electricians may install or maintain the electrical system. --- 5. Pre-Demonstration & Training Provide at least one week’ notice before requesting a demonstration. Ensure setup, operating, and maintenance personnel have read the manual. Arrange for personnel to attend the machine demonstration. Provide all necessary equipment (including mold) when the field service representative arrives. ---","Here’s the cleaned answer:
+
+---
+
+### **1. General Pre-Arrival Tasks**
+- Verify the plant floor is structurally capable of supporting the machine.
+- Order hydraulic oil filtered to **6 microns absolute** if cores are present.
+- Procure an adequate supply of desired plastic material for demonstration purposes.
+
+---
+
+### **2. Logistics & Site Preparation**
+- Arrange unloading of the machine.
+- Clear designated floor space and prepare it for installation.
+- Verify availability of electricity, water, and air.
+- Connect utilities but **do not turn on the main circuit breaker or install mold** until a MILACRON field service representative arrives.
+
+---
+
+### **3. Machine-Specific Tasks**
+- Check shipment for completeness and damage.
+- Move machine to designated location.
+- Remove all packing and protective coatings (avoid steam cleaning; do not use solvents on clamp linkage).
+- Level the machine properly.
+- Perform initial lubrication as outlined in the manual.
+
+---
+### **4. Electrical & Safety Requirements**
+- Ensure electrical system can regulate power supply within acceptable tolerances to avoid voltage surges/drops.
+- Connect proper voltage to circuit breaker (refer to shipped wiring diagrams).
+- **Do not start motor** until verified by a MILACRON field service representative.
+- Only qualified electricians may install or maintain the electrical system.
+
+---
+### **5. Pre-Demonstration & Training**
+- Provide at least **one week’ notice** before requesting a demonstration.
+- Ensure setup, operating, and maintenance personnel have read the manual.
+- Arrange for personnel to attend the machine demonstration.
+- Provide all necessary equipment (including mold) when the field service representative arrives.
+
+---",1.0000,1.0000,0.6941,0.9700,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.0441,0.1200
+text-14,text_only,What are the main sections of the MAAC Thermoformer operator manual?,6.92,"Here are the main sections of the MAAC Thermoformer Operator Manual: --- 1. Reference Documentation Safety Warnings Misuse of Equipment Safety Notice Machine Specifications Operating Conditions Introduction to MAAC Machinery Company, Inc. Limit of Guarantee and Liability Seven Fundamentals of Thermoforming --- 2. Forming Sequences Sequence #1: Vacuum Form Bottom Sequence #2: Vacuum Form Top Sequence #3: Plug Assist Bottom Sequence #4: Plug Assist Top Sequence #5: Billow Cavity Mold Bottom Sequence #6: Billow Cavity Mold Top Sequence #7: Snap Back From Bottom Sequence #8: Snap Back From Top Sequence #9: Billow Male Mold Bottom Sequence #10: Billow Male Mold Top --- 3. Software Screens and Descriptions Software Interface Startup --- 5. Setup Procedures and Processes Vacuum and Pressure Table Setup Sheet Machine Startup Procedure Machine Shutdown Procedure --- 6. Thermoforming Process Troubleshooting Guide Plastic Information --- 7. Maintenance --- 8. Parts ---","Here are the main sections of the **MAAC Thermoformer Operator Manual**:
+
+---
+
+### **1. Reference Documentation**
+- Safety Warnings
+- Misuse of Equipment
+- Safety Notice
+- Machine Specifications
+- Operating Conditions
+- Introduction to MAAC Machinery Company, Inc.
+- Limit of Guarantee and Liability
+- Seven Fundamentals of Thermoforming
+
+---
+### **2. Forming Sequences**
+- Sequence #1: Vacuum Form Bottom
+- Sequence #2: Vacuum Form Top
+- Sequence #3: Plug Assist Bottom
+- Sequence #4: Plug Assist Top
+- Sequence #5: Billow Cavity Mold Bottom
+- Sequence #6: Billow Cavity Mold Top
+- Sequence #7: Snap Back From Bottom
+- Sequence #8: Snap Back From Top
+- Sequence #9: Billow Male Mold Bottom
+- Sequence #10: Billow Male Mold Top
+
+---
+### **3. Software Screens and Descriptions**
+- Software Interface
+- Startup
+
+---
+
+### **5. Setup Procedures and Processes**
+- Vacuum and Pressure Table Setup Sheet
+- Machine Startup Procedure
+- Machine Shutdown Procedure
+
+---
+### **6. Thermoforming Process**
+- Troubleshooting Guide
+- Plastic Information
+
+---
+### **7. Maintenance**
+
+---
+### **8. Parts**
+
+---",0.8191,0.9984,0.6822,1.0000,Good,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.0191,0.0984,0.0322,0.1500
+text-15,text_only,What troubleshooting guidance does the MAAC manual provide for blisters or bubbles in thermoformed parts?,7.43,"MAAC Manual Troubleshooting Guidance: Blisters or Bubbles in Thermoformed Parts Probable Causes Heating too rapidly Excess moisture Uneven heating Incorrect sheet type/formulation --- Recommended Actions For Heating-Related Issues: Lower the heat temperature. Use a slower heating method (soaking heat). Increase the distance between heaters and the sheet. For Moisture-Related Issues: Pre-dry the material before use. Preheat the sheet. Heat from both sides of the sheet. Do not remove material from moisture-proof wrap until ready to form. Obtain dry materials directly from the supplier. For Uneven Heating/Screening Issues: Screen the heaters by attaching baffles, masks, or screens. Check for damaged heaters or improperly positioned screens. For Incorrect Sheet Type/Formulation: Verify and obtain the correct sheet formulation from the supplier.","### **MAAC Manual Troubleshooting Guidance: Blisters or Bubbles in Thermoformed Parts**
+
+#### **Probable Causes**
+- Heating too rapidly
+- Excess moisture
+- Uneven heating
+- Incorrect sheet type/formulation
+
+---
+
+#### **Recommended Actions**
+
+**For Heating-Related Issues:**
+- Lower the heat temperature.
+- Use a slower heating method (soaking heat).
+- Increase the distance between heaters and the sheet.
+
+**For Moisture-Related Issues:**
+- Pre-dry the material before use.
+- Preheat the sheet.
+- Heat from both sides of the sheet.
+- Do not remove material from moisture-proof wrap until ready to form.
+- Obtain dry materials directly from the supplier.
+
+**For Uneven Heating/Screening Issues:**
+- Screen the heaters by attaching baffles, masks, or screens.
+- Check for damaged heaters or improperly positioned screens.
+
+**For Incorrect Sheet Type/Formulation:**
+- Verify and obtain the correct sheet formulation from the supplier.",1.0000,1.0000,0.7500,0.9064,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.1000,0.0564
+text-16,text_only,What temperature control features does the RSA-G2 forced convection oven provide?,7.49,Here are the explicit temperature control features of the RSA-G2 Forced Convection Oven: --- Temperature Range -150 °C to 600 °C (standard sample clamps limited to 500 °C; optional clamps required for testing up to 600 °C) Immersion system temperature range: -10 °C to 200 °C --- Heating & Cooling Rates Controlled heating rates: 0.1 °C/min to 60 °C/min Controlled cooling rates: 0.1 °C/min to 60 °C/min Cooling Methods Liquid nitrogen system: Achieves -150 °C Mechanical chiller system: Achieves -100 °C --- Thermal Performance & Precision Isothermal stability: ±0.1 °C Unrivaled thermal uniformity with extreme oxygen exclusion Fastest temperature response in its class --- Control & Automation Features Programmable Profiles (via TRIOS Software) Temperature ramps Isothermal holds Step-and-hold profiles for dielectric measurements Specialized Control Modes Axial force control with gap temperature compensation Supports: Frequency sweeps at fixed temperatures Isothermal time sweeps across multiple frequencies Temperature ramp tests across a range of frequencies,"Here are the explicit temperature control features of the **RSA-G2 Forced Convection Oven**:
+
+---
+
+### **Temperature Range**
+- **-150 °C to 600 °C** (standard sample clamps limited to **500 °C**; optional clamps required for testing up to **600 °C**)
+- Immersion system temperature range: **-10 °C to 200 °C**
+
+---
+
+### **Heating & Cooling Rates**
+- **Controlled heating rates:** **0.1 °C/min** to **60 °C/min**
+- **Controlled cooling rates:** **0.1 °C/min** to **60 °C/min**
+
+#### **Cooling Methods**
+- Liquid nitrogen system: Achieves **-150 °C**
+- Mechanical chiller system: Achieves **-100 °C**
+
+---
+
+### **Thermal Performance & Precision**
+- **Isothermal stability:** **±0.1 °C**
+- Unrivaled thermal uniformity with extreme oxygen exclusion
+- Fastest temperature response in its class
+
+---
+### **Control & Automation Features**
+#### **Programmable Profiles (via TRIOS Software)**
+- Temperature ramps
+- Isothermal holds
+- Step-and-hold profiles for dielectric measurements
+
+#### **Specialized Control Modes**
+- Axial force control with gap temperature compensation
+- Supports:
+  - Frequency sweeps at fixed temperatures
+  - Isothermal time sweeps across multiple frequencies
+  - Temperature ramp tests across a range of frequencies",1.0000,0.9121,0.6785,0.9736,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0121,0.0285,0.1236
+text-17,text_only,What types of analysis does the RSA-G2 support?,8.26,"The RSA-G2 supports the following types of analysis: --- Mechanical Analysis (DMA - Dynamic Mechanical Analysis) Core tests: Creep and recovery Stress relaxation Stress ramps Strain rate ramps Iso-strain Iso-force Fatigue testing Multiwave analysis Arbitrary waveform experiments --- Dielectric Thermal Analysis (DETA) Stand-alone or simultaneous dielectric thermal measurements alongside mechanical tests. --- Immersion Testing Mechanical testing of solid materials submerged in liquids with temperature control (-10°C to 200°C). Supported geometries: tension, compression, and three-point bending. Removable cup for easy sample loading. --- Key Technical Features Supporting Analysis High-speed data acquisition: Transient measurements up to 87,000 Hz Oscillation measurements up to 15,000 Hz Fourier transformation analysis (for higher harmonic resolution: 3rd, 5th, etc.) Non-linear response analysis via fundamental frequency-to-harmonic ratio calculations Large deformation tests (including strain rate tests) --- Hardware Capabilities Forced convection oven for precise temperature control. Independent motor and transducer technology for pure mechanical data acquisition. Direct-drive DC-Servo motor with electronic DSP control for deformation. Force Rebalance Transducer (FRT) with rare-earth magnets for accurate force measurement. Linear optical encoder for precision head positioning (0.1 µm accuracy). High-speed electronics and digital signal processing for superior data resolution. --- Clamping Systems Extensive array of clamping systems to accommodate diverse sample shapes, stiffness, and immersion testing requirements.","The **RSA-G2** supports the following types of analysis:
+
+---
+
+### **Mechanical Analysis (DMA - Dynamic Mechanical Analysis)**
+- Core tests:
+  - Creep and recovery
+  - Stress relaxation
+  - Stress ramps
+  - Strain rate ramps
+  - Iso-strain
+  - Iso-force
+  - Fatigue testing
+  - Multiwave analysis
+  - Arbitrary waveform experiments
+
+---
+
+### **Dielectric Thermal Analysis (DETA)**
+- Stand-alone or simultaneous dielectric thermal measurements alongside mechanical tests.
+
+---
+### **Immersion Testing**
+- Mechanical testing of solid materials submerged in liquids with temperature control (-10°C to 200°C).
+- Supported geometries: tension, compression, and three-point bending.
+- Removable cup for easy sample loading.
+
+---
+### **Key Technical Features Supporting Analysis**
+- High-speed data acquisition:
+  - Transient measurements up to 87,000 Hz
+  - Oscillation measurements up to 15,000 Hz
+
+- Fourier transformation analysis (for higher harmonic resolution: 3rd, 5th, etc.)
+- Non-linear response analysis via fundamental frequency-to-harmonic ratio calculations
+- Large deformation tests (including strain rate tests)
+
+---
+### **Hardware Capabilities**
+- Forced convection oven for precise temperature control.
+- Independent motor and transducer technology for pure mechanical data acquisition.
+- Direct-drive DC-Servo motor with electronic DSP control for deformation.
+- Force Rebalance Transducer (**FRT**) with rare-earth magnets for accurate force measurement.
+- Linear optical encoder for precision head positioning (0.1 µm accuracy).
+- High-speed electronics and digital signal processing for superior data resolution.
+
+---
+### **Clamping Systems**
+- Extensive array of clamping systems to accommodate diverse sample shapes, stiffness, and immersion testing requirements.",0.8560,1.0000,0.7030,1.0000,Good,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.0560,0.1000,0.0530,0.1500
+text-18,text_only,What is the Fusion Cell technology in the Discovery DSC?,10.51,"Here’s the cleaned answer: --- Fusion Cell™ Core Technology Overview Purpose: The proprietary core technology integrating elements from Q Series™ and first-gen Discovery DSC. --- Technical Specifications & Components 1. Fusion Cell™ (Discovery DSC Models) Fixed X3 Sensor: Provides a stable, reproducible heat flow path. Patented Tzero® Technology: Measures cell resistance and capacitance for accurate energy storage characterization. Enables precise heat flow measurement without baseline corrections. 2. Discovery DSC 25P (Pressure Capable) Fusion Cell™ with Pressure Transducer: Fixed-pedestal mounted sensor Rugged Uniblock silver furnace Tzero® thermocouple Temperature-controlled electronics Operating Conditions: Atmospheric and elevated pressures. Optional Quench Cooling Accessory extends range to -130°C. Modulated DSC® (MDSC®): Enables separation of complex thermal events. 3. Discovery X3 DSC Multi-Sample Cell: Supports simultaneous analysis of up to three samples. Advanced T4P Tzero® Heat Flow Technology: Conducts and stores enthalpy + specific heat capacity in a single run. Modulated DSC® (MDSC®): Separates complex thermal events for detailed analysis. --- Performance Metrics | Parameter | Specification | |-------------------------------|------------------------------------------------------------------------------| | Baseline Flatness (-50°C–300°C) | ≤10 µW (no baseline subtractions required). | | Baseline Repeatability (-50°C–300°C) | <15 µW. | | Temperature Range | -180°C to 550°C. | --- Additional Features User-replaceable Fusion Cell™. 54-position autosampler. Dual-input gas-delivery manifold. Color app-style touchscreen interface. ---","Here’s the cleaned answer:
+
+---
+
+### **Fusion Cell™ Core Technology Overview**
+- **Purpose**: The proprietary core technology integrating elements from Q Series™ and first-gen Discovery DSC.
+
+---
+### **Technical Specifications & Components**
+
+#### **1. Fusion Cell™ (Discovery DSC Models)**
+- **Fixed X3 Sensor**: Provides a stable, reproducible heat flow path.
+- **Patented Tzero® Technology**:
+  - Measures cell resistance and capacitance for accurate energy storage characterization.
+  - Enables precise heat flow measurement without baseline corrections.
+
+#### **2. Discovery DSC 25P (Pressure Capable)**
+- **Fusion Cell™ with Pressure Transducer**:
+  - Fixed-pedestal mounted sensor
+  - Rugged Uniblock silver furnace
+  - Tzero® thermocouple
+  - Temperature-controlled electronics
+- **Operating Conditions**:
+  - Atmospheric and elevated pressures.
+  - Optional Quench Cooling Accessory extends range to **-130°C**.
+- **Modulated DSC® (MDSC®)**: Enables separation of complex thermal events.
+
+#### **3. Discovery X3 DSC**
+- **Multi-Sample Cell**: Supports simultaneous analysis of up to three samples.
+- **Advanced T4P Tzero® Heat Flow Technology**:
+  - Conducts and stores enthalpy + specific heat capacity in a single run.
+- **Modulated DSC® (MDSC®)**: Separates complex thermal events for detailed analysis.
+
+---
+
+### **Performance Metrics**
+| Parameter                     | Specification                                                                 |
+|-------------------------------|------------------------------------------------------------------------------|
+| Baseline Flatness (-50°C–300°C) | ≤10 µW (no baseline subtractions required).                                |
+| Baseline Repeatability (-50°C–300°C) | <15 µW.                                                               |
+| Temperature Range              | **-180°C to 550°C**.                                                      |
+
+---
+### **Additional Features**
+- User-replaceable Fusion Cell™.
+- 54-position autosampler.
+- Dual-input gas-delivery manifold.
+- Color app-style touchscreen interface.
+
+---",1.0000,0.9048,0.6559,0.9900,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0048,0.0059,0.1400
+text-19,text_only,What is the T4P Tzero heat flow technology in the Discovery DSC?,9.62,"T4P Tzero Heat Flow Technology in the Discovery DSC Core Principle Four-Term (T4P) heat flow measurement using a patented mathematical model. Measures: Thermal resistance Thermal capacitance imbalance Heating rate imbalance Includes DSC pans in calculations. --- Key Technical Implementation Components: Tzero thermocouples + Chromel/Area Detector configurations. Fusion Cell™ with: Three sample platforms (A, B, C) and a fixed X3 sensor configuration. Silver-wound uniblock furnace for temperature control. Performance Specifications: | Metric | Value/Detail | |----------------------------|------------------------------------------------------------------------------| | Baseline flatness (-50–300°C) | ≤ 10 µW (no baseline subtractions required). | | Baseline repeatability (-50–300°C) | < 15 µW. | | Temperature range | -180°C to 550°C. | --- Advantages Sharpest resolution and highest sensitivity in DSC systems. Direct heat capacity measurement in a single run (no post-processing). Eliminates need for baseline corrections. --- Compatibility & Features Integrated with: Modulated DSC (MDSC®) for event separation. Autosampler (54-position). Dual gas delivery. User-replaceable Fusion Cell™. One-Touch-Away™ UI for usability. --- Patents U.S. Patent Nos.: 4,488,406, 6,431,747, 6,561,692.","### **T4P Tzero Heat Flow Technology in the Discovery DSC**
+
+#### **Core Principle**
+- **Four-Term (T4P) heat flow measurement** using a **patented mathematical model**.
+  - Measures:
+    - Thermal resistance
+    - Thermal capacitance imbalance
+    - Heating rate imbalance
+  - Includes **DSC pans** in calculations.
+
+---
+
+#### **Key Technical Implementation**
+- **Components:**
+  - **Tzero thermocouples** + **Chromel/Area Detector** configurations.
+  - **Fusion Cell™** with:
+    - Three sample platforms (**A, B, C**) and a **fixed X3 sensor configuration**.
+    - **Silver-wound uniblock furnace** for temperature control.
+
+- **Performance Specifications:**
+  | Metric                     | Value/Detail                                                                 |
+  |----------------------------|------------------------------------------------------------------------------|
+  | Baseline flatness (-50–300°C) | ≤ **10 µW** (no baseline subtractions required).                            |
+  | Baseline repeatability (-50–300°C) | < **15 µW**.                                                                |
+  | Temperature range           | **-180°C to 550°C**.                                                        |
+
+---
+
+#### **Advantages**
+- **Sharpest resolution and highest sensitivity** in DSC systems.
+- **Direct heat capacity measurement** in a single run (no post-processing).
+- Eliminates need for **baseline corrections**.
+
+---
+#### **Compatibility & Features**
+- Integrated with:
+  - **Modulated DSC (MDSC®)** for event separation.
+  - **Autosampler (54-position)**.
+  - **Dual gas delivery**.
+  - **User-replaceable Fusion Cell™**.
+- **One-Touch-Away™ UI** for usability.
+
+---
+#### **Patents**
+- U.S. Patent Nos.: **4,488,406**, **6,431,747**, **6,561,692**.",1.0000,1.0000,0.6539,0.8928,Excellent,Excellent,Okay,Good,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.0039,0.0428
+text-20,text_only,How does Differential Scanning Calorimetry (DSC) work?,9.61,"Here’s the cleaned answer: --- How DSC Works DSC measures heat flow into or out of a sample as it undergoes thermal transitions while being heated/cooled at a controlled rate. It detects: Endothermic processes (e.g., melting). Exothermic processes (e.g., crystallization). --- Core Principles Heat Flow Equation: q = Cp × (dT/dt) + f(T,t) Cp = Specific heat capacity. (dT/dt) = Heating/cooling rate. f(T,t) = Kinetic response. Key Transitions: Glass transition temperature (Tg). Melting (endothermic latent heat). Crystallization/Polymerization (exothermic reactions). --- Applications in Manufacturing/Material Science Materials Tested: Polymers, pharmaceuticals, foods, biological materials, organic/inorganic compounds. Key Measurements: Tg, melting point, crystallization onset, decomposition kinetics, oxidative stability. Purpose: Optimize processing parameters and validate formulations. ---","Here’s the cleaned answer:
+
+---
+
+### **How DSC Works**
+DSC measures **heat flow** into or out of a sample as it undergoes thermal transitions while being heated/cooled at a controlled rate. It detects:
+- **Endothermic processes** (e.g., melting).
+- **Exothermic processes** (e.g., crystallization).
+
+---
+
+### **Core Principles**
+1. **Heat Flow Equation**:
+   - **q = Cp × (dT/dt) + f(T,t)**
+     - *Cp* = Specific heat capacity.
+     - *(dT/dt)* = Heating/cooling rate.
+     - *f(T,t)* = Kinetic response.
+
+2. **Key Transitions**:
+   - Glass transition temperature (**Tg**).
+   - Melting (endothermic latent heat).
+   - Crystallization/Polymerization (exothermic reactions).
+
+---
+
+### **Applications in Manufacturing/Material Science**
+- **Materials Tested**: Polymers, pharmaceuticals, foods, biological materials, organic/inorganic compounds.
+- **Key Measurements**:
+  - Tg, melting point, crystallization onset, decomposition kinetics, oxidative stability.
+- **Purpose**: Optimize processing parameters and validate formulations.
+
+---",1.0000,1.0000,0.7410,0.9213,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.0910,0.0713
+text-21,text_only,What safety precautions does the MILACRON manual describe for adding raw material?,5.86,"Here are the explicit safety precautions from the MILACRON manual for adding raw material: --- General Safety Precautions Do not climb or stand on the machine when adding raw material; use a safe and stable manner to avoid injury or damage. Never reach into the clamp area until all machine motion has stopped. Avoid climbing onto, over, under, or around any machine gates or guards while operating. --- Purging Precautions (if nozzle blockage is suspected) Ensure nozzle heater bands are set to the correct temperature and functioning properly. Move the screw fully back to its retracted position and leave it there. Wear protective clothing, a face shield, and safety glasses during purging. Consult the Material Safety Data Sheet (MSDS) from the material supplier for special properties affecting the procedure. ---","Here are the explicit safety precautions from the MILACRON manual for adding raw material:
+
+---
+
+### **General Safety Precautions**
+- Do not climb or stand on the machine when adding raw material; use a safe and stable manner to avoid injury or damage.
+- Never reach into the clamp area until all machine motion has stopped. Avoid climbing onto, over, under, or around any machine gates or guards while operating.
+
+---
+
+### **Purging Precautions (if nozzle blockage is suspected)**
+- Ensure nozzle heater bands are set to the correct temperature and functioning properly.
+  - Move the screw fully back to its retracted position and leave it there.
+  - Wear protective clothing, a face shield, and safety glasses during purging.
+  - Consult the **Material Safety Data Sheet (MSDS)** from the material supplier for special properties affecting the procedure.
+
+---",0.9908,1.0000,0.7411,0.9837,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1908,0.1000,0.0911,0.1337
+text-22,text_only,What is a cavity in the context of plastic injection molding?,5.04,"In plastic injection molding, a cavity refers to: A depression or set of matching recesses in a mold that shapes the outer surfaces of the molded articles. Function Defines and shapes the external geometry of the final plastic part. Acts as the space where molten resin is injected and solidifies to create the desired product shape. Key Characteristics Typically consists of: One or more cavities depending on the mold design (single-cavity, multi-cavity). Must match with a core to form complete part geometry during molding. Paired with the following components for proper material flow and gas escape: Runner: Feed channel connecting the sprue to the cavity gate. Gate: Channel through which molten resin flows from the runner into the cavity. Vent: Shallow channels or openings in the cavity to allow air/gases to escape during filling. --- (if applicable)","In plastic injection molding, a **cavity** refers to:
+
+- A **depression or set of matching recesses** in a mold that shapes the outer surfaces of the molded articles.
+
+### Function
+- Defines and shapes the external geometry of the final plastic part.
+- Acts as the space where molten resin is injected and solidifies to create the desired product shape.
+
+### Key Characteristics
+- Typically consists of:
+  - One or more cavities depending on the mold design (single-cavity, multi-cavity).
+- Must match with a core to form complete part geometry during molding.
+- Paired with the following components for proper material flow and gas escape:
+  - **Runner**: Feed channel connecting the sprue to the cavity gate.
+  - **Gate**: Channel through which molten resin flows from the runner into the cavity.
+  - **Vent**: Shallow channels or openings in the cavity to allow air/gases to escape during filling.
+
+---
+ *(if applicable)*",1.0000,1.0000,0.7491,0.9831,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.0991,0.1331
+text-23,text_only,What is flash in the context of injection molding?,15.8,Flash in Injection Molding Definition Flash is any excess molten resin formed and attached to the component along a seam or mold parting line. --- Key Characteristics Excess material resulting from molten resin escaping the cavity during injection. Forms at: Seams Parting lines Gaps between mold halves --- Causes of Flash Improper mold closure Excessive injection pressure Worn mold surfaces (parting line damage) Misalignment of mold components (core shift) Mold contamination --- Preventive Measures Machine Adjustments: Increase clamp tonnage. Reduce fill pressure high limit. Decrease: Shot size Pack/hold pressure Barrel temperature Mold Checks: Inspect for mold contamination. Check for parting line wear/damage. Verify core shift. --- Technical Terms Fill Pressure: Injection pressure required to fill the cavity. Clamp Tonnage: Force applied to hold the mold closed during injection.,"### **Flash in Injection Molding**
+
+#### **Definition**
+Flash is any excess molten resin formed and attached to the component along a seam or mold parting line.
+
+---
+
+#### **Key Characteristics**
+- Excess material resulting from molten resin escaping the cavity during injection.
+- Forms at:
+  - Seams
+  - Parting lines
+  - Gaps between mold halves
+
+---
+#### **Causes of Flash**
+- Improper mold closure
+- Excessive injection pressure
+- Worn mold surfaces (parting line damage)
+- Misalignment of mold components (core shift)
+- Mold contamination
+
+---
+#### **Preventive Measures**
+
+**Machine Adjustments:**
+- Increase clamp tonnage.
+- Reduce fill pressure high limit.
+- Decrease:
+  - Shot size
+  - Pack/hold pressure
+  - Barrel temperature
+
+**Mold Checks:**
+- Inspect for mold contamination.
+- Check for parting line wear/damage.
+- Verify core shift.
+
+---
+**Technical Terms**
+- **Fill Pressure:** Injection pressure required to fill the cavity.
+- **Clamp Tonnage:** Force applied to hold the mold closed during injection.",1.0000,0.9444,0.7062,0.9802,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0444,0.0562,0.1302
+text-24,text_only,What does the MAAC Thermoformer sequence selection section cover?,48.23,"MAAC Thermoformer Sequence Selection – Actionable Summary 1. Predefined Sequences Overview The MAAC Thermoformer manual outlines the following standard sequences: Standard Vacuum/Forming Sequences: #1: Vacuum Form Bottom #2: Vacuum Form Top #3: Plug Assist Bottom #4: Plug Assist Top Billow Mold Sequences: #5: Billow Cavity Mold Bottom #6: Billow Cavity Mold Top #7: Snap Back From Bottom #8: Snap Back From Top #9: Billow Male Mold Bottom #10: Billow Male Mold Top Specialized Sequences: Flex/Timeflex (customizable, Section IV). --- 2. Procedural Steps for Vacuum Form Bottom Sequence (#1) Structure: Up to 24 steps. Each step includes: Primary Function: One of: TOP VACUUM BOTTOM VACUUM FORM FANS OPEN Secondary Functions (selectable): TOP AIR, TOP EJECT, TOP AUX VACUUM BOTTOM AIR, BOTTOM EJECT, BOTTOM AUX VACUUM CLAMP FRAME SKIP, RESET, HOLD TIMER 2/3 Vacuum Pressure Settings: | Detail Level | Air Assist (PSI) | Vacuum (PSI) | |--------------------|------------------|---------------| | High Detail | 20 | 10 | | Low Detail | 2.0 | 0 | --- 3. Flex and Timeflex Forming Sequences Customization: Up to 30 functions across 24 steps. Primary Functions per Step (one of): FORM TIMER DELAY TIMER BOTH RETRACT/EXTEND Secondary Functions per Step (multiple allowed): TOP EXTEND, BOT AIR, AUX VACUUM, HOLD TIMER 2/3. Timeflex Process: Set a TIMEFLEX TIMER. Define START TIME and END TIME for each function within the timer. --- 4. Machine Specifications Mold & Clamp Frame: Maximum mold size: 72"" x 48"" (1828mm × 1219mm). Maximum clamp frame opening: 73"" x 49"" (1854mm × 1244mm). Pneumatic Requirements: | Component | Pressure (PSI) | |-------------------------|----------------| | Main Regulator | 80 | | Eject Regulator Max | 15 | | IR Eye Sensor | 5 | Electrical Requirements: Voltage: 480V, 60Hz. Full-load amps: 180 Amps (3-phase). Disconnect size: 250 Amps NEMA12 SCIR 5 KA. --- 5. Visual References --- 6. Additional Notes C-Flex Program Sheet allows layered control of up to 30 functions across 24 steps.","### **MAAC Thermoformer Sequence Selection – Actionable Summary**
+
+#### **1. Predefined Sequences Overview**
+The MAAC Thermoformer manual outlines the following standard sequences:
+
+- **Standard Vacuum/Forming Sequences**:
+  - **#1**: Vacuum Form Bottom
+  - **#2**: Vacuum Form Top
+  - **#3**: Plug Assist Bottom
+  - **#4**: Plug Assist Top
+
+- **Billow Mold Sequences**:
+  - **#5**: Billow Cavity Mold Bottom
+  - **#6**: Billow Cavity Mold Top
+  - **#7**: Snap Back From Bottom
+  - **#8**: Snap Back From Top
+  - **#9**: Billow Male Mold Bottom
+  - **#10**: Billow Male Mold Top
+
+- **Specialized Sequences**:
+  - **Flex/Timeflex** (customizable, Section IV).
+
+---
+
+#### **2. Procedural Steps for Vacuum Form Bottom Sequence (#1)**
+- **Structure**:
+  - Up to **24 steps**.
+  - Each step includes:
+    - **Primary Function**: One of:
+      - TOP VACUUM
+      - BOTTOM VACUUM
+      - FORM FANS OPEN
+
+    - **Secondary Functions** (selectable):
+      - TOP AIR, TOP EJECT, TOP AUX VACUUM
+      - BOTTOM AIR, BOTTOM EJECT, BOTTOM AUX VACUUM
+      - CLAMP FRAME SKIP, RESET, HOLD TIMER 2/3
+
+- **Vacuum Pressure Settings**:
+  | Detail Level       | Air Assist (PSI) | Vacuum (PSI) |
+  |--------------------|------------------|---------------|
+  | High Detail        | 20               | 10            |
+  | Low Detail         | 2.0              | 0             |
+
+---
+
+#### **3. Flex and Timeflex Forming Sequences**
+- **Customization**:
+  - Up to **30 functions** across **24 steps**.
+  - **Primary Functions per Step** (one of):
+    - FORM TIMER
+    - DELAY TIMER
+    - BOTH RETRACT/EXTEND
+
+  - **Secondary Functions per Step** (multiple allowed):
+    - TOP EXTEND, BOT AIR, AUX VACUUM, HOLD TIMER 2/3.
+
+- **Timeflex Process**:
+  - Set a TIMEFLEX TIMER.
+  - Define START TIME and END TIME for each function within the timer.
+
+---
+
+#### **4. Machine Specifications**
+- **Mold & Clamp Frame**:
+  - Maximum mold size: **72"" x 48""** (**1828mm × 1219mm**).
+  - Maximum clamp frame opening: **73"" x 49""** (**1854mm × 1244mm**).
+
+- **Pneumatic Requirements**:
+  | Component               | Pressure (PSI) |
+  |-------------------------|----------------|
+  | Main Regulator          | 80             |
+  | Eject Regulator Max     | 15             |
+  | IR Eye Sensor           | 5              |
+
+- **Electrical Requirements**:
+  - Voltage: **480V, 60Hz**.
+  - Full-load amps: **180 Amps** (3-phase).
+  - Disconnect size: **250 Amps NEMA12 SCIR 5 KA**.
+
+---
+#### **5. Visual References**
+- ![Forming Sequences Overview](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page25_rendered.png)
+- ![Component/System Diagram](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page28_img3.png)
+- ![Operating Conditions](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page15_rendered.png)
+- ![Sequence Operation Schematic](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page28_img7.jpeg)
+
+---
+#### **6. Additional Notes**
+- C-Flex Program Sheet allows layered control of up to 30 functions across 24 steps.
+
+![This image is a page from an industrial thermoforming equipment manual, specific](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page25_rendered.png)
+![The image appears to be a page from a technical manual for industrial thermoform](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page28_img3.png)
+![The image is a digital representation of an operating conditions page from a tec](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page15_rendered.png)",1.0000,0.9254,0.7063,0.9943,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0254,0.0563,0.1443
+text-25,text_only,What are the seven fundamentals of thermoforming mentioned in the MAAC manual?,10.09,"Here are the seven fundamentals of thermoforming explicitly outlined in the MAAC manual: --- 1. Material Selection and Resin Specifications Establish tolerances for: Melt flow Flow characteristics Odor Gels --- 2. Long-Term Consistency in Production Collaboration required among: Designer Resin supplier Sheet/film extruder Thermoforming machine operator Early determination of part specifications by all stakeholders. --- 3. Heat Requirements and Molecular Orientation Bi-axial orientation at 275% to 300% stretch rate. Heating to proper forming temperature (post-orientation). Hot forming does not realign molecular structure; oriented properties persist in the finished part. --- 4. Clamping and Sheet Handling Proper clamping of oriented sheet during thermoforming to ensure stability. --- 5. Vacuum and Compressed Air Systems Most parts formed on ""one-sided molds"". Standard vacuum pressure: 14.7 psi (sea level). Requires vacuum system rated at 29 inches of mercury (Hg). Rapid vacuum application for stress-free, high-quality parts. Vacuum system design: Avoid 90-degree elbows in piping from surge tank to mold. Use only straight connections and flexible vacuum hose. --- 6. Sheet and Film Purchasing Specifications Written specifications required for all purchased materials. Key considerations when reviewing with vendors: Orientation requirements: Test sample: 10×10 inch or 1×10 inch sheet heated to thermoforming temperature, cooled unrestrained. Sheet sag characteristics. Regrind usage limits: No more than 45% acceptable regrind. --- 7. Trimming and Post-Forming Handling Sheet must be held in position during heating/forming; excess trim removed afterward. Trim design should ideally be ""one-plane"" for economical removal. For close tolerances: Trim at the same temperature as forming or after all post-shrinkage occurs. ---","Here are the **seven fundamentals of thermoforming** explicitly outlined in the MAAC manual:
+
+---
+
+### **1. Material Selection and Resin Specifications**
+- Establish tolerances for:
+  - Melt flow
+  - Flow characteristics
+  - Odor
+  - Gels
+
+---
+
+### **2. Long-Term Consistency in Production**
+- Collaboration required among:
+  - Designer
+  - Resin supplier
+  - Sheet/film extruder
+  - Thermoforming machine operator
+- Early determination of part specifications by all stakeholders.
+
+---
+
+### **3. Heat Requirements and Molecular Orientation**
+- Bi-axial orientation at **275% to 300%** stretch rate.
+- Heating to proper forming temperature (post-orientation).
+- Hot forming does not realign molecular structure; oriented properties persist in the finished part.
+
+---
+### **4. Clamping and Sheet Handling**
+- Proper clamping of oriented sheet during thermoforming to ensure stability.
+
+---
+
+### **5. Vacuum and Compressed Air Systems**
+- Most parts formed on **""one-sided molds""**.
+- Standard vacuum pressure: **14.7 psi** (sea level).
+  - Requires vacuum system rated at **29 inches of mercury (Hg)**.
+- Rapid vacuum application for stress-free, high-quality parts.
+- Vacuum system design:
+  - Avoid **90-degree elbows** in piping from surge tank to mold.
+  - Use only straight connections and flexible vacuum hose.
+
+---
+### **6. Sheet and Film Purchasing Specifications**
+- Written specifications required for all purchased materials.
+- Key considerations when reviewing with vendors:
+  - Orientation requirements:
+    - Test sample: **10×10 inch or 1×10 inch** sheet heated to thermoforming temperature, cooled unrestrained.
+  - Sheet sag characteristics.
+  - Regrind usage limits: No more than **45%** acceptable regrind.
+
+---
+### **7. Trimming and Post-Forming Handling**
+- Sheet must be held in position during heating/forming; excess trim removed afterward.
+- Trim design should ideally be **""one-plane""** for economical removal.
+- For close tolerances:
+  - Trim at the same temperature as forming or after all post-shrinkage occurs.
+
+---",0.9003,0.9629,0.6652,0.9900,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1003,0.0629,0.0152,0.1400
+imgtext-01,image_text,"Show me the APSX-PIM wiring diagram with the J1, J2, J3 connectors and explain the connections",26.49,"The provided context does not include explicit details about connectors J1, J2, or J3. --- Wiring Diagram Visuals (Schematic References): --- Machine-Specific Notes: Power Supply: 115VAC. Clamp Force: 5 tons. Injection Capacity: Up to 30 cu-cm of plastic at temperatures up to 315°C. Standard Mold Size: 6"" (H) × 4.8"" (W). Control Interface: Touchscreen PC via USB cable. --- Components: Electric motors and precise sensors for accurate operation. Automatic cycle phases: Plasticizing, Clamping, Injection, Ejection, Cooling.","The provided context does not include explicit details about connectors J1, J2, or J3.
+
+---
+
+### **Wiring Diagram Visuals (Schematic References):**
+- ![General schematic diagram of APSX-PIM electrical connections](http://localhost:8000/api/media/yologen/train/APSX-PIM_page41_img1.png)
+
+---
+### **Machine-Specific Notes:**
+- **Power Supply:** 115VAC.
+- **Clamp Force:** 5 tons.
+- **Injection Capacity:** Up to **30 cu-cm** of plastic at temperatures up to **315°C**.
+- **Standard Mold Size:** 6"" (H) × 4.8"" (W).
+- **Control Interface:** Touchscreen PC via USB cable.
+
+---
+### **Components:**
+- Electric motors and precise sensors for accurate operation.
+- Automatic cycle phases: Plasticizing, Clamping, Injection, Ejection, Cooling.
+
+![This image appears to be a schematic diagram from an APSX injection molding mach](http://localhost:8000/api/media/yologen/train/APSX-PIM_page41_img1.png)
+![This image is a page from an instruction manual for an APSX-PIM plastic injectio](http://localhost:8000/api/media/yologen/val/APSX-PIM_page10_rendered.png)
+![This image is a schematic diagram from an APSX-PIM plastic injection molding mac](http://localhost:8000/api/media/yologen/train/APSX-PIM_page18_img1.png)",0.9465,1.0000,0.6708,0.9391,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1465,0.1000,0.0208,0.0891
+imgtext-02,image_text,Show the APSX-PIM dashboard status screen (STAND BY through COOLING) and describe what the operator sees during each sta,44.69,"APSX-PIM Dashboard Status Screen (STAND BY through COOLING) Visual Representation --- Dashboard Layout and Status Indicators The main display shows a top-center status message with real-time cycle stage updates. --- Stage Descriptions (Operator View) STAND BY Status Message: ""Ready for the operation command."" Machine State: Powered on and initialized. All systems prepared to begin an injection cycle upon operator activation via the RUN button. Barrel temperature display shows ambient/pre-set idle values. CLAMPING Status Message: ""Clamp block (2 & 3) is approaching the mold area. Be cautious."" Machine State: Clamp blocks move toward the mold to secure it in place. Visual/audible warnings may be active during this phase. INJECTING Status Message: ""The nozzle opens, and the plastic is injected into the mold cavity."" Machine State: Injection nozzle opens; molten plastic forced into the mold under pressure. Barrel temperature displayed in real-time. HOLDING Status Message: ""The injection pressure drops to the holding pressure to secure a 100% fill rate."" Machine State: Maintains holding pressure for complete mold filling. Plastic solidifies gradually; barrel temperature remains stable at set levels. COOLING Status Message: ""The machine is waiting for the injected plastic to cool down."" Machine State: Mold remains clamped; plastic cools under controlled conditions. Optional ENABLE FAN setting may activate for active cooling (adjustable via user settings). Transitions back to STAND BY post-cooling unless in SINGLE cycle mode, requiring manual restart via the RUN button. --- User Interface Components (Shows RUN button, TEMPERATURE display, SINGLE cycle mode, and temperature settings.)","### **APSX-PIM Dashboard Status Screen (STAND BY through COOLING)**
+
+#### **Visual Representation**
+![Composite schematic of APSX-PIM dashboard status messages](http://localhost:8000/api/media/yologen/train/APSX-PIM_page31_img1.jpeg)
+
+---
+
+### **Dashboard Layout and Status Indicators**
+The main display shows a **top-center status message** with real-time cycle stage updates.
+
+---
+### **Stage Descriptions (Operator View)**
+
+#### **STAND BY**
+- **Status Message:** *""Ready for the operation command.""*
+- **Machine State:**
+  - Powered on and initialized.
+  - All systems prepared to begin an injection cycle upon operator activation via the **RUN** button.
+  - Barrel temperature display shows ambient/pre-set idle values.
+
+#### **CLAMPING**
+- **Status Message:** *""Clamp block (2 & 3) is approaching the mold area. Be cautious.""*
+- **Machine State:**
+  - Clamp blocks move toward the mold to secure it in place.
+  - Visual/audible warnings may be active during this phase.
+
+#### **INJECTING**
+- **Status Message:** *""The nozzle opens, and the plastic is injected into the mold cavity.""*
+- **Machine State:**
+  - Injection nozzle opens; molten plastic forced into the mold under pressure.
+  - Barrel temperature displayed in real-time.
+
+#### **HOLDING**
+- **Status Message:** *""The injection pressure drops to the holding pressure to secure a 100% fill rate.""*
+- **Machine State:**
+  - Maintains holding pressure for complete mold filling.
+  - Plastic solidifies gradually; barrel temperature remains stable at set levels.
+
+#### **COOLING**
+- **Status Message:** *""The machine is waiting for the injected plastic to cool down.""*
+- **Machine State:**
+  - Mold remains clamped; plastic cools under controlled conditions.
+  - Optional **ENABLE FAN** setting may activate for active cooling (adjustable via user settings).
+  - Transitions back to **STAND BY** post-cooling unless in **SINGLE cycle mode**, requiring manual restart via the **RUN** button.
+
+---
+### **User Interface Components**
+![APSX-PIM UI Diagram](http://localhost:8000/api/media/yologen/train/APSX-PIM_page30_img1.jpeg)
+*(Shows RUN button, TEMPERATURE display, SINGLE cycle mode, and temperature settings.)*
+
+![This image is a composite of various screens from an APSX-PIM plastic injection ](http://localhost:8000/api/media/yologen/train/APSX-PIM_page31_img1.jpeg)
+![The image is a page from an APSX-PIM plastic injection molding machine manual. I](http://localhost:8000/api/media/yologen/train/APSX-PIM_page13_rendered.png)
+![This image is a digital graphic with text and a layout that appears to be from a](http://localhost:8000/api/media/yologen/train/APSX-PIM_page43_rendered.png)",1.0000,1.0000,0.7426,0.9317,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.0926,0.0817
+imgtext-03,image_text,Show me the APSX-PIM machine internal components and hopper assembly,29.87,"APSX-PIM Internal Components and Hopper Assembly: Internal Components: Modular Structure: Plasticizing Section: Melts and homogenizes plastic via an electric motor-driven screw mechanism. Clamping Assembly: Generates clamp force to secure mold halves during injection. Injection System: Handles up to per cycle. Ejection Mechanism: Automatically ejects molded parts post-cooling phase. Mechanical Components: Fully electric design; no hydraulics or pneumatic systems. Electric motors and precision sensors integrated into clamping, injection, and ejection subsystems. Modular design allows separation of plasticizing, clamping, injection, and ejection stages. Thermal Specifications: Maximum operating temperature: . --- Hopper Assembly: Design: Dedicated hopper with feeder pipes for plastic pellet/granule input. Positioned at the start of the plasticizing section. Cleaning Requirement: Must be cleaned before use; residual material from previous sessions must be removed to prevent obstructions. --- Control System: Touchscreen PC Interface: Connected via for setup, monitoring, and operational controls. Automated injection cycle sequence: Plasticizing Clamping Injection Ejection --- Visual References (Schematics):","### **APSX-PIM Internal Components and Hopper Assembly:**
+
+#### **Internal Components:**
+##### **Modular Structure:**
+- **Plasticizing Section:** Melts and homogenizes plastic via an electric motor-driven screw mechanism.
+- **Clamping Assembly:** Generates clamp force to secure mold halves during injection.
+- **Injection System:** Handles up to per cycle.
+- **Ejection Mechanism:** Automatically ejects molded parts post-cooling phase.
+
+##### **Mechanical Components:**
+- Fully electric design; no hydraulics or pneumatic systems.
+- Electric motors and precision sensors integrated into clamping, injection, and ejection subsystems.
+- Modular design allows separation of plasticizing, clamping, injection, and ejection stages.
+
+##### **Thermal Specifications:**
+- Maximum operating temperature: .
+
+---
+
+#### **Hopper Assembly:**
+
+- **Design:**
+  - Dedicated hopper with feeder pipes for plastic pellet/granule input.
+  - Positioned at the start of the plasticizing section.
+
+- **Cleaning Requirement:**
+  - Must be cleaned before use; residual material from previous sessions must be removed to prevent obstructions.
+
+---
+
+#### **Control System:**
+
+- **Touchscreen PC Interface:** Connected via for setup, monitoring, and operational controls.
+  - Automated injection cycle sequence:
+    1. Plasticizing
+    2. Clamping
+    3. Injection
+    4. Ejection
+
+---
+#### **Visual References (Schematics):**
+- ![Internal components schematic including hopper, feeder pipes, plasticizing section, clamping assembly, injection system, and ejection mechanism](http://localhost:8000/api/media/yologen/train/APSX-PIM_page18_img1.png)
+
+![The image is a page from an APSX-PIM plastic injection molding machine manual. I](http://localhost:8000/api/media/yologen/val/APSX-PIM_page12_rendered.png)
+![The image is a page from an APSX-PIM plastic injection molding machine manual. I](http://localhost:8000/api/media/yologen/train/APSX-PIM_page8_rendered.png)
+![The image is a page from an APSX-PIM plastic injection molding machine manual. I](http://localhost:8000/api/media/yologen/train/APSX-PIM_page6_rendered.png)",0.8492,0.9111,0.6975,0.9033,Good,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.0492,0.0111,0.0475,0.0533
+imgtext-04,image_text,Show the BOY 35 user administration screen with USB options,39.43,"BOY 35 User Administration Screen (USB Options) Screen Page: ""14.40 User Administration"" Manual Reference: Section 14.40, Manual_BOY-35-E-VV_unlocked.pdf Pages: Primary reference: Pages 271–274. --- USB-Related Functions & Procedures 1. USB Login Functionality A plugged-in USB stick linked to a user enables automatic login with stored access authorization. Removal of the USB stick logs the operator out automatically. 2. User Administration Data Transfer Entire user administration data can be exported to/from a USB stick for transfer between machines. 3. Encrypted Data Handling Usernames and passwords are stored as encrypted login data when copied to a USB stick. --- Screen Layout & Columns (User List Display) | Column | Description | |--------|-----------------------------------------------------------------------------| | 1 | Username | | 2 | Password (displayed as stars) | | 3 | Access Level | | 4 | Timeout period | | 5 | USB-related actions: link/unlink USB stick, export/import user data | | 6 | Additional info | --- Operational Requirements Authorization level required for modifications in user administration. Dedicated USB interface for login/data transfer. --- Visual References","### **BOY 35 User Administration Screen (USB Options)**
+
+#### **Screen Page: ""14.40 User Administration""**
+- **Manual Reference**: Section 14.40, *Manual_BOY-35-E-VV_unlocked.pdf*
+- **Pages**:
+  - Primary reference: Pages **271–274**.
+
+---
+
+### **USB-Related Functions & Procedures**
+
+#### **1. USB Login Functionality**
+- A plugged-in USB stick linked to a user enables automatic login with stored access authorization.
+- Removal of the USB stick logs the operator out automatically.
+
+#### **2. User Administration Data Transfer**
+- Entire user administration data can be exported to/from a USB stick for transfer between machines.
+
+#### **3. Encrypted Data Handling**
+- Usernames and passwords are stored as encrypted login data when copied to a USB stick.
+
+---
+
+### **Screen Layout & Columns (User List Display)**
+
+| Column | Description                                                                 |
+|--------|-----------------------------------------------------------------------------|
+| 1      | Username                                                                   |
+| 2      | Password (displayed as stars)                                             |
+| 3      | Access Level                                                             |
+| 4      | Timeout period                                                            |
+| **5**  | USB-related actions: link/unlink USB stick, export/import user data         |
+| 6      | Additional info                                                            |
+
+---
+
+### **Operational Requirements**
+- Authorization level required for modifications in user administration.
+- Dedicated USB interface for login/data transfer.
+
+---
+### **Visual References**
+![User Administration Screen Overview](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page271_img1.png)
+![User List Table with Columns](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page272_img1.png)
+
+![This image is a page from an instruction manual for a BOY 35 E injection molding](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page357_rendered.png)
+![The image is a page from an industrial equipment manual, specifically for a BOY ](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page243_rendered.png)
+![The image is a screenshot from a technical manual for a BOY 35 E VV injection mo](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page225_img1.png)",1.0000,0.9887,0.6525,0.8611,Excellent,Excellent,Okay,Good,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0887,0.0025,0.0111
+imgtext-05,image_text,What safety warning signs are shown for BOY 35 maintenance procedures?,46.54,"BOY 35 Maintenance Safety Warning Signs 1. General Safety Warning Signs ""Qualified Personnel Only"" – Only authorized personnel may perform maintenance. ""Consult Manual Before Work"" – Always refer to the manual before starting any service or repair. --- 2. Warning Sign Placement & Procedures Main Disconnect Switch: Post a ""WARNING: Maintenance in Progress"" sign at the main disconnect switch when working on electrical equipment or opening guards/covers. Ensure the main disconnect switch is locked in the ""Off"" position before opening any electrical enclosure, cover plate, or door. --- 3. Electrical Safety Signs ""DANGER HIGH VOLTAGE"" – Must be displayed inside all electrical enclosures. ""WARNING: Lockout/Tagout (LOTO) Required for De-Energized State"" – Post at the main disconnect switch during electrical work. ""Do not operate without proper shutdown and signage"" – Never work on electrical equipment without following LOTO procedures. --- 4. Machine-Specific Warnings ""Do not remove, paint over, alter, or deface warning plates"" – Replace unreadable plates immediately. ""CAUTION: Moving Parts – Do Not Operate Without Guards/Covers in Place."" ""Pinch Point Hazard – Do Not Place Body or Extremities Here."" ""Crushing Hazard"" – Use supports when working above 1.8m. ""Hot Surface – Do Not Touch."" ""Gloves Required in This Area."" --- 5. General Maintenance Warnings ""Do Not Operate if Machine is in Alarm State."" ""Attend to Oil Leaks Immediately"" – Air entry into hydraulic systems can cause serious injury. ""All Guards, Shields, Covers, and Doors Must Be in Place Before/During Operation."" --- 6. Signal Words & Color Coding Signal Word Labels: ""DANGER"" (imminently hazardous). ""WARNING"" (potentially hazardous). ""CAUTION"" (minor hazards). Color Standards: Use safety yellow background for all caution signs/labels. --- 7. Required Visual Warning Signs & Placards Use these images as-is for compliance:","### **BOY 35 Maintenance Safety Warning Signs**
+
+#### **1. General Safety Warning Signs**
+- **""Qualified Personnel Only""** – Only authorized personnel may perform maintenance.
+- **""Consult Manual Before Work""** – Always refer to the manual before starting any service or repair.
+
+---
+
+#### **2. Warning Sign Placement & Procedures**
+- **Main Disconnect Switch:**
+  - Post a **""WARNING: Maintenance in Progress""** sign at the main disconnect switch when working on electrical equipment or opening guards/covers.
+  - Ensure the main disconnect switch is locked in the ""Off"" position before opening any electrical enclosure, cover plate, or door.
+
+---
+
+#### **3. Electrical Safety Signs**
+- **""DANGER HIGH VOLTAGE""** – Must be displayed inside all electrical enclosures.
+- **""WARNING: Lockout/Tagout (LOTO) Required for De-Energized State""** – Post at the main disconnect switch during electrical work.
+- **""Do not operate without proper shutdown and signage""** – Never work on electrical equipment without following LOTO procedures.
+
+---
+
+#### **4. Machine-Specific Warnings**
+- **""Do not remove, paint over, alter, or deface warning plates""** – Replace unreadable plates immediately.
+- **""CAUTION: Moving Parts – Do Not Operate Without Guards/Covers in Place.""**
+- **""Pinch Point Hazard – Do Not Place Body or Extremities Here.""**
+- **""Crushing Hazard""** – Use supports when working above 1.8m.
+- **""Hot Surface – Do Not Touch.""**
+- **""Gloves Required in This Area.""**
+
+---
+#### **5. General Maintenance Warnings**
+- **""Do Not Operate if Machine is in Alarm State.""**
+- **""Attend to Oil Leaks Immediately""** – Air entry into hydraulic systems can cause serious injury.
+- **""All Guards, Shields, Covers, and Doors Must Be in Place Before/During Operation.""**
+
+---
+#### **6. Signal Words & Color Coding**
+- **Signal Word Labels:**
+  - **""DANGER""** (imminently hazardous).
+  - **""WARNING""** (potentially hazardous).
+  - **""CAUTION""** (minor hazards).
+
+- **Color Standards:**
+  - Use **safety yellow** background for all caution signs/labels.
+
+---
+#### **7. Required Visual Warning Signs & Placards**
+Use these images as-is for compliance:
+1. ![Vertical clamping unit safety precautions](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page44_img2.png)
+2. ![Fault troubleshooting warning](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page299_rendered.png)
+3. ![Alarm 0012 safety door warning](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page279_rendered.png)
+4. ![Electrical connection warning sign](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page313_rendered.png)
+5. ![General maintenance safety warning](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page450_rendered.png)
+
+![This image is a page from an industrial equipment manual, specifically for a BOY](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page299_rendered.png)
+![The image is a warning sign from an industrial manual, specifically related to e](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page372_rendered.png)
+![This image is a warning sign from a technical manual for a BOY 35 E VV injection](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page450_rendered.png)",0.9268,0.9515,0.7083,0.8991,Excellent,Excellent,Good,Good,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1268,0.0515,0.0583,0.0491
+imgtext-06,image_text,Show the BOY 35 process configurator sequence screen,42.54,"BOY 35 Process Configurator Sequence Screen --- 1. Main Cycle Configurator Screens Screen Page ""11.10 Cycle Configurator"" Displays complete cycle sequence. Speed buttons: ""Inject"" → Switches to Screen Page ""4.40 Injection Unit Configurator"". ""Drive Back Unit"" → Switches to Screen Page ""3.20 Unit Configurator"". ""Plasticize"" → Switches to Screen Page ""4.40 Injection Unit Configurator"". Screen Page ""11.20 Cycle Completion Configurator"" Graphically defines cycle completion. --- 2. Machine Cycle Components (Graphic Process Editor) ""Close Mould"" (Clamping Unit) Includes high-pressure build-up. Speed button to access: Screen Page ""1.30 Clamping Unit Configurator"". ""Advance Unit"" (Unit Sequence) Builds contact pressure between mould and unit. ""Inject"" (Injection Unit) Includes holding pressure. Speed button to access: Screen Page ""4.40 Injection Unit Configurator"". ""Feed"" (Injection Unit) Includes decompression. Speed button to access: Screen Page ""4.40 Injection Unit Configurator"". ""Retract Unit"" (Unit Sequence) Builds contact pressure. --- 3. Graphic Process Editor Features Function Elements: Start of sequence and end of process: Non-deletable. Delay time: Configurable from 1–16 seconds. User outputs: Activation switch (disable without removal). Selection: O-y (switch off), On (switch on). Sequence Management: User library for storing sequences. ""Load"" → Activates selected sequence in run configurator. ""Save"" → Archives new/revised sequences with name and description. --- 4. Speed Buttons & Navigation | Button | Screen Page Destination | |----------------------|--------------------------------------------| | ""Close Mould"" | Screen Page ""1.30 Clamping Unit Configurator"" | | ""Drive Back Unit"" | Screen Page ""3.20 Unit Configurator"" | | ""Inject"" | Screen Page ""4.40 Injection Unit Configurator"" | | ""Plasticize"" | Screen Page ""4.40 Injection Unit Configurator"" | --- 5. Visual References - Shows cycle sequence navigation and delay time configuration.","### **BOY 35 Process Configurator Sequence Screen**
+
+---
+
+#### **1. Main Cycle Configurator Screens**
+##### **Screen Page ""11.10 Cycle Configurator""**
+- Displays complete cycle sequence.
+- Speed buttons:
+  - **""Inject""** → Switches to **Screen Page ""4.40 Injection Unit Configurator""**.
+  - **""Drive Back Unit""** → Switches to **Screen Page ""3.20 Unit Configurator""**.
+  - **""Plasticize""** → Switches to **Screen Page ""4.40 Injection Unit Configurator""**.
+
+##### **Screen Page ""11.20 Cycle Completion Configurator""**
+- Graphically defines cycle completion.
+
+---
+
+#### **2. Machine Cycle Components (Graphic Process Editor)**
+- **""Close Mould""** (Clamping Unit)
+  - Includes high-pressure build-up.
+  - Speed button to access: **Screen Page ""1.30 Clamping Unit Configurator""**.
+
+- **""Advance Unit""** (Unit Sequence)
+  - Builds contact pressure between mould and unit.
+
+- **""Inject""** (Injection Unit)
+  - Includes holding pressure.
+  - Speed button to access: **Screen Page ""4.40 Injection Unit Configurator""**.
+
+- **""Feed""** (Injection Unit)
+  - Includes decompression.
+  - Speed button to access: **Screen Page ""4.40 Injection Unit Configurator""**.
+
+- **""Retract Unit""** (Unit Sequence)
+  - Builds contact pressure.
+
+---
+
+#### **3. Graphic Process Editor Features**
+##### **Function Elements:**
+- Start of sequence and end of process: Non-deletable.
+- Delay time: Configurable from **1–16 seconds**.
+- User outputs:
+  - Activation switch (disable without removal).
+  - Selection: **O-y (switch off)**, **On (switch on)**.
+
+##### **Sequence Management:**
+- User library for storing sequences.
+- **""Load""** → Activates selected sequence in run configurator.
+- **""Save""** → Archives new/revised sequences with name and description.
+
+---
+
+#### **4. Speed Buttons & Navigation**
+| Button               | Screen Page Destination                     |
+|----------------------|--------------------------------------------|
+| ""Close Mould""        | **Screen Page ""1.30 Clamping Unit Configurator""** |
+| ""Drive Back Unit""    | **Screen Page ""3.20 Unit Configurator""**     |
+| ""Inject""             | **Screen Page ""4.40 Injection Unit Configurator""** |
+| ""Plasticize""         | **Screen Page ""4.40 Injection Unit Configurator""** |
+
+---
+
+#### **5. Visual References**
+- ![Graphical user interface with handling/configurator settings](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page194_img2.png)
+  - Shows cycle sequence navigation and delay time configuration.
+
+- ![Schematic diagram of cycle sequence](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page195_img3.png)
+
+- ![User interface with open/close mould functions](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page88_img6.png)
+
+![This image is a screenshot from a technical manual, specifically for a BOY 35 E ](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page194_img2.png)
+![This image is a screenshot from a technical manual for an industrial plastic inj](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page57_rendered.png)
+![The image is a screenshot from a manual for a BOY 35 E VV injection molding mach](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page88_img6.png)",0.9488,1.0000,0.7115,0.9979,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1488,0.1000,0.0615,0.1479
+imgtext-07,image_text,Show me the MILACRON ejector system setup menu and explain the settings,53.45,"MILACRON Ejector System Setup Menu & Settings 1. Key Setpoints (Menu 13 – Ejector Setup) Forward Speed 1 Controls ejector speed between Retract Limit/Pulse Retract position and Forward Position 2. Forward Position 2 Transition point where ejector speed shifts from Forward Speed 1 to Forward Speed 2. Forward Speed 2 Controls ejector speed between Forward Position 2 and Forward Limit. Forward Limit (Eject Forward Limit) Maximum forward extension of the ejector mechanism. Determined by extending ejector pins until parts are ejected, then recording position in Menu 13’s Eject Forward Limit box. --- 2. Additional Parameters & Procedures Retract Speed Set via Menu 13 after retracting ejector to Retract Limit using MAN + EJECT keys. Requires motor current ≤10% during setup; adjust Retract Limit if higher. Eject Retract Limit (Retract Limit) Defined by aligning servo ejector bar with ejector rods and recording position in Menu 13. --- 3. Setup Workflow Initial Adjustments: Open Fast, Start Eject, Forward Limit (Ejector), Retract Limit (Ejector), Core Set Clamp Position, Core Pull Clamp Position. Enter values in: Menu 12 (Clamp Setup) Menu 13 (Ejector Setup) Menu 21 (Cores) Calibration Procedure: Disconnect power and lockout machine. Open clamp manually to verify full opening. Align ejector rods with servo bar; record Retract Limit in Menu 13. --- 4. Operational Logic Forward Sequence: Forward Speed 1 → Forward Position 2 → Forward Speed 2 → Forward Limit (hold pressure applied). Retract Sequence: Retract Speed ramps from Forward Limit to Retract Limit. Ejector dwells at Forward Limit for time entered in Dwell timer before retracting. --- 5. Visual References","### **MILACRON Ejector System Setup Menu & Settings**
+
+#### **1. Key Setpoints (Menu 13 – Ejector Setup)**
+- **Forward Speed 1**
+  - Controls ejector speed between Retract Limit/Pulse Retract position and Forward Position 2.
+
+- **Forward Position 2**
+  - Transition point where ejector speed shifts from **Forward Speed 1** to **Forward Speed 2**.
+
+- **Forward Speed 2**
+  - Controls ejector speed between Forward Position 2 and Forward Limit.
+
+- **Forward Limit (Eject Forward Limit)**
+  - Maximum forward extension of the ejector mechanism.
+  - Determined by extending ejector pins until parts are ejected, then recording position in Menu 13’s Eject Forward Limit box.
+
+---
+
+#### **2. Additional Parameters & Procedures**
+- **Retract Speed**
+  - Set via Menu 13 after retracting ejector to Retract Limit using MAN + EJECT keys.
+  - Requires motor current ≤10% during setup; adjust Retract Limit if higher.
+
+- **Eject Retract Limit (Retract Limit)**
+  - Defined by aligning servo ejector bar with ejector rods and recording position in Menu 13.
+
+---
+
+#### **3. Setup Workflow**
+- **Initial Adjustments:**
+  - Open Fast, Start Eject, Forward Limit (Ejector), Retract Limit (Ejector), Core Set Clamp Position, Core Pull Clamp Position.
+  - Enter values in:
+    - Menu 12 (Clamp Setup)
+    - Menu 13 (Ejector Setup)
+    - Menu 21 (Cores)
+
+- **Calibration Procedure:**
+  1. Disconnect power and lockout machine.
+  2. Open clamp manually to verify full opening.
+  3. Align ejector rods with servo bar; record Retract Limit in Menu 13.
+
+---
+
+#### **4. Operational Logic**
+- **Forward Sequence:**
+  - Forward Speed 1 → Forward Position 2 → Forward Speed 2 → Forward Limit (hold pressure applied).
+
+- **Retract Sequence:**
+  - Retract Speed ramps from Forward Limit to Retract Limit.
+  - Ejector dwells at Forward Limit for time entered in Dwell timer before retracting.
+
+---
+
+#### **5. Visual References**
+![MILACRON Ejector Setup Menu](http://localhost:8000/api/media/yologen/train/MILACRON_page263_img3.png)
+
+![The image is a screenshot from an electronic interface, specifically a menu from](http://localhost:8000/api/media/yologen/train/MILACRON_page263_img3.png)
+![This image appears to be a schematic diagram from an industrial plastic injectio](http://localhost:8000/api/media/yologen/train/MILACRON_page328_rendered.png)
+![The image is a page from an industrial plastic injection molding machine manual.](http://localhost:8000/api/media/yologen/val/MILACRON_page249_rendered.png)",1.0000,0.9167,0.7477,0.9210,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0167,0.0977,0.0710
+imgtext-08,image_text,Show the MILACRON lubricant specifications table,37.25,"Here’s the cleaned answer: --- 1. Approved Lubricants and Hydraulic Oils --- 2. Detailed Lubricant Specifications AW32 Performance Plus Hydraulic Oil (ISO VG 32) Shell Global Solutions (US) Inc.: Tellus S2 M 32, Tellus S3 M 32 Sinopec Lubricant Co., Ltd.: Great Wall L-HM32, L-HS32, L-HV32, Sinopec L-HM32, L-HS32, L-HV32 Tide Water Oil Co. (India) Ltd.: Avalon HLP 32 TongYi Petroleum Chemical Co., Ltd.: Cave L-HM32, Tongli L-HM 32 --- ISO VG 320 Heavy-Duty Gear Lubricants Chevron Oronite S.A.S.: IND19038 ExxonMobil Corp.: SHC Elite 320 Pertamina Lubricants: MASRI RG 320 Petro-Canada Lubricants Inc.: Enduratex EP 320 Petromin Corporation: Gearlube EP 320 Phillips 66 Company: Extra Duty Gear Oil GLW 320 Shell Global Solutions (US) Inc.: Omala S2 GX 320 Sinopec Lubricant Co., Ltd.: Great Wall AP-S 320, AP-S 320 --- P59 Heavy EP Gear Lubricant (C-320) | Specification | Value/Requirement | |----------------------------------|-------------------------------------------| | Viscosity @40°C | 288–352 cSt (ASTM D2422) | | Viscosity Index | Minimum 85 (ASTM D2270) | --- P68 Light Anti-Wear Hydraulic Oil and Lubricant (HM-32) | Specification | Value/Requirement | |----------------------------------|-------------------------------------------| | Viscosity @40°C | 28.8–35.2 cSt (ASTM D445) | | Viscosity Index | Minimum 90 (ASTM D2270) | | Color | Maximum 2.0 (ASTM D1500) | --- General Rules Synthetic fluids approved only if they meet the ""P"" specification. Avoid mixing synthetic/conventional products. Not all Milacron equipment supports biodegradable/non-zinc/synthetic—consult Milacron first. --- --- Initial Lubrication Recommendation Use Mobilith SHC-PM Grease unless otherwise specified.","Here’s the cleaned answer:
+
+---
+
+### **1. Approved Lubricants and Hydraulic Oils**
+![The image is a table from a technical manual, specifically related to industrial plastic injection molding equipment. It lists various types of lubricants and hydraulic oils that are approved for use](http://localhost:8000/api/media/yologen/train/MILACRON_page88_rendered.png)
+
+---
+
+### **2. Detailed Lubricant Specifications**
+
+#### **AW32 Performance Plus Hydraulic Oil (ISO VG 32)**
+- Shell Global Solutions (US) Inc.: *Tellus S2 M 32*, *Tellus S3 M 32*
+- Sinopec Lubricant Co., Ltd.: *Great Wall L-HM32*, *L-HS32*, *L-HV32*, *Sinopec L-HM32*, *L-HS32*, *L-HV32*
+- Tide Water Oil Co. (India) Ltd.: *Avalon HLP 32*
+- TongYi Petroleum Chemical Co., Ltd.: *Cave L-HM32*, *Tongli L-HM 32*
+
+---
+
+#### **ISO VG 320 Heavy-Duty Gear Lubricants**
+- Chevron Oronite S.A.S.: *IND19038*
+- ExxonMobil Corp.: *SHC Elite 320*
+- Pertamina Lubricants: *MASRI RG 320*
+- Petro-Canada Lubricants Inc.: *Enduratex EP 320*
+- Petromin Corporation: *Gearlube EP 320*
+- Phillips 66 Company: *Extra Duty Gear Oil GLW 320*
+- Shell Global Solutions (US) Inc.: *Omala S2 GX 320*
+- Sinopec Lubricant Co., Ltd.: *Great Wall AP-S 320*, *AP-S 320*
+
+---
+
+#### **P59 Heavy EP Gear Lubricant (C-320)**
+| **Specification**               | **Value/Requirement**                     |
+|----------------------------------|-------------------------------------------|
+| Viscosity @40°C                  | 288–352 cSt (ASTM D2422)                 |
+| Viscosity Index                  | Minimum 85 (ASTM D2270)                   |
+
+---
+
+#### **P68 Light Anti-Wear Hydraulic Oil and Lubricant (HM-32)**
+| **Specification**               | **Value/Requirement**                     |
+|----------------------------------|-------------------------------------------|
+| Viscosity @40°C                  | 28.8–35.2 cSt (ASTM D445)                |
+| Viscosity Index                  | Minimum 90 (ASTM D2270)                   |
+| Color                           | Maximum 2.0 (ASTM D1500)                 |
+
+---
+
+### **General Rules**
+- Synthetic fluids approved only if they meet the **""P"" specification**.
+- Avoid mixing synthetic/conventional products.
+- Not all Milacron equipment supports biodegradable/non-zinc/synthetic—**consult Milacron first**.
+
+---
+![The image is a table from an industrial plastic injection molding machine manual. It lists various lubricants and hydraulic fluids along with their product names, manufacturers, and specifications such as viscosity, flash point, fire point, and additives](http://localhost:8000/api/media/yologen/train/MILACRON_page93_rendered.png)
+
+---
+### **Initial Lubrication Recommendation**
+- Use **Mobilith SHC-PM Grease** unless otherwise specified.
+
+![The image is a table from a technical manual, specifically related to industrial](http://localhost:8000/api/media/yologen/train/MILACRON_page88_rendered.png)
+![The image is a table from an industrial plastic injection molding machine manual](http://localhost:8000/api/media/yologen/train/MILACRON_page93_rendered.png)
+![The image is a table from a technical manual, specifically related to thermal st](http://localhost:8000/api/media/yologen/train/MILACRON_page86_rendered.png)",0.9847,0.9653,0.7311,0.9212,Excellent,Excellent,,Excellent,0.80,0.90,0.65,0.85,yes,yes,,yes,0.1847,0.0653,,0.0712
+imgtext-09,image_text,Show the MAAC thermoformer forming timer diagram with flow control,27.69,"MAAC Thermoformer Forming Timer and Flow Control Overview Key Components: Timer Functions (13 Total): Heating Timer: Controls heating duration. Forming Timer: Defines total cycle time for platen movement, vacuum application, air eject; includes configurable platen delay for pre-draw or assist functions. Zero-second setting initiates simultaneous platen activation. Oven Pre-Heat Timer: Prepares oven before sheet entry. Platen Delay Timer: Controls mold-installed platen timing (assist/pre-draw extension) and synchronizes vacuum application. Eject Delay Timer: Delays platen return until eject air releases mold-plastic seal. Fan Delay Timer: Delays cooling fans to allow optimal vacuum application before cooling begins. Platen Return Timer: Regulates post-forming platen retraction timing. Vacuum Delay Timer: Optimizes vacuum timing for part formation. Infrared (IR) Setting Timer: Terminates heating when sheet temperature matches IR setpoint, triggering early index to forming station. Hold Timers (#1 and #2): Optional extended holding periods during specific stages. Auto-Man Hold Timer: Enables manual override or automated hold cycles. Flow Control Schematic: The MAAC Thermoformer Flow Control System schematic is available on Page 31. Includes timer interconnections and flow control logic for vacuum, eject, and platen movements. Security & Integration: Multi-level security codes prevent unauthorized adjustments. Ethernet IP integration with Allen-Bradley (AB) for data acquisition/supervisory control.","### **MAAC Thermoformer Forming Timer and Flow Control Overview**
+
+#### **Key Components:**
+- **Timer Functions (13 Total):**
+  - **Heating Timer:** Controls heating duration.
+  - **Forming Timer:** Defines total cycle time for platen movement, vacuum application, air eject; includes configurable platen delay for pre-draw or assist functions. Zero-second setting initiates simultaneous platen activation.
+
+  - **Oven Pre-Heat Timer:** Prepares oven before sheet entry.
+
+  - **Platen Delay Timer:** Controls mold-installed platen timing (assist/pre-draw extension) and synchronizes vacuum application.
+
+  - **Eject Delay Timer:** Delays platen return until eject air releases mold-plastic seal.
+
+  - **Fan Delay Timer:** Delays cooling fans to allow optimal vacuum application before cooling begins.
+
+  - **Platen Return Timer:** Regulates post-forming platen retraction timing.
+
+  - **Vacuum Delay Timer:** Optimizes vacuum timing for part formation.
+
+  - **Infrared (IR) Setting Timer:** Terminates heating when sheet temperature matches IR setpoint, triggering early index to forming station.
+
+  - **Hold Timers (#1 and #2):** Optional extended holding periods during specific stages.
+  - **Auto-Man Hold Timer:** Enables manual override or automated hold cycles.
+
+#### **Flow Control Schematic:**
+- The **MAAC Thermoformer Flow Control System** schematic is available on **[Page 31](http://localhost:8000/api/media/yologen/val/Manual_MAAC-Thermoformer_page31_img3.png)**.
+  - Includes timer interconnections and flow control logic for vacuum, eject, and platen movements.
+
+#### **Security & Integration:**
+- Multi-level security codes prevent unauthorized adjustments.
+- Ethernet IP integration with Allen-Bradley (AB) for data acquisition/supervisory control.
+
+![The image is a screenshot from a technical manual, specifically focusing on an i](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page30_img3.png)
+![The image is a screenshot from an industrial equipment manual, specifically for ](http://localhost:8000/api/media/yologen/val/Manual_MAAC-Thermoformer_page31_img3.png)
+![This image appears to be a page from an industrial thermoforming equipment manua](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page31_img9.png)",0.9472,0.9052,0.7464,0.8913,,Excellent,Good,Good,0.80,0.90,0.65,0.85,,yes,yes,yes,,0.0052,0.0964,0.0413
+imgtext-10,image_text,Show the MAAC thermoformer input diagnostics screen,18.69,"Here’s the cleaned answer: --- How to Access the Screen Navigate to the Main Menu. Select the ""SETUP"" button (to enter Setup Mode). On the Setup Screen, touch the ""I/O STATUS pushbutton"" to display the INPUT DIAGNOSTIC SCREEN. --- Screen Content & Layout Inputs Monitored Limit switches Positions Pushbuttons Visual Indicators | State | Color | |-------------|--------| | Input is off | Red | | Input is on | Green | --- Functionality The screen provides real-time status monitoring of hardware inputs only.","Here’s the cleaned answer:
+
+---
+
+### **How to Access the Screen**
+1. Navigate to the **Main Menu**.
+2. Select the **""SETUP"" button** (to enter Setup Mode).
+3. On the **Setup Screen**, touch the **""I/O STATUS pushbutton""** to display the **INPUT DIAGNOSTIC SCREEN**.
+
+---
+
+### **Screen Content & Layout**
+#### **Inputs Monitored**
+- Limit switches
+- Positions
+- Pushbuttons
+
+#### **Visual Indicators**
+| State       | Color  |
+|-------------|--------|
+| Input is off | Red    |
+| Input is on  | Green  |
+
+---
+### **Functionality**
+- The screen provides real-time status monitoring of hardware inputs only.
+
+![MAAC Thermoformer Input Diagnostics Screen](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page77_img2.png)
+
+![This image is a screenshot from an online help manual for a MAAC Thermoformer ma](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page77_img2.png)
+![This image is a screenshot from an industrial thermoforming machine's control in](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page88_img1.png)
+![This image appears to be a page from an equipment manual, specifically focusing ](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page87_rendered.png)",0.8287,1.0000,0.6989,0.9066,Good,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.0287,0.1000,0.0489,0.0566
+imgtext-11,image_text,Show me the RSA-G2 clamping systems for tension and three-point bending tests,47.0,"Here are the cleaned specifications for the RSA-G2 clamping systems: --- Three-Point Bending Clamping System Deformation Mode: Pure bending (free bending) with three-point contacts at both ends and the middle. Sample Support Mechanism: Freely supported by fulcrums to eliminate clamping effects. Ideal Applications: Solid bars of stiff materials: Composites Ceramics Glassy/semi-crystalline polymers Metals Standard Clamp Availability: Included with every RSA-G2 for routine instrument calibration. Sample Size Specifications: Interchangeable span pieces: 10 mm, 25 mm, 40 mm (standard). Additional available spans: 5 mm, 15 mm, 20 mm, 50 mm. Maximum sample width: 12.8 mm Maximum sample thickness: 5 mm Low-Friction Design: Roller-bearing supported design for 20 mm and 50 mm clamps. --- Tension Clamping System Deformation Mode: Sample clamped at top and bottom, subjected to tensile force. Ideal Applications: Thin films Individual fibers/fiber bundles Strips, bars --- Temperature Limits Standard clamps: Operable up to 500°C. Optional clamps required for testing beyond 500°C. --- Visual References","Here are the cleaned specifications for the RSA-G2 clamping systems:
+
+---
+
+### **Three-Point Bending Clamping System**
+- **Deformation Mode**: Pure bending (free bending) with three-point contacts at both ends and the middle.
+- **Sample Support Mechanism**:
+  - Freely supported by fulcrums to eliminate clamping effects.
+
+- **Ideal Applications**:
+  - Solid bars of stiff materials:
+    - Composites
+    - Ceramics
+    - Glassy/semi-crystalline polymers
+    - Metals
+
+- **Standard Clamp Availability**: Included with every RSA-G2 for routine instrument calibration.
+- **Sample Size Specifications**:
+  - Interchangeable span pieces: **10 mm, 25 mm, 40 mm** (standard).
+  - Additional available spans: **5 mm, 15 mm, 20 mm, 50 mm**.
+  - Maximum sample width: **12.8 mm**
+  - Maximum sample thickness: **5 mm**
+
+- **Low-Friction Design**:
+  - Roller-bearing supported design for **20 mm and 50 mm clamps**.
+
+---
+
+### **Tension Clamping System**
+- **Deformation Mode**: Sample clamped at top and bottom, subjected to tensile force.
+- **Ideal Applications**:
+  - Thin films
+  - Individual fibers/fiber bundles
+  - Strips, bars
+
+---
+### **Temperature Limits**
+- Standard clamps: Operable up to **500°C**.
+- Optional clamps required for testing beyond **500°C**.
+
+---
+### **Visual References**
+- ![Schematic diagram of three-point bending and tension clamping systems](http://localhost:8000/api/media/yologen/train/RSA-G2_page7_img3.jpeg)
+
+![This is a schematic diagram from an equipment manual. It shows a TA Instruments ](http://localhost:8000/api/media/yologen/train/RSA-G2_page7_img3.jpeg)
+![This is an image from a technical equipment manual. It shows a schematic diagram](http://localhost:8000/api/media/yologen/train/RSA-G2_page8_img4.jpeg)
+![This image is a schematic diagram of the TA Instruments RSA-G2 rheometer, which ](http://localhost:8000/api/media/yologen/train/RSA-G2_page8_img3.jpeg)",1.0000,1.0000,0.6883,0.8505,Excellent,Excellent,Okay,Good,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.0383,0.0005
+imgtext-12,image_text,Show the MILACRON alarm SPC chart for trend monitoring,37.55,"Here’s the cleaned answer: --- MILACRON SPC Trend Monitoring Chart Graphical Representation The trend monitoring chart is displayed in Menu 51–58 (for each SPC chart #1–#8). It shows: X̄ vs. Sample Number: A line plot of the average values over time. Control Limits: Upper Control Limit (UCL) Lower Control Limit (LCL) R Trend: Optional overlay for range trends if configured. Key Components Displays X̄ values plotted against sample numbers with UCL/LCL bands. --- Tabular Data Columns: Sample Number (#) X̄ (Average) of readings R (Range) of readings Date & Time stamps --- Alarm Conditions and Configuration Run Alarm Triggered if samples are consistently above/below the X̄ value for a preset number of consecutive samples. Configured via ""Run"" parameter on Menu 67. Trend Alarms R Trend Alarm: Monitors consistent rising/falling trends in range (R) values. X̄ Trend Alarm: Monitors consistent upward/downward movement in average (X̄). Configured via ""Trend"" parameter on Menu 67. --- Control Limits If Alarm Enable is active, alarms trigger when samples exceed: Upper Control Limit (UCL) Lower Control Limit (LCL) --- Procedure for Accessing the Chart Navigate to Menu 51–58. View: Graphical trend plot. Tabular sample data. --- Configuration Steps Enable Sampling: Toggle ""Sample Enable"" on in Menu 59. Set Alarm Thresholds: Adjust ""Run"" and ""Trend"" parameters in Menu 67 (number of consecutive samples for triggering alarms). Verify Control Limits: Ensure UCL/LCL are set per process requirements.","Here’s the cleaned answer:
+
+---
+
+### **MILACRON SPC Trend Monitoring Chart**
+
+#### **Graphical Representation**
+The trend monitoring chart is displayed in **Menu 51–58** (for each SPC chart #1–#8). It shows:
+- **X̄ vs. Sample Number**: A line plot of the average values over time.
+- **Control Limits**:
+  - Upper Control Limit (**UCL**)
+  - Lower Control Limit (**LCL**)
+- **R Trend**: Optional overlay for range trends if configured.
+
+#### **Key Components**
+- ![SPC Analysis Chart](http://localhost:8000/api/media/yologen/train/MILACRON_page372_img3.png)
+  Displays **X̄ values** plotted against sample numbers with UCL/LCL bands.
+
+---
+
+### **Tabular Data**
+Columns:
+- Sample Number (#)
+- X̄ (Average) of readings
+- R (Range) of readings
+- Date & Time stamps
+
+---
+### **Alarm Conditions and Configuration**
+
+#### **Run Alarm**
+Triggered if samples are consistently above/below the **X̄ value** for a preset number of consecutive samples.
+Configured via **""Run"" parameter on Menu 67**.
+
+#### **Trend Alarms**
+- **R Trend Alarm**: Monitors consistent rising/falling trends in range (**R**) values.
+- **X̄ Trend Alarm**: Monitors consistent upward/downward movement in average (**X̄**).
+Configured via **""Trend"" parameter on Menu 67**.
+
+---
+### **Control Limits**
+If **Alarm Enable** is active, alarms trigger when samples exceed:
+- Upper Control Limit (UCL)
+- Lower Control Limit (LCL)
+
+---
+### **Procedure for Accessing the Chart**
+1. Navigate to **Menu 51–58**.
+2. View:
+   - Graphical trend plot.
+   - Tabular sample data.
+
+---
+### **Configuration Steps**
+- **Enable Sampling**: Toggle **""Sample Enable""** on in **Menu 59**.
+- **Set Alarm Thresholds**:
+  - Adjust **""Run"" and ""Trend""** parameters in **Menu 67** (number of consecutive samples for triggering alarms).
+- **Verify Control Limits**: Ensure UCL/LCL are set per process requirements.
+
+![This image is a page from an industrial plastic injection molding machine manual](http://localhost:8000/api/media/yologen/train/MILACRON_page406_rendered.png)
+![The image is a black and white graphical representation from an industrial plast](http://localhost:8000/api/media/yologen/train/MILACRON_page331_img4.png)
+![The image is a page from an industrial plastic injection molding machine manual,](http://localhost:8000/api/media/yologen/train/MILACRON_page133_rendered.png)",1.0000,0.9928,0.7600,0.9016,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0928,0.1100,0.0516
+imgtext-13,image_text,Show me the APSX-PIM electrical schematic showing the hopper motor and sensors wiring,27.28,"Hopper Motor and Sensors Wiring Schematic --- Wiring Details Motor Connections Power Supply: Terminal Labels: L (Line), N (Neutral), G (Ground). Wiring Standards: Follow wiring standards referenced in schematic. Sensors Wiring Proximity Sensors Connections: COM, NO, NC. Wiring: Shielded cables if exposed to EMI. Level Sensors Connections: IN/OUT, VCC, GND. --- Power & Electrical Requirements Voltage Supply: 110VAC, single-phase. Frequency: 60Hz. Circuit Protection: Fuse Rating: 15A–20A (verify on schematic). Overload protection for motor. --- Procedural Notes Pre-Operation Checks Inspect feeder pipes for obstructions. Verify sensor connections are secure and free of corrosion. Confirm power supply is isolated before wiring checks. Check continuity using a multimeter (verify L/N/G connections). --- Troubleshooting Guide No Sensor Signal: Verify power supply to sensors. Check wiring continuity between sensor and control module. Motor Not Running: Confirm voltage at motor terminals (110VAC). Inspect fuse/overload relay for integrity.","### **Hopper Motor and Sensors Wiring Schematic**
+![Technical schematic of APSX-PIM electrical connections](http://localhost:8000/api/media/yologen/train/APSX-PIM_page41_img1.png)
+
+---
+
+### **Wiring Details**
+
+#### **Motor Connections**
+- **Power Supply**:
+  - Terminal Labels: **L (Line), N (Neutral), G (Ground)**.
+  - Wiring Standards: Follow wiring standards referenced in schematic.
+
+#### **Sensors Wiring**
+##### **Proximity Sensors**
+- **Connections**: **COM, NO, NC**.
+- **Wiring**: Shielded cables if exposed to EMI.
+
+##### **Level Sensors**
+- **Connections**: **IN/OUT, VCC, GND**.
+
+---
+### **Power & Electrical Requirements**
+- **Voltage Supply**: **110VAC**, single-phase.
+- **Frequency**: **60Hz**.
+- **Circuit Protection**:
+  - Fuse Rating: **15A–20A** (verify on schematic).
+  - Overload protection for motor.
+
+---
+### **Procedural Notes**
+#### **Pre-Operation Checks**
+1. Inspect feeder pipes for obstructions.
+2. Verify sensor connections are secure and free of corrosion.
+3. Confirm power supply is isolated before wiring checks.
+4. Check continuity using a multimeter (verify **L/N/G** connections).
+
+---
+### **Troubleshooting Guide**
+- **No Sensor Signal**:
+  - Verify power supply to sensors.
+  - Check wiring continuity between sensor and control module.
+
+- **Motor Not Running**:
+  - Confirm voltage at motor terminals (**110VAC**).
+  - Inspect fuse/overload relay for integrity.
+
+![This image appears to be a schematic diagram from an APSX injection molding mach](http://localhost:8000/api/media/yologen/train/APSX-PIM_page41_img1.png)
+![This image is a schematic diagram from an APSX-PIM plastic injection molding mac](http://localhost:8000/api/media/yologen/train/APSX-PIM_page18_img1.png)
+![The image is a schematic diagram of an APSX-PIM plastic injection molding machin](http://localhost:8000/api/media/yologen/train/APSX-PIM_page14_img2.png)",0.9063,1.0000,0.6957,0.8701,Excellent,Excellent,Okay,Good,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1063,0.1000,0.0457,0.0201
+imgtext-14,image_text,Show the BOY 35 injection pressure diagram from the technical data section,42.49,"BOY 35 Injection Pressure Diagram --- Injection Pressure Diagram (Page 27) X-Axis: Injection pressure range: 0–300 bar. Screw diameters labeled: Ø14, Ø18, Ø22, Ø24, Ø28, Ø32. Y-Axis: Clamping force in kN: Ø14: Up to 1489 kN. Ø18: Up to 1639 kN (standard), 2100 kN (with differential injection). Ø22: Up to 1255 kN. Ø24: Up to 2231 kN (standard), 2739 kN (with differential injection). Ø28: Up to 2224 kN. Ø32: Up to 2655 kN. --- Differential Injection Enabled via valve Y52 for screw sizes: Ø18, Ø24. --- Hydraulic Motor & Screw Stroke Compatibility | Screw Diameter (mm) | Differential Injection | Screw Stroke (mm) | Hydraulic Motor (ccm) | |--------------------|------------------------|-------------------|----------------------| | 14 | No | 40 | 80 | | 18 | Yes/No | 80 | 80 | | 22 | No | 95 | 100/160 | | 24 | Yes | 95 | 100/160 | | 32 | No | 95 | 100/160 | --- Injection Unit Constants G16DIFF (for differential injection). G45D_56, G45D_81, G96. --- Pressure Monitoring Locations Injection unit pressures: Screen page 15.30. Clamping unit pressures: Screen page 15.30. System pressure (pump): Screen page 0.10.","### **BOY 35 Injection Pressure Diagram**
+
+![Injection pressure diagram](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page27_rendered.png)
+
+---
+#### **Injection Pressure Diagram (Page 27)**
+- **X-Axis:** Injection pressure range: **0–300 bar**.
+  - Screw diameters labeled: **Ø14, Ø18, Ø22, Ø24, Ø28, Ø32**.
+
+- **Y-Axis:** Clamping force in **kN**:
+  - **Ø14**: Up to **1489 kN**.
+  - **Ø18**: Up to **1639 kN** (standard), **2100 kN** (with differential injection).
+  - **Ø22**: Up to **1255 kN**.
+  - **Ø24**: Up to **2231 kN** (standard), **2739 kN** (with differential injection).
+  - **Ø28**: Up to **2224 kN**.
+  - **Ø32**: Up to **2655 kN**.
+
+---
+#### **Differential Injection**
+- Enabled via valve **Y52** for screw sizes: **Ø18, Ø24**.
+
+---
+#### **Hydraulic Motor & Screw Stroke Compatibility**
+| Screw Diameter (mm) | Differential Injection | Screw Stroke (mm) | Hydraulic Motor (ccm) |
+|--------------------|------------------------|-------------------|----------------------|
+| 14                 | No                     | 40                | 80                   |
+| 18                 | Yes/No                 | 80                | 80                   |
+| 22                 | No                     | 95                | 100/160              |
+| 24                 | Yes                    | 95                | 100/160              |
+| 32                 | No                     | 95                | 100/160              |
+
+---
+#### **Injection Unit Constants**
+- **G16DIFF** (for differential injection).
+- **G45D_56, G45D_81, G96**.
+
+---
+#### **Pressure Monitoring Locations**
+- Injection unit pressures: Screen page **15.30**.
+- Clamping unit pressures: Screen page **15.30**.
+- System pressure (pump): Screen page **0.10**.
+
+![This image is a page from an industrial manual, specifically focusing on the mai](http://localhost:8000/api/media/yologen/val/Manual_BOY-35-E-VV_unlocked_page446_rendered.png)
+![The image is a page from an industrial plastic injection molding system manual, ](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page102_rendered.png)
+![The image is a page from a technical manual, specifically focusing on the ""BOY 3](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page465_rendered.png)",1.0000,1.0000,0.9000,0.9318,Excellent,Excellent,Excellent,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.2500,0.0818
+imgtext-15,image_text,Show the FTIR spectra comparison interface for data comparison analysis,36.93,"Technical Summary of FTIR Spectra Comparison Interface Core Functionality Data Comparison Module: Compares a measured spectrum with a reference spectrum. Requires selection of the reference spectrum file and specification of the wavenumber range. --- Algorithm Selection (for spectral matching) Euclidean Distance 1st Derivative Euclidean Distance Correlation Coefficient 1st Derivative Correlation Coefficient Absolute Value (sum of absolute differences) 1st Derivative Absolute Value (sum of absolute differences after differentiation) Least Squares (sum of squares of differences) 1st Derivative Least Squares (sum of squares of differences after differentiation) --- Operational Constraints Comparison command only available when the x-axis is set to wavenumber. --- Data Processing Variations Parameter dialog boxes vary by: Y-axis units: Abs (Absorbance), %T (%Transmittance), or %R (%Reflectance). --- Additional Features Spectral Correction & Interference Removal CO₂ Reduction: Eliminates CO₂ absorption peaks when y-axis is Abs, %T, or %R. H₂O (Water Vapor) Reduction: Removes water vapor interference when y-axis is Abs, %T, or %R. --- Background & Crystal Handling Delay time of 30 seconds after changing measurement parameters before background correction. [Crystal Recognition] Function: Detects ATR crystal type for automatic method selection in Navigation mode. --- Visual Interface Elements Schematics and Screenshots","### **Technical Summary of FTIR Spectra Comparison Interface**
+
+#### **Core Functionality**
+- **Data Comparison Module**:
+  - Compares a measured spectrum with a reference spectrum.
+  - Requires selection of the **reference spectrum file** and specification of the **wavenumber range**.
+
+---
+
+### **Algorithm Selection (for spectral matching)**
+- Euclidean Distance
+- 1st Derivative Euclidean Distance
+- Correlation Coefficient
+- 1st Derivative Correlation Coefficient
+- Absolute Value (sum of absolute differences)
+- 1st Derivative Absolute Value (sum of absolute differences after differentiation)
+- Least Squares (sum of squares of differences)
+- 1st Derivative Least Squares (sum of squares of differences after differentiation)
+
+---
+
+### **Operational Constraints**
+- Comparison command only available when the x-axis is set to **wavenumber**.
+
+---
+
+### **Data Processing Variations**
+- Parameter dialog boxes vary by:
+  - Y-axis units: **Abs (Absorbance), %T (%Transmittance), or %R (%Reflectance)**.
+
+---
+
+### **Additional Features**
+
+#### **Spectral Correction & Interference Removal**
+- **CO₂ Reduction**:
+  - Eliminates CO₂ absorption peaks when y-axis is **Abs, %T, or %R**.
+
+- **H₂O (Water Vapor) Reduction**:
+  - Removes water vapor interference when y-axis is **Abs, %T, or %R**.
+
+---
+
+### **Background & Crystal Handling**
+- Delay time of **30 seconds** after changing measurement parameters before background correction.
+- **[Crystal Recognition] Function**:
+  - Detects ATR crystal type for automatic method selection in Navigation mode.
+
+---
+
+### **Visual Interface Elements**
+
+#### **Schematics and Screenshots**
+![A schematic representation of an FTIR software interface showing spectrum comparison tools and data visualization.](http://localhost:8000/api/media/yologen/train/FTIR_page133_img1.png)
+
+![A detailed schematic of the FTIR spectrum view pane, including toolbars for spectral analysis and comparison.](http://localhost:8000/api/media/yologen/train/FTIR_page141_rendered.png)
+
+![An FTIR software interface screenshot displaying overlay tools, peak annotation, and data processing controls.](http://localhost:8000/api/media/yologen/train/FTIR_page144_img2.png)
+
+![This image is a screenshot from an analytical equipment manual, specifically for](http://localhost:8000/api/media/yologen/train/FTIR_page133_img1.png)
+![This image appears to be a page from a manual or guide related to a Fourier Tran](http://localhost:8000/api/media/yologen/train/FTIR_page141_rendered.png)
+![This image is a screenshot from an analytical instrument's software interface, s](http://localhost:8000/api/media/yologen/train/FTIR_page144_img2.png)",1.0000,0.9289,0.7179,0.9669,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0289,0.0679,0.1169
+imgtext-16,image_text,Show the MILACRON machine layout and space requirements diagram,32.3,"Here’s the cleaned answer: --- MILACRON Machine Layout and Space Requirements Space Requirements Operator Workspace: Must comply with safety standards. No step-ladders allowed for operation; must use stable, level stair/ladder per EN ISO 14122. Setup Personnel Workspace: Allow safe access to machine components. Material Hopper Height: If hopper upper edge exceeds 1.50 meters, provide a compliant climbing aid (per EN ISO 14122). Electrical Equipment Clearance: Working space around electrical equipment must remain clear of obstructions. Adequate illumination required. --- Schematic Diagrams for Layout Reference Visual Resources --- Key Compliance Requirements EN ISO 14122: Must be adhered to for stair/ladder stability, climbing aids, and operator safety. Safety Guards & Protective Devices: All guards, limit switches, doors, and shields must be installed before operation. Inspect post-reprogramming or modifications.","Here’s the cleaned answer:
+
+---
+
+### **MILACRON Machine Layout and Space Requirements**
+
+#### **Space Requirements**
+- **Operator Workspace:**
+  - Must comply with safety standards.
+  - No step-ladders allowed for operation; must use stable, level stair/ladder per **EN ISO 14122**.
+
+- **Setup Personnel Workspace:**
+  - Allow safe access to machine components.
+
+- **Material Hopper Height:**
+  - If hopper upper edge exceeds **1.50 meters**, provide a compliant climbing aid (per **EN ISO 14122**).
+
+- **Electrical Equipment Clearance:**
+  - Working space around electrical equipment must remain clear of obstructions.
+  - Adequate illumination required.
+
+---
+
+#### **Schematic Diagrams for Layout Reference**
+#### **Visual Resources**
+- ![Configuration of base plates and modules](http://localhost:8000/api/media/yologen/train/MILACRON_page228_img2.png)
+- ![Equipment layout schematic](http://localhost:8000/api/media/yologen/train/MILACRON_page336_rendered.png)
+- ![Sectional schematic of machine part label](http://localhost:8000/api/media/yologen/val/MILACRON_page380_rendered.png)
+
+---
+### **Key Compliance Requirements**
+- **EN ISO 14122:** Must be adhered to for stair/ladder stability, climbing aids, and operator safety.
+- **Safety Guards & Protective Devices:**
+  - All guards, limit switches, doors, and shields must be installed before operation.
+  - Inspect post-reprogramming or modifications.
+
+![This image is a schematic diagram from an industrial plastic injection molding m](http://localhost:8000/api/media/yologen/train/MILACRON_page228_img2.png)
+![The image provided appears to be a schematic diagram from an industrial plastic ](http://localhost:8000/api/media/yologen/train/MILACRON_page336_rendered.png)
+![This image is a schematic diagram from an industrial plastic injection molding m](http://localhost:8000/api/media/yologen/val/MILACRON_page218_img3.jpeg)",0.8476,1.0000,0.6857,0.9283,Good,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.0476,0.1000,0.0357,0.0783
+imgtext-17,image_text,Show the MAAC thermoformer heater zone layout diagram,25.09,"MAAC Thermoformer Heater Zone Layout Diagram Visual Representations - Shows physical layout of heater zones on the bottom plate. Includes connector labels for each zone. Heater Zone Configuration | Zone | Description | |------|---------------------------| | 1 | Feed zone | | 2 | | | 3 | | | 4 | | | 5 | Nozzle | | 6* | Mold temperature control (if enabled) | *Zone 6 is active only in ""Elastomer/Thermoset Processing"" mode. --- Temperature Monitoring & Controls Adjustable set-up values for zones with configurable tolerances. Visual indicators: Amber: Set-point value Blue: Actual temperature >15°C below set-point (blockage risk unless processing elastomer/thermoset) Green: Within ±set-point tolerance range Red: Actual temperature >15°C above set-point --- Note: ""Elastomer/Thermoset Processing"" mode activates Zone 6 on screen page ""14.30"".","### **MAAC Thermoformer Heater Zone Layout Diagram**
+
+#### **Visual Representations**
+- ![Schematic of MAAC Thermoformer bottom plate and connectors](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page30_img2.png)
+  - Shows physical layout of heater zones on the bottom plate.
+  - Includes connector labels for each zone.
+
+- ![MAAC Thermoformer heating system diagram](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page31_img9.png)
+
+#### **Heater Zone Configuration**
+| Zone | Description               |
+|------|---------------------------|
+| 1    | Feed zone                 |
+| 2    |                           |
+| 3    |                           |
+| 4    |                           |
+| 5    | Nozzle                    |
+| 6*   | Mold temperature control (if enabled) |
+
+*Zone 6 is active only in **""Elastomer/Thermoset Processing"" mode**.
+
+---
+#### **Temperature Monitoring & Controls**
+- Adjustable set-up values for zones with configurable tolerances.
+- Visual indicators:
+  - Amber: Set-point value
+  - Blue: Actual temperature >15°C below set-point (blockage risk unless processing elastomer/thermoset)
+  - Green: Within ±set-point tolerance range
+  - Red: Actual temperature >15°C above set-point
+
+---
+**Note:**
+- **""Elastomer/Thermoset Processing""** mode activates **Zone 6** on screen page ""14.30"".
+
+![The image is a schematic diagram from an industrial thermoforming equipment manu](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page31_img31.png)
+![The image appears to be a schematic diagram from a technical manual. It shows a ](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page30_img2.png)
+![The image appears to be a schematic diagram from a technical manual, specificall](http://localhost:8000/api/media/yologen/train/Manual_MAAC-Thermoformer_page75_img2.png)",0.9701,0.9025,0.6773,0.8685,,Excellent,Okay,Good,0.80,0.90,0.65,0.85,,yes,yes,yes,,0.0025,0.0273,0.0185
+imgtext-18,image_text,Show the RSA-G2 instrument overview and main components,51.58,"RSA-G2 Instrument Overview and Main Components Technical Specifications Force Range: Minimum: 0.0005 N Maximum: 35 N Dynamic Displacement Range: ±0.00005 to ±1.5 mm Displacement Resolution: 1 Nanometer Modulus Range: 10³ to 3 × 10¹² Pa Tan δ Sensitivity: 0.0001 Frequency Range: 2 × 10⁻⁵ to 100 Hz --- Temperature Control System Type: Forced Convection Oven (FCO) Temperature Range: -150°C to 600°C (Standard clamps: max 500°C; optional clamps required for 600°C) Heating Rate: 0.1 to 60 °C/min Cooling Rate: 0.1 to 60 °C/min Isothermal Stability: ±0.1 °C --- Mechanical System & Drive Mechanism Transducer System: Force Rebalance Transducer (FRT): Mounted on a linear slide with: Micro-stepping motor Duplex bearing lead screw for precision positioning (±0.1 µm accuracy) Linear optical encoder Drive Mechanism: Direct-drive DC-Servo Motor (bottom): Deforms the sample. Patented FRT: Measures force at the top. --- Clamping Systems & Sample Handling Three-Point Bending: Standard span pieces: 10 mm, 25 mm, 40 mm. Maximum sample width: 12.8 mm, thickness: 5 mm. Tension Testing: Sample size: Up to 35 mm long × 12.5 mm wide × 1.5 mm thick (films, fibers). --- Visual References","### **RSA-G2 Instrument Overview and Main Components**
+
+#### **Technical Specifications**
+- **Force Range:**
+  - Minimum: **0.0005 N**
+  - Maximum: **35 N**
+- **Dynamic Displacement Range:** ±**0.00005 to ±1.5 mm**
+- **Displacement Resolution:** **1 Nanometer**
+- **Modulus Range:** **10³ to 3 × 10¹² Pa**
+- **Tan δ Sensitivity:** **0.0001**
+- **Frequency Range:** **2 × 10⁻⁵ to 100 Hz**
+
+---
+
+#### **Temperature Control System**
+- **Type:** Forced Convection Oven (FCO)
+- **Temperature Range:**
+  - **-150°C to 600°C** (*Standard clamps: max 500°C; optional clamps required for 600°C*)
+- **Heating Rate:** **0.1 to 60 °C/min**
+- **Cooling Rate:** **0.1 to 60 °C/min**
+- **Isothermal Stability:** **±0.1 °C**
+
+---
+
+#### **Mechanical System & Drive Mechanism**
+##### **Transducer System:**
+- **Force Rebalance Transducer (FRT):**
+  - Mounted on a **linear slide** with:
+    - **Micro-stepping motor**
+    - **Duplex bearing lead screw** for precision positioning (**±0.1 µm accuracy**)
+    - **Linear optical encoder**
+
+##### **Drive Mechanism:**
+- **Direct-drive DC-Servo Motor (bottom):** Deforms the sample.
+- **Patented FRT:** Measures force at the top.
+
+---
+
+#### **Clamping Systems & Sample Handling**
+##### **Three-Point Bending:**
+  - Standard span pieces: **10 mm, 25 mm, 40 mm**.
+  - Maximum sample width: **12.8 mm**, thickness: **5 mm**.
+
+##### **Tension Testing:**
+  - Sample size: Up to **35 mm long × 12.5 mm wide × 1.5 mm thick** (films, fibers).
+
+---
+
+#### **Visual References**
+- ![Control Panel](http://localhost:8000/api/media/yologen/train/RSA-G2_page3_img2.jpeg)
+- ![Transducer and Motor Assembly](http://localhost:8000/api/media/yologen/train/RSA-G2_page5_img3.jpeg)
+- ![DMA Component View](http://localhost:8000/api/media/yologen/train/RSA-G2_page9_img1.jpeg)
+- ![Clamping Systems for Three-Point Bending and Tension Testing](http://localhost:8000/api/media/yologen/train/RSA-G2_page7_img3.jpeg)
+- ![Three-Point Bending Clamp Close-Up](http://localhost:8000/api/media/yologen/train/RSA-G2_page7_img6.jpeg)
+
+![This is a schematic diagram from an equipment manual. It shows a TA Instruments ](http://localhost:8000/api/media/yologen/train/RSA-G2_page7_img3.jpeg)
+![This image is a schematic diagram illustrating the geographical distribution of ](http://localhost:8000/api/media/yologen/train/RSA-G2_page16_img1.jpeg)
+![This image is a detailed component view from a technical equipment manual. It sh](http://localhost:8000/api/media/yologen/train/RSA-G2_page9_img1.jpeg)",1.0000,0.9565,0.6756,0.8806,Excellent,Excellent,Okay,Good,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0565,0.0256,0.0306
+imgtext-19,image_text,Show the Discovery DSC instrument and Fusion Cell design,75.64,"Discovery DSC Instrument Design Core Technology TA Fusion Cell™: Combines Q Series™, first-generation Discovery DSC, and proprietary manufacturing processes. Incorporates Tzero® technology (measures cell resistance/capacitance for energy storage characteristics). Eliminates sensor exchange to optimize: Baseline flatness Sensitivity Resolution Reproducibility Performance Metrics Baseline Flatness (-50°C to 300°C): ≤10 µW (no baseline subtractions required). Baseline Repeatability (-50°C to 300°C): <15 µW. Temperature Range: Standard: -180°C to 550°C. Extended (with Quench Cooling Accessory): -130°C (Discovery DSC 25P). Accuracy/Precision: Temperature Accuracy: ±0.025°C. Temperature Precision: ±0.005°C. Modulated DSC® (MDSC®) Enables separation of complex thermal events and heat capacity monitoring under elevated pressures. --- Fusion Cell Design Components Fixed-pedestal mounted sensor. Rugged silver furnace with long-life windings for uniform temperature control. Tzero® thermocouple. Temperature-controlled electronics. Pressure transducer (Discovery DSC 25P). Advanced T4P Tzero® heat flow technology for single-run heat capacity measurements. Schematic Components --- Instrument Models Discovery X3 DSC Multi-sample cell for simultaneous analysis of up to three samples. User-replaceable Fusion Cell™. 54-position autosampler. Dual input gas-delivery manifold. Color app-style touch screen with One-Touch-Away™ interface. Discovery DSC 25P Operates under atmospheric and elevated pressures (up to 550°C). Compatible with Quench Cooling Accessory for sub-ambient temperatures down to -130°C.","### **Discovery DSC Instrument Design**
+
+#### **Core Technology**
+- **TA Fusion Cell™**:
+  - Combines Q Series™, first-generation Discovery DSC, and proprietary manufacturing processes.
+  - Incorporates **Tzero® technology** (measures cell resistance/capacitance for energy storage characteristics).
+  - Eliminates sensor exchange to optimize:
+    - Baseline flatness
+    - Sensitivity
+    - Resolution
+    - Reproducibility
+
+#### **Performance Metrics**
+- **Baseline Flatness (-50°C to 300°C)**: ≤10 µW (no baseline subtractions required).
+- **Baseline Repeatability (-50°C to 300°C)**: <15 µW.
+- **Temperature Range**:
+  - Standard: **-180°C to 550°C**.
+  - Extended (with Quench Cooling Accessory): **-130°C** (Discovery DSC 25P).
+- **Accuracy/Precision**:
+  - Temperature Accuracy: ±0.025°C.
+  - Temperature Precision: ±0.005°C.
+
+#### **Modulated DSC® (MDSC®)**
+- Enables separation of complex thermal events and heat capacity monitoring under elevated pressures.
+
+---
+
+### **Fusion Cell Design**
+
+#### **Components**
+- Fixed-pedestal mounted sensor.
+- Rugged silver furnace with long-life windings for uniform temperature control.
+- Tzero® thermocouple.
+- Temperature-controlled electronics.
+- Pressure transducer (Discovery DSC 25P).
+- Advanced **T4P Tzero® heat flow technology** for single-run heat capacity measurements.
+
+#### **Schematic Components**
+- ![Fusion Cell Schematic](http://localhost:8000/api/media/yologen/train/TA-Instruments-Discovery-DSCX3-Brochure-EN_page9_rendered.png)
+
+---
+
+### **Instrument Models**
+
+#### **Discovery X3 DSC**
+- Multi-sample cell for simultaneous analysis of up to three samples.
+  - User-replaceable Fusion Cell™.
+  - 54-position autosampler.
+  - Dual input gas-delivery manifold.
+  - Color app-style touch screen with One-Touch-Away™ interface.
+
+#### **Discovery DSC 25P**
+- Operates under atmospheric and elevated pressures (up to 550°C).
+- Compatible with Quench Cooling Accessory for sub-ambient temperatures down to **-130°C**.
+
+![The image is a schematic diagram from a technical manual that illustrates the co](http://localhost:8000/api/media/yologen/train/TA-Instruments-Discovery-DSCX3-Brochure-EN_page9_rendered.png)
+![The image is a digital graphic with text and a graph that appears to be from a t](http://localhost:8000/api/media/yologen/train/TA-Instruments-Discovery-DSCX3-Brochure-EN_page11_rendered.png)
+![The image appears to be a schematic or diagram from a technical manual, specific](http://localhost:8000/api/media/yologen/train/TA-Instruments-Discovery-DSCX3-Brochure-EN_page25_img2.jpeg)",0.9866,1.0000,0.7315,0.9171,Excellent,Excellent,Good,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1866,0.1000,0.0815,0.0671
+imgtext-20,image_text,Show the MILACRON toggle clamp mechanism diagram,30.93,"MILACRON Toggle Clamp Mechanism – Technical Summary Diagrams and Schematics Mechanical Components Toggle Mechanism: Locks moving platen to stationary components via linkage. Prevents clamp relaxation during injection by maintaining lockover. Crosshead: Mechanical link between clamp rack and toggle mechanism. Transfers force from pinion gear-driven rack to moving platen. Operational Sequence Closing Cycle: Motor rotates pinion → rack moves crosshead toward mold → toggle locks over, generating clamp force. Opening Cycle: Reversed motor motion retracts rack → crosshead pulls moving platen away from mold. Safety & Procedures Toggle mechanism must be unlocked before powering down or locking out to prevent rack/pinion gear rotation.","### **MILACRON Toggle Clamp Mechanism – Technical Summary**
+
+#### **Diagrams and Schematics**
+- ![Schematic of clamp unit layout, including stationary platen, moving platen, toggle linkage, crosshead positioning](http://localhost:8000/api/media/yologen/train/MILACRON_page140_rendered.png)
+
+- ![Warning and operational procedure for toggle clamp handling](http://localhost:8000/api/media/yologen/train/MILACRON_page139_rendered.png)
+
+- ![Detailed schematic of clamp system components and functions](http://localhost:8000/api/media/yologen/train/MILACRON_page141_rendered.png)
+
+#### **Mechanical Components**
+- **Toggle Mechanism**:
+  - Locks moving platen to stationary components via linkage.
+  - Prevents clamp relaxation during injection by maintaining lockover.
+
+- **Crosshead**:
+  - Mechanical link between clamp rack and toggle mechanism.
+  - Transfers force from pinion gear-driven rack to moving platen.
+
+#### **Operational Sequence**
+1. **Closing Cycle**:
+   - Motor rotates pinion → rack moves crosshead toward mold → toggle locks over, generating clamp force.
+2. **Opening Cycle**:
+   - Reversed motor motion retracts rack → crosshead pulls moving platen away from mold.
+
+#### **Safety & Procedures**
+- Toggle mechanism must be unlocked before powering down or locking out to prevent rack/pinion gear rotation.
+
+![The image is a page from an industrial plastic injection molding machine manual.](http://localhost:8000/api/media/yologen/train/MILACRON_page139_rendered.png)
+![The image is a page from an industrial plastic injection molding machine manual,](http://localhost:8000/api/media/yologen/train/MILACRON_page33_rendered.png)
+![The image is a procedure illustration from a technical manual, specifically rela](http://localhost:8000/api/media/yologen/train/MILACRON_page460_rendered.png)",1.0000,1.0000,0.7500,0.8944,Excellent,Excellent,Good,Good,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.1000,0.0444
+imgtext-21,image_text,Show the BOY 35 nozzle and screw arrangement diagram,37.5,"BOY 35 Nozzle and Screw Arrangement Nozzle Types & Compatible Screws Shut-off Nozzles: Radius 35 mm (for thermoset plastics, elastomer, rubber): Length adjustment: +21 mm for screws in the range of 24–32 mm. Part numbers: SW41, SW50, SW55. Radius R ½"" (12.7 mm) (for thermoset plastics, elastomer, rubber): Length adjustment: +21 mm for screws in the range of 24–32 mm. Part numbers: SW41, SW50, SW55. Open Nozzles: For silicon rubber: X1 (115 mm length) → Screw diameter: 14 mm. X2 (25 mm length) → Screw diameter: 14 mm. X1 (125 mm length) → Screw diameters: 18 mm, 22 mm, or 32 mm. Screw Specifications Standard screw diameters: 14 mm, 18 mm, 22 mm, 24 mm, 28 mm, 32 mm. Stroke lengths for differential injection: 14 mm diameter: Stroke 40 mm. 18 mm diameter: Stroke 80 mm. 22 mm diameter: Stroke 80 mm (or 95 mm for differential injection). 24 mm diameter: Stroke 95 mm. 32 mm diameter: Stroke 95 mm. Visual References","### **BOY 35 Nozzle and Screw Arrangement**
+
+#### **Nozzle Types & Compatible Screws**
+- **Shut-off Nozzles:**
+  - Radius **35 mm** (for thermoset plastics, elastomer, rubber):
+    - Length adjustment: **+21 mm** for screws in the range of **24–32 mm**.
+    - Part numbers: **SW41, SW50, SW55**.
+
+  - Radius **R ½"" (12.7 mm)** (for thermoset plastics, elastomer, rubber):
+    - Length adjustment: **+21 mm** for screws in the range of **24–32 mm**.
+    - Part numbers: **SW41, SW50, SW55**.
+
+- **Open Nozzles:**
+  - For silicon rubber:
+    - **X1 (115 mm length)** → Screw diameter: **14 mm**.
+    - **X2 (25 mm length)** → Screw diameter: **14 mm**.
+    - **X1 (125 mm length)** → Screw diameters: **18 mm, 22 mm, or 32 mm**.
+
+#### **Screw Specifications**
+- **Standard screw diameters:** **14 mm**, **18 mm**, **22 mm**, **24 mm**, **28 mm**, **32 mm**.
+- **Stroke lengths for differential injection:**
+  - **14 mm diameter:** Stroke **40 mm**.
+  - **18 mm diameter:** Stroke **80 mm**.
+  - **22 mm diameter:** Stroke **80 mm** (or **95 mm** for differential injection).
+  - **24 mm diameter:** Stroke **95 mm**.
+  - **32 mm diameter:** Stroke **95 mm**.
+
+#### **Visual References**
+- ![Nozzle and screw arrangement schematic](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page32_rendered.png)
+- ![BOY 35 nozzle configuration table](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page31_rendered.png)
+
+![This image is a page from a manual for an industrial plastic injection molding s](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page31_rendered.png)
+![The image is a page from an industrial plastic injection molding system manual, ](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page102_rendered.png)
+![The image is a page from a technical manual, specifically focusing on the operat](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page400_rendered.png)",1.0000,0.9444,0.6881,0.9500,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0444,0.0381,0.1000
+imgtext-22,image_text,Show the FTIR simple quantitation analysis settings dialog,7.76,"Here are the explicit steps to access the FTIR simple quantitation analysis settings dialog: --- Accessing the Dialog Navigation Path: Open the FTIR software. Select [Navigation...] > [Simple quantitative analysis]. Confirm selection by clicking [Simple Quantification]. Proceed to Parameters: Click the <Next>> button to open the dialog titled: ""Specifying analysis parameters (simple quantitative analysis 1/4 to 4/4)"". --- Parameters to Configure Follow on-screen instructions for each step. Refer to Section 3.10.10.4.17 in the manual for detailed specifications. ---","Here are the explicit steps to access the FTIR simple quantitation analysis settings dialog:
+
+---
+
+### **Accessing the Dialog**
+1. **Navigation Path**:
+   - Open the FTIR software.
+   - Select **[Navigation...]** > **[Simple quantitative analysis]**.
+   - Confirm selection by clicking **[Simple Quantification]**.
+
+2. **Proceed to Parameters**:
+   - Click the **<Next>>** button to open the dialog titled:
+     **""Specifying analysis parameters (simple quantitative analysis 1/4 to 4/4)""**.
+
+---
+
+### **Parameters to Configure**
+- Follow on-screen instructions for each step.
+- Refer to **Section 3.10.10.4.17** in the manual for detailed specifications.
+
+---",1.0000,0.9006,0.6938,0.9413,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.0006,0.0438,0.0913
+imgtext-23,image_text,Show the APSX-PIM mold clamping assembly diagram,27.48,APSX-PIM Mold Clamping Assembly Diagram Schematics & Diagrams --- Key Components Platens: Stationary platen Moving platen Die height platen Clamping Mechanism: Toggle mechanism Clamp motor (AC) Gearbox Ejector System: Ejector pins Adjustable clamp switch --- Operational Steps Secure mold halves between stationary and moving platens. Adjust die height platen for alignment. Engage clamp motor to activate toggle/gearbox system. Verify ejector pins fully retracted before clamping. --- Installation & Alignment Notes Two-stage clamp engagement: Fast mode: Approaches mold until gap remains. Slow mode: Final adjustment for precise alignment. Ensure ejector pins fully retracted before clamping to prevent bearing damage.,"### **APSX-PIM Mold Clamping Assembly Diagram**
+
+#### **Schematics & Diagrams**
+1. ![A schematic diagram showing the APSX-PIM clamp unit, including hopper, feeder pipes, and internal components](http://localhost:8000/api/media/yologen/train/APSX-PIM_page18_img1.png)
+
+2. ![A detailed schematic of the mold clamping assembly showing electric motors, toggle mechanism, gearbox connections, and mechanical linkages](http://localhost:8000/api/media/yologen/train/APSX-PIM_page14_img2.png)
+
+---
+
+#### **Key Components**
+**Platens:**
+- Stationary platen
+- Moving platen
+- Die height platen
+
+**Clamping Mechanism:**
+- Toggle mechanism
+- Clamp motor (AC)
+- Gearbox
+
+**Ejector System:**
+- Ejector pins
+- Adjustable clamp switch
+
+---
+#### **Operational Steps**
+1. Secure mold halves between stationary and moving platens.
+2. Adjust die height platen for alignment.
+3. Engage clamp motor to activate toggle/gearbox system.
+4. Verify ejector pins fully retracted before clamping.
+
+---
+#### **Installation & Alignment Notes**
+- Two-stage clamp engagement:
+  - Fast mode: Approaches mold until gap remains.
+  - Slow mode: Final adjustment for precise alignment.
+- Ensure ejector pins fully retracted before clamping to prevent bearing damage.
+
+![This image is a schematic diagram from an APSX-PIM plastic injection molding mac](http://localhost:8000/api/media/yologen/train/APSX-PIM_page18_img1.png)
+![This image appears to be a schematic diagram from an APSX injection molding mach](http://localhost:8000/api/media/yologen/train/APSX-PIM_page41_img1.png)
+![The image is a schematic diagram of an APSX-PIM plastic injection molding machin](http://localhost:8000/api/media/yologen/train/APSX-PIM_page14_img2.png)",1.0000,1.0000,0.8000,0.8959,Excellent,Excellent,Good,Good,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.1500,0.0459
+imgtext-24,image_text,Show the MILACRON barrel and screw assembly cross-section,38.2,"MILACRON Barrel and Screw Assembly Cross-Section Cross-Sectional Images: - Illustrated in cross-section. - Perspective schematic with labeled components: Feedthroat Barrel Nut Thermocouple Cross-Sectional Components: Screw Retainer Ring: Two-piece assembly. Barrel Assembly: Feedthroat Block Set Screw Barrel Nut Torque Specifications: Barrel Adapter Cap Screws: Torque: 175 ft.-lbs. Tightening sequence: Cross-pattern, in increments. Requires anti-seize compound on threads. Nozzle Body: Torque: 300 ft.-lbs. Installation/Assembly Notes: Barrel must be purged of material before removal or installation. Ensure proper seating of barrel adapter with uniform gap around circumference. Locating pin must fit inside the keyway on feedthroat platen.","### **MILACRON Barrel and Screw Assembly Cross-Section**
+
+#### **Cross-Sectional Images:**
+- ![Screw retainer ring removal procedure](http://localhost:8000/api/media/yologen/train/MILACRON_page191_rendered.png)
+  - Illustrated in cross-section.
+
+- ![Removal of screw from spline adapter](http://localhost:8000/api/media/yologen/train/MILACRON_page192_rendered.png)
+
+- ![Installation of injection screw and tip](http://localhost:8000/api/media/yologen/train/MILACRON_page193_rendered.png)
+
+- ![Procedure for installing screws into barrel](http://localhost:8000/api/media/yologen/train/MILACRON_page194_rendered.png)
+
+- ![Schematic view of barrel assembly](http://localhost:8000/api/media/yologen/train/MILACRON_page200_rendered.png)
+  - Perspective schematic with labeled components:
+    - Feedthroat
+    - Barrel Nut
+    - Thermocouple
+
+- ![Top view schematic of barrel component](http://localhost:8000/api/media/yologen/train/MILACRON_page202_rendered.png)
+
+#### **Cross-Sectional Components:**
+- **Screw Retainer Ring**:
+  - Two-piece assembly.
+
+- **Barrel Assembly**:
+  - Feedthroat Block Set Screw
+  - Barrel Nut
+
+#### **Torque Specifications:**
+- **Barrel Adapter Cap Screws**:
+  - Torque: **175 ft.-lbs.**
+  - Tightening sequence: Cross-pattern, in increments.
+  - Requires anti-seize compound on threads.
+
+- **Nozzle Body**:
+  - Torque: **300 ft.-lbs.**
+
+#### **Installation/Assembly Notes:**
+- Barrel must be purged of material before removal or installation.
+- Ensure proper seating of barrel adapter with uniform gap around circumference.
+- Locating pin must fit inside the keyway on feedthroat platen.
+
+![This image is a procedure illustration from an industrial plastic injection mold](http://localhost:8000/api/media/yologen/train/MILACRON_page194_rendered.png)
+![The image appears to be a schematic diagram from a technical manual related to a](http://localhost:8000/api/media/yologen/train/MILACRON_page202_rendered.png)
+![The image is a procedure illustration from an industrial plastic injection moldi](http://localhost:8000/api/media/yologen/train/MILACRON_page200_rendered.png)",0.9798,1.0000,0.6987,0.9846,Excellent,Excellent,Okay,Excellent,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.1798,0.1000,0.0487,0.1346
+imgtext-25,image_text,Show the BOY 35 hydraulic system schematic diagram,32.43,"Here is the cleaned answer: --- BOY 35 Hydraulic System Schematic Diagrams: 1. Vertical Clamping Unit Schematic 2. Hydraulic-Related Instructional Schematic --- Key Hydraulic System Specifications: Motor Power Ratings by Screw Size: | Screw Size | Power Rating (kW) | |------------|------------------| | Ø 14 | 80 | | Ø 18 | 80 | | Ø 22 | 80 | | Ø 24 | 100/160* | | Ø 28 | 100/160* | | Ø 32 | 100/160* | \* Selectable power rating. --- Differential Injection Support: Supported for Screws: Ø 14, Ø 18, and Ø 22 Not supported for Screws: Ø 24, Ø 28, or Ø 32 --- Hydraulic Fluid Cooling System: Cooling Water Connection: Maximum water pressure: 10 bar Y06T solenoid valve: Opens at ≥35°C hydraulic fluid temperature. Closes when hydraulic fluid temperature drops below 35°C. --- Hydraulic Pump Troubleshooting (No Pressure): Checklist: Clogged suction filter Insufficient oil level Defective suction pipe or transducer (B01D) Mechanical defects in the pump unit --- Schematic Details: Page 444: Vertical clamping unit schematic with labeled components (pumps, valves, motors). Page 315: Hydraulic-related instructional diagram including flow paths and connections. ---","Here is the cleaned answer:
+
+---
+
+### **BOY 35 Hydraulic System Schematic Diagrams:**
+
+#### **1. Vertical Clamping Unit Schematic**
+![Technical schematic of the BOY 35 injection molding system with vertical clamping unit](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page444_rendered.png)
+
+#### **2. Hydraulic-Related Instructional Schematic**
+![Hydraulic-related schematic for BOY 35 E VV machine](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page315_rendered.png)
+
+---
+
+### **Key Hydraulic System Specifications:**
+
+#### **Motor Power Ratings by Screw Size:**
+| Screw Size | Power Rating (kW) |
+|------------|------------------|
+| Ø 14       | 80               |
+| Ø 18       | 80               |
+| Ø 22       | 80               |
+| Ø 24       | 100/160*         |
+| Ø 28       | 100/160*         |
+| Ø 32       | 100/160*         |
+
+\* Selectable power rating.
+
+---
+
+#### **Differential Injection Support:**
+- Supported for Screws: **Ø 14, Ø 18, and Ø 22**
+- Not supported for Screws: **Ø 24, Ø 28, or Ø 32**
+
+---
+
+### **Hydraulic Fluid Cooling System:**
+
+#### **Cooling Water Connection:**
+- Maximum water pressure: **10 bar**
+- Y06T solenoid valve:
+  - Opens at **≥35°C** hydraulic fluid temperature.
+  - Closes when hydraulic fluid temperature drops below **35°C**.
+
+---
+
+### **Hydraulic Pump Troubleshooting (No Pressure):**
+
+#### **Checklist:**
+- Clogged suction filter
+- Insufficient oil level
+- Defective suction pipe or transducer (**B01D**)
+- Mechanical defects in the pump unit
+
+---
+### **Schematic Details:**
+
+- **Page 444:** Vertical clamping unit schematic with labeled components (pumps, valves, motors).
+- **Page 315:** Hydraulic-related instructional diagram including flow paths and connections.
+
+---
+
+![This image is a page from a technical manual for an industrial plastic injection](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page444_rendered.png)
+![The image is a page from a technical manual, specifically an instructional secti](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page315_rendered.png)
+![The image appears to be a page from an industrial equipment manual, specifically](http://localhost:8000/api/media/yologen/train/Manual_BOY-35-E-VV_unlocked_page387_rendered.png)",1.0000,1.0000,0.7271,0.8882,Excellent,Excellent,Good,Good,0.80,0.90,0.65,0.85,yes,yes,yes,yes,0.2000,0.1000,0.0771,0.0382
