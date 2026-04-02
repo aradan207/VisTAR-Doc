@@ -213,3 +213,4 @@ media/build_slides.bat
 
 # RAGAS evaluation results (timestamped CSVs — tracked via .gitkeep)
 data/benchmarks/ragas_results/*.csv
+!data/benchmarks/ragas_results/ragas_20260302_194107.csv
