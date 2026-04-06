@@ -193,6 +193,9 @@ ollama pull hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M
 # Pull the alternative lighter LLM model (4.4 GB)
 ollama pull hf.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF:Q4_K_M
 
+# Pull the dedicated RAGAS judge model (4.9 GB)
+ollama pull hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M
+
 # Pull the embedding model for RAG (required, 215 MB)
 ollama pull hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
 ```
@@ -203,8 +206,10 @@ ollama pull hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
 |-------|------|-------|----------|
 | Ministral-3-8B-Instruct-2512 | 6.1 GB | Moderate | Best quality reasoning (default) |
 | Mistral-7B-Instruct-v0.3 | 4.4 GB | Fast | Lighter alternative, lower resource usage |
+| Meta-Llama-3.1-8B-Instruct | 4.9 GB | Moderate | Dedicated RAGAS judge model |
 
 To switch models, update `OLLAMA_MODEL` in your `.env` file.
+For RAGAS judge selection, update `RAGAS_JUDGE_MODEL` in `.env`.
 
 If needed, create your local environment file from the template:
 
@@ -219,6 +224,9 @@ The `.env` file is already configured with defaults for Ollama:
 ```env
 # LLM Configuration
 OLLAMA_MODEL=hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M
+
+# Dedicated RAGAS judge model
+RAGAS_JUDGE_MODEL=hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M
 
 # Embedding Model
 OLLAMA_EMBED_MODEL=hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M

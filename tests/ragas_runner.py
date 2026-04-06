@@ -346,7 +346,7 @@ def run_ragas(
     )
     from tests.ragas_config import get_ragas_embeddings, get_ragas_llm
 
-    # Pause to let Ollama unload the agent model before the judge (llama3.1:8b)
+    # Pause to let Ollama unload the agent model before the configured RAGAS judge
     # starts receiving requests. Avoids GPU memory contention on single-GPU rigs.
     if on_progress:
         on_progress("Pausing for model swap...")
