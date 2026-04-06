@@ -364,6 +364,7 @@ npm start
 | Variable | Description | Default |
 |----------|-------------|---------|
 | OLLAMA_MODEL | Ollama model name | Ministral-3-8B-Instruct-2512 |
+| RAGAS_JUDGE_MODEL | Ollama model name used for RAGAS judging | hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M |
 | OLLAMA_HOST | Ollama server URL | http://localhost:11434 |
 | OLLAMA_EMBED_MODEL | Ollama embedding model for RAG | mxbai-embed-large-v1-gguf:Q4_K_M |
 | OFFLINE_MODE | Disables web tools for strict local mode | true |

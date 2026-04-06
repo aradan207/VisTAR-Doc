@@ -208,6 +208,7 @@ __marimo__/
 
 # Paper documentation (private)
 media/*.md
+media/**/*.md
 media/diagrams/
 media/build_slides.bat
 

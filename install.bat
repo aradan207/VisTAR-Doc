@@ -375,6 +375,7 @@ echo.
 echo Available LLM models:
 echo   - hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M (default, best quality)
 echo   - hf.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF:Q4_K_M (lighter alternative)
+echo   - hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M (RAGAS judge)
 echo.
 echo To switch models, edit the OLLAMA_MODEL value in .env
 echo.
