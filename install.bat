@@ -204,6 +204,13 @@ if "%ONLINE_MODE%"=="1" (
     )
 
     echo.
+    echo Pulling Meta-Llama 3.1 8B Instruct judge model for RAGAS (Q4_K_M)...
+    ollama pull hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M
+    if errorlevel 1 (
+        echo WARNING: Failed to pull the RAGAS judge model. Pull it manually before benchmark runs.
+    )
+
+    echo.
     echo Pulling mxbai-embed-large embedding model (215 MB)...
     ollama pull hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
     if errorlevel 1 (
@@ -225,6 +232,10 @@ if "%ONLINE_MODE%"=="1" (
     ollama list | findstr /I "hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M" >nul
     if errorlevel 1 (
         echo WARNING: Default LLM model is missing. Pull it during online preparation.
+    )
+    ollama list | findstr /I "hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M" >nul
+    if errorlevel 1 (
+        echo WARNING: RAGAS judge model is missing. Pull it during online preparation for benchmark runs.
     )
     echo Offline model validation complete.
 )

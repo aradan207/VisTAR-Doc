@@ -37,8 +37,8 @@ _OLLAMA_HOST   = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 
 # Judge model: a dedicated, more capable model for RAGAS NLI evaluation.
 # Uses a SEPARATE env var so it never interferes with the agent model.
-# llama3.1:8b is ~4.7 GB; runs comfortably on RTX 5090 alongside the 8B agent.
-_DEFAULT_JUDGE = "llama3.1:8b"
+# Defaults to a dedicated local HF GGUF model served through Ollama.
+_DEFAULT_JUDGE = "hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M"
 _JUDGE_MODEL   = os.getenv("RAGAS_JUDGE_MODEL", _DEFAULT_JUDGE)
 
 # Sentence-transformers model for ResponseRelevancy embeddings.
