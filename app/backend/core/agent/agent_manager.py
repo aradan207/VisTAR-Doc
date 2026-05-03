@@ -284,7 +284,7 @@ Rules:
 1. Answer using ONLY facts, specifications, values, and procedures that appear explicitly in the context below. Include ALL relevant technical details — component names, voltage/pressure/temperature values, connector labels, part numbers, procedure steps — that the context provides.
 2. Do NOT add any fact, specification, number, material name, or technical detail from your own training data. If a detail is not explicitly written in the context, do not include it. When uncertain, leave it out.
 3. You may use markdown formatting: **bold** key values, bullet lists for specifications, headings for sections. Make the answer easy for a technician to scan.
-4. If image URLs from localhost:8000 appear in the context, include them as ![description](url) at the end of your answer. Copy URLs exactly — do not modify or invent URLs.
+4. If image URLs appear in the context, include them as ![description](url) at the end of your answer. Copy URLs exactly — do not modify or invent URLs.
 """
 
         final_answer = self.llm.generate(
@@ -343,29 +343,85 @@ CONTEXT:
         self._emit_update(on_update, latest_leaf_id=final_leaf_id)
         return final_answer
 
+    def _url_path(self, url: str) -> str:
+        from urllib.parse import urlparse
+
+        parsed = urlparse(url)
+        if parsed.scheme or parsed.netloc:
+            return parsed.path
+        return parsed.path or url
+
+    def _collect_image_results(self) -> list[tuple[str, str]]:
+        collected: list[tuple[str, str]] = []
+        seen_urls: set[str] = set()
+
+        for leaf in self.reasoning_tree.leaves.values():
+            for tc in leaf.tool_calls:
+                if tc.tool_name != "image_search":
+                    continue
+                result = tc.result or {}
+                if not isinstance(result, dict):
+                    continue
+                for item in result.get("results", []):
+                    url = str(item.get("url", "")).strip()
+                    if not url or url in seen_urls:
+                        continue
+                    seen_urls.add(url)
+                    kwords = item.get("keywords")
+                    desc = (
+                        item.get("description")
+                        or item.get("vlm_description")
+                        or (kwords[0] if isinstance(kwords, list) and kwords else "image")
+                    )
+                    collected.append((url, str(desc)[:80]))
+
+        return collected
+
+    def _extract_markdown_image_urls(self, answer: str) -> tuple[set[str], set[str]]:
+        import re
+
+        urls: set[str] = set()
+        paths: set[str] = set()
+        for match in re.finditer(r"!\[[^\]]*\]\(([^\)]+)\)", answer):
+            url = match.group(1).strip()
+            if not url:
+                continue
+            urls.add(url)
+            path = self._url_path(url)
+            if path:
+                paths.add(path)
+        return urls, paths
+
     def _strip_hallucinated_urls(self, answer: str) -> str:
         """
-        Remove any image markdown where the URL does not match our real API.
+        Remove any image markdown where the URL does not match tool results.
 
-        The model sometimes invents URLs like http://example.com/image1 or
-        http://localhost:8000/findings-link that don't correspond to any
-        real served image.  Only URLs matching the yologen media endpoint
-        are kept.
+        Only URLs returned by image_search are kept. This prevents leaking
+        container-internal hosts (e.g. http://backend:8000) or invented links.
         """
         import re
-        import os
+        from urllib.parse import urlparse
 
-        base_url = os.getenv("API_BASE_URL", "http://localhost:8000")
-        real_prefix = f"{base_url}/api/media/yologen/"
+        allowed = self._collect_image_results()
+        if not allowed:
+            answer = re.sub(r"!\[[^\]]*\]\([^\)]+\)", "", answer)
+            answer = re.sub(r"\n{3,}", "\n\n", answer).strip()
+            return answer
+
+        allowed_urls = {url for url, _ in allowed}
+        allowed_paths = {self._url_path(url) for url in allowed_urls if self._url_path(url)}
 
         def _check_image_md(m: re.Match) -> str:
-            url = m.group(2)
-            if url.startswith(real_prefix):
-                return m.group(0)  # keep — real image
-            return ""  # strip — hallucinated
+            url = m.group(2).strip()
+            parsed = urlparse(url)
+            if parsed.scheme or parsed.netloc:
+                return m.group(0) if url in allowed_urls else ""
+            path = self._url_path(url)
+            if url in allowed_urls or (path and path in allowed_paths):
+                return m.group(0)
+            return ""
 
         answer = re.sub(r"!\[([^\]]*)\]\(([^\)]+)\)", _check_image_md, answer)
-        # Clean up leftover blank lines from stripped images
         answer = re.sub(r"\n{3,}", "\n\n", answer).strip()
         return answer
 
@@ -378,41 +434,18 @@ CONTEXT:
 
         At most 3 images are appended to avoid cluttering short answers.
         """
-        import re
-
-        collected: list = []  # [(url, description), ...]
-        seen_urls: set = set()
-
-        for leaf in self.reasoning_tree.leaves.values():
-            for tc in leaf.tool_calls:
-                if tc.tool_name != "image_search":
-                    continue
-                result = tc.result or {}
-                if not isinstance(result, dict):
-                    continue
-                for item in result.get("results", []):
-                    url = item.get("url", "").strip()
-                    if not url or url in seen_urls:
-                        continue
-                    seen_urls.add(url)
-                    kwords = item.get("keywords")
-                    desc = (
-                        item.get("description")
-                        or item.get("vlm_description")
-                        or (kwords[0] if isinstance(kwords, list) and kwords else "image")
-                    )
-                    collected.append((url, str(desc)[:80]))
+        collected = self._collect_image_results()
 
         if not collected:
             return answer
 
         # Identify URLs already in the answer
-        existing_urls = set(re.findall(r"https?://\S+", answer))
+        existing_urls, existing_paths = self._extract_markdown_image_urls(answer)
 
         missing = [
             (url, desc)
             for url, desc in collected
-            if url not in existing_urls
+            if url not in existing_urls and self._url_path(url) not in existing_paths
         ][:3]  # cap at 3 new images
 
         if not missing:

@@ -63,6 +63,20 @@ _embedding_model = None
 _loaded = False
 
 
+def _resolve_public_api_base() -> str:
+    """Return optional externally reachable API base URL for absolute image links.
+
+    If `API_PUBLIC_BASE_URL` is not set, prefer returning an empty string so
+    the application emits relative URLs. Avoid falling back to an internal
+    `API_BASE_URL` which may contain container-internal hostnames (e.g.
+    `http://backend:8000`) that are not reachable from browsers.
+    """
+    explicit = os.getenv("API_PUBLIC_BASE_URL", "").strip()
+    if explicit:
+        return explicit.rstrip("/")
+    return ""
+
+
 def _load_all_data(force_reload: bool = False):
     """Load image index, embeddings, and model."""
     global _image_index, _embeddings, _filenames, _embedding_model, _loaded
@@ -518,7 +532,7 @@ def image_search(args: ImageSearchArgs) -> dict:
                 "suggestion": f"Recommend user view page {args.page_hint} in the PDF directly." if args.page_hint else None
             }
         
-        base_url = os.getenv("API_BASE_URL", "http://localhost:8000")
+        public_api_base = _resolve_public_api_base()
         
         formatted_results = []
         for r in results:
@@ -533,7 +547,11 @@ def image_search(args: ImageSearchArgs) -> dict:
                 "description": r["vlm_description"],
                 "relevance_score": r["score"],
                 "semantic_match": f"{r['semantic_score']}%",
-                "url": f"{base_url}/api/media/yologen/{r['split']}/{r['image_name']}"
+                "url": (
+                    f"{public_api_base}/api/media/yologen/{r['split']}/{r['image_name']}"
+                    if public_api_base
+                    else f"/api/media/yologen/{r['split']}/{r['image_name']}"
+                )
             })
         
         if not formatted_results:

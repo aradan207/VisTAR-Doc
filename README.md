@@ -105,6 +105,43 @@ What `install.bat` does in **mode 1**:
 
 Mode `1` does not download missing online resources.
 
+### Docker Setup (Windows 11, Recommended for Team Consistency)
+
+Docker provides consistent UI rendering, API behavior, and image-link handling across machines. The full workflow and troubleshooting steps are documented in Docker.md.
+
+#### Quick Start
+
+1. Ensure folder layout:
+
+```text
+Repositories/
+├── agentic-rag/
+└── vlm-yolo-detector/
+```
+
+2. Ensure Ollama is running on the host and required models are pulled.
+
+3. From agentic-rag:
+
+```bash
+copy .env.docker.example .env.docker
+docker-start.bat
+```
+
+4. Open:
+
+- UI: http://localhost:3000
+- API: http://localhost:8000
+
+#### Full Guide
+
+See Docker.md for:
+- Detailed configuration (.env.docker)
+- LAN access
+- Offline mode
+- Artifact regeneration
+- Troubleshooting
+
 ### Offline Scripts and Readiness Tools (Why They Exist)
 
 | File | Why it exists | When to run | Must create per user? |
@@ -368,8 +405,10 @@ npm start
 | OLLAMA_HOST | Ollama server URL | http://localhost:11434 |
 | OLLAMA_EMBED_MODEL | Ollama embedding model for RAG | mxbai-embed-large-v1-gguf:Q4_K_M |
 | OFFLINE_MODE | Disables web tools for strict local mode | true |
+| REQUIRE_OLLAMA | Fail startup if Ollama is unreachable | true |
 | REQUIRE_IMAGE_RETRIEVAL | Block startup if image artifacts are missing | true |
 | REQUIRE_SEMANTIC_MODEL_CACHE | Block startup if semantic cache is missing | true |
+| API_PUBLIC_BASE_URL | Optional absolute base for image URLs in tool output | unset (relative URLs) |
 | HF_HOME | HuggingFace cache root override | repo `.cache/huggingface` when set |
 | SENTENCE_TRANSFORMERS_HOME | Sentence-transformers cache root override | repo `.cache/torch/sentence_transformers` when set |
 | YOLOGEN_ROOT | Optional override to companion repo root | unset |

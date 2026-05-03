@@ -2,7 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import uvicorn
+import os
 from pathlib import Path
+from urllib import error as urllib_error
+from urllib import request as urllib_request
 
 from app.backend.api.agent import router as agent_router
 from app.backend.core.runtime_paths import (
@@ -22,6 +25,33 @@ def _offline_mode_enabled() -> bool:
 
 def _strict_offline_image_mode() -> bool:
     return _offline_mode_enabled() and require_image_retrieval()
+
+
+def _ollama_host() -> str:
+    return os.getenv("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
+
+
+def _require_ollama_available() -> bool:
+    value = os.getenv("REQUIRE_OLLAMA", "true").strip().lower()
+    return value not in {"0", "false", "no", "off"}
+
+
+def _validate_ollama_connectivity() -> None:
+    """Verify Ollama endpoint is reachable before serving requests."""
+    tags_url = f"{_ollama_host()}/api/tags"
+    try:
+        with urllib_request.urlopen(tags_url, timeout=8) as response:
+            if response.status >= 400:
+                raise RuntimeError(f"HTTP {response.status}")
+        print(f"[Main] Ollama reachable at {_ollama_host()}")
+    except (urllib_error.URLError, TimeoutError, RuntimeError) as exc:
+        message = (
+            f"Ollama endpoint unreachable at {tags_url}. "
+            "Start Ollama and/or set OLLAMA_HOST to a reachable URL."
+        )
+        if _require_ollama_available():
+            raise RuntimeError(message) from exc
+        print(f"[Main] WARNING: {message}")
 
 
 def _find_yologen_processed_dir(project_root: Path) -> Path | None:
@@ -130,9 +160,11 @@ def create_app() -> FastAPI:
     async def startup_event():
         """Preload image search data and emit offline readiness diagnostics."""
         print(f"[Main] OFFLINE_MODE={'enabled' if _offline_mode_enabled() else 'disabled'}")
+        print(f"[Main] REQUIRE_OLLAMA={'enabled' if _require_ollama_available() else 'disabled'}")
         print(f"[Main] REQUIRE_IMAGE_RETRIEVAL={'enabled' if require_image_retrieval() else 'disabled'}")
         print(f"[Main] REQUIRE_SEMANTIC_MODEL_CACHE={'enabled' if require_semantic_model_cache() else 'disabled'}")
 
+        _validate_ollama_connectivity()
         _validate_startup_prerequisites(project_root, yologen_processed)
 
         try:
