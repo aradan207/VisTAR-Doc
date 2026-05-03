@@ -1,0 +1,33 @@
+# Git and editor files
+.git
+.gitignore
+.vscode
+.idea
+
+# Python artifacts
+.venv
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets and local env files
+.env
+.env.*
+!.env.example
+
+# Local caches and heavy runtime artifacts (mounted at runtime)
+.cache/
+
+# Frontend local dependencies
+app/frontend/agent-frontend/node_modules/
+
+# Benchmark outputs and docs not needed in image context
+data/benchmarks/ragas_results/*.csv
+media/
+
+# Large/manual data should be mounted, not copied
+data/manuals/

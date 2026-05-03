@@ -1,6 +1,23 @@
 import { el } from '../ui/dom.js';
 
-const BASE_URL = 'http://localhost:8000';
+function normalizeBaseUrl(rawValue) {
+  if (!rawValue) return '';
+  const value = String(rawValue).trim();
+  if (!value || value === '/') return '';
+  return value.replace(/\/+$/, '');
+}
+
+const runtimeApiBase =
+  (globalThis.__APP_CONFIG__ && globalThis.__APP_CONFIG__.API_BASE_URL) ||
+  globalThis.AGENTIC_API_BASE_URL ||
+  '';
+
+const BASE_URL = normalizeBaseUrl(runtimeApiBase);
+
+function buildApiUrl(path) {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  return BASE_URL ? `${BASE_URL}${normalizedPath}` : normalizedPath;
+}
 
 function collectPayload() {
   const checkbox = document.getElementById('runBenchmark');
@@ -28,7 +45,7 @@ export function streamAgent(onEvent) {
   const promise = (async () => {
     let res;
     try {
-      res = await fetch(`${BASE_URL}/api/agent/run-stream`, {
+      res = await fetch(buildApiUrl('/api/agent/run-stream'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
