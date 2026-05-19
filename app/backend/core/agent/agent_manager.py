@@ -446,7 +446,7 @@ CONTEXT:
             (url, desc)
             for url, desc in collected
             if url not in existing_urls and self._url_path(url) not in existing_paths
-        ][:3]  # cap at 3 new images
+        ][:1]  # cap at 1 to avoid cluttering the response
 
         if not missing:
             return answer

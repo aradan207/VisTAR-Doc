@@ -33,6 +33,7 @@ The image search feature requires the vlm-yolo-detector repository:
 1. **VLM Descriptions**: Images extracted from PDFs are described using LLaVA via Ollama
 2. **Semantic Embeddings**: Descriptions are converted to 384-dim embeddings
 3. **FAISS Search**: User queries find relevant images by semantic similarity
+4. **Result Selection**: Returns the single best-matching image (`top_k=1` default) to avoid cluttering responses with low-relevance results
 
 ## Frontend UI Features
 
@@ -408,7 +409,7 @@ npm start
 | REQUIRE_OLLAMA | Fail startup if Ollama is unreachable | true |
 | REQUIRE_IMAGE_RETRIEVAL | Block startup if image artifacts are missing | true |
 | REQUIRE_SEMANTIC_MODEL_CACHE | Block startup if semantic cache is missing | true |
-| API_PUBLIC_BASE_URL | Optional absolute base for image URLs in tool output | unset (relative URLs) |
+| API_PUBLIC_BASE_URL | Base URL for image links. Unset defaults to `http://localhost:8000`. Set to `RELATIVE` for reverse-proxy setups | unset (localhost:8000) |
 | HF_HOME | HuggingFace cache root override | repo `.cache/huggingface` when set |
 | SENTENCE_TRANSFORMERS_HOME | Sentence-transformers cache root override | repo `.cache/torch/sentence_transformers` when set |
 | YOLOGEN_ROOT | Optional override to companion repo root | unset |
