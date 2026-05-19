@@ -64,17 +64,22 @@ _loaded = False
 
 
 def _resolve_public_api_base() -> str:
-    """Return optional externally reachable API base URL for absolute image links.
+    """Return the externally reachable API base URL for image links.
 
-    If `API_PUBLIC_BASE_URL` is not set, prefer returning an empty string so
-    the application emits relative URLs. Avoid falling back to an internal
-    `API_BASE_URL` which may contain container-internal hostnames (e.g.
-    `http://backend:8000`) that are not reachable from browsers.
+    Priority:
+    1. API_PUBLIC_BASE_URL env var (explicit override for LAN/custom setups).
+    2. In local dev (no Docker proxy), default to http://localhost:8000 so
+       images resolve correctly when the frontend is on a different port.
+    3. If API_PUBLIC_BASE_URL is set to the literal value "RELATIVE", return
+       empty string to force relative URLs (useful behind a reverse proxy).
     """
     explicit = os.getenv("API_PUBLIC_BASE_URL", "").strip()
     if explicit:
+        if explicit.upper() == "RELATIVE":
+            return ""
         return explicit.rstrip("/")
-    return ""
+    # Default: backend serves images on its own port.
+    return "http://localhost:8000"
 
 
 def _load_all_data(force_reload: bool = False):
@@ -481,7 +486,7 @@ class ImageSearchArgs(BaseModel):
         description="Page number from manual_search results. Images near this page are prioritized.",
     )
     top_k: int = Field(
-        default=3,
+        default=1,
         description="Number of images to return",
     )
 

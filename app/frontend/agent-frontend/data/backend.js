@@ -12,7 +12,13 @@ const runtimeApiBase =
   globalThis.AGENTIC_API_BASE_URL ||
   '';
 
-const BASE_URL = normalizeBaseUrl(runtimeApiBase);
+// In local dev (npx serve on port 3000), no proxy exists so API calls must
+// target the backend directly. In Docker/nginx, the reverse proxy handles
+// /api/ routing on the same origin so the empty string works as-is.
+const BASE_URL = normalizeBaseUrl(runtimeApiBase) ||
+  (globalThis.location && globalThis.location.port && globalThis.location.port !== '8000'
+    ? 'http://localhost:8000'
+    : '');
 
 function buildApiUrl(path) {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;

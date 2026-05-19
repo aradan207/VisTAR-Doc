@@ -8,7 +8,8 @@ This guide documents the Docker workflow for agentic-rag. It replaces the older 
 - Frontend runs in a container (Nginx on port 3000).
 - Ollama runs on the host machine (not in Docker).
 - Image artifacts are mounted from the sibling repo: ../vlm-yolo-detector/data/processed.
-- API and media URLs are emitted as relative paths by default.
+- API and media URLs are emitted as relative paths in Docker (via `RELATIVE` sentinel).
+- In local dev (no Docker), image URLs default to `http://localhost:8000` so the browser resolves them correctly.
 
 ## Prerequisites
 
@@ -94,13 +95,14 @@ Common variables:
 | DOCKER_REQUIRE_OLLAMA | true | Fail startup if Ollama is unreachable |
 | DOCKER_REQUIRE_IMAGE_RETRIEVAL | true | Require image artifacts on startup |
 | DOCKER_REQUIRE_SEMANTIC_MODEL_CACHE | false | Require sentence-transformer cache |
-| DOCKER_API_PUBLIC_BASE_URL | (empty) | Optional absolute base for image URLs |
+| DOCKER_API_PUBLIC_BASE_URL | RELATIVE | Image URL mode: RELATIVE for nginx proxy, or an absolute URL for LAN |
 | DOCKER_API_BASE_URL | http://backend:8000 | Internal Docker URL for validation |
 
 ### Image URL Behavior
 
-- Default (recommended): DOCKER_API_PUBLIC_BASE_URL is empty, so the backend emits relative URLs like /api/media/yologen/...
-- For LAN access: set DOCKER_API_PUBLIC_BASE_URL to the host IP, and keep UI access via http://<HOST_IP>:3000.
+- **Docker (default)**: `DOCKER_API_PUBLIC_BASE_URL=RELATIVE` — backend emits relative URLs like `/api/media/yologen/...` which nginx proxies to the backend container.
+- **Local dev (no Docker)**: When `API_PUBLIC_BASE_URL` is unset, the backend defaults to `http://localhost:8000` so images resolve correctly even when the frontend is served on a different port (e.g. 3000).
+- **LAN access**: Set `DOCKER_API_PUBLIC_BASE_URL` to the host IP (e.g. `http://192.168.x.x:8000`).
 
 ### LAN Access
 
