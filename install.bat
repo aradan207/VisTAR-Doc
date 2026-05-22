@@ -222,24 +222,39 @@ if "%ONLINE_MODE%"=="1" (
     echo.
     echo Ollama model pull step complete.
 ) else (
-    ollama list | findstr /I "hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M" >nul
-    if errorlevel 1 (
-        echo ERROR: Required embedding model is missing in offline mode.
-        echo Missing: hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
-        pause
-        exit /b 1
-    )
-    ollama list | findstr /I "hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M" >nul
-    if errorlevel 1 (
-        echo WARNING: Default LLM model is missing. Pull it during online preparation.
-    )
-    ollama list | findstr /I "hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M" >nul
-    if errorlevel 1 (
-        echo WARNING: RAGAS judge model is missing. Pull it during online preparation for benchmark runs.
-    )
-    echo Offline model validation complete.
+    call :validate_offline_models
 )
 echo.
+goto :after_model_validation
+
+:validate_offline_models
+ollama list > "%TEMP%\ollama_models.txt" 2>&1
+if errorlevel 1 (
+    echo ERROR: Could not run 'ollama list'. Is Ollama installed and running?
+    pause
+    exit /b 1
+)
+findstr /I "mxbai-embed-large" "%TEMP%\ollama_models.txt" >nul
+if errorlevel 1 (
+    echo ERROR: Required embedding model is missing in offline mode.
+    echo Missing: hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
+    del "%TEMP%\ollama_models.txt" 2>nul
+    pause
+    exit /b 1
+)
+findstr /I "Ministral-3-8B-Instruct" "%TEMP%\ollama_models.txt" >nul
+if errorlevel 1 (
+    echo WARNING: Default LLM model is missing. Pull it during online preparation.
+)
+findstr /I "Meta-Llama-3.1-8B-Instruct" "%TEMP%\ollama_models.txt" >nul
+if errorlevel 1 (
+    echo WARNING: RAGAS judge model is missing. Pull it during online preparation for benchmark runs.
+)
+del "%TEMP%\ollama_models.txt" 2>nul
+echo Offline model validation complete.
+goto :eof
+
+:after_model_validation
 
 :: Clone vlm-yolo-detector if not present (for image search functionality)
 echo [7/8] Setting up or validating vlm-yolo-detector image artifacts...
