@@ -16,7 +16,6 @@ embeddings = get_ragas_embeddings()
 """
 
 import os
-import subprocess
 from pathlib import Path
 from typing import Dict, List
 
@@ -113,21 +112,33 @@ def _offline_mode_enabled() -> bool:
 
 
 def _ollama_list_text() -> str:
+    """Fetch available models from Ollama via HTTP API.
+
+    Uses the /api/tags endpoint instead of shelling out to the `ollama` binary.
+    This works both locally and in Docker (where the binary may not exist but
+    the Ollama API is reachable via OLLAMA_HOST).
+    """
+    import urllib.request
+    import json
+
+    tags_url = f"{_OLLAMA_HOST.rstrip('/')}/api/tags"
     try:
-        proc = subprocess.run(
-            ["ollama", "list"],
-            capture_output=True,
-            text=True,
-            check=False,
-            timeout=20,
-        )
-    except FileNotFoundError:
-        return ""
+        req = urllib.request.Request(tags_url, method="GET")
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode())
     except Exception:
         return ""
-    if proc.returncode != 0:
+
+    # Build a text listing similar to `ollama list` output so the existing
+    # _ollama_model_present() substring check still works.
+    models = data.get("models", [])
+    if not models:
         return ""
-    return proc.stdout or ""
+    lines = []
+    for m in models:
+        name = m.get("name", "") or m.get("model", "")
+        lines.append(name)
+    return "\n".join(lines)
 
 
 def _ollama_model_present(model_name: str, listing: str) -> bool:
