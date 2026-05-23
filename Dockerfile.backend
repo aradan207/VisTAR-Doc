@@ -9,7 +9,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends libgomp1 ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir uv
+RUN pip install --no-cache-dir --trusted-host pypi.org --trusted-host files.pythonhosted.org uv
 
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --python-preference only-system
