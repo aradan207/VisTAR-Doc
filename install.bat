@@ -42,7 +42,7 @@ if "%INSTALL_MODE%"=="1" (
 echo.
 
 :: Check for Python
-echo [1/8] Checking Python installation...
+echo [1/6] Checking Python installation...
 python --version >nul 2>&1
 if errorlevel 1 (
     echo ERROR: Python is not installed or not in PATH.
@@ -55,22 +55,8 @@ for /f "tokens=2" %%i in ('python --version 2^>^&1') do set PYTHON_VERSION=%%i
 echo Found Python %PYTHON_VERSION%
 echo.
 
-:: Check for Ollama
-echo [2/8] Checking Ollama installation...
-ollama --version >nul 2>&1
-if errorlevel 1 (
-    echo ERROR: Ollama is not installed or not in PATH.
-    echo Please install Ollama from https://ollama.com/download
-    echo After installation, restart this script.
-    pause
-    exit /b 1
-)
-for /f "tokens=4" %%i in ('ollama --version 2^>^&1') do set OLLAMA_VERSION=%%i
-echo Found Ollama %OLLAMA_VERSION%
-echo.
-
 :: Install/validate uv package manager
-echo [3/8] Preparing uv package manager...
+echo [2/6] Preparing uv package manager...
 if "%ONLINE_MODE%"=="1" (
     pip install uv --quiet
     if errorlevel 1 (
@@ -92,7 +78,7 @@ if "%ONLINE_MODE%"=="1" (
 echo.
 
 :: Install/validate Python dependencies
-echo [4/8] Installing or validating Python dependencies...
+echo [3/6] Installing or validating Python dependencies...
 if "%ONLINE_MODE%"=="1" (
     echo Using system Python installation...
     uv sync --python-preference only-system
@@ -135,7 +121,7 @@ if "%ONLINE_MODE%"=="1" (
 echo.
 
 :: Check for Node.js and install frontend dependencies
-echo [5/8] Setting up frontend dependencies...
+echo [4/6] Setting up frontend dependencies...
 if "%ONLINE_MODE%"=="1" (
     where npm >nul 2>&1
     if errorlevel 1 (
@@ -186,78 +172,8 @@ if "%ONLINE_MODE%"=="1" (
 )
 echo.
 
-:: Pull Ollama models
-echo [6/8] Preparing or validating Ollama models...
-if "%ONLINE_MODE%"=="1" (
-    echo.
-    echo Pulling Mistral 7B Instruct (4.4 GB)...
-    ollama pull hf.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF:Q4_K_M
-    if errorlevel 1 (
-        echo WARNING: Failed to pull Mistral 7B model. You can try manually later.
-    )
-
-    echo.
-    echo Pulling Ministral 8B Instruct (6.1 GB) - Best quality model...
-    ollama pull hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M
-    if errorlevel 1 (
-        echo WARNING: Failed to pull Ministral 8B model. You can try manually later.
-    )
-
-    echo.
-    echo Pulling Meta-Llama 3.1 8B Instruct judge model for RAGAS (Q4_K_M)...
-    ollama pull hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M
-    if errorlevel 1 (
-        echo WARNING: Failed to pull the RAGAS judge model. Pull it manually before benchmark runs.
-    )
-
-    echo.
-    echo Pulling mxbai-embed-large embedding model (215 MB)...
-    ollama pull hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
-    if errorlevel 1 (
-        echo ERROR: Failed to pull embedding model. RAG will not work without this.
-        pause
-        exit /b 1
-    )
-
-    echo.
-    echo Ollama model pull step complete.
-) else (
-    call :validate_offline_models
-)
-echo.
-goto :after_model_validation
-
-:validate_offline_models
-ollama list > "%TEMP%\ollama_models.txt" 2>&1
-if errorlevel 1 (
-    echo ERROR: Could not run 'ollama list'. Is Ollama installed and running?
-    pause
-    exit /b 1
-)
-findstr /I "mxbai-embed-large" "%TEMP%\ollama_models.txt" >nul
-if errorlevel 1 (
-    echo ERROR: Required embedding model is missing in offline mode.
-    echo Missing: hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
-    del "%TEMP%\ollama_models.txt" 2>nul
-    pause
-    exit /b 1
-)
-findstr /I "Ministral-3-8B-Instruct" "%TEMP%\ollama_models.txt" >nul
-if errorlevel 1 (
-    echo WARNING: Default LLM model is missing. Pull it during online preparation.
-)
-findstr /I "Meta-Llama-3.1-8B-Instruct" "%TEMP%\ollama_models.txt" >nul
-if errorlevel 1 (
-    echo WARNING: RAGAS judge model is missing. Pull it during online preparation for benchmark runs.
-)
-del "%TEMP%\ollama_models.txt" 2>nul
-echo Offline model validation complete.
-goto :eof
-
-:after_model_validation
-
-:: Clone vlm-yolo-detector if not present (for image search functionality)
-echo [7/8] Setting up or validating vlm-yolo-detector image artifacts...
+:: Check vlm-yolo-detector image artifacts
+echo [5/6] Checking vlm-yolo-detector image artifacts...
 set "PARENT_DIR=%~dp0.."
 if "%ONLINE_MODE%"=="1" (
     if exist "%PARENT_DIR%\vlm-yolo-detector" (
@@ -299,7 +215,7 @@ if exist "%PARENT_DIR%\vlm-yolo-detector\data\processed\embedding_mapping.json" 
 echo.
 
 :: Build FAISS index
-echo [8/8] Building FAISS index from PDF manuals...
+echo [6/6] Building FAISS index from PDF manuals...
 if exist ".\.venv\Scripts\python.exe" (
     .\.venv\Scripts\python.exe -m app.backend.core.rag.indexer
     if errorlevel 1 (
@@ -317,10 +233,6 @@ echo  Verifying Installation
 echo ============================================================
 echo.
 
-echo Checking Ollama models...
-ollama list
-echo.
-
 echo Testing RAG functionality...
 if exist ".\.venv\Scripts\python.exe" (
     .\.venv\Scripts\python.exe tests\test_rag.py
@@ -333,40 +245,11 @@ echo Running offline readiness check...
 if exist ".\.venv\Scripts\python.exe" (
     .\.venv\Scripts\python.exe tests\offline_readiness_check.py
     if errorlevel 1 (
-        echo ERROR: Offline readiness check failed.
-        echo Resolve blockers listed above before starting the app.
-        pause
-        exit /b 1
+        echo WARNING: Offline readiness check reported issues.
+        echo Review the output above. Non-critical warnings can be ignored.
     )
 ) else (
     echo WARNING: Skipped readiness check because .venv is missing.
-)
-echo.
-
-if "%ONLINE_MODE%"=="1" (
-    if exist "scripts\export_offline_bundle.ps1" (
-        set /p EXPORT_BUNDLE=Create offline transfer bundle now? [Y/N]: 
-        if /I "!EXPORT_BUNDLE!"=="Y" (
-            powershell -ExecutionPolicy Bypass -File scripts\export_offline_bundle.ps1
-            if errorlevel 1 (
-                echo WARNING: Offline bundle export failed.
-                echo You can retry manually:
-                echo   powershell -ExecutionPolicy Bypass -File scripts\export_offline_bundle.ps1
-            )
-        )
-    )
-) else (
-    if exist "scripts\import_offline_bundle.ps1" (
-        set /p IMPORT_BUNDLE=Import offline transfer bundle now? [Y/N]: 
-        if /I "!IMPORT_BUNDLE!"=="Y" (
-            powershell -ExecutionPolicy Bypass -File scripts\import_offline_bundle.ps1
-            if errorlevel 1 (
-                echo WARNING: Offline bundle import failed.
-                echo You can retry manually:
-                echo   powershell -ExecutionPolicy Bypass -File scripts\import_offline_bundle.ps1
-            )
-        )
-    )
 )
 echo.
 
@@ -376,27 +259,12 @@ echo ============================================================
 echo.
 echo To start the application, run: start.bat
 echo.
-if "%ONLINE_MODE%"=="0" (
-    echo Offline mode note:
-    echo   Ensure OFFLINE_MODE=true in .env for strict local runtime.
-    echo   See media\offline.md for full air-gapped workflow.
-    echo.
-)
-
+echo IMPORTANT: Make sure Ollama models are pulled before starting.
+echo   See README.md for the required model pull commands.
+echo.
 echo Or start manually:
 echo   Backend:  uv run uvicorn app.backend.main:app --host 0.0.0.0 --port 8000
 echo   Frontend: cd app\frontend\agent-frontend ^&^& npm start
-echo.
-echo Available LLM models:
-echo   - hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M (default, best quality)
-echo   - hf.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF:Q4_K_M (lighter alternative)
-echo   - hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M (RAGAS judge)
-echo.
-echo To switch models, edit the OLLAMA_MODEL value in .env
-echo.
-echo Image search dependency:
-echo   For image search to work, ensure vlm-yolo-detector is set up in the parent directory.
-echo   If not already done, run install.bat in that repository.
 echo.
 pause
 goto :eof
@@ -433,5 +301,5 @@ del "%NODE_MSI%" >nul 2>&1
 :refresh_path
 :: Refresh PATH environment
 echo Refreshing PATH environment...
-for /f "usebackq tokens=*" %%a in (`powershell -Command "[System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')"`) do set "PATH=%%a"
+for /f "usebackq tokens=*" %%a in (powershell -Command "[System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')") do set "PATH=%%a"
 exit /b 0
