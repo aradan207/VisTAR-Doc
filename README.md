@@ -21,14 +21,21 @@ Install these **before** running the install script:
 Make sure Ollama is running (`ollama serve`), then pull these models:
 
 ```bash
-# Required - LLM for reasoning (6.1 GB)
+# Main reasoning LLM
 ollama pull hf.co/bartowski/mistralai_Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M
 
-# Required - Embedding model for RAG (215 MB)
+# Embedding model
 ollama pull hf.co/ChristianAzinn/mxbai-embed-large-v1-gguf:Q4_K_M
 
-# Optional - RAGAS benchmark judge model (4.9 GB)
+# RAGAS judge model
 ollama pull hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M
+
+# VLM image
+ollama pull hf.co/cjpais/llava-1.6-mistral-7b-gguf:Q4_K_M
+
+# The vlm-yolo-detector also uses sentence-transformers/all-MiniLM-L6-v2 for image embeddings,
+# but that's a Python package model downloaded via HuggingFace (not an Ollama model),and it gets
+# cached locally during install.bat in the .cache/ directory.
 ```
 
 ---
