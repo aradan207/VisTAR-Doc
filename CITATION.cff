@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "MDF Agentic Manufacturing Assistant"
+abstract: >-
+  An agentic retrieval-augmented generation system for manufacturing equipment
+  documentation. A recursive planning agent decomposes a technician's question
+  into bounded reasoning steps, executes retrieval tools over a local corpus of
+  equipment manuals, and exposes its full decision trajectory as an interactive
+  reasoning tree. Retrieval is two-stage (FAISS recall followed by cross-encoder
+  reranking), and answers pass through a self-critique stage that removes claims
+  unsupported by the retrieved context. The system runs fully offline against
+  local language models.
+type: software
+version: "0.1.0"
+date-released: "2026-09-14"
+license: BSD-3-Clause
+repository-code: "https://github.com/aradan207/VisTAR-Doc"
+authors:
+  - family-names: "Mora"
+    given-names: "Kevin"
+    email: "moragonzalka@ornl.gov"
+    affiliation: "Oak Ridge National Laboratory"
+  - family-names: "Zaveri"
+    given-names: "Akshay"
+  - family-names: "Perez"
+    given-names: "Lesli"
+  - family-names: "Chawla"
+    affiliation: "Oak Ridge National Laboratory"
+keywords:
+  - agentic AI
+  - retrieval-augmented generation
+  - large language models
+  - manufacturing
+  - equipment maintenance
+  - technical documentation
+  - offline inference

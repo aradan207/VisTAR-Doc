@@ -77,3 +77,13 @@ media/*
 data/benchmarks/ragas_results/*.csv
 # I will only keep this one specific CSV file to show results
 !data/benchmarks/ragas_results/ragas_20260302_194107.csv
+
+# Equipment manuals: third-party copyrighted documents, supplied by the user.
+# Never commit these - see LICENSE, "Third-party content".
+data/manuals/*
+!data/manuals/.gitkeep
+
+# FAISS index: derived from the manuals above, rebuild locally with
+#   uv run python -m app.backend.core.rag.indexer
+data/faiss_index/*
+!data/faiss_index/.gitkeep

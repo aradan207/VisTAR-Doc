@@ -1,5 +1,5 @@
 param(
-    [string]$BundleZip = "../agentic-rag-offline-bundle.zip"
+    [string]$BundleZip = "../vistar-doc-offline-bundle.zip"
 )
 
 $ErrorActionPreference = "Stop"
@@ -20,4 +20,4 @@ try {
 }
 
 Write-Host "Offline bundle import completed into workspace: $workspaceRoot"
-Write-Host "Next: run 'uv run python tests/offline_readiness_check.py' from agentic-rag."
+Write-Host "Next: run 'uv run python tests/offline_readiness_check.py' from the repository root."

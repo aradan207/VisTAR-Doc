@@ -1,5 +1,5 @@
 param(
-    [string]$OutputZip = "../agentic-rag-offline-bundle.zip"
+    [string]$OutputZip = "../vistar-doc-offline-bundle.zip"
 )
 
 $ErrorActionPreference = "Stop"
@@ -12,9 +12,13 @@ if (Test-Path $outputPath) {
     Remove-Item -Path $outputPath -Force
 }
 
+# Derive the checkout folder name instead of hardcoding it, so the bundle is
+# still complete when the repository is cloned under a different directory name.
+$repoName = Split-Path -Leaf $repoRoot
+
 $includes = @(
-    "agentic-rag/.cache",
-    "agentic-rag/data/faiss_index",
+    "$repoName/.cache",
+    "$repoName/data/faiss_index",
     "vlm-yolo-detector/data/processed"
 )
 

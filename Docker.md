@@ -1,6 +1,6 @@
 # Docker Deployment Guide
 
-This guide documents the Docker workflow for agentic-rag. It replaces the older Docker docs and provides a single source of truth.
+This guide documents the Docker workflow for VisTAR-Doc. It replaces the older Docker docs and provides a single source of truth.
 
 ## Overview
 
@@ -18,7 +18,7 @@ This guide documents the Docker workflow for agentic-rag. It replaces the older 
 3. Repository layout:
 
    Repositories/
-   ├── agentic-rag/
+   ├── VisTAR-Doc/
    └── vlm-yolo-detector/
 
 4. Image artifacts exist in ../vlm-yolo-detector/data/processed:
