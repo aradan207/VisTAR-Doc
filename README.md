@@ -1,4 +1,4 @@
-﻿# MDF Agentic Manufacturing Assistant
+﻿# Visual-Text Agentic Reasoning for Documents (VisTAR-Doc)
 
 RAG pipeline with a multi-step reasoning agent for manufacturing equipment documentation. Renders the agent's logic as an interactive DAG in a web UI.
 
