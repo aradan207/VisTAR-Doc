@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "MDF Agentic Manufacturing Assistant"
+title: "Visual-Text Agentic Reasoning for Documents"
 abstract: >-
   An agentic retrieval-augmented generation system for manufacturing equipment
   documentation. A recursive planning agent decomposes a technician's question
@@ -20,10 +20,10 @@ authors:
     given-names: "Kevin"
     email: "moragonzalka@ornl.gov"
     affiliation: "Oak Ridge National Laboratory"
-  - family-names: "Zaveri"
-    given-names: "Akshay"
-  - family-names: "Perez"
-    given-names: "Lesli"
+  - family-names: "Kim"
+    given-names: "Seokpum"
+    email: "kimsp@ornl.gov"
+    affiliation: "Oak Ridge National Laboratory"
   - family-names: "Chawla"
     affiliation: "Oak Ridge National Laboratory"
 keywords:
